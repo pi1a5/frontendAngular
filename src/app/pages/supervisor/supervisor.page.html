@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Orientador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary" class="ion-justify-content-center">
+  
+  <ion-grid >
+    <ion-row >
+      <ion-col class="ion-text-center">
+        <ion-card>
+          <ion-card-content>
+            <ion-item *ngIf="user">
+              <ion-avatar slot="start">
+                <img [src]="user.foto" alt="user image">
+              </ion-avatar>
+              <ion-label>
+                {{user.nome}}
+                <p>{{user.email}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button color="danger" shape="round" (click)="signOut()" *ngIf="user">Logout</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
