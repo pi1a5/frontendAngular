@@ -1,13 +1,32 @@
 <ion-content color="primary">
-  <ion-grid class="ion-text-center" >
+  <ion-grid>
     <ion-row>
-      <ion-col size="12">
-        <ion-button color="success" shape="round" (click)="signIn()" *ngIf="!user">
-          <ion-icon name="logo-google" slot="start" ></ion-icon>
-          Entre com E-mail Institucional
-        </ion-button>
+      <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+        <ion-card color="primary" class="card">
+          <ion-card-header>
+            <ion-label color="dark">
+              <ion-label class="title">Sistema de Gestão de Estágio IFSP-SPO.</ion-label>
+            </ion-label>
+            <br>
+            <ion-label color="dark" class="subtitle">Nunca foi tão fácil gerenciar processos de estágio. </ion-label>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center"> 
+            <ion-button class="button" shape="round" color="success" (click)="signIn()">
+              <ion-icon name="logo-google" slot="start"></ion-icon>
+              Entre com o E-mail Institucional
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card class="card" color="primary">
+          <ion-card-content>
+            <ion-img src="../../../assets/backgroundImg.svg"></ion-img>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <!-- <ion-button expand="full" (click)="refresh()" *ngIf="!user">Try refresh</ion-button> -->
+
 </ion-content>

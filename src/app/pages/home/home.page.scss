@@ -7,3 +7,85 @@ ion-row{
   justify-content: center;
   height: 100%;
 }
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+
+
+// small screen
+@media only screen and (min-width: 0px) {
+
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3em;
+    font-weight: 800;
+  }
+  
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .card {
+    box-shadow: none;
+  }
+  
+  .button {
+    font-weight: 900;
+    font-size: 0.7em;
+  }
+
+}
+
+// Large screen
+@media only screen and (min-width: 992px) {
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 4.5em;
+    font-weight: 800;
+    align-items: start;
+  }
+  
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2em;
+    text-align: justify;
+  }
+  
+  .card {
+    box-shadow: none;
+  }
+  
+  .button {
+    font-weight: 900;
+    font-size: 1.2em;
+  }
+}
+
+// Larger screen
+@media only screen and (min-width: 1435px) {
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 6em;
+    font-weight: 800;
+    align-items: start;
+  }
+  
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3em;
+    text-align: justify;
+  }
+  
+  .card {
+    box-shadow: none;
+  }
+  
+  .button {
+    font-weight: 900;
+    font-size: 1.2em;
+  }
+}
+
+
+
+

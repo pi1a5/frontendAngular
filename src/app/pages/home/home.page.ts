@@ -22,15 +22,6 @@ export class HomePage {
     }
   }
 
-  async refresh() {
-    try {
-      var response = await this.ggAuth.refresh();
-      console.log('refresh: ', response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   apiLogin(name: string, email: string, imageUrl: string, idToken: string, sub: string) {
     this.api.login(idToken, sub).subscribe(user => {
       this.userPage(user.email);
