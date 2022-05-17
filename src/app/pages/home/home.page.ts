@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 
@@ -10,11 +11,36 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
 })
 export class HomePage {
 
-  constructor(private ggAuth: GoogleAuthService, private api: ApiService, private router: Router) { }
+  constructor(
+    private ggAuth: GoogleAuthService,
+    private api: ApiService,
+    private router: Router,
+    public loadingController: LoadingController,
+    public toastController: ToastController
+  ) { }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Iniciando sessão...',
+      spinner: 'crescent'
+    });
+    return await loading.present();
+  }
+
+  async presentToast(error: string) {
+    const toast = await this.toastController.create({
+      message: error,
+      duration: 2000,
+      icon: 'information-circle',
+      color: 'danger'
+    });
+    toast.present();
+  }
 
   async signIn() {
-    try {
+    try { 
       var user = await this.ggAuth.signIn();
+      this.presentLoading();
       console.log('user: ', user);
       this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id)
     } catch (error) {
@@ -32,15 +58,18 @@ export class HomePage {
         this.api.login(idToken, sub).subscribe(user => {
           this.userPage(user.email);
         }, error => {
+          this.presentToast(error.error);
           console.log(error);
         });
       }, error => {
+        this.presentToast(error.error);
         console.log(error);
       });
     });
   }
 
   userPage(email: string) {
+    this.loadingController.dismiss();
     if (email.includes('aluno')) {
       this.router.navigate(['student'], { replaceUrl: true });
     } else {
