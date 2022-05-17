@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-app.use(express.static('www'));
+app.use(express.static('www/index.html'));
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -8,10 +8,6 @@ app.all('*', function(req, res, next) {
 });
 
 app.set('port', process.env.PORT || 5000);
-
-app.use('*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, 'index.html file path'));
-});
 
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
