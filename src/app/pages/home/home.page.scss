@@ -10,23 +10,29 @@ ion-row{
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
 
 
-// small screen
+// Small screen
 @media only screen and (min-width: 0px) {
 
   .title {
     font-family: 'Nunito', sans-serif;
-    font-size: 3em;
+    font-size: 1.9em;
     font-weight: 800;
   }
   
   .subtitle {
     font-family: 'Nunito', sans-serif;
-    font-size: 1.5em;
-    text-align: center;
+    font-size: 1.1em;
   }
-  
-  .card {
-    box-shadow: none;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container div {
+    flex: 1;
+    width: 100%
   }
   
   .button {
@@ -36,23 +42,28 @@ ion-row{
 
 }
 
-// Large screen
+// Medium screen
 @media only screen and (min-width: 992px) {
   .title {
     font-family: 'Nunito', sans-serif;
-    font-size: 4.5em;
+    font-size: 3.5em;
     font-weight: 800;
-    align-items: start;
   }
   
   .subtitle {
     font-family: 'Nunito', sans-serif;
-    font-size: 2em;
-    text-align: justify;
+    font-size: 1.5em;
   }
-  
-  .card {
-    box-shadow: none;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container div {
+    flex: 1;
+    width: 100%
   }
   
   .button {
@@ -61,23 +72,29 @@ ion-row{
   }
 }
 
-// Larger screen
+// Large screen
 @media only screen and (min-width: 1435px) {
   .title {
     font-family: 'Nunito', sans-serif;
-    font-size: 6em;
+    font-size: 5.5em;
     font-weight: 800;
-    align-items: start;
+    margin-bottom: 0px;
   }
   
   .subtitle {
     font-family: 'Nunito', sans-serif;
-    font-size: 3em;
-    text-align: justify;
+    font-size: 2em;
   }
-  
-  .card {
-    box-shadow: none;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container div {
+    flex: 1;
+    width: 100%
   }
   
   .button {
