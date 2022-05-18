@@ -38,4 +38,15 @@ export class ApiService {
       sub: sub
     });
   }
+
+  getCourses(): Observable<any> {
+    return this.http.get<any>(`${this.url}api/courses`);
+  }
+
+  setCourse(id_curso: number, sub: string): Observable<any> {
+    return this.http.post<any>(`${this.url}api/setCourse`, {
+      id_curso: id_curso,
+      sub: sub,
+    });
+  }
 }

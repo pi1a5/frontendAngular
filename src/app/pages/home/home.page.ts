@@ -38,9 +38,9 @@ export class HomePage {
   }
 
   async signIn() {
-    try { 
+    try {
       var user = await this.ggAuth.signIn();
-      this.presentLoading();
+      await this.presentLoading();
       console.log('user: ', user);
       this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id)
     } catch (error) {
@@ -56,7 +56,7 @@ export class HomePage {
       this.api.newUser(name, email, imageUrl, idToken, sub).subscribe(resp => {
         console.log(resp);
         this.api.login(idToken, sub).subscribe(user => {
-          this.userPage(user.email);
+          this.goToSelectCoursePage();
         }, error => {
           this.presentToast(error.error);
           console.log(error);
@@ -75,6 +75,11 @@ export class HomePage {
     } else {
       this.router.navigate(['supervisor'], { replaceUrl: true });
     }
+  }
+  
+  goToSelectCoursePage() {
+    this.loadingController.dismiss();
+    this.router.navigate(['select-course'], { replaceUrl: true });
   }
 
 }

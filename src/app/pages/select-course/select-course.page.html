@@ -1,0 +1,23 @@
+<ion-content color="primary">
+  <ion-card class="container">
+    <ion-card-header>
+      <p class="title ion-text-center">Selecione o seu Curso</p>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let course of list">
+              <ion-card class="curso" button="true" color="primary" (click)="setCourse(course.id)">
+                <ion-card-header >
+                  <ion-icon name="desktop-outline"></ion-icon>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-title>{{course.nome}}</ion-title>
+                </ion-card-content>
+              </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

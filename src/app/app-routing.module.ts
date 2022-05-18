@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'supervisor',
     loadChildren: () => import('./pages/supervisor/supervisor.module').then( m => m.SupervisorPageModule)
   },
+  {
+    path: 'select-course',
+    loadChildren: () => import('./pages/select-course/select-course.module').then( m => m.SelectCoursePageModule)
+  },
 ];
 
 @NgModule({

@@ -11,6 +11,11 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
 })
 export class StudentPage implements OnInit {
 
+  public sidebarItems = [
+    { title: 'Novo Ticket', url: 'newTicket', icon: 'create' },
+    { title: 'Perfil', url: 'profile', icon: 'person' },
+  ]
+
   private user: User = null;
 
   constructor(private ggAuth: GoogleAuthService, private api: ApiService, private router: Router) { }
