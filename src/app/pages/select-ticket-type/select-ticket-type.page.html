@@ -1,0 +1,23 @@
+<ion-content color="primary">
+  <ion-card class="container">
+    <ion-card-header>
+      <p class="title ion-text-center">Selecione o Assunto do Ticket</p>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let type of list" size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
+            <ion-card class="ticket" button="true" color="primary" (click)="goToForm(type.id)">
+              <ion-card-header>
+                <ion-icon [name]="type.icon"></ion-icon>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-label class="font">{{type.name}}</ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

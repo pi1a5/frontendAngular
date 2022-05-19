@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
+import { ApiStudentService } from 'src/app/services/api-student.service';
 import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 
@@ -15,22 +15,18 @@ export class StudentPage implements OnInit {
     { title: 'Novo Ticket', url: 'newTicket', icon: 'create' },
     { title: 'Perfil', url: 'profile', icon: 'person' },
   ]
+  private ticketsE: [any];
+  private ticketP: any;
 
-  private user: User = null;
-
-  constructor(private ggAuth: GoogleAuthService, private api: ApiService, private router: Router) { }
+  constructor(private ggAuth: GoogleAuthService, private api: ApiService, private router: Router, private apiStudent: ApiStudentService) { }
 
   async ngOnInit() {
-    try { 
-      this.api.getUser(localStorage.getItem('sub')).subscribe(user => {
-        this.user = user;
-      }, error => {
-        console.log(error);
-        this.signOut();
-      })
-    } catch (error) {
+    this.apiStudent.getTicketsUser(localStorage.getItem('sub')).subscribe(tickets => {
+      console.log(tickets);
+      this.defineTickets(tickets);
+    }, error => {
       console.log(error);
-    }
+    })
   }
 
   async signOut() {
@@ -39,6 +35,24 @@ export class StudentPage implements OnInit {
       this.router.navigate(['home'], { replaceUrl: true });
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  goToNewTicket() {
+    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
+  }
+
+  goToProfile() {
+    this.router.navigate(['profile'], { replaceUrl: true });
+  }
+
+  defineTickets(tickets: any) {
+    for (let index = 0; index < tickets.length; index++) {
+      if (!tickets[index].feedback) {
+        this.ticketP = tickets[index];
+      } else {
+        this.ticketsE.push(tickets[index]);
+      }
     }
   }
 }

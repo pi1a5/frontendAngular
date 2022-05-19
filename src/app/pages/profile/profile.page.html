@@ -1,0 +1,58 @@
+<ion-split-pane contentId="main-content" >
+  <ion-menu contentId="main-content" type="overlay" >
+    <ion-content >
+      <ion-list id="inbox-list">
+        <ion-card id="logoIF">
+          <ion-img src="../../../assets/logoIF.png"></ion-img>
+        </ion-card>
+
+        <ion-button color="light" expand="block" size="large" (click)="goToNewTicket()">
+          <ion-icon slot="start" name="create"></ion-icon>
+          <ion-label>Novo Ticket</ion-label>
+        </ion-button>
+        <ion-button color="light" expand="block" size="large" (click)="goToDashboard()">
+          <ion-icon slot="start" name="list"></ion-icon>
+          <ion-label >Dashboard</ion-label>
+        </ion-button>
+      </ion-list>
+
+    </ion-content>
+  </ion-menu>
+
+  <!-- content -->
+  <ion-router-outlet id="main-content">
+    <ion-header>
+      <ion-toolbar color="success" >
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="title" >Perfil</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content color="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-card>
+              <ion-card-content>
+                <ion-item *ngIf="user">
+                  <ion-avatar slot="start">
+                    <img [src]="user.foto" alt="user image">
+                  </ion-avatar>
+                  <ion-label>
+                    {{user.nome}}
+                    <p>{{user.email}}</p>
+                  </ion-label>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+    
+            <ion-button color="danger" shape="round" (click)="signOut()" *ngIf="user">Logout</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ion-router-outlet>
+</ion-split-pane>
+

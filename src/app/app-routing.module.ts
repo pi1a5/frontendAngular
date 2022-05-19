@@ -23,6 +23,18 @@ const routes: Routes = [
     path: 'select-course',
     loadChildren: () => import('./pages/select-course/select-course.module').then( m => m.SelectCoursePageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'select-ticket-type',
+    loadChildren: () => import('./pages/select-ticket-type/select-ticket-type.module').then( m => m.SelectTicketTypePageModule)
+  },
+  {
+    path: 'inicio-de-estagio',
+    loadChildren: () => import('./pages/inicio-de-estagio/inicio-de-estagio.module').then( m => m.InicioDeEstagioPageModule)
+  },
 ];
 
 @NgModule({
