@@ -7,13 +7,13 @@
       <ion-card-content>
 
         <ion-item lines="none" button="true" id="open-date-input">
-          <ion-label class="font">Prazo da empresa para o início de estágio</ion-label>
-          <ion-text slot="end">{{ dateValue }}</ion-text>
+          <ion-label *ngIf="!dateString" class="font">Prazo da empresa para o início de estágio</ion-label>
+          <ion-label *ngIf="dateString" class="font">{{ dateString }}</ion-label>
           <ion-icon slot="end" color="dark" name="calendar"></ion-icon>
           <ion-popover trigger="open-date-input" show-backdrop="false">
             <ng-template>
-              <ion-datetime #popoverDatetime presentation="date"
-                (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
+              <ion-datetime locale="pt-BR" #popoverDatetime presentation="date"
+                (ionChange)="formatDate(popoverDatetime.value)"></ion-datetime>
             </ng-template>
           </ion-popover>
         </ion-item>
@@ -34,10 +34,12 @@
 
         <ion-item lines="none">
           <ion-label position="floating" class="font">Escreva algo para o Orientador</ion-label>
-          <ion-textarea class="font" rows="3" cols="20" placeholder="Olá orientador, estou iniciando estágio..."></ion-textarea>
+          <ion-textarea [(ngModel)]="textArea" class="font" rows="4" cols="20"
+            placeholder="Olá Orientador! Eu gostaria de dar início ao meu processo de estágio...">
+          </ion-textarea>
         </ion-item>
 
-        <ion-button class="font" color="success" expand="block">
+        <ion-button class="font" color="success" expand="block" (click)="submit()">
           Enviar
           <ion-icon slot="end" name="send"></ion-icon>
         </ion-button>

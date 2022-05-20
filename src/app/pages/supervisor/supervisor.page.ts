@@ -16,7 +16,7 @@ export class SupervisorPage implements OnInit {
 
   async ngOnInit() {
     try {
-      this.api.getUser(localStorage.getItem('sub')).subscribe(user => {
+      this.api.getUser().subscribe(user => {
         this.user = user;
       }, error => {
         console.log(error);

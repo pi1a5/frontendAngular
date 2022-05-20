@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     try { 
-      this.api.getUser(localStorage.getItem('sub')).subscribe(user => {
+      this.api.getUser().subscribe(user => {
         this.user = user;
       }, error => {
         console.log(error);
