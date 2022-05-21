@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class SelectCoursePage implements OnInit {
 
   constructor(
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -25,14 +27,24 @@ export class SelectCoursePage implements OnInit {
     })
   }
 
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color: color,
+      icon: icon,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   setCourse(idCourse: number) {
     this.api.setCourse(idCourse, localStorage.getItem('sub')).subscribe(data => {
-      console.log(data);
+      this.presentToast('Curso definido com sucesso', 'success', 'checkmark-circle');
       this.userPage(data.email);
     }, error => {
       console.log(error);
+      this.presentToast(error.error, 'danger', 'close-circle');
     })
-
   }
 
   userPage(email: string) {

@@ -6,10 +6,10 @@
       </ion-card-header>
       <ion-card-content>
 
-        <ion-item lines="none" button="true" id="open-date-input">
-          <ion-label *ngIf="!dateString" class="font">Prazo da empresa para o início de estágio</ion-label>
-          <ion-label *ngIf="dateString" class="font">{{ dateString }}</ion-label>
-          <ion-icon slot="end" color="dark" name="calendar"></ion-icon>
+        <ion-item color="primary" lines="none" button id="open-date-input">
+          <label *ngIf="!dateString" class="font">Prazo limite dado pela empresa</label>
+          <label *ngIf="dateString" class="font">Prazo limite: {{ dateString }}</label>
+          <ion-icon slot="end" name="calendar"></ion-icon>
           <ion-popover trigger="open-date-input" show-backdrop="false">
             <ng-template>
               <ion-datetime locale="pt-BR" #popoverDatetime presentation="date"
@@ -17,20 +17,21 @@
             </ng-template>
           </ion-popover>
         </ion-item>
+        <br>
 
 
-        <ion-button expand="block" type="file">
-          <label class="font" for='selecao-arquivo-tce'>TCE</label>
+        <ion-item button color="primary">
+          <label class="font" for='selecao-arquivo-tce'>Termo de Compromisso de Estágio</label>
           <input id='selecao-arquivo-tce' type='file'>
           <ion-icon slot="end" name="document"></ion-icon>
-        </ion-button>
+        </ion-item>
+        <br>
 
-
-        <ion-button expand="block" type="file">
-          <label class="font" for='selecao-arquivo-pa'>PA</label>
+        <ion-item button color="primary">
+          <ion-label class="font" for='selecao-arquivo-pa'>Plano de Atividades</ion-label>
           <input id='selecao-arquivo-pa' type='file'>
           <ion-icon slot="end" name="document"></ion-icon>
-        </ion-button>
+        </ion-item>
 
         <ion-item lines="none">
           <ion-label position="floating" class="font">Escreva algo para o Orientador</ion-label>

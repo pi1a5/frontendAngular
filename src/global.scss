@@ -39,3 +39,19 @@
   align-items: center;
   height: 100%;
 }
+
+// ion-content {
+//   --offset-bottom: auto !important;
+//   --overflow: auto;
+//   --background: #F7F7FA;
+//   overflow: auto;
+
+//   &::part(background) {
+//     bottom: 0;
+//   }
+
+//   &::-webkit-scrollbar {
+//     display: none;
+//     scrollbar-width: none;
+//   }
+// }

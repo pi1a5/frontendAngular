@@ -38,10 +38,22 @@ export class ProfilePage implements OnInit {
   }
 
   goToNewTicket() {
+    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
+  }
+
+  goToBarsSupervisors() {
     
   }
 
   goToDashboard() {
-    this.router.navigate(['student'], { replaceUrl: true });
+    this.userPage();
+  }
+
+  userPage() {
+    if (this.user.email.includes('aluno')) {
+      this.router.navigate(['student'], { replaceUrl: true });
+    } else {
+      this.router.navigate(['supervisor'], { replaceUrl: true });
+    }
   }
 }

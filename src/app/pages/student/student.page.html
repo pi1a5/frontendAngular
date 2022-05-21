@@ -37,20 +37,21 @@
                 <ion-card-title>Ticket Pendente</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <ion-card *ngIf="ticketP" color="primary">
+                <ion-card color="primary" *ngIf="ticketP">
                   <ion-card-header>
                     <ion-item color="primary" lines="none">
                       <ion-avatar slot="start">
-                        <img src="{{user.foto}}">
+                        <img src="{{ticketP.foto}}">
                       </ion-avatar>
-                      <ion-label class="font ion-hide-lg-down">{{user.nome}}</ion-label>
-                      <ion-badge color="warning" class="font badge" slot="end">{{tipoEstagio}}</ion-badge>
+                      <ion-badge color="warning" slot="end" class="font badge">{{tipoEstagio}}</ion-badge>
                     </ion-item>
                   </ion-card-header>
 
-                  <ion-card-content class="font ion-text-start ion-margin-start">
+                  <ion-card-content class="font ion-text-start ion-margin-start">   
+                    <p><ion-label class="font">{{ticketP.nome}}</ion-label></p>
+                    <br>
                     <p>Data de Criação: {{ticketP.data_criado}}</p>
-                    <p>Data Limite: {{ticketP.data_limite}}</p>
+                    <p>Data Limite: {{ticketP.data_limite}}</p>  
                   </ion-card-content>
 
                 </ion-card>
@@ -73,10 +74,37 @@
               <ion-card-header>
                 <ion-card-title>Tickets Encerrados</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                <ion-card *ngIf="ticketsE">Card ticket</ion-card>
-                <ion-label *ngIf="!ticketsE">Nenhum ticket respondido...</ion-label>
-              </ion-card-content>
+
+              <ion-list class="list" *ngIf="ticketsE.length > 0">
+
+                <ion-card button color="primary" *ngFor="let ticket of ticketsE"
+                  (click)="presentModal(ticket)">
+                  <ion-card-header>
+                    <ion-item color="primary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="{{ticket.foto}}">
+                      </ion-avatar>
+                      <ion-badge color="warning" slot="end" class="font badge">Início Estágio</ion-badge>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content class="font ion-text-start ion-margin-start">
+                    <p>
+                      <ion-label class="font">{{ticket.nome}}</ion-label>
+                    </p>
+                    <br>
+                    <p>Data de Criação: {{ticket.data_criado}}</p>
+                    <p>Data da Resposta: {{ticket.data_fechado}}</p>
+                  </ion-card-content>
+                </ion-card>
+
+              </ion-list>
+
+              <div *ngIf="ticketsE.length == 0">
+                <p>
+                  <ion-label>Não há tickets pendentes...</ion-label>
+                </p>
+              </div>
             </ion-card>
           </ion-col>
 

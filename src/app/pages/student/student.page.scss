@@ -47,10 +47,6 @@ ion-menu.md ion-item.selected ion-icon {
   color: var(--ion-color-primary);
 }
 
-ion-menu.md ion-item ion-icon {
-  color: #616e7e;
-}
-
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
@@ -71,4 +67,15 @@ ion-item.selected {
 .badge {
   font-size: 1em;
   padding: 0.5em;
+}
+
+.list {
+  max-height: 80vh;
+  overflow: auto;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.list::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }

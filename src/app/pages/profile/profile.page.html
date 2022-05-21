@@ -6,10 +6,16 @@
           <ion-img src="../../../assets/logoIF.png"></ion-img>
         </ion-card>
 
-        <ion-button color="light" expand="block" size="large" (click)="goToNewTicket()">
-          <ion-icon slot="start" name="create"></ion-icon>
-          <ion-label>Novo Ticket</ion-label>
-        </ion-button>
+        <div *ngIf="user">
+          <ion-button *ngIf="user.email.includes('aluno')" color="light" expand="block" size="large" (click)="goToNewTicket()">
+            <ion-icon slot="start" name="create"></ion-icon>
+            <ion-label>Novo Ticket</ion-label>
+          </ion-button>
+          <ion-button *ngIf="!user.email.includes('aluno')" color="light" expand="block" size="large" (click)="goToBarsSupervisors()">
+            <ion-icon slot="start" name="bar-chart"></ion-icon>
+            <ion-label>Orientadores</ion-label>
+          </ion-button>
+        </div>
         <ion-button color="light" expand="block" size="large" (click)="goToDashboard()">
           <ion-icon slot="start" name="list"></ion-icon>
           <ion-label >Dashboard</ion-label>
