@@ -27,19 +27,19 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content color="primary" class="ion-justify-content-center">
+    <ion-content color="primary" class="ion-justify-content-center"  color="medium">
       <ion-grid>
         <ion-row>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="6" size-xl="6">
-            <ion-card class="font ion-text-center">
+            <ion-card color="primary" class="font ion-text-center" >
               <ion-card-header>
                 <ion-card-title>Ticket Pendente</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <ion-card color="primary" *ngIf="ticketP">
+                <ion-card button color="light" *ngIf="ticketP" (click)="presentModal(ticketP)">
                   <ion-card-header>
-                    <ion-item color="primary" lines="none">
+                    <ion-item color="light" lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticketP.foto}}">
                       </ion-avatar>
@@ -70,17 +70,17 @@
           </ion-col>
 
           <ion-col>
-            <ion-card class="font ion-text-center">
+            <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Tickets Encerrados</ion-card-title>
               </ion-card-header>
 
-              <ion-list class="list" *ngIf="ticketsE.length > 0">
+              <ion-list style="background-color: var(--ion-color-primary);" class="list" *ngIf="ticketsE.length > 0">
 
-                <ion-card button color="primary" *ngFor="let ticket of ticketsE"
+                <ion-card button color="light" *ngFor="let ticket of ticketsE"
                   (click)="presentModal(ticket)">
                   <ion-card-header>
-                    <ion-item color="primary" lines="none">
+                    <ion-item color="light" lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticket.foto}}">
                       </ion-avatar>

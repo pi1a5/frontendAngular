@@ -27,4 +27,22 @@ export class ApiStudentService {
       eProfessor: false
     })
   }
+
+  sendTicketAcompanhamento(corpo_texto: string, doc: string): Observable<any> {
+    return this.http.post(`${this.url}api/newTicketAcompanhamento`, {
+      corpo_texto: corpo_texto,
+      sub: localStorage.getItem('sub'),
+      doc: doc,
+      eProfessor: false
+    })
+  }
+
+  sendTicketFim(corpo_texto: string, doc: string): Observable<any> {
+    return this.http.post(`${this.url}api/newTicketFim`, {
+      corpo_texto: corpo_texto,
+      sub: localStorage.getItem('sub'),
+      doc: doc,
+      eProfessor: false
+    })
+  }
 }

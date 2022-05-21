@@ -70,6 +70,7 @@ export class StudentPage implements OnInit {
         if (tickets[index].data_limite) {
           this.ticketP[index].data_limite = this.formatDate(tickets[index].data_limite);
         }
+        
       } else {
         this.ticketsE.push(tickets[index]);
         if (tickets[index].data_criado) {

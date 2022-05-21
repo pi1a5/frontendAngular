@@ -36,13 +36,13 @@ export class SelectTicketTypePage implements OnInit {
   goToForm(id: number) {
     switch (id) {
       case 0:
-        this.router.navigate(['inicio-de-estagio'], { replaceUrl: true });
+        this.router.navigate(['inicio-de-estagio']);
         break;
       case 1:
-        this.presentToast();
+        this.router.navigate(['acompanhamento']);
         break;
       case 2:
-        this.presentToast();
+        this.router.navigate(['fim-de-estagio']);
         break;
       case 3:
         this.presentToast();
