@@ -1,53 +1,115 @@
 <ion-split-pane contentId="main-content">
   <ion-menu contentId="main-content" type="overlay">
-    <ion-content >
+    <ion-content>
       <ion-list id="inbox-list">
-        <ion-list-header>IFSP-SPO</ion-list-header>
-        <ion-note>Gestão de Estágio</ion-note>
+        <ion-card id="logoIF">
+          <ion-img src="../../../assets/logoIF.png"></ion-img>
+        </ion-card>
 
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of sidebarItems; let i = index">
-          <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-            routerLinkActive="selected">
-            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-            <ion-label>{{ p.title }}</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+        <ion-button color="light" expand="block" size="large" (click)="goToNewTicket()">
+          <ion-icon slot="start" name="create"></ion-icon>
+          <ion-label>Novo Ticket</ion-label>
+        </ion-button>
+        <ion-button color="light" expand="block" size="large" (click)="goToProfile()">
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-button>
       </ion-list>
 
     </ion-content>
   </ion-menu>
 
+  <!-- content -->
   <ion-router-outlet id="main-content">
     <ion-header>
-      <ion-toolbar color="success" class="ion-text-center">
+      <ion-toolbar color="success" class="ion-text-center ion-padding">
         <ion-label class="title">Acompanhe seu Processo de Estágio</ion-label>
       </ion-toolbar>
     </ion-header>
-  
+
     <ion-content color="primary" class="ion-justify-content-center">
-  
       <ion-grid>
         <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-card>
+
+          <ion-col size="12" size-sm="12" size-md="12" size-lg="6" size-xl="6">
+            <ion-card class="font ion-text-center">
+              <ion-card-header>
+                <ion-card-title>Ticket Pendente</ion-card-title>
+              </ion-card-header>
               <ion-card-content>
-                <ion-item *ngIf="user">
-                  <ion-avatar slot="start">
-                    <img [src]="user.foto" alt="user image">
-                  </ion-avatar>
-                  <ion-label>
-                    {{user.nome}}
-                    <p>{{user.email}}</p>
-                  </ion-label>
-                </ion-item>
+                <ion-card color="primary" *ngIf="ticketP">
+                  <ion-card-header>
+                    <ion-item color="primary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="{{ticketP.foto}}">
+                      </ion-avatar>
+                      <ion-badge color="warning" slot="end" class="font badge">{{tipoEstagio}}</ion-badge>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content class="font ion-text-start ion-margin-start">   
+                    <p><ion-label class="font">{{ticketP.nome}}</ion-label></p>
+                    <br>
+                    <p>Data de Criação: {{ticketP.data_criado}}</p>
+                    <p>Data Limite: {{ticketP.data_limite}}</p>  
+                  </ion-card-content>
+
+                </ion-card>
+
+                <div *ngIf="!ticketP">
+                  <ion-label>Você não possui ticket pendente...</ion-label>
+                  <br>
+                  <br>
+                  <ion-button color="success" shape="round" (click)="goToNewTicket()">
+                    <ion-icon slot="start" name="create"></ion-icon>
+                    <ion-label>Novo Ticket</ion-label>
+                  </ion-button>
+                </div>
               </ion-card-content>
             </ion-card>
-  
-            <ion-button color="danger" shape="round" (click)="signOut()" *ngIf="user">Logout</ion-button>
           </ion-col>
+
+          <ion-col>
+            <ion-card class="font ion-text-center">
+              <ion-card-header>
+                <ion-card-title>Tickets Encerrados</ion-card-title>
+              </ion-card-header>
+
+              <ion-list class="list" *ngIf="ticketsE.length > 0">
+
+                <ion-card button color="primary" *ngFor="let ticket of ticketsE"
+                  (click)="presentModal(ticket)">
+                  <ion-card-header>
+                    <ion-item color="primary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="{{ticket.foto}}">
+                      </ion-avatar>
+                      <ion-badge color="warning" slot="end" class="font badge">Início Estágio</ion-badge>
+                    </ion-item>
+                  </ion-card-header>
+
+                  <ion-card-content class="font ion-text-start ion-margin-start">
+                    <p>
+                      <ion-label class="font">{{ticket.nome}}</ion-label>
+                    </p>
+                    <br>
+                    <p>Data de Criação: {{ticket.data_criado}}</p>
+                    <p>Data da Resposta: {{ticket.data_fechado}}</p>
+                  </ion-card-content>
+                </ion-card>
+
+              </ion-list>
+
+              <div *ngIf="ticketsE.length == 0">
+                <p>
+                  <ion-label>Não há tickets pendentes...</ion-label>
+                </p>
+              </div>
+            </ion-card>
+          </ion-col>
+
         </ion-row>
       </ion-grid>
-  
     </ion-content>
   </ion-router-outlet>
 </ion-split-pane>

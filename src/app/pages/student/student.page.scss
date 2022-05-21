@@ -1,12 +1,9 @@
-// ion-menu ion-content {
-//   --background: var(--ion-item-background, var(--ion-background-color, #fff));
-// }
 
 ion-split-pane {
   --border: none !important;
 
   ion-menu {
-    --background: var(--ion-color-success) !important;
+    // --background: var(--ion-color-success) !important;
 
     ion-content {
       --background: var(--ion-color-success) !important;
@@ -18,34 +15,28 @@ ion-split-pane {
 ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;
-  --padding-top: 20px;
+  --padding-top: 8px;
   --padding-bottom: 20px;
 }
 
 ion-menu.md ion-list {
-  padding: 30px 0;
+  padding: 0;
+  height: 100%;
 }
 
-ion-menu.md ion-note {
-  margin-bottom: 30px;
+ion-menu.md ion-list#inbox-list {
+  background-color: rgba(var(--ion-color-success-rgb));
 }
 
-ion-menu.md ion-list-header,
-ion-menu.md ion-note {
-  padding-left: 10px;
+ion-menu.md ion-list#inbox-list ion-card {
+  padding: 1.5em;
 }
 
-ion-menu.md ion-list#inbox-list ion-list-header {
-  font-size: 30px;
-  font-weight: 600;
-  color: rgba(var(--ion-color-dark-rgb));
-  min-height: 20px;
-}
-
-ion-menu.md ion-item {
-  --padding-start: 10px;
-  --padding-end: 10px;
-  border-radius: 4px;
+ion-menu.md ion-list#inbox-list ion-button {
+  font-family: 'Nunito', sans-serif;
+  font-size: medium;
+  padding: 0.4em;
+  border-radius: 4em;
 }
 
 ion-menu.md ion-item.selected {
@@ -56,17 +47,6 @@ ion-menu.md ion-item.selected ion-icon {
   color: var(--ion-color-primary);
 }
 
-ion-menu.md ion-item ion-icon {
-  color: #616e7e;
-}
-
-ion-note {
-  display: inline-block;
-  font-size: 16px;
-
-  color: var(--ion-color-medium-shade);
-}
-
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
@@ -74,4 +54,28 @@ ion-item.selected {
 .title {
   font-family: 'Nunito', sans-serif;
   font-size: 2em;
+}
+
+#header {
+  padding-bottom: 2em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+.badge {
+  font-size: 1em;
+  padding: 0.5em;
+}
+
+.list {
+  max-height: 80vh;
+  overflow: auto;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.list::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }

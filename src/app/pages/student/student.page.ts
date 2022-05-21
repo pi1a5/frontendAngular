@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
+import { ModalController } from '@ionic/angular';
+import { format } from 'date-fns';
+import { ApiStudentService } from 'src/app/services/api-student.service';
 import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
+import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
 @Component({
   selector: 'app-student',
@@ -11,26 +14,33 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
 })
 export class StudentPage implements OnInit {
 
-  public sidebarItems = [
-    { title: 'Novo Ticket', url: 'newTicket', icon: 'create' },
-    { title: 'Perfil', url: 'profile', icon: 'person' },
-  ]
+  private tipoEstagio: string = 'Início Estágio';
+  private ticketsE: any = [];
+  private ticketP: any = null;
 
-  private user: User = null;
-
-  constructor(private ggAuth: GoogleAuthService, private api: ApiService, private router: Router) { }
+  constructor(
+    private ggAuth: GoogleAuthService,
+    private api: ApiService,
+    private router: Router,
+    private apiStudent: ApiStudentService,
+    public modalController: ModalController
+  ) { }
 
   async ngOnInit() {
-    try { 
-      this.api.getUser(localStorage.getItem('sub')).subscribe(user => {
-        this.user = user;
-      }, error => {
-        console.log(error);
-        this.signOut();
-      })
-    } catch (error) {
+    this.apiStudent.getTicketsUser().subscribe(tickets => {
+      console.log(tickets);
+      this.defineTickets(tickets);
+    }, error => {
       console.log(error);
-    }
+    })
+  }
+
+  async presentModal(ticket: any) {
+    var modal = await this.modalController.create({
+      component: ModelCardClosedPage,
+      componentProps: { ticket }
+    });
+    return modal.present();
   }
 
   async signOut() {
@@ -40,5 +50,42 @@ export class StudentPage implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  goToNewTicket() {
+    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
+  }
+
+  goToProfile() {
+    this.router.navigate(['profile'], { replaceUrl: true });
+  }
+
+  defineTickets(tickets: any) {
+    for (let index = 0; index < tickets.length; index++) {
+      if (!tickets[index].feedback) {
+        this.ticketP = tickets[index];
+        if (tickets[index].data_criado) {
+          this.ticketP[index].data_criado = this.formatDate(tickets[index].data_criado);
+        }
+        if (tickets[index].data_limite) {
+          this.ticketP[index].data_limite = this.formatDate(tickets[index].data_limite);
+        }
+      } else {
+        this.ticketsE.push(tickets[index]);
+        if (tickets[index].data_criado) {
+          this.ticketsE[index].data_criado = this.formatDate(tickets[index].data_criado);
+        }
+        if (tickets[index].data_limite) {
+          this.ticketsE[index].data_limite = this.formatDate(tickets[index].data_limite);
+        }
+        if (tickets[index].data_fechado) {
+          this.ticketsE[index].data_fechado = this.formatDate(tickets[index].data_fechado);
+        }
+      }
+    }
+  }
+
+  formatDate(date: string) {
+    return format(new Date(date), 'dd/MM/yyyy');
   }
 }

@@ -23,6 +23,26 @@ const routes: Routes = [
     path: 'select-course',
     loadChildren: () => import('./pages/select-course/select-course.module').then( m => m.SelectCoursePageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'select-ticket-type',
+    loadChildren: () => import('./pages/select-ticket-type/select-ticket-type.module').then( m => m.SelectTicketTypePageModule)
+  },
+  {
+    path: 'inicio-de-estagio',
+    loadChildren: () => import('./pages/inicio-de-estagio/inicio-de-estagio.module').then( m => m.InicioDeEstagioPageModule)
+  },
+  {
+    path: 'modal-card-open',
+    loadChildren: () => import('./pages/modal-card-open/modal-card-open.module').then( m => m.ModalCardOpenPageModule)
+  },
+  {
+    path: 'model-card-closed',
+    loadChildren: () => import('./pages/model-card-closed/model-card-closed.module').then( m => m.ModelCardClosedPageModule)
+  },
 ];
 
 @NgModule({

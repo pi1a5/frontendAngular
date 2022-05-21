@@ -33,9 +33,9 @@ export class ApiService {
     });
   }
 
-  getUser(sub: string): Observable<User> {
+  getUser(): Observable<User> {
     return this.http.post<User>(`${this.url}api/user`, {
-      sub: sub
+      sub: localStorage.getItem('sub')
     });
   }
 

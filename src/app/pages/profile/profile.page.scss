@@ -60,26 +60,6 @@ ion-item.selected {
   font-size: 2em;
 }
 
-.list {
-  max-height: 80vh;
-  overflow: auto;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.list::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}
-
 #header {
   padding-bottom: 2em;
-}
-
-.font {
-  font-family: 'Nunito', sans-serif;
-}
-
-.badge {
-  font-size: 1em;
-  padding: 0.5em;
 }
