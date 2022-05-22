@@ -63,9 +63,9 @@ export class StudentPage implements OnInit {
   defineTickets(tickets: any) {
     for (let index = 0; index < tickets.length; index++) {
       if (!tickets[index].feedback) {
-        this.ticketP = tickets[index];    
-        if (tickets[index].data_criado) {        
-          this.ticketP.data_criado = this.formatDate(tickets[index].data_criado);      
+        this.ticketP = tickets[index];
+        if (tickets[index].data_criado) {
+          this.ticketP.data_criado = this.formatDate(tickets[index].data_criado);
         }
         if (tickets[index].data_limite) {
           this.ticketP.data_limite = this.formatDate(tickets[index].data_limite);
@@ -86,6 +86,6 @@ export class StudentPage implements OnInit {
   }
 
   formatDate(date: string) {
-    return format(new Date(date), 'dd/MM/yyyy');
+    return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
   }
 }

@@ -12,7 +12,6 @@ export class AcompanhamentoPage implements OnInit {
 
   private arqRAE: any = 'exemploarquivoRAE';
   private textArea: string = null;
-  private dataLimite: string = null;
 
   constructor(
     private router: Router,
@@ -43,13 +42,23 @@ export class AcompanhamentoPage implements OnInit {
   }
 
   calculateDataLimite() {
-
+    var mes: any = new Date().getMonth();
+    mes = mes + 2
+    if (mes < 10 ) {
+      mes = '0' + mes
+    }
+    if (mes > 12) {
+      mes = '01'
+    }
+   
+    return `${new Date().getFullYear()}-${mes}-${29}`;     
   }
 
   async submit() {
+    
     if (this.validate()) {
       await this.presentLoading();
-      this.apiStudent.sendTicketAcompanhamento(this.textArea, this.dataLimite, this.arqRAE).subscribe(data => {
+      this.apiStudent.sendTicketAcompanhamento(this.textArea, this.calculateDataLimite(), this.arqRAE).subscribe(data => {
         console.log(data);
         this.loadingController.dismiss();
         this.presentToast(data, 'success', 'checkmark-circle');
@@ -72,10 +81,6 @@ export class AcompanhamentoPage implements OnInit {
     }
     if (!this.arqRAE) {
       this.presentToast('RAE obrigatório', 'danger', 'close-circle');
-      return false;
-    }
-    if (!this.dataLimite) {
-      this.presentToast('Data limite inválida', 'danger', 'close-circle');
       return false;
     }
 

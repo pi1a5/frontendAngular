@@ -6,17 +6,19 @@
     <ion-card-content class="ion-text-center">
       <ion-grid>
         <ion-row>
-          <ion-col *ngFor="let course of list">
-              <ion-card class="curso" button="true" color="primary" (click)="setCourse(course.id)">
-                <ion-card-header >
+          <ion-list  class="list">
+            <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4" *ngFor="let course of list">
+              <ion-card class="curso font" button="true" color="primary" (click)="setCourse(course.id)">
+                <ion-card-header>
                   <ion-icon name="desktop-outline"></ion-icon>
                 </ion-card-header>
                 <ion-card-content>
                   <ion-title>{{course.nome}}</ion-title>
-                  <ion-note color="light">{{course.sigla}}</ion-note>
+                  <ion-note color="light" class="font" style="font-size: large;">{{course.sigla}}</ion-note>
                 </ion-card-content>
               </ion-card>
-          </ion-col>
+            </ion-col>
+          </ion-list>
         </ion-row>
       </ion-grid>
     </ion-card-content>

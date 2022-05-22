@@ -9,6 +9,21 @@ ion-icon {
   font-size: 5em;
 }
 
+.list {
+  max-height: 80vh;
+  overflow: auto;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.list::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
 .curso {
   padding-top: 2em;
   padding-bottom: 2em;

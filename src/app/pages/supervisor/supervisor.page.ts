@@ -111,6 +111,6 @@ export class SupervisorPage implements OnInit {
   }
 
   formatDate(date: string) {
-    return format(new Date(date), 'dd/MM/yyyy');
+    return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
   }
 }

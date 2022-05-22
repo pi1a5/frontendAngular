@@ -41,10 +41,23 @@ export class FimDeEstagioPage implements OnInit {
     toast.present();
   }
 
+  calculateDataLimite() {
+    var mes: any = new Date().getMonth();
+    mes = mes + 2
+    if (mes < 10 ) {
+      mes = '0' + mes
+    }
+    if (mes > 12) {
+      mes = '01'
+    }
+   
+    return `${new Date().getFullYear()}-${mes}-${29}`;     
+  }
+
   async submit() {
     if (this.validate()) {
       await this.presentLoading();
-      this.apiStudent.sendTicketFim(this.textArea, this.arqTRE).subscribe(data => {
+      this.apiStudent.sendTicketFim(this.textArea, this.calculateDataLimite(), this.arqTRE).subscribe(data => {
         console.log(data);
         this.loadingController.dismiss();
         this.presentToast(data, 'success', 'checkmark-circle');
