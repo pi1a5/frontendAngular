@@ -40,6 +40,7 @@ export class HomePage {
   async signIn() {
     try {
       var user = await this.ggAuth.signIn();
+      if (!user) return;
       await this.presentLoading();
       console.log('user: ', user);
       this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id)

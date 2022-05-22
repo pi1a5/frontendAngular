@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { format, parseISO } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 
 @Component({
-  selector: 'app-inicio-de-estagio',
-  templateUrl: './inicio-de-estagio.page.html',
-  styleUrls: ['./inicio-de-estagio.page.scss'],
+  selector: 'app-acompanhamento',
+  templateUrl: './acompanhamento.page.html',
+  styleUrls: ['./acompanhamento.page.scss'],
 })
-export class InicioDeEstagioPage implements OnInit {
+export class AcompanhamentoPage implements OnInit {
 
-  private dateValue: any = null;
-  private dateString: any = null;
-  private arqTCE: any = 'exemploarquivoTCE';
-  private arqPA: any = 'exemploarquivoPA';
+  private arqRAE: any = 'exemploarquivoRAE';
   private textArea: string = null;
 
   constructor(
@@ -45,15 +41,10 @@ export class InicioDeEstagioPage implements OnInit {
     toast.present();
   }
 
-  formatDate(value: any) {
-    this.dateValue = format(parseISO(value), 'yyyy-MM-dd');;
-    this.dateString = format(parseISO(value), 'dd/MM/yyyy');
-  }
-
   async submit() {
     if (this.validate()) {
       await this.presentLoading();
-      this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, this.arqTCE, this.arqPA).subscribe(data => {
+      this.apiStudent.sendTicketAcompanhamento(this.textArea, this.arqRAE).subscribe(data => {
         console.log(data);
         this.loadingController.dismiss();
         this.presentToast(data, 'success', 'checkmark-circle');
@@ -64,25 +55,18 @@ export class InicioDeEstagioPage implements OnInit {
         this.presentToast(error.error, 'danger', 'close-circle');
         this.router.navigate(['student'], { replaceUrl: true });
       });
-    } 
-    return ;
+    }
+
+    return;
   }
 
   validate() {
-    if (!this.dateValue) {
-      this.presentToast('Data obrigatória', 'danger', 'close-circle');
-      return false;
-    }
-    if (!this.arqTCE) {
-      this.presentToast('TCE obrigatório', 'danger', 'close-circle');
-      return false;
-    }
-    if (!this.arqPA) {
-      this.presentToast('PA obrigatório', 'danger', 'close-circle');
-      return false;
-    }
     if (!this.textArea) {
       this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
+      return false;
+    }
+    if (!this.arqRAE) {
+      this.presentToast('RAE obrigatório', 'danger', 'close-circle');
       return false;
     }
 

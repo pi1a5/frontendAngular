@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'model-card-closed',
     loadChildren: () => import('./pages/model-card-closed/model-card-closed.module').then( m => m.ModelCardClosedPageModule)
   },
+  {
+    path: 'acompanhamento',
+    loadChildren: () => import('./pages/acompanhamento/acompanhamento.module').then( m => m.AcompanhamentoPageModule)
+  },
+  {
+    path: 'fim-de-estagio',
+    loadChildren: () => import('./pages/fim-de-estagio/fim-de-estagio.module').then( m => m.FimDeEstagioPageModule)
+  },
 ];
 
 @NgModule({

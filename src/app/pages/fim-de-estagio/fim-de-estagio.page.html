@@ -1,0 +1,30 @@
+<ion-content color="primary">
+  <div class="flex-center">
+    <ion-card class="ion-text-center">
+      <ion-card-header class="font">
+        <ion-card-title class="title">Fim de Estágio</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-item button color="primary">
+          <label class="font" for='selecao-arquivo-tre'>Termo de Realização de Estágio</label>
+          <input id='selecao-arquivo-tre' type='file'>
+          <ion-icon slot="end" name="document"></ion-icon>
+        </ion-item>
+        <br>
+
+        <ion-item lines="none">
+          <ion-label position="floating" class="font">Escreva algo para o Orientador</ion-label>
+          <ion-textarea [(ngModel)]="textArea" class="font" rows="4" cols="20"
+            placeholder="Olá Orientador! Estou enviando o meu relatório...">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-button class="font" color="success" expand="block" (click)="submit()">
+          Enviar
+          <ion-icon slot="end" name="send"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

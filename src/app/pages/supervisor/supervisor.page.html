@@ -27,22 +27,22 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content color="primary" class="ion-justify-content-center">
+    <ion-content color="medium" class="ion-justify-content-center" >
       <ion-grid>
         <ion-row>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
-            <ion-card class="font ion-text-center">
+            <ion-card class="font ion-text-center" color="primary">
               <ion-card-header>
                 <ion-card-title>Alunos sem Orientador</ion-card-title>
               </ion-card-header>
 
-              <ion-list class="list" *ngIf="ticketsWithoutSupervisor.length > 0">
+              <ion-list style="background-color: var(--ion-color-primary);" class="list" *ngIf="ticketsWithoutSupervisor.length > 0">
 
-                <ion-card button color="primary" *ngFor="let ticket of ticketsWithoutSupervisor"
+                <ion-card button color="light" *ngFor="let ticket of ticketsWithoutSupervisor"
                   (click)="presentModal(ticket)">
                   <ion-card-header>
-                    <ion-item color="primary" lines="none">
+                    <ion-item color="light" lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticket.foto}}">
                       </ion-avatar>
@@ -72,17 +72,17 @@
           </ion-col>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
-            <ion-card class="font ion-text-center">
+            <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Alunos sob sua Orientação</ion-card-title>
               </ion-card-header>
 
-              <ion-list class="list" *ngIf="ticketsWithSupervisor.length > 0">
+              <ion-list style="background-color: var(--ion-color-primary);" class="list" *ngIf="ticketsWithSupervisor.length > 0">
 
-                <ion-card button color="primary" *ngFor="let ticket of ticketsWithSupervisor"
+                <ion-card button color="light" *ngFor="let ticket of ticketsWithSupervisor"
                   (click)="presentModal(ticket)">
                   <ion-card-header>
-                    <ion-item color="primary" lines="none">
+                    <ion-item color="light" lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticket.foto}}">
                       </ion-avatar>
@@ -112,17 +112,17 @@
           </ion-col>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
-            <ion-card class="font ion-text-center">
+            <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Tickets Respondidos</ion-card-title>
               </ion-card-header>
 
-              <ion-list class="list" *ngIf="closedTicketsWithSupervisor.length > 0">
+              <ion-list style="background-color: var(--ion-color-primary);" class="list" *ngIf="closedTicketsWithSupervisor.length > 0">
 
-                <ion-card button color="primary" *ngFor="let ticket of closedTicketsWithSupervisor"
+                <ion-card button color="light" *ngFor="let ticket of closedTicketsWithSupervisor"
                   (click)="presentModal(ticket)">
                   <ion-card-header>
-                    <ion-item color="primary" lines="none">
+                    <ion-item color="light" lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticket.foto}}">
                       </ion-avatar>
@@ -144,7 +144,7 @@
 
               <div *ngIf="closedTicketsWithSupervisor.length == 0">
                 <p>
-                  <ion-label>Não há tickets pendentes...</ion-label>
+                  <ion-label>Não há tickets respondidos...</ion-label>
                 </p>
               </div>
 
