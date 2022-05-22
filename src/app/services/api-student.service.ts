@@ -47,4 +47,10 @@ export class ApiStudentService {
       eProfessor: false
     });
   }
+
+  checkIfFinalizou(): Observable<any> {
+    return this.http.post(`${this.url}api/checkIfFinalizou`, {
+      sub: localStorage.getItem('sub'),
+    });
+  }
 }

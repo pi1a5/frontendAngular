@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -16,7 +16,8 @@ export class SelectCoursePage implements OnInit {
   constructor(
     private router: Router,
     private api: ApiService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -25,6 +26,14 @@ export class SelectCoursePage implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando...',
+      spinner: 'crescent'
+    });
+    return await loading.present();
   }
 
   async presentToast(msg: string, color: string, icon: string) {
@@ -37,12 +46,15 @@ export class SelectCoursePage implements OnInit {
     toast.present();
   }
 
-  setCourse(idCourse: number) {
-    this.api.setCourse(idCourse, localStorage.getItem('sub')).subscribe(data => {
+  async setCourse(idCourse: number) {
+    await this.presentLoading();
+    this.api.setCourse(idCourse).subscribe(data => {
+      this.loadingController.dismiss();
       this.presentToast('Curso definido com sucesso', 'success', 'checkmark-circle');
       this.userPage(data.email);
     }, error => {
       console.log(error);
+      this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
     })
   }

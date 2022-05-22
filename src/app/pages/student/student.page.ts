@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
-import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
@@ -20,19 +19,26 @@ export class StudentPage implements OnInit {
 
   constructor(
     private ggAuth: GoogleAuthService,
-    private api: ApiService,
     private router: Router,
     private apiStudent: ApiStudentService,
     public modalController: ModalController
   ) { }
 
   async ngOnInit() {
+    this.apiStudent.checkIfFinalizou().subscribe(data => {
+      console.log('data:' ,data);
+      
+    }, error => {
+      console.log('errr:',error);
+      
+    });
+
     this.apiStudent.getTicketsUser().subscribe(tickets => {
       console.log(tickets);
       this.defineTickets(tickets);
     }, error => {
       console.log(error);
-    })
+    });
   }
 
   async presentModal(ticket: any) {

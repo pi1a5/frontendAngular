@@ -9,31 +9,21 @@ ion-icon {
   font-size: 5em;
 }
 
-.list {
-  max-height: 80vh;
-  overflow: auto;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.list::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}
-
 .font {
   font-family: 'Nunito', sans-serif;
 }
 
-.curso {
-  padding-top: 2em;
-  padding-bottom: 2em;
+.container {
+  margin: 3em;
+  border-radius: 2em;
+  height: 90vh;
+  overflow: auto;
 }
 
-.container {
-  height: 97vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.curso {
+  border: solid 5px #295ebb;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 .title {
