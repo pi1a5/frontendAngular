@@ -26,7 +26,7 @@ export class SupervisorPage implements OnInit {
 
   async ngOnInit() {
     this.apiSupervisor.getTicketsWithoutSupervisor().subscribe(data => {
-      console.log(data);
+      console.log("Alunos sem orientador: ",data);
       this.ticketsWithoutSupervisor = data;
       for (let index = 0; index < data.length; index++) {
         if (data[index].data_criado) {
@@ -37,17 +37,26 @@ export class SupervisorPage implements OnInit {
         }
       }
     }, error => {
-      console.log(error);
+      console.log("Alunos sem orientador: ",error);
     });
 
     this.apiSupervisor.getTicketsWithSupervisor().subscribe(data => {
-      console.log(data);
+      console.log("Alunos sob sua orientação: ",data);
+      this.ticketsWithSupervisor = data;
+      for (let index = 0; index < data.length; index++) {
+        if (data[index].data_criado) {
+          this.ticketsWithSupervisor[index].data_criado = this.formatDate(data[index].data_criado);
+        }
+        if (data[index].data_limite) {
+          this.ticketsWithSupervisor[index].data_limite = this.formatDate(data[index].data_limite);
+        }
+      }
     }, error => {
-      console.log(error);
+      console.log("Alunos sob sua orientação: ",error);
     });
 
     this.apiSupervisor.getClosedTicketsWithSupervisor().subscribe(data => {
-      console.log(data);
+      console.log("Tickets respondidos: ",data);
       this.closedTicketsWithSupervisor = data;
       for (let index = 0; index < data.length; index++) {
         if (data[index].data_criado) {
@@ -61,7 +70,7 @@ export class SupervisorPage implements OnInit {
         }
       }
     }, error => {
-      console.log(error);
+      console.log("Tickets respondidos: ",error);
     });
     
   }

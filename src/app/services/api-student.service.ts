@@ -28,9 +28,10 @@ export class ApiStudentService {
     })
   }
 
-  sendTicketAcompanhamento(corpo_texto: string, doc: string): Observable<any> {
+  sendTicketAcompanhamento(corpo_texto: string, data_limite: string ,doc: string): Observable<any> {
     return this.http.post(`${this.url}api/newTicketAcompanhamento`, {
       corpo_texto: corpo_texto,
+      data_limite: data_limite,
       sub: localStorage.getItem('sub'),
       doc: doc,
       eProfessor: false

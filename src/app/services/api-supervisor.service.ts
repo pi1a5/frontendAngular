@@ -14,7 +14,9 @@ export class ApiSupervisorService {
 
   // Dashboard
   getTicketsWithoutSupervisor(): Observable<any> {
-    return this.http.get(`${this.url}api/getTicketsWithoutSupervisor`);
+    return this.http.post(`${this.url}api/getTicketsWithoutSupervisor`, {
+      sub: localStorage.getItem('sub')
+    });
   }
 
   getTicketsWithSupervisor(): Observable<any> {

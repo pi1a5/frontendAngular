@@ -27,33 +27,64 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content color="primary" class="ion-justify-content-center"  color="medium">
+    <ion-content color="primary" class="ion-justify-content-center" color="medium">
       <ion-grid>
         <ion-row>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="6" size-xl="6">
-            <ion-card color="primary" class="font ion-text-center" >
+            <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Ticket Pendente</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <ion-card button color="light" *ngIf="ticketP" (click)="presentModal(ticketP)">
+
+                <ion-card *ngIf="ticketP">
                   <ion-card-header>
-                    <ion-item color="light" lines="none">
-                      <ion-avatar slot="start">
-                        <img src="{{ticketP.foto}}">
-                      </ion-avatar>
-                      <ion-badge color="warning" slot="end" class="font badge">{{tipoEstagio}}</ion-badge>
+                    <ion-item lines="none">
+
+                      <ion-label color="primary" class="font" style="font-size: 1.8em;">Data Limite:
+                        {{ticketP.data_limite}}</ion-label>
+                      <ion-badge color="warning" slot="end" class="font badge">{{ticketP.tipo_estagios}}</ion-badge>
                     </ion-item>
                   </ion-card-header>
 
-                  <ion-card-content class="font ion-text-start ion-margin-start">   
-                    <p><ion-label class="font">{{ticketP.nome}}</ion-label></p>
-                    <br>
-                    <p>Data de Criação: {{ticketP.data_criado}}</p>
-                    <p>Data Limite: {{ticketP.data_limite}}</p>  
-                  </ion-card-content>
+                  <ion-card-header>
+                    <ion-item lines="none">
+                      <ion-avatar slot="start">
+                        <img src="{{ticketP.foto}}">
+                      </ion-avatar>
+                      <ion-label class="font">{{ticketP.nome}}</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <ion-label class="font">
+                        <ion-text color="primary">E-mail:</ion-text> {{ticketP.email}}
+                      </ion-label>
+                    </ion-item>
+                  </ion-card-header>
 
+                  <ion-list>
+                    <ion-item class="ion-text-start ion-margin-start" lines="none">
+                      <ion-label class="font">
+                        <ion-text color="primary">Data de Criação do Ticket:</ion-text> {{ticketP.data_criado}}
+                      </ion-label>
+                    </ion-item>
+
+                    <ion-item class="ion-text-start ion-margin-start" lines="none">
+                      <ion-label color="primary" class="font">Mensagem do Aluno:</ion-label>
+                    </ion-item>
+
+                    <ion-item class="ion-text-start ion-margin-start ion-margin-end" lines="none">
+                      <ion-label class="font ion-text-wrap ion-text-justify">
+                        {{ticketP.corpo_texto}}
+                      </ion-label>
+                    </ion-item>
+
+                    <ion-button size="default" class="font ion-margin">
+                      <ion-icon slot="start" name="eye-sharp"></ion-icon>
+                      Ver Anexos
+                    </ion-button>
+
+                  </ion-list>
                 </ion-card>
 
                 <div *ngIf="!ticketP">
@@ -77,14 +108,13 @@
 
               <ion-list style="background-color: var(--ion-color-primary);" class="list" *ngIf="ticketsE.length > 0">
 
-                <ion-card button color="light" *ngFor="let ticket of ticketsE"
-                  (click)="presentModal(ticket)">
+                <ion-card button color="light" *ngFor="let ticket of ticketsE" (click)="presentModal(ticket)">
                   <ion-card-header>
                     <ion-item color="light" lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticket.foto}}">
                       </ion-avatar>
-                      <ion-badge color="warning" slot="end" class="font badge">Início Estágio</ion-badge>
+                      <ion-badge color="warning" slot="end" class="font badge">{{ticket.tipo_estagios}}</ion-badge>
                     </ion-item>
                   </ion-card-header>
 

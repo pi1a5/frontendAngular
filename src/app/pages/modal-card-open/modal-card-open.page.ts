@@ -50,7 +50,7 @@ export class ModalCardOpenPage implements OnInit {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
     this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, true).subscribe(data => {
-      console.log(data);
+      //console.log(data);
       this.loadingController.dismiss();
       this.presentToast('Ticket Aceito', 'success', 'checkmark-circle');
       this.dismiss();
@@ -66,7 +66,7 @@ export class ModalCardOpenPage implements OnInit {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
     this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, false).subscribe(data => {
-      console.log(data);
+      //console.log(data);
       this.loadingController.dismiss();
       this.presentToast('Ticket Recusado', 'success', 'checkmark-circle');
       this.dismiss();
