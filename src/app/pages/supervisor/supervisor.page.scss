@@ -71,15 +71,28 @@ ion-item.selected {
   display: none;  /* Safari and Chrome */
 }
 
-#header {
-  padding-bottom: 2em;
-}
-
 .font {
   font-family: 'Nunito', sans-serif;
 }
 
 .badge {
   font-size: 1em;
-  padding: 0.5em;
+}
+
+.simulateItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dataResp {
+  font-size: 1.2em;
+}
+
+.cardChip {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.avatar {
+  padding: 0.1em;
 }

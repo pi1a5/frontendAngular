@@ -79,3 +79,21 @@ ion-item.selected {
 .list::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+.simulateItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dataResp {
+  font-size: 1.2em;
+}
+
+.cardChip {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.avatar {
+  padding: 0.1em;
+}

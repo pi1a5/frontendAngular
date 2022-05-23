@@ -13,7 +13,6 @@ import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page
 })
 export class StudentPage implements OnInit {
 
-  private tipoEstagio: string = 'Início Estágio';
   private ticketsE: any = [];
   private ticketP: any = null;
 
@@ -26,16 +25,17 @@ export class StudentPage implements OnInit {
 
   async ngOnInit() {
     this.apiStudent.checkIfFinalizou().subscribe(data => {
-      console.log('data:' ,data);
-      
+      console.log('data:', data);
+
     }, error => {
-      console.log('errr:',error);
-      
+      console.log('errr:', error);
+
     });
 
     this.apiStudent.getTicketsUser().subscribe(tickets => {
       console.log(tickets);
-      this.defineTickets(tickets);
+      this.defineTickets(tickets)
+
     }, error => {
       console.log(error);
     });
@@ -67,28 +67,59 @@ export class StudentPage implements OnInit {
   }
 
   defineTickets(tickets: any) {
+
     for (let index = 0; index < tickets.length; index++) {
-      if (!tickets[index].feedback) {
+      if (tickets[index].feedback) {
+        this.ticketsE.push(tickets[index]);
+    
+        var index_novo = this.ticketsE.length;
+    
+        if (tickets[index].data_criado) {
+          this.ticketsE[index_novo - 1].data_criado = this.formatDate(tickets[index].data_criado)
+        }
+        if (tickets[index].data_limite) {
+          this.ticketsE[index_novo - 1].data_limite = this.formatDate(tickets[index].data_limite);
+        }
+        if (tickets[index].data_fechado) {
+          this.ticketsE[index_novo - 1].data_fechado = this.formatDate(tickets[index].data_fechado);
+        }
+      } else {
         this.ticketP = tickets[index];
+        
         if (tickets[index].data_criado) {
           this.ticketP.data_criado = this.formatDate(tickets[index].data_criado);
         }
         if (tickets[index].data_limite) {
           this.ticketP.data_limite = this.formatDate(tickets[index].data_limite);
         }
-      } else {
-        this.ticketsE.push(tickets[index]);
-        if (tickets[index].data_criado) {
-          this.ticketsE[index].data_criado = this.formatDate(tickets[index].data_criado);
-        }
-        if (tickets[index].data_limite) {
-          this.ticketsE[index].data_limite = this.formatDate(tickets[index].data_limite);
-        }
-        if (tickets[index].data_fechado) {
-          this.ticketsE[index].data_fechado = this.formatDate(tickets[index].data_fechado);
-        }
       }
     }
+
+    // for (let index = 0; index < tickets.length; index++) {
+
+    //   if (!tickets[index].feedback) {
+  
+    //     this.ticketP = tickets[index];
+    //     if (tickets[index].data_criado) {
+    //       this.ticketP.data_criado = this.formatDate(tickets[index].data_criado);
+    //     }
+    //     if (tickets[index].data_limite) {
+    //       this.ticketP.data_limite = this.formatDate(tickets[index].data_limite);
+    //     }
+
+    //   } else {
+    //     this.ticketsE.push(tickets[index]);
+    //     if (tickets[index].data_criado) {
+    //       this.ticketsE[index].data_criado = this.formatDate(tickets[index].data_criado)
+    //     }
+    //     if (tickets[index].data_limite) {
+    //       this.ticketsE[index].data_limite = this.formatDate(tickets[index].data_limite);
+    //     }
+    //     if (tickets[index].data_fechado) {
+    //       this.ticketsE[index].data_fechado = this.formatDate(tickets[index].data_fechado);
+    //     }
+    //   }
+    // }
   }
 
   formatDate(date: string) {
