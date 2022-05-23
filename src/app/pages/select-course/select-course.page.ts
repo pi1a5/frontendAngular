@@ -46,6 +46,23 @@ export class SelectCoursePage implements OnInit {
     toast.present();
   }
 
+  loadIcon(id: number) {
+    switch (id) {
+      case 0:
+        return 'desktop'
+      case 1:
+        return 'construct'
+      case 2:
+        return 'clipboard'
+      case 3:
+        return 'airplane'
+      case 4:
+        return 'bulb'
+      default:
+        break;
+    }
+  }
+
   async setCourse(idCourse: number) {
     await this.presentLoading();
     this.api.setCourse(idCourse).subscribe(data => {

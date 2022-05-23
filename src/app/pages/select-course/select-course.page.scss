@@ -6,7 +6,12 @@ ion-button {
 }
 
 ion-icon {
-  font-size: 5em;
+  font-size: 6em;
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 3em;
 }
 
 .font {
@@ -16,17 +21,21 @@ ion-icon {
 .container {
   margin: 3em;
   border-radius: 2em;
-  height: 90vh;
+  height: 88vh;
   overflow: auto;
 }
 
 .curso {
+  border-radius: 2em;
   border: solid 5px #295ebb;
   padding-top: 2em;
   padding-bottom: 2em;
 }
 
-.title {
-  font-family: 'Nunito', sans-serif;
-  font-size: 3em;
+.nome {
+  font-size: 1em;
+}
+
+.sigla {
+  font-size: 2em;
 }

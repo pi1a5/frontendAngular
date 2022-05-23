@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
@@ -11,10 +11,11 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 })
 export class InicioDeEstagioPage implements OnInit {
 
+  private today: any = new Date().toISOString();
   private dateValue: any = null;
   private dateString: any = null;
-  private arqTCE: any = 'exemploarquivoTCE';
-  private arqPA: any = 'exemploarquivoPA';
+  private arqTCE: any = null;
+  private arqPA: any = null;
   private textArea: string = null;
 
   constructor(
@@ -64,8 +65,8 @@ export class InicioDeEstagioPage implements OnInit {
         this.presentToast(error.error, 'danger', 'close-circle');
         this.router.navigate(['student'], { replaceUrl: true });
       });
-    } 
-    return ;
+    }
+    return;
   }
 
   validate() {
@@ -89,4 +90,13 @@ export class InicioDeEstagioPage implements OnInit {
     return true;
   }
 
+  arqTce(files: FileList) {
+    console.log('TCE: ', files.item(0));
+    this.arqTCE = files.item(0);
+  }
+
+  arqPa(files: FileList) {
+    console.log('PA: ', files.item(0)); 
+    this.arqPA = files.item(0);
+  }
 }

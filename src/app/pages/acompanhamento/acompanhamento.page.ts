@@ -10,7 +10,7 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 })
 export class AcompanhamentoPage implements OnInit {
 
-  private arqRAE: any = 'exemploarquivoRAE';
+  private arqRAE: any = null;
   private textArea: string = null;
 
   constructor(
@@ -85,6 +85,11 @@ export class AcompanhamentoPage implements OnInit {
     }
 
     return true;
+  }
+
+  arqRae(files: FileList) {
+    console.log('RAE: ', files.item(0)); 
+    this.arqRAE = files.item(0);
   }
 
 }

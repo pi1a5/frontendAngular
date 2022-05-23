@@ -4,7 +4,13 @@
 }
 
 .title {
-  font-size: 2em;
+  font-size: 2.5em;
+  margin: 0.5em;
+  color: var(--ion-color-primary);
+}
+
+ion-item {
+  border-radius: 0.5em;
 }
 
 /* Esconde o input */
@@ -15,6 +21,6 @@ input[type='file'] {
 /* Aparência que terá o seletor de arquivo */
 label {
   cursor: pointer;
-  margin: 0px;
-  padding: 0px;
+  margin: auto;
+  padding: auto;
 }

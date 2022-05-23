@@ -1,4 +1,4 @@
-<ion-content color="medium">
+<ion-content color="primary">
   <ion-card class="container">
     <ion-card-header>
       <p class="title ion-text-center">Selecione o seu Curso</p>
@@ -9,11 +9,12 @@
           <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4" *ngFor="let course of list">
             <ion-card class="curso font" button="true" color="primary" (click)="setCourse(course.id)">
               <ion-card-header>
-                <ion-img src="../../../assets/courses/ADS.png"></ion-img>
+
+                <ion-icon [name]="loadIcon(course.id)"></ion-icon>
               </ion-card-header>
               <ion-card-content>
-                <ion-title>{{course.nome}}</ion-title>
-                <ion-note color="light" class="font" style="font-size: large;">{{course.sigla}}</ion-note>
+                <ion-note color="light" class="font sigla">{{course.sigla}}</ion-note>
+                <ion-title class="nome">{{course.nome}}</ion-title>
               </ion-card-content>
             </ion-card>
           </ion-col>

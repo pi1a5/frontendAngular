@@ -6,19 +6,29 @@ ion-button {
 }
 
 ion-icon {
-  font-size: 5em;
+  font-size: 6em;
 }
 
 .ticket {
+  border-radius: 2em;
+  border: solid 5px #295ebb;
   padding-top: 2em;
   padding-bottom: 2em;
 }
 
+ion-icon {
+  font-size: 5em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: 4em;
+  margin: 3em;
+  border-radius: 2em;
+  height: 88vh;
+  overflow: auto;
 }
 
 .title {
@@ -26,7 +36,6 @@ ion-icon {
   font-size: 3em;
 }
 
-.font {
-  font-family: 'Nunito', sans-serif;
+.nome {
   font-size: 2em;
 }

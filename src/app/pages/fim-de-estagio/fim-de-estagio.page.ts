@@ -10,7 +10,7 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 })
 export class FimDeEstagioPage implements OnInit {
 
-  private arqTRE: any = 'exemploarquivoTRE';
+  private arqTRE: any = null;
   private textArea: string = null;
 
   constructor(
@@ -84,6 +84,11 @@ export class FimDeEstagioPage implements OnInit {
     }
 
     return true;
+  }
+
+  arqTre(files: FileList) {
+    console.log('TRE: ', files.item(0)); 
+    this.arqTRE = files.item(0);
   }
 
 }
