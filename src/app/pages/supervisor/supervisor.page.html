@@ -114,7 +114,7 @@
                       </ion-label>
                       <ion-button (click)="presentModal(ticket)" class="font" size="default" slot="end" color="success">
                         <ion-icon slot="start" name="eye-sharp"></ion-icon>
-                        Ver Detalhes
+                        Detalhes
                       </ion-button>
                     </ion-item>
 
@@ -142,52 +142,37 @@
               <ion-list style="background-color: var(--ion-color-primary);" class="list"
                 *ngIf="closedTicketsWithSupervisor.length > 0">
 
-                <ion-card button="true" color="light" *ngFor="let ticket of closedTicketsWithSupervisor"
-                  (click)="presentModal(ticket)">
+                <ion-card color="light" *ngFor="let ticket of closedTicketsWithSupervisor">
                   <ion-card-header>
-
-                    <div class="simulateItem">
-                      <ion-chip *ngIf="ticket.eAceito" class="cardChip" slot="start" color="success">
-                        <ion-label class="font dataResp ion-text-wrap">Respondido: {{ticket.data_fechado}}</ion-label>
-                      </ion-chip>
-
-                      <ion-chip *ngIf="!ticket.eAceito" class="cardChip" slot="start" color="danger">
-                        <ion-label class="font dataResp ion-text-wrap">Respondido: {{ticket.data_fechado}}</ion-label>
-                      </ion-chip>
-
-                      <ion-chip class="cardChip" slot="end" color="warning">
-                        <ion-label class="font badge ion-text-wrap">{{ticket.tipo_estagios}}</ion-label>
-                      </ion-chip>
-                    </div>
-
-                  </ion-card-header>
-
-                  <ion-card-content class="font ion-text-start ">
 
                     <ion-item color="light" lines="none">
                       <ion-avatar slot="start" class="cardAvatar">
                         <img src="{{ticket.foto}}">
                       </ion-avatar>
-
                       <ion-label class="font">
                         <h3>{{ticket.nome}}</h3>
                         <p>SP3046923</p>
                       </ion-label>
-
-                      <ion-icon *ngIf="ticket.eAceito" size="large" slot="end" color="success"
-                        name="checkmark-circle-outline"></ion-icon>
-                      <ion-icon *ngIf="!ticket.eAceito" size="large" slot="end" color="danger"
-                        name="close-circle-outline"></ion-icon>
+                      <ion-chip class="cardChip" slot="end" color="secondary">
+                        <ion-label class="font badge ion-text-wrap">{{ticket.tipo_estagios}}</ion-label>
+                      </ion-chip>
                     </ion-item>
 
-                    <br>
-                    <div class="simulateItem">
-                      <ion-label class="ion-margin-start">Data de Envio: </ion-label>
-                      <ion-label>
-                        {{ticket.data_criado}}
+                    <ion-item lines="none" color="light">
+                      <ion-label class="font ion-text-start">
+                        <h3>Data Resposta: {{ticket.data_fechado}}</h3>
+                        <h3>Data de Envio: {{ticket.data_criado}}</h3>
                       </ion-label>
-                    </div>
-                  </ion-card-content>
+                      <ion-button (click)="presentModal(ticket)" class="font" size="default" slot="end" color="success">
+                        <ion-icon slot="start" name="eye-sharp"></ion-icon>
+                        Detalhes
+                      </ion-button>
+                      <ion-icon *ngIf="ticket.eAceito" size="large" color="success" name="checkmark-circle"></ion-icon>
+                      <ion-icon *ngIf="!ticket.eAceito" size="large" color="danger" name="close-circle"></ion-icon>
+                    </ion-item>
+
+                  </ion-card-header>
+
                 </ion-card>
 
               </ion-list>

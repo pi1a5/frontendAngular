@@ -1,13 +1,9 @@
-.font {
-  font-family: 'Nunito', sans-serif;
-}
-
-.badge {
-  font-size: 1em;
-  padding: 0.5em;
-}
-
-.cardChip {
+.cardChip:hover {
   padding-top: 2em;
   padding-bottom: 2em;
+  cursor: default;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
 }

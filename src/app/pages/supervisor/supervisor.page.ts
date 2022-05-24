@@ -88,8 +88,10 @@ export class SupervisorPage implements OnInit {
         componentProps: { ticket }
       });
       await modal.present();
-      await modal.onDidDismiss();
-      await this.ngOnInit();
+      var {data} = await modal.onDidDismiss();   
+      if (data) {
+        await this.ngOnInit();
+      }
     }
   }
 

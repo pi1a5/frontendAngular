@@ -90,13 +90,13 @@ export class InicioDeEstagioPage implements OnInit {
     return true;
   }
 
-  arqTce(files: FileList) {
-    console.log('TCE: ', files.item(0));
-    this.arqTCE = files.item(0);
+  arqTce(event: any) {
+    console.log('TCE: ', event.target.files.item(0));
+    this.arqTCE = event.target.files.item(0);
   }
 
-  arqPa(files: FileList) {
-    console.log('PA: ', files.item(0)); 
-    this.arqPA = files.item(0);
+  arqPa(event: any) {
+    console.log('PA: ', event.target.files.item(0)); 
+    this.arqPA = event.target.files.item(0);
   }
 }

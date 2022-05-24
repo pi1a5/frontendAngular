@@ -1,30 +1,30 @@
-<ion-content color="primary">
+<ion-content color="success">
   <div class="flex-center">
-    <ion-card class="ion-text-center">
+    <ion-card color="medium" class="ion-text-center">
       <ion-card-header class="font">
-        <ion-card-title class="title">Acompanhamento</ion-card-title>
+        <ion-title color="dark" class="title">Acompanhamento</ion-title>
       </ion-card-header>
       <ion-card-content>
 
-        <ion-item color="primary" lines="none" button (click)="rae.click()" class="ion-text-center">
-          <ion-label *ngIf="arqRAE" class="font" for='selecao-arquivo-rae'>{{arqRAE.name}}</ion-label>
-          <ion-label *ngIf="!arqRAE" class="font" for='selecao-arquivo-rae'>Relatório de Atividades de Estágio</ion-label>
+        <ion-item color="dark" lines="none" button (click)="rae.click()" class="ion-text-center">
+          <ion-label *ngIf="arqRAE" class="font">{{arqRAE.name}}</ion-label>
+          <ion-label *ngIf="!arqRAE" class="font">Relatório de Atividades de Estágio</ion-label>
 
-          <input id='selecao-arquivo-tce' class="ion-hide" #rae type="file" (change)="arqRae($event.target.files)"
+          <input class="ion-hide" #rae type="file" (change)="arqRae($event.target.files)"
             accept="application/pdf">
           <ion-icon lazy="true" slot="end" name="document"></ion-icon>
         </ion-item>
 
         <br>
 
-        <ion-item lines="none">
-          <ion-label position="floating" class="font" color="primary">Escreva algo para o Orientador</ion-label>
-          <ion-textarea [(ngModel)]="textArea" class="font" rows="4" cols="20"
+        <ion-item color="medium" lines="none">
+          <ion-label position="floating" class="font" color="dark">Escreva algo para o Orientador</ion-label>
+          <ion-textarea color="dark" [(ngModel)]="textArea" class="font" rows="4" cols="20"
             placeholder="Olá Orientador! Estou enviando o meu relatório...">
           </ion-textarea>
         </ion-item>
 
-        <ion-button class="font" shape="round" color="success" expand="full" (click)="submit()">
+        <ion-button class="font" shape="round" color="dark" expand="full" (click)="submit()">
           Enviar
           <ion-icon slot="end" name="send"></ion-icon>
         </ion-button>

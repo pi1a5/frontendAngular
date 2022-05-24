@@ -1,12 +1,12 @@
-<ion-content color="primary">
+<ion-content color="success">
   <div class="flex-center">
-    <ion-card class="ion-text-center">
+    <ion-card color="medium" class="ion-text-center">
       <ion-card-header class="font">
-        <ion-card-title class="title">Início de Estágio</ion-card-title>
+        <ion-title color="dark" class="title">Início de Estágio</ion-title>
       </ion-card-header>
       <ion-card-content>
 
-        <ion-item color="primary" lines="none" button id="open-date-input">
+        <ion-item color="dark" lines="none" button id="open-date-input">
           <label *ngIf="!dateString" class="font">Prazo limite dado pela empresa</label>
           <label *ngIf="dateString" class="font">Prazo limite: {{ dateString }}</label>
 
@@ -20,33 +20,33 @@
         </ion-item>
         <br>
 
-        <ion-item color="primary" lines="none" button (click)="tce.click()" class="ion-text-center">
-          <label *ngIf="arqTCE" class="font" for='selecao-arquivo-tce'>{{arqTCE.name}}</label>
-          <label *ngIf="!arqTCE" class="font" for='selecao-arquivo-tce'>Termo de Compromisso de Estágio</label>
-          <input id='selecao-arquivo-tce' class="ion-hide" #tce type="file" (change)="arqTce($event.target.files)"
-            accept="application/pdf">
+        <ion-item color="dark" lines="none" button="true" (click)="tce.click()" class="ion-text-center">
+          <label *ngIf="arqTCE" class="font">{{arqTCE.name}}</label>
+          <label *ngIf="!arqTCE" class="font">Termo de Compromisso de Estágio</label>
+          <input class="ion-hide" #tce type="file" (change)="arqTce($event)"
+            accept=".pdf">
           <ion-icon lazy="true" slot="end" name="document"></ion-icon>
         </ion-item>
 
         <br>
 
-        <ion-item color="primary" lines="none" button (click)="pa.click()" class="ion-text-center">
-          <label *ngIf="arqPA" class="font" for='selecao-arquivo-tce'>{{arqPA.name}}</label>
-          <label *ngIf="!arqPA" class="font" for='selecao-arquivo-pa'>Plano de Atividades</label>
-          <input id='selecao-arquivo-pa' class="ion-hide" #pa type="file" (change)="arqPa($event.target.files)"
-            accept="application/pdf">
+        <ion-item color="dark" lines="none" button="true" (click)="pa.click()" class="ion-text-center">
+          <label *ngIf="arqPA" class="font" >{{arqPA.name}}</label>
+          <label *ngIf="!arqPA" class="font" >Plano de Atividades</label>
+          <input class="ion-hide" #pa type="file" (change)="arqPa($event)"
+            accept=".pdf">
           <ion-icon lazy="true" slot="end" name="document"></ion-icon>
         </ion-item>
 
 
-        <ion-item lines="none">
-          <ion-label position="floating" class="font" color="primary">Escreva algo para o Orientador</ion-label>
-          <ion-textarea [(ngModel)]="textArea" class="font" rows="4" cols="20"
+        <ion-item color="medium" lines="none">
+          <ion-label position="floating" class="font" color="dark">Escreva algo para o Orientador</ion-label>
+          <ion-textarea color="dark" [(ngModel)]="textArea" class="font" rows="4" cols="20"
             placeholder="Olá Orientador! Eu gostaria de dar início ao meu processo de estágio...">
           </ion-textarea>
         </ion-item>
 
-        <ion-button class="font" shape="round" color="success" expand="full" (click)="submit()">
+        <ion-button class="font" shape="round" color="dark" expand="full" (click)="submit()">
           Enviar
           <ion-icon slot="end" name="send"></ion-icon>
         </ion-button>

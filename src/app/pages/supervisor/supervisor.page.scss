@@ -71,19 +71,21 @@ ion-item.selected {
   display: none;  /* Safari and Chrome */
 }
 
+.avatar {
+  padding: 0.1em;
+}
+
+.cardChip:hover {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  cursor: default;
+}
+
 .font {
   font-family: 'Nunito', sans-serif;
 }
 
-.badge {
-  font-size: 1em;
-}
-
-.cardChip {
-  padding-top: 2em;
-  padding-bottom: 2em;
-}
-
-.avatar {
-  padding: 0.1em;
+.icon {
+  position: absolute;
+  right: 0px;
 }

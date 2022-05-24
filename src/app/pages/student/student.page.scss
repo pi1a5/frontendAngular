@@ -56,19 +56,6 @@ ion-item.selected {
   font-size: 2em;
 }
 
-#header {
-  padding-bottom: 2em;
-}
-
-.font {
-  font-family: 'Nunito', sans-serif;
-}
-
-.badge {
-  font-size: 1em;
-  padding: 0.5em;
-}
-
 .list {
   max-height: 80vh;
   overflow: auto;
@@ -80,11 +67,16 @@ ion-item.selected {
   display: none;  /* Safari and Chrome */
 }
 
-.cardChip {
-  padding-top: 2em;
-  padding-bottom: 2em;
-}
-
 .avatar {
   padding: 0.1em;
+}
+
+.cardChip:hover {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  cursor: default;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
 }

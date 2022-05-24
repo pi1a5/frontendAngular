@@ -40,18 +40,16 @@
   height: 100%;
 }
 
-// ion-content {
-//   --offset-bottom: auto !important;
-//   --overflow: auto;
-//   --background: #F7F7FA;
-//   overflow: auto;
+.cardChip {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
 
-//   &::part(background) {
-//     bottom: 0;
-//   }
+.font {
+  font-family: 'Nunito', sans-serif;
+}
 
-//   &::-webkit-scrollbar {
-//     display: none;
-//     scrollbar-width: none;
-//   }
-// }
+.badge {
+  font-size: 1em;
+  padding: 0.5em;
+}
