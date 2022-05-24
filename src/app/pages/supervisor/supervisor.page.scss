@@ -6,7 +6,7 @@ ion-split-pane {
     // --background: var(--ion-color-success) !important;
 
     ion-content {
-      --background: var(--ion-color-success) !important;
+      --background: #3eae91 !important;
 
     }
   }
@@ -25,7 +25,7 @@ ion-menu.md ion-list {
 }
 
 ion-menu.md ion-list#inbox-list {
-  background-color: rgba(var(--ion-color-success-rgb));
+  background-color: #3eae91;
 }
 
 ion-menu.md ion-list#inbox-list ion-card {
@@ -77,15 +77,6 @@ ion-item.selected {
 
 .badge {
   font-size: 1em;
-}
-
-.simulateItem {
-  display: flex;
-  justify-content: space-between;
-}
-
-.dataResp {
-  font-size: 1.2em;
 }
 
 .cardChip {

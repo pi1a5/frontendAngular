@@ -41,36 +41,31 @@
                 <ion-card *ngIf="ticketP">
                   <ion-card-header>
                     <ion-item lines="none">
-
-                      <ion-label color="primary" class="font" style="font-size: 1.8em;">Data Limite:
-                        {{ticketP.data_limite}}</ion-label>
-                      <ion-badge color="warning" slot="end" class="font badge">{{ticketP.tipo_estagios}}</ion-badge>
-                    </ion-item>
-                  </ion-card-header>
-
-                  <ion-card-header>
-                    <ion-item lines="none">
                       <ion-avatar slot="start">
                         <img src="{{ticketP.foto}}">
                       </ion-avatar>
-                      <ion-label class="font">{{ticketP.nome}}</ion-label>
-                    </ion-item>
-                    <ion-item lines="none">
                       <ion-label class="font">
-                        <ion-text color="primary">E-mail:</ion-text> {{ticketP.email}}
+                        <h3>{{ticketP.nome}}</h3>
+                        <p>SP3046923</p>
+                      </ion-label>
+                      <ion-chip class="cardChip" slot="end" color="warning">
+                        <ion-label class="font badge ion-text-wrap">{{ticketP.tipo_estagios}}</ion-label>
+                      </ion-chip>
+                    </ion-item>
+                    <ion-item class="ion-margin-start" lines="none">
+                      <ion-label class="font">
+                        <ion-text color="dark">E-mail:</ion-text> {{ticketP.email}}
+                      </ion-label>
+                      <ion-label class="font ion-text-end">
+                        <ion-text color="dark">Data Limite:</ion-text> {{ticketP.data_limite}}
                       </ion-label>
                     </ion-item>
                   </ion-card-header>
 
                   <ion-list>
-                    <ion-item class="ion-text-start ion-margin-start" lines="none">
-                      <ion-label class="font">
-                        <ion-text color="primary">Data de Criação do Ticket:</ion-text> {{ticketP.data_criado}}
-                      </ion-label>
-                    </ion-item>
 
-                    <ion-item class="ion-text-start ion-margin-start" lines="none">
-                      <ion-label color="primary" class="font">Mensagem do Aluno:</ion-label>
+                    <ion-item class="ion-text-start" lines="none">
+                      <ion-label color="dark" class="font ion-text-center ">Sua mensagem</ion-label>
                     </ion-item>
 
                     <ion-item class="ion-text-start ion-margin-start ion-margin-end" lines="none">
@@ -79,10 +74,16 @@
                       </ion-label>
                     </ion-item>
 
-                    <ion-button size="default" class="font ion-margin">
+                    <ion-button color="dark" size="default" class="font ion-margin">
                       <ion-icon slot="start" name="eye-sharp"></ion-icon>
                       Ver Anexos
                     </ion-button>
+
+                    <ion-item class="ion-text-center ion-margin-start" lines="none">
+                      <ion-label class="font">
+                        <ion-text color="dark">Data de Criação do Ticket:</ion-text> {{ticketP.data_criado}}
+                      </ion-label>
+                    </ion-item>
 
                   </ion-list>
                 </ion-card>
@@ -108,8 +109,7 @@
 
               <ion-list style="background-color: var(--ion-color-primary);" class="list" *ngIf="ticketsE.length > 0">
 
-                <ion-card button="true" color="light" *ngFor="let ticket of ticketsE"
-                  (click)="presentModal(ticket)">
+                <ion-card button="true" color="light" *ngFor="let ticket of ticketsE" (click)="presentModal(ticket)">
                   <ion-card-header>
 
                     <div class="simulateItem">

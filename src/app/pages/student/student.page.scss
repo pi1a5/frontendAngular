@@ -25,7 +25,7 @@ ion-menu.md ion-list {
 }
 
 ion-menu.md ion-list#inbox-list {
-  background-color: rgba(var(--ion-color-success-rgb));
+  background-color: rgba(var(--ion-color-success));
 }
 
 ion-menu.md ion-list#inbox-list ion-card {
@@ -78,15 +78,6 @@ ion-item.selected {
 
 .list::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
-}
-
-.simulateItem {
-  display: flex;
-  justify-content: space-between;
-}
-
-.dataResp {
-  font-size: 1.2em;
 }
 
 .cardChip {
