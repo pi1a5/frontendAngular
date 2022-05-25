@@ -107,23 +107,23 @@ export class InicioDeEstagioPage implements OnInit {
   }
 
   uploadApi() {
-    this.s3.getFiles().subscribe(data => {
-      // api 
-      console.log('nome', data.map(item => console.log(item)
-      ));
-      
-      this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, data[0].URL, data[1].URL).subscribe(data => {
-        console.log(data);
-        this.loadingController.dismiss();
-        this.presentToast(data, 'success', 'checkmark-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      }, error => {
-        console.log(error);
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      })
+
+    // api 
+    console.log('nome', this.s3.getFiles())
+    
+
+    this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, this.arqTCE, this.arqPA).subscribe(data => {
+      console.log(data);
+      this.loadingController.dismiss();
+      this.presentToast(data, 'success', 'checkmark-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
+    }, error => {
+      console.log(error);
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
     })
+
   }
 
 }
