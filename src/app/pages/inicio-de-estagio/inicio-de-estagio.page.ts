@@ -1,8 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
+import { S3Service } from 'src/app/services/s3.service';
 
 @Component({
   selector: 'app-inicio-de-estagio',
@@ -21,6 +22,7 @@ export class InicioDeEstagioPage implements OnInit {
   constructor(
     private router: Router,
     private apiStudent: ApiStudentService,
+    private s3: S3Service,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }
@@ -54,18 +56,10 @@ export class InicioDeEstagioPage implements OnInit {
   async submit() {
     if (this.validate()) {
       await this.presentLoading();
-      this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, this.arqTCE, this.arqPA).subscribe(data => {
-        console.log(data);
-        this.loadingController.dismiss();
-        this.presentToast(data, 'success', 'checkmark-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      }, error => {
-        console.log(error);
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      });
+      await this.uploadS3();
+      this.uploadApi();
     }
+
     return;
   }
 
@@ -91,12 +85,45 @@ export class InicioDeEstagioPage implements OnInit {
   }
 
   arqTce(event: any) {
-    console.log('TCE: ', event.target.files.item(0));
-    this.arqTCE = event.target.files.item(0);
+    if (event.target.value) {
+      this.arqTCE = event.target.files[0];
+    } else {
+      console.log('There is no file');
+    }
   }
 
   arqPa(event: any) {
-    console.log('PA: ', event.target.files.item(0)); 
-    this.arqPA = event.target.files.item(0);
+    if (event.target.value) {
+      this.arqPA = event.target.files[0];
+    } else {
+      console.log('There is no file');
+    }
   }
+
+  async uploadS3() {
+    // s3
+    await this.s3.uploadFile(this.arqTCE);
+    await this.s3.uploadFile(this.arqPA);
+  }
+
+  uploadApi() {
+    this.s3.getFiles().subscribe(data => {
+      // api 
+      console.log('nome', data.map(item => console.log(item)
+      ));
+      
+      this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, data[0].URL, data[1].URL).subscribe(data => {
+        console.log(data);
+        this.loadingController.dismiss();
+        this.presentToast(data, 'success', 'checkmark-circle');
+        this.router.navigate(['student'], { replaceUrl: true });
+      }, error => {
+        console.log(error);
+        this.loadingController.dismiss();
+        this.presentToast(error.error, 'danger', 'close-circle');
+        this.router.navigate(['student'], { replaceUrl: true });
+      })
+    })
+  }
+
 }

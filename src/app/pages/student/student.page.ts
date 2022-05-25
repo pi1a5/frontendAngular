@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
+import { S3Service } from 'src/app/services/s3.service';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
 @Component({
@@ -20,6 +21,7 @@ export class StudentPage implements OnInit {
     private ggAuth: GoogleAuthService,
     private router: Router,
     private apiStudent: ApiStudentService,
+    private s3: S3Service,
     public modalController: ModalController
   ) { }
 
@@ -98,5 +100,17 @@ export class StudentPage implements OnInit {
 
   formatDate(date: string) {
     return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
+  }
+
+  showPdf(id: number) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: { id }
+    };
+
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/pdf'], navigationExtras)
+    );
+  
+    window.open(url, '_blank');
   }
 }

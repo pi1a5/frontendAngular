@@ -31,7 +31,7 @@
       <ion-grid>
         <ion-row>
 
-          <ion-col size="12" size-sm="12" size-md="12" size-lg="6" size-xl="6">
+          <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="6">
             <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Ticket Pendente</ion-card-title>
@@ -74,7 +74,7 @@
                       </ion-label>
                     </ion-item>
 
-                    <ion-button color="success" size="default" class="font ion-margin">
+                    <ion-button (click)="showPdf(ticket.id)" color="success" size="default" class="font ion-margin">
                       <ion-icon slot="start" name="eye-sharp"></ion-icon>
                       Ver Anexos
                     </ion-button>
@@ -101,7 +101,7 @@
             </ion-card>
           </ion-col>
 
-          <ion-col>
+          <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="6">
             <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Tickets Encerrados</ion-card-title>

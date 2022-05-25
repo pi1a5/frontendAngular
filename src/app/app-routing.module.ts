@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'fim-de-estagio',
     loadChildren: () => import('./pages/fim-de-estagio/fim-de-estagio.module').then( m => m.FimDeEstagioPageModule)
   },
+  {
+    path: 'pdf',
+    loadChildren: () => import('./pages/pdf/pdf.module').then( m => m.PdfPageModule)
+  },
 ];
 
 @NgModule({
