@@ -117,21 +117,4 @@ export class SupervisorPage implements OnInit {
   formatDate(date: string) {
     return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
   }
-
-  showPdf(id: number) {
-    this.api.getPdfUrl(id).subscribe(data => {
-      for (let index = 0; index < data.length; index++) {
-
-        let navigationExtras: NavigationExtras = {
-          queryParams: { url: data[index].arquivo }
-        };
-
-        const url = this.router.serializeUrl(
-          this.router.createUrlTree(['/pdf'], navigationExtras)
-        );
-
-        window.open(url, '_blank');
-      }
-    })
-  }
 }

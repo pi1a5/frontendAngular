@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 //import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,16 @@ import * as S3 from 'aws-sdk/clients/s3';
 export class S3Service {
 
   FOLDER = localStorage.getItem('sub');
-  BUCKET = 'pi1a5';
+  BUCKET = environment.bucket;
 
   constructor() { }
 
   private getS3Bucket(): any {
     const bucket = new S3(
       {
-        accessKeyId: 'AKIA4VWXXQ5BD45EOVPK',
-        secretAccessKey: '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',
-        region: 'sa-east-1'
+        accessKeyId: environment.accessKeyId,
+        secretAccessKey: environment.secretAccessKey,
+        region: environment.region
       }
     );
 
@@ -25,11 +26,11 @@ export class S3Service {
   }
 
   async uploadFile(file: any) {
-    var Key = `${this.FOLDER}/${new Date().getTime()}${file.name}`
+    var KEY = `${this.FOLDER}/${new Date().getTime()}${file.name}`
 
     const params = {
       Bucket: this.BUCKET,
-      Key: Key,
+      Key: KEY,
       Body: file,
       ACL: 'public-read'
     };
@@ -37,7 +38,7 @@ export class S3Service {
     try {
       const stored = await this.getS3Bucket().upload(params).promise();
       // console.log(stored);
-      return Key;
+      return KEY;
     } catch (error) {
       console.log(error);
       return false;

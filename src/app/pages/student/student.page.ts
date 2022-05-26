@@ -27,8 +27,8 @@ export class StudentPage implements OnInit {
 
   async ngOnInit() {
     this.apiStudent.checkIfFinalizou().subscribe(data => {
-      console.log('data:', data);
-
+      //console.log('data:', data);
+      
     }, error => {
       console.log('errr:', error);
 
