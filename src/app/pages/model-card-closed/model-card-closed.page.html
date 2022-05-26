@@ -31,7 +31,7 @@
         <ion-text color="success">Data da Resposta:</ion-text>
         {{ticket.data_fechado}}
       </ion-label>
-      <ion-button color="success" size="default" class="font">
+      <ion-button (click)="showPdf(ticket.id)" color="success" size="default" class="font">
         <ion-icon slot="start" name="eye-sharp"></ion-icon>
         Ver Anexos
       </ion-button>

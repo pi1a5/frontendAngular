@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
+import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 import { ModalCardOpenPage } from '../modal-card-open/modal-card-open.page';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
@@ -22,6 +23,7 @@ export class SupervisorPage implements OnInit {
     private ggAuth: GoogleAuthService, 
     private router: Router, 
     private apiSupervisor: ApiSupervisorService, 
+    private api: ApiService,
     public modalController: ModalController) { }
 
   async ngOnInit() {
@@ -114,5 +116,22 @@ export class SupervisorPage implements OnInit {
 
   formatDate(date: string) {
     return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
+  }
+
+  showPdf(id: number) {
+    this.api.getPdfUrl(id).subscribe(data => {
+      for (let index = 0; index < data.length; index++) {
+
+        let navigationExtras: NavigationExtras = {
+          queryParams: { url: data[index].arquivo }
+        };
+
+        const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/pdf'], navigationExtras)
+        );
+
+        window.open(url, '_blank');
+      }
+    })
   }
 }

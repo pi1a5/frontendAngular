@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 //import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class S3Service {
 
-  FOLDER = 'test/';
+  FOLDER = localStorage.getItem('sub');
   BUCKET = 'pi1a5';
 
   constructor() { }
@@ -26,35 +25,30 @@ export class S3Service {
   }
 
   async uploadFile(file: any) {
+    var Key = `${this.FOLDER}/${new Date().getTime()}${file.name}`
+
     const params = {
       Bucket: this.BUCKET,
-      Key: this.FOLDER + file.name,
+      Key: Key,
       Body: file,
       ACL: 'public-read'
     };
 
     try {
       const stored = await this.getS3Bucket().upload(params).promise();
-      //console.log(stored);
+      // console.log(stored);
+      return Key;
     } catch (error) {
       console.log(error);
+      return false;
     }
 
   }
 
   async getFiles() {
-
-    var fileUploads = [];
-
-    const params = {
-      Bucket: this.BUCKET,
-      Prefix: this.FOLDER
-    };
-    
     return this.getS3Bucket().listObjects({
       Bucket: this.BUCKET,
       Prefix: this.FOLDER
     }).promise();
-
   }
 }

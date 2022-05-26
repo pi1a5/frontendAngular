@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-model-card-closed',
@@ -14,6 +16,8 @@ export class ModelCardClosedPage implements OnInit {
     private navParams: NavParams,
     public modalController: ModalController,
     public toastController: ToastController,
+    private api: ApiService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -32,6 +36,23 @@ export class ModelCardClosedPage implements OnInit {
 
   dismiss() {
     this.modalController.dismiss();
+  }
+
+  showPdf(id: number) {
+    this.api.getPdfUrl(id).subscribe(data => {
+      for (let index = 0; index < data.length; index++) {
+
+        let navigationExtras: NavigationExtras = {
+          queryParams: { url: data[index].arquivo }
+        };
+
+        const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/pdf'], navigationExtras)
+        );
+
+        window.open(url, '_blank');
+      }
+    })
   }
 
 }

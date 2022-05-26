@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-modal-card-open',
@@ -16,6 +18,8 @@ export class ModalCardOpenPage implements OnInit {
     private navParams: NavParams,
     public modalController: ModalController,
     private apiSupervisor: ApiSupervisorService,
+    private api: ApiService,
+    private router: Router,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }
@@ -74,6 +78,23 @@ export class ModalCardOpenPage implements OnInit {
       this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
       this.dismiss();
+    })
+  }
+
+  showPdf(id: number) {
+    this.api.getPdfUrl(id).subscribe(data => {
+      for (let index = 0; index < data.length; index++) {
+
+        let navigationExtras: NavigationExtras = {
+          queryParams: { url: data[index].arquivo }
+        };
+
+        const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/pdf'], navigationExtras)
+        );
+
+        window.open(url, '_blank');
+      }
     })
   }
 

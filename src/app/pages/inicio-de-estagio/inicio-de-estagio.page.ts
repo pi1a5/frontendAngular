@@ -56,10 +56,13 @@ export class InicioDeEstagioPage implements OnInit {
   async submit() {
     if (this.validate()) {
       await this.presentLoading();
-      await this.uploadS3();
-      await this.uploadApi(await this.getPdf());
+      var resp = await this.uploadS3();
+      if(resp == false) {
+        console.log('error');
+      } else {
+        this.uploadApi(resp);
+      }
     }
-
     return;
   }
 
@@ -102,21 +105,21 @@ export class InicioDeEstagioPage implements OnInit {
 
   async uploadS3() {
     // s3
-    await this.s3.uploadFile(this.arqTCE);
-    await this.s3.uploadFile(this.arqPA);
+    var key1 = await this.s3.uploadFile(this.arqTCE)
+    var key2 = await this.s3.uploadFile(this.arqPA)
+
+    if (key1 == false || key2 == false) {
+      return false;
+    } else {
+      return [key1, key2];
+    }
   }
 
-  async getPdf() {
-    // s3
-    var objects = await this.s3.getFiles();
-    console.log(objects.Contents[0].Key);
-    return `https://s3-sa-east-1.amazonaws.com/pi1a5/${objects.Contents[0].Key}`
-  }
-
-  async uploadApi(doc1: string) {
+  async uploadApi(resp: any) {
     // api 
-    console.log(doc1);
-    this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, doc1, doc1).subscribe(data => {
+    var doc1 = `https://s3-sa-east-1.amazonaws.com/pi1a5/${resp[0]}`
+    var doc2 = `https://s3-sa-east-1.amazonaws.com/pi1a5/${resp[1]}`
+    this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, doc1, doc2).subscribe(data => {
       console.log(data);
       this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');

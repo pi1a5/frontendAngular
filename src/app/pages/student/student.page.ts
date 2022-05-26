@@ -3,8 +3,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
+import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
-import { S3Service } from 'src/app/services/s3.service';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
 @Component({
@@ -21,7 +21,7 @@ export class StudentPage implements OnInit {
     private ggAuth: GoogleAuthService,
     private router: Router,
     private apiStudent: ApiStudentService,
-    private s3: S3Service,
+    private api: ApiService,
     public modalController: ModalController
   ) { }
 
@@ -73,9 +73,9 @@ export class StudentPage implements OnInit {
     for (let index = 0; index < tickets.length; index++) {
       if (tickets[index].feedback) {
         this.ticketsE.push(tickets[index]);
-    
+
         var index_novo = this.ticketsE.length;
-    
+
         if (tickets[index].data_criado) {
           this.ticketsE[index_novo - 1].data_criado = this.formatDate(tickets[index].data_criado)
         }
@@ -87,7 +87,7 @@ export class StudentPage implements OnInit {
         }
       } else {
         this.ticketP = tickets[index];
-        
+
         if (tickets[index].data_criado) {
           this.ticketP.data_criado = this.formatDate(tickets[index].data_criado);
         }
@@ -103,14 +103,19 @@ export class StudentPage implements OnInit {
   }
 
   showPdf(id: number) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: { id }
-    };
+    this.api.getPdfUrl(id).subscribe(data => {
+      for (let index = 0; index < data.length; index++) {
 
-    const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/pdf'], navigationExtras)
-    );
-  
-    window.open(url, '_blank');
+        let navigationExtras: NavigationExtras = {
+          queryParams: { url: data[index].arquivo }
+        };
+
+        const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/pdf'], navigationExtras)
+        );
+
+        window.open(url, '_blank');
+      }
+    })
   }
 }
