@@ -35,36 +35,26 @@ export class S3Service {
 
     try {
       const stored = await this.getS3Bucket().upload(params).promise();
-      console.log(stored);
+      //console.log(stored);
     } catch (error) {
       console.log(error);
     }
 
   }
 
-  getFiles(): Observable<any> {
-    const fileUploads = new Array();
+  async getFiles() {
+
+    var fileUploads = [];
 
     const params = {
       Bucket: this.BUCKET,
       Prefix: this.FOLDER
     };
+    
+    return this.getS3Bucket().listObjects({
+      Bucket: this.BUCKET,
+      Prefix: this.FOLDER
+    }).promise();
 
-    this.getS3Bucket().listObjects(params, function (err, data) {
-      if (err) {
-        console.log('There was an error getting your files: ' + err);
-        return;
-      }
-
-      console.log('Successfully get files.', data);
-
-      const fileDatas = data.Contents;
-
-      fileDatas.forEach(function (file) {
-        fileUploads.push({ KEY: file.Key, URL: 'https://s3-sa-east-1.amazonaws.com/' + params.Bucket + '/' + file.Key });
-      });
-    });
-
-    return of(fileUploads);
   }
 }

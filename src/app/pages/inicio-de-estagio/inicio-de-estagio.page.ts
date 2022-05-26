@@ -57,7 +57,7 @@ export class InicioDeEstagioPage implements OnInit {
     if (this.validate()) {
       await this.presentLoading();
       await this.uploadS3();
-      this.uploadApi();
+      await this.uploadApi(await this.getPdf());
     }
 
     return;
@@ -106,13 +106,17 @@ export class InicioDeEstagioPage implements OnInit {
     await this.s3.uploadFile(this.arqPA);
   }
 
-  uploadApi() {
+  async getPdf() {
+    // s3
+    var objects = await this.s3.getFiles();
+    console.log(objects.Contents[0].Key);
+    return `https://s3-sa-east-1.amazonaws.com/pi1a5/${objects.Contents[0].Key}`
+  }
 
+  async uploadApi(doc1: string) {
     // api 
-    console.log('nome', this.s3.getFiles())
-    
-
-    this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, this.arqTCE, this.arqPA).subscribe(data => {
+    console.log(doc1);
+    this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, doc1, doc1).subscribe(data => {
       console.log(data);
       this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
