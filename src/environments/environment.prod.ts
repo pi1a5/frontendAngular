@@ -1,8 +1,7 @@
 export const environment = {
   production: true,
-  bucket: 'pi1a5',
-  //accessKeyId: process.env.ACCESS_KEY_ID,
-  accessKeyId: 'path/to/prod/env',
-  secretAccessKey: process.env.SECRET_ACCESS_KEY,
-  region: 'sa-east-1'
+  BUCKET: 'pi1a5',
+  ACCESS_KEY_ID: 'AKIA4VWXXQ5BBSW7RR2V',
+  SECRET_ACCESS_KEY: '4v+ JBQL / XuysT1kelZ5jk440GXdHtySnjKHwd0YE',
+  REGION: 'sa - east - 1'
 };

@@ -9,16 +9,16 @@ import { environment } from './../../environments/environment';
 export class S3Service {
 
   FOLDER = localStorage.getItem('sub');
-  BUCKET = environment.bucket;
+  BUCKET = environment.BUCKET;
 
   constructor() { }
 
   private getS3Bucket(): any {
     const bucket = new S3(
       {
-        accessKeyId: environment.accessKeyId,
-        secretAccessKey: environment.secretAccessKey,
-        region: environment.region
+        accessKeyId: environment.ACCESS_KEY_ID,
+        secretAccessKey: environment.SECRET_ACCESS_KEY,
+        region: environment.REGION
       }
     );
 
