@@ -75,6 +75,7 @@
   "description": "An Ionic project",
   "engines": {
     "node": "16.13.2",
-    "npm": "8.3.2"
+    "npm": "8.3.2",
+    "ts-node": "8.3.0"
   }
 }
