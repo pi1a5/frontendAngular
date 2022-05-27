@@ -28,10 +28,9 @@ export class StudentPage implements OnInit {
   async ngOnInit() {
     this.apiStudent.checkIfFinalizou().subscribe(data => {
       //console.log('data:', data);
-      //console.log(bucket);
       
     }, error => {
-      console.log('errr:', error);
+      console.log('err:', error);
 
     });
 
@@ -105,6 +104,8 @@ export class StudentPage implements OnInit {
 
   showPdf(id: number) {
     this.api.getPdfUrl(id).subscribe(data => {
+      console.log(data);
+      
       for (let index = 0; index < data.length; index++) {
 
         let navigationExtras: NavigationExtras = {
