@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
 import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 
@@ -11,7 +10,7 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
 })
 export class ProfilePage implements OnInit {
 
-  public user: User;
+  public user: any;
 
   constructor(public ggAuth: GoogleAuthService, public router: Router, public api: ApiService) { }
 

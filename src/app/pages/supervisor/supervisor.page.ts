@@ -114,6 +114,10 @@ export class SupervisorPage implements OnInit {
     this.router.navigate(['profile'], { replaceUrl: true });
   }
 
+  goToChartSupervisors() {
+    
+  }
+
   formatDate(date: string) {
     return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
   }

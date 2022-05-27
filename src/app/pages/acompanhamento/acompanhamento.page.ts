@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ApiStudentService } from 'src/app/services/api-student.service';
+import { S3Service } from 'src/app/services/s3.service';
 
 @Component({
   selector: 'app-acompanhamento',
@@ -16,6 +17,7 @@ export class AcompanhamentoPage implements OnInit {
   constructor(
     public router: Router,
     public apiStudent: ApiStudentService,
+    public s3: S3Service,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }
@@ -44,33 +46,26 @@ export class AcompanhamentoPage implements OnInit {
   calculateDataLimite() {
     var mes: any = new Date().getMonth();
     mes = mes + 2
-    if (mes < 10 ) {
+    if (mes < 10) {
       mes = '0' + mes
     }
     if (mes > 12) {
       mes = '01'
     }
-   
-    return `${new Date().getFullYear()}-${mes}-${29}`;     
+
+    return `${new Date().getFullYear()}-${mes}-${29}`;
   }
 
   async submit() {
-    
     if (this.validate()) {
       await this.presentLoading();
-      this.apiStudent.sendTicketAcompanhamento(this.textArea, this.calculateDataLimite(), this.arqRAE).subscribe(data => {
-        console.log(data);
-        this.loadingController.dismiss();
-        this.presentToast(data, 'success', 'checkmark-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      }, error => {
-        console.log(error);
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      });
+      var resp = await this.uploadS3();
+      if(resp == false) {
+        console.log('error');
+      } else {
+        this.uploadApi(resp);
+      }
     }
-
     return;
   }
 
@@ -87,9 +82,40 @@ export class AcompanhamentoPage implements OnInit {
     return true;
   }
 
-  arqRae(files: FileList) {
-    console.log('RAE: ', files.item(0)); 
-    this.arqRAE = files.item(0);
+  arqRae(event: any) {
+    if (event.target.value) {
+      this.arqRAE = event.target.files[0];
+    } else {
+      console.log('There is no file');
+    }
+  }
+
+  async uploadS3() {
+    // s3
+    var key = await this.s3.uploadFile(this.arqRAE)
+
+    if (key == false) {
+      return false;
+    } else {
+      return [key];
+    }
+  }
+
+  async uploadApi(resp: any) {
+    // api 
+    var doc = `https://s3-sa-east-1.amazonaws.com/pi1a5/${resp[0]}`
+    this.apiStudent.sendTicketAcompanhamento(this.textArea, this.calculateDataLimite(), doc).subscribe(data => {
+      console.log(data);
+      this.loadingController.dismiss();
+      this.presentToast(data, 'success', 'checkmark-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
+    }, error => {
+      console.log(error);
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
+    });
+
   }
 
 }
