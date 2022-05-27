@@ -15,15 +15,15 @@ import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page
 })
 export class SupervisorPage implements OnInit {
 
-  private ticketsWithoutSupervisor: any = [];
-  private ticketsWithSupervisor: any = [];
-  private closedTicketsWithSupervisor: any = [];
+  public ticketsWithoutSupervisor: any = [];
+  public ticketsWithSupervisor: any = [];
+  public closedTicketsWithSupervisor: any = [];
 
   constructor(
-    private ggAuth: GoogleAuthService, 
-    private router: Router, 
-    private apiSupervisor: ApiSupervisorService, 
-    private api: ApiService,
+    public ggAuth: GoogleAuthService, 
+    public router: Router, 
+    public apiSupervisor: ApiSupervisorService, 
+    public api: ApiService,
     public modalController: ModalController) { }
 
   async ngOnInit() {

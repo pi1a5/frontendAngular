@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class SelectTicketTypePage implements OnInit {
 
-  private list = [
+  public list = [
     { id: 0, icon: 'document', name: 'Início de Estágio' },
     { id: 1, icon: 'documents', name: 'Acompanhamento' },
     { id: 2, icon: 'document-text', name: 'Finalização de Estágio' },
@@ -18,7 +18,7 @@ export class SelectTicketTypePage implements OnInit {
     { id: 5, icon: 'globe', name: 'Estágio no Exterior' },
   ]
 
-  constructor(public toastController: ToastController, private router: Router) { }
+  constructor(public toastController: ToastController, public router: Router) { }
 
   async presentToast() {
     const toast = await this.toastController.create({

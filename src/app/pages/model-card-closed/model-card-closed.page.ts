@@ -10,14 +10,14 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ModelCardClosedPage implements OnInit {
 
-  private ticket: any = null;
+  public ticket: any = null;
 
   constructor(
-    private navParams: NavParams,
+    public navParams: NavParams,
     public modalController: ModalController,
     public toastController: ToastController,
-    private api: ApiService,
-    private router : Router
+    public api: ApiService,
+    public router : Router
   ) { }
 
   ngOnInit() {

@@ -11,15 +11,15 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ModalCardOpenPage implements OnInit {
 
-  private ticket: any = null;
-  private textArea: any = null;
+  public ticket: any = null;
+  public textArea: any = null;
 
   constructor(
-    private navParams: NavParams,
+    public navParams: NavParams,
     public modalController: ModalController,
-    private apiSupervisor: ApiSupervisorService,
-    private api: ApiService,
-    private router: Router,
+    public apiSupervisor: ApiSupervisorService,
+    public api: ApiService,
+    public router: Router,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }

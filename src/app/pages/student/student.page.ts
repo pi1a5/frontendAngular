@@ -14,14 +14,14 @@ import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page
 })
 export class StudentPage implements OnInit {
 
-  private ticketsE: any = [];
-  private ticketP: any = null;
+  public ticketsE: any = [];
+  public ticketP: any = null;
 
   constructor(
-    private ggAuth: GoogleAuthService,
-    private router: Router,
-    private apiStudent: ApiStudentService,
-    private api: ApiService,
+    public ggAuth: GoogleAuthService,
+    public router: Router,
+    public apiStudent: ApiStudentService,
+    public api: ApiService,
     public modalController: ModalController
   ) { }
 

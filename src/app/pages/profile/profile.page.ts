@@ -11,9 +11,9 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
 })
 export class ProfilePage implements OnInit {
 
-  private user: User;
+  public user: User;
 
-  constructor(private ggAuth: GoogleAuthService, private router: Router, private api: ApiService) { }
+  constructor(public ggAuth: GoogleAuthService, public router: Router, public api: ApiService) { }
 
   ngOnInit() {
     try { 
