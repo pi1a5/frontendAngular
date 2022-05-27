@@ -46,7 +46,10 @@ const environmentFileContent = `
 
   export const environment = {
     production: ${isProduction},
-    FIREBASE_API_KEY: '${process.env.FIREBASE_API_KEY}'
+    BUCKET: '${process.env.BUCKET}',
+    ACCESS_KEY_ID: '${process.env.ACCESS_KEY_ID}',
+    SECRET_ACCESS_KEY: '${process.env.SECRET_ACCESS_KEY}',
+    REGION: '${process.env.REGION}'
   };
 `;
 
