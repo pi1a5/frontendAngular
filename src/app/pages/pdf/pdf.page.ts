@@ -11,7 +11,7 @@ export class PdfPage implements OnInit {
   pdfSrc = "https://s3-sa-east-1.amazonaws.com/pi1a5/test/ComprovanteVacinacao.pdf"
 
   constructor(
-    private route: ActivatedRoute
+    public route: ActivatedRoute
   ) { }
 
   ngOnInit() {

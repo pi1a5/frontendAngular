@@ -10,12 +10,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class SelectCoursePage implements OnInit {
 
-  private list: [];
-  private idCourse: number = undefined;
+  public list: [];
+  public idCourse: number = undefined;
 
   constructor(
-    private router: Router,
-    private api: ApiService,
+    public router: Router,
+    public api: ApiService,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }

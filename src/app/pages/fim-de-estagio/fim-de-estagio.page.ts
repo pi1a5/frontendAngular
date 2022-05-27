@@ -10,12 +10,12 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 })
 export class FimDeEstagioPage implements OnInit {
 
-  private arqTRE: any = null;
-  private textArea: string = null;
+  public arqTRE: any = null;
+  public textArea: string = null;
 
   constructor(
-    private router: Router,
-    private apiStudent: ApiStudentService,
+    public router: Router,
+    public apiStudent: ApiStudentService,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }

@@ -12,9 +12,9 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
 export class HomePage {
 
   constructor(
-    private ggAuth: GoogleAuthService,
-    private api: ApiService,
-    private router: Router,
+    public ggAuth: GoogleAuthService,
+    public api: ApiService,
+    public router: Router,
     public loadingController: LoadingController,
     public toastController: ToastController
   ) { }

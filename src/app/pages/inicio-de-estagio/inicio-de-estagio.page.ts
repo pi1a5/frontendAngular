@@ -12,17 +12,17 @@ import { S3Service } from 'src/app/services/s3.service';
 })
 export class InicioDeEstagioPage implements OnInit {
 
-  private today: any = new Date().toISOString();
-  private dateValue: any = null;
-  private dateString: any = null;
-  private arqTCE: any = null;
-  private arqPA: any = null;
-  private textArea: string = null;
+  public today: any = new Date().toISOString();
+  public dateValue: any = null;
+  public dateString: any = null;
+  public arqTCE: any = null;
+  public arqPA: any = null;
+  public textArea: string = null;
 
   constructor(
-    private router: Router,
-    private apiStudent: ApiStudentService,
-    private s3: S3Service,
+    public router: Router,
+    public apiStudent: ApiStudentService,
+    public s3: S3Service,
     public toastController: ToastController,
     public loadingController: LoadingController
   ) { }
