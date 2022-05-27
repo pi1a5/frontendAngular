@@ -1,7 +1,8 @@
 /* tslint:disable */
 // @ts-nocheck
 const { writeFile, existsSync, mkdirSync } = require('fs');
-const { argv } = require('yargs');
+import argv from 'yargs';
+//const { argv } = require('yargs');
 
 require('dotenv').config();
 const environment = argv.environment;
