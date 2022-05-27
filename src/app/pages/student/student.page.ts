@@ -110,7 +110,7 @@ export class StudentPage implements OnInit {
           queryParams: { url: data[index].arquivo }
         };
 
-        const url = this.router.serializeUrl(
+        let url = this.router.serializeUrl(
           this.router.createUrlTree(['/pdf'], navigationExtras)
         );
 

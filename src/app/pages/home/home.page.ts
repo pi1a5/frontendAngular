@@ -21,8 +21,9 @@ export class HomePage {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      message: 'Iniciando sessão...',
-      spinner: 'crescent'
+      cssClass: 'loading',
+      message: 'Iniciando sessão',
+      spinner: 'crescent',
     });
     return await loading.present();
   }
