@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 //import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
-import { environment } from './../../environments/environment.prod';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
