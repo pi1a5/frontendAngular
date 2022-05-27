@@ -104,7 +104,6 @@ export class StudentPage implements OnInit {
 
   showPdf(id: number) {
     this.api.getPdfUrl(id).subscribe(data => {
-      console.log(data);
       
       for (let index = 0; index < data.length; index++) {
 
