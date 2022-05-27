@@ -10,7 +10,7 @@
           <ion-label *ngIf="arqRAE" class="font">{{arqRAE.name}}</ion-label>
           <ion-label *ngIf="!arqRAE" class="font">Relatório de Atividades de Estágio</ion-label>
 
-          <input class="ion-hide" #rae type="file" (change)="arqRae($event.target.files)"
+          <input class="ion-hide" #rae type="file" (change)="arqRae($event)"
             accept="application/pdf">
           <ion-icon lazy="true" slot="end" name="document"></ion-icon>
         </ion-item>

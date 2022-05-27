@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class SelectCoursePage implements OnInit {
 
-  public list: [];
+  public list: [any];
   public idCourse: number = undefined;
 
   constructor(
