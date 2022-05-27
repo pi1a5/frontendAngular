@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
 //app.use(express.static(__dirname + '/www'));
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
