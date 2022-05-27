@@ -53,3 +53,9 @@
   font-size: 1em;
   padding: 0.5em;
 }
+
+.loading {
+  //--background: transparent;
+  --spinner-color: var(--ion-color-success);
+  color:  var(--ion-color-success);
+}

@@ -1,4 +1,4 @@
-<ion-split-pane contentId="main-content">
+<ion-split-pane when="(min-width: 1600px)" contentId="main-content">
   <ion-menu contentId="main-content" type="overlay">
     <ion-content>
       <ion-list id="inbox-list">
@@ -23,6 +23,7 @@
   <ion-router-outlet id="main-content">
     <ion-header>
       <ion-toolbar color="success" class="ion-text-center ion-padding">
+        <ion-menu-button slot="start"></ion-menu-button>
         <ion-label class="title">Gerenciamento de Tickets</ion-label>
       </ion-toolbar>
     </ion-header>
@@ -31,7 +32,7 @@
       <ion-grid>
         <ion-row>
 
-          <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
+          <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
             <ion-card class="font ion-text-center" color="primary">
               <ion-card-header>
                 <ion-card-title>Alunos sem Orientador</ion-card-title>
@@ -82,7 +83,7 @@
             </ion-card>
           </ion-col>
 
-          <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
+          <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
             <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Alunos sob sua Orientação</ion-card-title>
@@ -133,7 +134,7 @@
             </ion-card>
           </ion-col>
 
-          <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
+          <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
             <ion-card color="primary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Tickets Respondidos</ion-card-title>
