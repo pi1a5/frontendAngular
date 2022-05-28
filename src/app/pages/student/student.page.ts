@@ -105,7 +105,10 @@ export class StudentPage implements OnInit {
           this.router.createUrlTree(['/pdf'], navigationExtras)
         );
 
-        window.open(url, '_blank');
+        var teste = window.open(url, '_blank');
+        teste.onload = function() {
+          console.log('teste');
+        }
       }
     })
   }
