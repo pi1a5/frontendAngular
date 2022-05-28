@@ -92,7 +92,7 @@ export class InicioDeEstagioPage implements OnInit {
 
   arqTce(event: any) {
     if (event.target.value) {
-      this.arqTCE = event.target.files[0];
+      this.arqTCE = event.target.files[0]; 
     } else {
       console.log('There is no file');
     }
