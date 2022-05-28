@@ -17,7 +17,6 @@ $RECYCLE.BIN/
 log.txt
 npm-debug.log*
 
-/.env
 /.angular
 /.idea
 /.ionic
@@ -31,5 +30,3 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-'/src/environments/**'  
-/src/environments/**  
