@@ -55,7 +55,7 @@ export class ModelCardClosedPage implements OnInit {
         var test = window.open(url, '_blank'); 
         console.log(test);
         
-        await this.sleep(100);
+        await this.sleep(2000);
       }
     })
   }
