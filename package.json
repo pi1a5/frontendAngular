@@ -5,14 +5,14 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "config": "ts-node ./src/assets/scripts/setEnv.ts",
-    "start": "npm run config -- --environment=prod && node server.js",
-    "build": "npm run config -- --environment=prod && ng build --configuration production",
+    "heroku-postbuild": "ng build",
+    "start": "node server.js",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deployH": "git add . && git commit -m Heroku && git push heroku master",
-    "deployTest": "touch .gitignore && echo /src/environments/** >> .gitignore && git add . && git commit -m Test && git push teste master"
+    "deployHeroku": "git add . && git commit -m Heroku && git push heroku master",
+    "deployGithub": "git add . && git commit -m Github && git push origin master"
   },
   "private": true,
   "dependencies": {
@@ -30,17 +30,13 @@
     "@capacitor/storage": "^1.2.5",
     "@codetrix-studio/capacitor-google-auth": "^3.1.3",
     "@ionic/angular": "^6.0.0",
-    "aws-sdk": "^2.1143.0",
     "date-fns": "^2.28.0",
     "express": "^4.18.1",
     "ngx-extended-pdf-viewer": "^13.5.0-alpha.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "util": "^0.12.4",
-    "zone.js": "~0.11.4",
-    "ts-node": "~8.3.0",
-    "typescript": "~4.4.4",
-    "yargs": "^17.5.1"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.3",
@@ -59,7 +55,6 @@
     "@types/node": "^12.20.52",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
-    "dotenv": "^16.0.1",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -73,9 +68,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
-    "ts-node": "~8.3.0",
-    "typescript": "~4.4.4",
-    "yargs": "^17.5.1"
+    "typescript": "~4.4.4"
   },
   "description": "An Ionic project",
   "engines": {
