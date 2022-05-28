@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deployH": "git add . && git commit -m Heroku && git push heroku master"
+    "deployH": "git add . && git commit -m Heroku && git push heroku master",
+    "deployTest": "touch .gitignore && echo '/src/environments/**' >> .gitignore && git add . && git commit -m Test && git push teste master"
   },
   "private": true,
   "dependencies": {
