@@ -53,6 +53,7 @@ export class InicioDeEstagioPage implements OnInit {
 
   async submit() {
     if (this.validate()) {
+
       await this.presentLoading();
       this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, this.arqTCE, this.arqPA).subscribe(data => {
         console.log(data);
@@ -64,7 +65,7 @@ export class InicioDeEstagioPage implements OnInit {
         this.loadingController.dismiss();
         this.presentToast(error.error, 'danger', 'close-circle');
         this.router.navigate(['student'], { replaceUrl: true });
-      })     
+      })
     }
     return;
   }
@@ -91,19 +92,23 @@ export class InicioDeEstagioPage implements OnInit {
   }
 
   arqTce(event: any) {
-    if (event.target.value) {
-      this.arqTCE = event.target.files[0]; 
-    } else {
-      console.log('There is no file');
+    if (event.target.files && event.target.files[0]) {
+      const pdfFiles = event.target.files;
+      const pdfFile = pdfFiles.item(0);
+
+      const formData: FormData = new FormData();
+      formData.append('tce', pdfFile); // Nome precisa ser igual no backend
+      this.arqTCE = formData;
     }
   }
 
   arqPa(event: any) {
-    if (event.target.value) {
-      this.arqPA = event.target.files[0];
-    } else {
-      console.log('There is no file');
-    }
+    const pdfFiles = event.target.files;
+    const pdfFile = pdfFiles.item(0);
+
+    const formData: FormData = new FormData();
+    formData.append('pa', pdfFile); // Nome precisa ser igual no backend
+    this.arqPA = formData;
   }
 
 }

@@ -36,10 +36,9 @@ export class StudentPage implements OnInit {
 
     this.apiStudent.getTicketsUser().subscribe(tickets => {
       console.log(tickets);
-      this.defineTickets(tickets)
-
+      this.defineTickets(tickets);
     }, error => {
-      console.log(error);
+      if (error.status !== 404) return console.log(error);
     });
   }
 
@@ -49,15 +48,6 @@ export class StudentPage implements OnInit {
       componentProps: { ticket }
     });
     return modal.present();
-  }
-
-  async signOut() {
-    try {
-      await this.ggAuth.signOut();
-      this.router.navigate(['home'], { replaceUrl: true });
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   goToNewTicket() {
