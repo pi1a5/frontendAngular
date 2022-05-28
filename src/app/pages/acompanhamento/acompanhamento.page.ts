@@ -10,6 +10,7 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 })
 export class AcompanhamentoPage implements OnInit {
 
+  public formData: FormData = new FormData();
   public arqRAE: any = null;
   public textArea: string = null;
 
@@ -56,8 +57,15 @@ export class AcompanhamentoPage implements OnInit {
 
   async submit() {
     if (this.validate()) {
+
       await this.presentLoading();
-      this.apiStudent.sendTicketAcompanhamento(this.textArea, this.calculateDataLimite(), this.arqRAE).subscribe(data => {
+
+      this.formData.append('corpo_texto', this.textArea);
+      this.formData.append('data_limite', this.calculateDataLimite());
+      this.formData.append('sub', localStorage.getItem('sub'));
+      this.formData.append('eProfessor', 'false');
+  
+      this.apiStudent.sendTicketAcompanhamento(this.formData).subscribe(data => {
         console.log(data);
         this.loadingController.dismiss();
         this.presentToast(data, 'success', 'checkmark-circle');
@@ -67,18 +75,18 @@ export class AcompanhamentoPage implements OnInit {
         this.loadingController.dismiss();
         this.presentToast(error.error, 'danger', 'close-circle');
         this.router.navigate(['student'], { replaceUrl: true });
-      });    
+      })
     }
     return;
   }
 
   validate() {
-    if (!this.textArea) {
-      this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
-      return false;
-    }
     if (!this.arqRAE) {
       this.presentToast('RAE obrigatório', 'danger', 'close-circle');
+      return false;
+    }
+    if (!this.textArea) {
+      this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
       return false;
     }
 
@@ -86,11 +94,11 @@ export class AcompanhamentoPage implements OnInit {
   }
 
   arqRae(event: any) {
-    if (event.target.value) {
-      this.arqRAE = event.target.files[0];
-    } else {
-      console.log('There is no file');
-    }
+    const pdfFiles = event.target.files;
+    const pdfFile = pdfFiles.item(0);
+
+    this.formData.append('rae', pdfFile);
+    this.arqRAE = pdfFile;
   }
 
 }

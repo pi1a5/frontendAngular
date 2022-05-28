@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PdfPage implements OnInit {
 
-  pdfSrc = "https://s3-sa-east-1.amazonaws.com/pi1a5/test/ComprovanteVacinacao.pdf"
+  pdfSrc = null;
 
   constructor(
     public route: ActivatedRoute
@@ -17,7 +17,7 @@ export class PdfPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params && params.url) {
-       this.pdfSrc = params.url;
+        this.pdfSrc = params.url;
       }
     });
   }

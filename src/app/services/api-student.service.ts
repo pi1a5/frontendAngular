@@ -17,35 +17,16 @@ export class ApiStudentService {
     });
   }
 
-  sendTicketInicio(corpo_texto: string, data_limite: string, tce: string, pa: string): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketInicio`, {
-      corpo_texto: corpo_texto,
-      data_limite: data_limite,
-      sub: localStorage.getItem('sub'),
-      tce: tce,
-      pa: pa,
-      eProfessor: false
-    });
+  sendTicketInicio(formData: FormData): Observable<any> {
+    return this.http.post(`${this.url}api/newTicketInicio`, formData);
   }
 
-  sendTicketAcompanhamento(corpo_texto: string, data_limite: string, doc: string): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketAcompanhamento`, {
-      corpo_texto: corpo_texto,
-      data_limite: data_limite,
-      sub: localStorage.getItem('sub'),
-      doc: doc,
-      eProfessor: false
-    });
+  sendTicketAcompanhamento(formData: FormData): Observable<any> {
+    return this.http.post(`${this.url}api/newTicketAcompanhamento`, formData);
   }
 
-  sendTicketFim(corpo_texto: string, data_limite: string, doc: string): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketFim`, {
-      corpo_texto: corpo_texto,
-      data_limite: data_limite,
-      sub: localStorage.getItem('sub'),
-      doc: doc,
-      eProfessor: false
-    });
+  sendTicketFim(formData: FormData): Observable<any> {
+    return this.http.post(`${this.url}api/newTicketFim`, formData);
   }
 
   checkIfFinalizou(): Observable<any> {

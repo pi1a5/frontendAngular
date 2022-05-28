@@ -11,6 +11,7 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 })
 export class InicioDeEstagioPage implements OnInit {
 
+  public formData: FormData = new FormData();
   public today: any = new Date().toISOString();
   public dateValue: any = null;
   public dateString: any = null;
@@ -55,7 +56,13 @@ export class InicioDeEstagioPage implements OnInit {
     if (this.validate()) {
 
       await this.presentLoading();
-      this.apiStudent.sendTicketInicio(this.textArea, this.dateValue, this.arqTCE, this.arqPA).subscribe(data => {
+
+      this.formData.append('corpo_texto', this.textArea);
+      this.formData.append('data_limite', this.dateValue);
+      this.formData.append('sub', localStorage.getItem('sub'));
+      this.formData.append('eProfessor', 'false');
+  
+      this.apiStudent.sendTicketInicio(this.formData).subscribe(data => {
         console.log(data);
         this.loadingController.dismiss();
         this.presentToast(data, 'success', 'checkmark-circle');
@@ -92,23 +99,19 @@ export class InicioDeEstagioPage implements OnInit {
   }
 
   arqTce(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const pdfFiles = event.target.files;
-      const pdfFile = pdfFiles.item(0);
+    const pdfFiles = event.target.files;
+    const pdfFile = pdfFiles.item(0);
 
-      const formData: FormData = new FormData();
-      formData.append('tce', pdfFile); // Nome precisa ser igual no backend
-      this.arqTCE = formData;
-    }
+    this.formData.append('tce', pdfFile);
+    this.arqTCE = pdfFile;
   }
 
   arqPa(event: any) {
     const pdfFiles = event.target.files;
     const pdfFile = pdfFiles.item(0);
 
-    const formData: FormData = new FormData();
-    formData.append('pa', pdfFile); // Nome precisa ser igual no backend
-    this.arqPA = formData;
+    this.formData.append('pa', pdfFile);
+    this.arqPA = pdfFile;
   }
 
 }
