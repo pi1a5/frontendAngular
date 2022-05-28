@@ -17,7 +17,7 @@ export class ModelCardClosedPage implements OnInit {
     public modalController: ModalController,
     public toastController: ToastController,
     public api: ApiService,
-    public router : Router
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -39,8 +39,8 @@ export class ModelCardClosedPage implements OnInit {
   }
 
   showPdf(id: number) {
-    this.api.getPdfUrl(id).subscribe(data => {
-      
+    this.api.getPdfUrl(id).subscribe(async data => {
+
       for (let index = 0; index < data.length; index++) {
 
         let navigationExtras: NavigationExtras = {
@@ -51,12 +51,17 @@ export class ModelCardClosedPage implements OnInit {
           this.router.createUrlTree(['/pdf'], navigationExtras)
         );
 
-        var teste = window.open(url, '_blank');
-        teste.onload = function() {
-          console.log('teste' + index);
-        }
+      
+        var test = window.open(url, '_blank'); 
+        console.log(test);
+        
+        await this.sleep(100);
       }
     })
+  }
+
+  async sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }
