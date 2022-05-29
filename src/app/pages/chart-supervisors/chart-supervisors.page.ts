@@ -27,6 +27,7 @@ export class ChartSupervisorsPage implements OnInit {
         this.supervisorsName[index] = data[index].nome;
         this.supervisorsCount[index] = data[index].quantidade;
       }
+
       this.barChartMethod();
     }, error => {
       console.log(error);
@@ -49,16 +50,32 @@ export class ChartSupervisorsPage implements OnInit {
         }]
       },
       options: {
+        plugins: {
+          legend: {
+            labels: {
+              // This more specific font property overrides the global property
+              font: {
+                family: "'Nunito', sans-serif",
+              }
+            }
+          }
+        },
         animation: {
-          duration: 1000
+          duration: 2000
         },
         responsive: true,
         indexAxis: 'y',
         scales: {
-          x: {
-            
+          y: {
             ticks: {
-              stepSize: 1
+              font: {
+                family: "'Nunito', sans-serif",
+              },
+            }
+          },
+          x: {
+            ticks: {
+              stepSize: 1,
             },
             suggestedMax: 5,
             beginAtZero: true
