@@ -17,7 +17,7 @@ export class SetProntuarioComponent implements OnInit {
     public navParams: NavParams,
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.course = this.navParams.get('course');
   }
 
@@ -32,8 +32,9 @@ export class SetProntuarioComponent implements OnInit {
   }
 
   async confirm() {
-    if (this.validate()) {  
-      this.modalController.dismiss({ prontuario: this.prontuario });
+    if (this.validate()) {
+      let prontuarioCaps = this.prontuario.toUpperCase(); // Deixar em caixa alta
+      this.modalController.dismiss({ prontuario: prontuarioCaps });
     }
   }
 
@@ -46,8 +47,15 @@ export class SetProntuarioComponent implements OnInit {
   }
 
   validate() {
+    // Checar se está vazio
     if (!this.prontuario) {
       this.presentToast('Prontuário obrigatório', 'danger', 'close-circle');
+      return false;
+    }
+    
+    // Checar se tem 7 digitos e Checar se começa com SP
+    if (this.prontuario.length !== 9 || this.prontuario.substring(0, 2).toUpperCase() !== "SP") {
+      this.presentToast('Prontuário incorreto', 'danger', 'close-circle');
       return false;
     }
 
