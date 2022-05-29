@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deployHeroku": "git add . && git commit -m Heroku && git push heroku master",
-    "deployGithub": "git add . && git commit -m Github && git push origin master"
+    "deployGithub": "git add . && git commit -m Github && git push origin master -f"
   },
   "private": true,
   "dependencies": {
