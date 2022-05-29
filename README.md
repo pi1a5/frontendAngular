@@ -26,8 +26,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-Frontend do Projeto de Gestão de Estágio. 
-Confira: https://pi1a5frontend-angular.herokuapp.com/home
+- Frontend do Projeto de Gestão de Estágio. 
+- Confira: https://pi1a5frontend-angular.herokuapp.com/home
 
 
 ## 📝 Licença
