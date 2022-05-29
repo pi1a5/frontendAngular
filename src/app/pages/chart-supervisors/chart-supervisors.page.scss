@@ -1,0 +1,91 @@
+
+ion-split-pane {
+  --border: none !important;
+
+  ion-menu {
+    // --background: var(--ion-color-success) !important;
+
+    ion-content {
+      --background: #3eae91 !important;
+
+    }
+  }
+}
+
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 20px;
+}
+
+ion-menu.md ion-list {
+  padding: 0;
+  height: 100%;
+}
+
+ion-menu.md ion-list#inbox-list {
+  background-color: #3eae91;
+}
+
+ion-menu.md ion-list#inbox-list ion-card {
+  padding: 1.5em;
+}
+
+ion-menu.md ion-list#inbox-list ion-button {
+  font-family: 'Nunito', sans-serif;
+  font-size: medium;
+  padding: 0.4em;
+  border-radius: 4em;
+}
+
+ion-menu.md ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+}
+
+ion-menu.md ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.md ion-item ion-icon {
+  color: #616e7e;
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2em;
+}
+
+.list {
+  max-height: 80vh;
+  overflow: auto;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.list::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+.avatar {
+  padding: 0.1em;
+}
+
+.cardChip:hover {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  cursor: default;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+.icon {
+  position: absolute;
+  right: 0px;
+}

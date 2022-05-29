@@ -15,16 +15,12 @@ export class ProfilePage implements OnInit {
   constructor(public ggAuth: GoogleAuthService, public router: Router, public api: ApiService) { }
 
   ngOnInit() {
-    try { 
-      this.api.getUser().subscribe(user => {
-        this.user = user;
-      }, error => {
-        console.log(error);
-        this.signOut();
-      })
-    } catch (error) {
+    this.api.getUser().subscribe(user => {
+      this.user = user;
+    }, error => {
       console.log(error);
-    }
+      this.signOut();
+    })
   }
 
   async signOut() {
@@ -41,7 +37,7 @@ export class ProfilePage implements OnInit {
   }
 
   goToBarsSupervisors() {
-    
+    this.router.navigate(['chart-supervisors'], { replaceUrl: true });
   }
 
   goToDashboard() {

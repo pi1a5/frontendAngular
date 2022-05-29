@@ -104,16 +104,12 @@ export class SupervisorPage implements OnInit {
     }
   }
 
-  goToNewTicket() {
-    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
-  }
-
   goToProfile() {
     this.router.navigate(['profile'], { replaceUrl: true });
   }
 
   goToChartSupervisors() {
-    
+    this.router.navigate(['chart-supervisors'], { replaceUrl: true });
   }
 
   formatDate(date: string) {

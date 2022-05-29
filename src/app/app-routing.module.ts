@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'pdf',
     loadChildren: () => import('./pages/pdf/pdf.module').then( m => m.PdfPageModule)
   },
+  {
+    path: 'chart-supervisors',
+    loadChildren: () => import('./pages/chart-supervisors/chart-supervisors.module').then( m => m.ChartSupervisorsPageModule)
+  },
 ];
 
 @NgModule({

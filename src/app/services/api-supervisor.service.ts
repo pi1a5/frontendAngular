@@ -40,4 +40,11 @@ export class ApiSupervisorService {
       eAceito: accept
     });
   }
+
+  // Chart Supervisors
+  checkOrientadoresAmount(): Observable<any> {
+    return this.http.post(`${this.url}api/checkOrientadoresAmount`, {
+      sub: localStorage.getItem('sub'),
+    });
+  }
 }
