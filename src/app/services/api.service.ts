@@ -49,10 +49,4 @@ export class ApiService {
       sub: localStorage.getItem('sub'),
     });
   }
-
-  getPdfUrl(id: number): Observable<any> {
-    return this.http.post<any>(`${this.url}api/getPdfUrl`, {
-      id: id 
-    });
-  }
 }

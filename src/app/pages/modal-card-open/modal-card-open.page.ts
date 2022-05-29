@@ -81,21 +81,16 @@ export class ModalCardOpenPage implements OnInit {
     })
   }
 
-  showPdf(id: number) {
-    this.api.getPdfUrl(id).subscribe(data => {
-      for (let index = 0; index < data.length; index++) {
+  showPdf(url: string) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: { url }
+    };
 
-        let navigationExtras: NavigationExtras = {
-          queryParams: { url: data[index].arquivo }
-        };
+    let urlLoad = this.router.serializeUrl(
+      this.router.createUrlTree(['/pdf'], navigationExtras)
+    );
 
-        const url = this.router.serializeUrl(
-          this.router.createUrlTree(['/pdf'], navigationExtras)
-        );
-
-        window.open(url, '_blank');
-      }
-    })
+    window.open(urlLoad, '_blank');
   }
 
 }

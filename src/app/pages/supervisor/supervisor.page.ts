@@ -3,7 +3,6 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
-import { ApiService } from 'src/app/services/api.service';
 import { GoogleAuthService } from 'src/app/services/google-auth.service';
 import { ModalCardOpenPage } from '../modal-card-open/modal-card-open.page';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
@@ -23,7 +22,6 @@ export class SupervisorPage implements OnInit {
     public ggAuth: GoogleAuthService, 
     public router: Router, 
     public apiSupervisor: ApiSupervisorService, 
-    public api: ApiService,
     public modalController: ModalController) { }
 
   async ngOnInit() {

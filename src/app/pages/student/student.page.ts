@@ -28,7 +28,7 @@ export class StudentPage implements OnInit {
   async ngOnInit() {
     this.apiStudent.checkIfFinalizou().subscribe(data => {
       //console.log('data:', data);
-      
+
     }, error => {
       console.log('err:', error);
 
@@ -92,24 +92,18 @@ export class StudentPage implements OnInit {
     return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
   }
 
-  showPdf(id: number) {
-    this.api.getPdfUrl(id).subscribe(data => {
-      
-      for (let index = 0; index < data.length; index++) {
+  showPdf(url: string) {
 
-        let navigationExtras: NavigationExtras = {
-          queryParams: { url: data[index].arquivo }
-        };
+    let navigationExtras: NavigationExtras = {
+      queryParams: { url }
+    };
 
-        let url = this.router.serializeUrl(
-          this.router.createUrlTree(['/pdf'], navigationExtras)
-        );
+    let urlLoad = this.router.serializeUrl(
+      this.router.createUrlTree(['/pdf'], navigationExtras)
+    );
 
-        var teste = window.open(url, '_blank');
-        teste.onload = function() {
-          console.log('teste');
-        }
-      }
-    })
+    window.open(urlLoad, '_blank');
+
   }
+
 }

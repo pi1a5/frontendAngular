@@ -38,30 +38,16 @@ export class ModelCardClosedPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  showPdf(id: number) {
-    this.api.getPdfUrl(id).subscribe(async data => {
+  showPdf(url: string) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: { url }
+    };
 
-      for (let index = 0; index < data.length; index++) {
+    let urlLoad = this.router.serializeUrl(
+      this.router.createUrlTree(['/pdf'], navigationExtras)
+    );
 
-        let navigationExtras: NavigationExtras = {
-          queryParams: { url: data[index].arquivo }
-        };
-
-        const url = this.router.serializeUrl(
-          this.router.createUrlTree(['/pdf'], navigationExtras)
-        );
-
-      
-        var test = window.open(url, '_blank'); 
-        console.log(test);
-        
-        await this.sleep(2000);
-      }
-    })
-  }
-
-  async sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    window.open(urlLoad, '_blank');
   }
 
 }
