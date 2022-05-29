@@ -7,7 +7,7 @@
       </ion-avatar>
       <ion-label class="font">
         <h3>{{ticket.nome}}</h3>
-        <p>SP3046923</p>
+        <p>{{ticket.prontuario}}</p>
       </ion-label>
       <ion-button color="danger" shape="round" slot="end" (click)="dismiss()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -31,10 +31,6 @@
         <ion-text color="success">Data da Resposta:</ion-text>
         {{ticket.data_fechado}}
       </ion-label>
-      <ion-button (click)="showPdf(ticket.id)" color="success" size="default" class="font">
-        <ion-icon slot="start" name="eye-sharp"></ion-icon>
-        Ver Anexos
-      </ion-button>
     </ion-item>
 
     <ion-item class="ion-text-start ion-margin-start" lines="none">

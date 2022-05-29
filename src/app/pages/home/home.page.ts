@@ -46,6 +46,7 @@ export class HomePage {
       console.log('user: ', user);
       this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id)
     } catch (error) {
+      this.loadingController.dismiss();
       console.log(error);
     }
   }
@@ -60,10 +61,12 @@ export class HomePage {
         this.api.login(idToken, sub).subscribe(user => {
           this.goToSelectCoursePage();
         }, error => {
+          this.loadingController.dismiss();
           this.presentToast(error.error);
           console.log(error);
         });
       }, error => {
+        this.loadingController.dismiss();
         this.presentToast(error.error);
         console.log(error);
       });

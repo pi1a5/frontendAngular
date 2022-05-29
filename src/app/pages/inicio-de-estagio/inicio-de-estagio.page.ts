@@ -57,6 +57,10 @@ export class InicioDeEstagioPage implements OnInit {
 
       await this.presentLoading();
 
+      // Files
+      this.formData.append('tce', this.arqTCE);
+      this.formData.append('pa', this.arqPA);
+      // Body
       this.formData.append('corpo_texto', this.textArea);
       this.formData.append('data_limite', this.dateValue);
       this.formData.append('sub', localStorage.getItem('sub'));
@@ -102,7 +106,6 @@ export class InicioDeEstagioPage implements OnInit {
     const pdfFiles = event.target.files;
     const pdfFile = pdfFiles.item(0);
 
-    this.formData.append('tce', pdfFile);
     this.arqTCE = pdfFile;
   }
 
@@ -110,7 +113,6 @@ export class InicioDeEstagioPage implements OnInit {
     const pdfFiles = event.target.files;
     const pdfFile = pdfFiles.item(0);
 
-    this.formData.append('pa', pdfFile);
     this.arqPA = pdfFile;
   }
 

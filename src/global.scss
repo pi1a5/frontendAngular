@@ -28,9 +28,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
 
-.split-pane-visible >.split-pane-side {
-  min-width: 20%!important;
-  max-width: 20%!important;
+
+.split-pane-visible>.split-pane-side {
+  min-width: 20% !important;
+  max-width: 20% !important;
 }
 
 .flex-center {
@@ -57,5 +58,5 @@
 .loading {
   //--background: transparent;
   --spinner-color: var(--ion-color-success);
-  color:  var(--ion-color-success);
+  color: var(--ion-color-success);
 }

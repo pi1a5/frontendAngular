@@ -60,6 +60,9 @@ export class AcompanhamentoPage implements OnInit {
 
       await this.presentLoading();
 
+      // Files 
+      this.formData.append('rae', this.arqRAE);
+      // Body
       this.formData.append('corpo_texto', this.textArea);
       this.formData.append('data_limite', this.calculateDataLimite());
       this.formData.append('sub', localStorage.getItem('sub'));
@@ -97,7 +100,6 @@ export class AcompanhamentoPage implements OnInit {
     const pdfFiles = event.target.files;
     const pdfFile = pdfFiles.item(0);
 
-    this.formData.append('rae', pdfFile);
     this.arqRAE = pdfFile;
   }
 

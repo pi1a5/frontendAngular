@@ -19,14 +19,15 @@ export class SupervisorPage implements OnInit {
   public closedTicketsWithSupervisor: any = [];
 
   constructor(
-    public ggAuth: GoogleAuthService, 
-    public router: Router, 
-    public apiSupervisor: ApiSupervisorService, 
-    public modalController: ModalController) { }
+    public ggAuth: GoogleAuthService,
+    public router: Router,
+    public apiSupervisor: ApiSupervisorService,
+    public modalController: ModalController
+  ) { }
 
   async ngOnInit() {
     this.apiSupervisor.getTicketsWithoutSupervisor().subscribe(data => {
-      console.log("Alunos sem orientador: ",data);
+      console.log("Alunos sem orientador: ", data);
       this.ticketsWithoutSupervisor = data;
       for (let index = 0; index < data.length; index++) {
         if (data[index].data_criado) {
@@ -37,11 +38,11 @@ export class SupervisorPage implements OnInit {
         }
       }
     }, error => {
-      console.log("Alunos sem orientador: ",error);
+      console.log("Alunos sem orientador: ", error);
     });
 
     this.apiSupervisor.getTicketsWithSupervisor().subscribe(data => {
-      console.log("Alunos sob sua orientação: ",data);
+      console.log("Alunos sob sua orientação: ", data);
       this.ticketsWithSupervisor = data;
       for (let index = 0; index < data.length; index++) {
         if (data[index].data_criado) {
@@ -52,11 +53,11 @@ export class SupervisorPage implements OnInit {
         }
       }
     }, error => {
-      console.log("Alunos sob sua orientação: ",error);
+      console.log("Alunos sob sua orientação: ", error);
     });
 
     this.apiSupervisor.getClosedTicketsWithSupervisor().subscribe(data => {
-      console.log("Tickets respondidos: ",data);
+      console.log("Tickets respondidos: ", data);
       this.closedTicketsWithSupervisor = data;
       for (let index = 0; index < data.length; index++) {
         if (data[index].data_criado) {
@@ -70,9 +71,9 @@ export class SupervisorPage implements OnInit {
         }
       }
     }, error => {
-      console.log("Tickets respondidos: ",error);
+      console.log("Tickets respondidos: ", error);
     });
-    
+
   }
 
   async presentModal(ticket: any) {
@@ -88,7 +89,7 @@ export class SupervisorPage implements OnInit {
         componentProps: { ticket }
       });
       await modal.present();
-      var {data} = await modal.onDidDismiss();   
+      var { data } = await modal.onDidDismiss();
       if (data) {
         await this.ngOnInit();
       }

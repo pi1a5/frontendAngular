@@ -7,7 +7,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4" *ngFor="let course of list">
-            <ion-card class="curso font" button="true" color="dark" (click)="setCourse(course.id)">
+            <ion-card class="curso font" button="true" color="dark" (click)="setCourse(course)">
               <ion-card-header>
                 <ion-icon color="primary" [name]="loadIcon(course.id)"></ion-icon>
               </ion-card-header>

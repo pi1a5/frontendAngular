@@ -22,17 +22,15 @@
 
         <ion-item color="dark" lines="none" button="true" (click)="tce.click()" class="ion-text-center">
           <label class="font">{{arqTCE ? arqTCE.name : "Termo de Compromisso de Estágio"}}</label>
-          <input class="ion-hide" #tce type="file" (change)="arqTce($event)"
-            accept=".pdf">
+          <input class="ion-hide" #tce type="file" (change)="arqTce($event)" accept=".pdf">
           <ion-icon lazy="true" slot="end" name="document"></ion-icon>
         </ion-item>
 
         <br>
 
         <ion-item color="dark" lines="none" button="true" (click)="pa.click()" class="ion-text-center">
-          <label class="font" >{{arqPA ? arqPA.name : "Plano de Atividades"}}</label>
-          <input class="ion-hide" #pa type="file" (change)="arqPa($event)"
-            accept=".pdf">
+          <label class="font">{{arqPA ? arqPA.name : "Plano de Atividades"}}</label>
+          <input class="ion-hide" #pa type="file" (change)="arqPa($event)" accept=".pdf">
           <ion-icon lazy="true" slot="end" name="document"></ion-icon>
         </ion-item>
 

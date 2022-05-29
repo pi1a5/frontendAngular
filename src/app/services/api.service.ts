@@ -43,9 +43,10 @@ export class ApiService {
     return this.http.get<any>(`${this.url}api/courses`);
   }
 
-  setCourse(id_curso: number): Observable<any> {
-    return this.http.post<any>(`${this.url}api/setCourse`, {
+  setCourseProntuario(id_curso: number, prontuario: string): Observable<any> {
+    return this.http.post<any>(`${this.url}api/setCourseProntuario`, {
       id_curso: id_curso,
+      prontuario: prontuario,
       sub: localStorage.getItem('sub'),
     });
   }

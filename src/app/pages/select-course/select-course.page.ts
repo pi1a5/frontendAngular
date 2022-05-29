@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { SetProntuarioComponent } from 'src/app/components/set-prontuario/set-prontuario.component';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class SelectCoursePage implements OnInit {
     public router: Router,
     public api: ApiService,
     public toastController: ToastController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -46,6 +48,23 @@ export class SelectCoursePage implements OnInit {
     toast.present();
   }
 
+  async presentModal(course: any) {
+    var modal = await this.modalController.create({
+      component: SetProntuarioComponent,
+      cssClass: 'set-prontuario',
+      componentProps: { course }
+    });
+
+    await this.loadingController.dismiss();
+    await modal.present();
+
+    var { data } = await modal.onDidDismiss();
+
+    if (data) return data
+
+    return false;
+  }
+
   loadIcon(id: number) {
     switch (id) {
       case 0:
@@ -63,17 +82,21 @@ export class SelectCoursePage implements OnInit {
     }
   }
 
-  async setCourse(idCourse: number) {
+  async setCourse(course: any) {
     await this.presentLoading();
-    this.api.setCourse(idCourse).subscribe(data => {
-      this.loadingController.dismiss();
-      this.presentToast('Curso definido com sucesso', 'success', 'checkmark-circle');
+    this.idCourse = course.id;
+    const resp = await this.presentModal(course);
+    if (!resp) return;
+    await this.presentLoading();
+    this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async data => {
+      await this.loadingController.dismiss();
+      await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
       this.userPage(data.email);
-    }, error => {
+    }, async error => {
       console.log(error);
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
-    })
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+    });
   }
 
   userPage(email: string) {
