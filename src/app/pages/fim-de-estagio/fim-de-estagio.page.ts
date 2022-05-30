@@ -26,6 +26,7 @@ export class FimDeEstagioPage implements OnInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
+      cssClass: 'loading',
       message: 'Carregando...',
       spinner: 'crescent'
     });

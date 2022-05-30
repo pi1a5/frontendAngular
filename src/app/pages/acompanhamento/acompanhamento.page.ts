@@ -26,6 +26,7 @@ export class AcompanhamentoPage implements OnInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
+      cssClass: 'loading',
       message: 'Carregando...',
       spinner: 'crescent'
     });
