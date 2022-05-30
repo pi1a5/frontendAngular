@@ -49,7 +49,8 @@ export class InicioDeEstagioPage implements OnInit {
   }
 
   formatDate(value: any) {
-    this.dateValue = format(parseISO(value), 'yyyy-MM-dd');;
+    this.dateValue = value;
+    // this.dateValue = format(parseISO(value), 'yyyy-MM-dd');
     this.dateString = format(parseISO(value), 'dd/MM/yyyy');
   }
 

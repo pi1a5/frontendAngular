@@ -53,12 +53,12 @@ export class AcompanhamentoPage implements OnInit {
       mes = '01'
     }
 
-    return `${new Date().getFullYear()}-${mes}-${29}`;
+    return `${new Date().getFullYear()}-${mes}-${29} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()} -0300`;
   }
 
   async submit() {
     if (this.validate()) {
-
+      
       await this.presentLoading();
 
       // Files 
