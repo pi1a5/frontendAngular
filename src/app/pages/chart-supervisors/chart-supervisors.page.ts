@@ -77,7 +77,7 @@ export class ChartSupervisorsPage implements OnInit {
             ticks: {
               stepSize: 1,
             },
-            suggestedMax: 5,
+            suggestedMax: 6,
             beginAtZero: true
           }
         }
