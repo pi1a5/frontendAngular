@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
@@ -14,6 +14,7 @@ import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page
 })
 export class SupervisorPage implements OnInit {
 
+  public searchTerm: string;
   public ticketsWithoutSupervisor: any = [];
   public ticketsWithSupervisor: any = [];
   public closedTicketsWithSupervisor: any = [];

@@ -8,12 +8,15 @@ import { SupervisorPageRoutingModule } from './supervisor-routing.module';
 
 import { SupervisorPage } from './supervisor.page';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SupervisorPageRoutingModule
+    SupervisorPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [SupervisorPage]
 })
