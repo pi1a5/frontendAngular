@@ -13,7 +13,7 @@ export class InterceptorService implements HttpInterceptor {
     
     const clonedRequest = req.clone({ headers: new HttpHeaders({
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-      'Content-Security-Policy': "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'",
+      'Content-Security-Policy': "default-src 'self';",
       'X-Frame-Options': 'SAMEORIGIN',
       'X-Content-Type-Options': 'nosniff',
       'Referrer-Policy': 'no-referrer',
