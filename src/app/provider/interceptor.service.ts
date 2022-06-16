@@ -14,7 +14,7 @@ export class InterceptorService implements HttpInterceptor {
     const clonedRequest = req.clone({
       headers: new HttpHeaders({
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-        'Content-Security-Policy': "style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com",
+        'Content-Security-Policy': "style-src 'self' http://fonts.googleapis.com fonts.googleapis.com 'unsafe-inline';",
         'X-Frame-Options': 'SAMEORIGIN',
         'X-Content-Type-Options': 'nosniff',
         'Referrer-Policy': 'no-referrer',

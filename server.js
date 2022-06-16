@@ -7,7 +7,7 @@ app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  res.header('Content-Security-Policy', "style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com");
+  res.header('Content-Security-Policy', "style-src 'self' http://fonts.googleapis.com fonts.googleapis.com 'unsafe-inline';");
   res.header('X-Frame-Options', 'SAMEORIGIN');
   res.header('X-Content-Type-Options', 'nosniff');
   res.header('Referrer-Policy', 'no-referrer');
