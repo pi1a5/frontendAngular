@@ -10,15 +10,17 @@ export class InterceptorService implements HttpInterceptor {
   constructor() { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Clone the request to add the new header
-    
-    const clonedRequest = req.clone({ headers: new HttpHeaders({
-      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
-      'Content-Security-Policy': "font-src fonts.gstatic.com;style-src 'self' fonts.googleapis.com",
-      'X-Frame-Options': 'SAMEORIGIN',
-      'X-Content-Type-Options': 'nosniff',
-      'Referrer-Policy': 'no-referrer',
-      'Permissions-Policy': 'geolocation=(self "https://pi1a5frontend-angular.herokuapp.com")'
-    }) });
+
+    const clonedRequest = req.clone({
+      headers: new HttpHeaders({
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+        'Content-Security-Policy': "style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com",
+        'X-Frame-Options': 'SAMEORIGIN',
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'no-referrer',
+        'Permissions-Policy': 'geolocation=(self "https://pi1a5frontend-angular.herokuapp.com")'
+      })
+    });
 
     // Pass the cloned request instead of the original request to the next handle
     return next.handle(clonedRequest);
