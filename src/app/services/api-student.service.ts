@@ -1,19 +1,22 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiStudentService {
-
   private url: string = 'https://pi1a5back.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
   getTicketsUser(): Observable<any> {
     return this.http.post(`${this.url}api/getTicketsUser`, {
-      sub: localStorage.getItem('sub')
+      sub: localStorage.getItem('sub'),
     });
   }
 

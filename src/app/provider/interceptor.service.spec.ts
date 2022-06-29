@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/no-unresolved */
 import { TestBed } from '@angular/core/testing';
 
 import { InterceptorService } from './interceptor.service';

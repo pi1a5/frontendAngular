@@ -1,3 +1,6 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +9,5 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  
   constructor() {}
 }

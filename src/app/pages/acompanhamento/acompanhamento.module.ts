@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +15,8 @@ import { AcompanhamentoPage } from './acompanhamento.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AcompanhamentoPageRoutingModule
+    AcompanhamentoPageRoutingModule,
   ],
-  declarations: [AcompanhamentoPage]
+  declarations: [AcompanhamentoPage],
 })
 export class AcompanhamentoPageModule {}

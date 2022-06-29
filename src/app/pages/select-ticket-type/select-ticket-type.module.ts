@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +15,8 @@ import { SelectTicketTypePage } from './select-ticket-type.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SelectTicketTypePageRoutingModule
+    SelectTicketTypePageRoutingModule,
   ],
-  declarations: [SelectTicketTypePage]
+  declarations: [SelectTicketTypePage],
 })
 export class SelectTicketTypePageModule {}

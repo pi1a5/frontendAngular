@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,8 +8,8 @@ import { PdfPage } from './pdf.page';
 const routes: Routes = [
   {
     path: '',
-    component: PdfPage
-  }
+    component: PdfPage,
+  },
 ];
 
 @NgModule({

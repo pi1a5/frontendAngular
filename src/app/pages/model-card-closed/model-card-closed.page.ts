@@ -1,6 +1,11 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
+import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -9,7 +14,6 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./model-card-closed.page.scss'],
 })
 export class ModelCardClosedPage implements OnInit {
-
   public ticket: any = null;
 
   constructor(
@@ -17,7 +21,7 @@ export class ModelCardClosedPage implements OnInit {
     public modalController: ModalController,
     public toastController: ToastController,
     public api: ApiService,
-    public router: Router
+    public router: Router,
   ) { }
 
   ngOnInit() {
@@ -27,9 +31,9 @@ export class ModelCardClosedPage implements OnInit {
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
-      color: color,
-      icon: icon,
-      duration: 2000
+      color,
+      icon,
+      duration: 2000,
     });
     toast.present();
   }
@@ -39,15 +43,14 @@ export class ModelCardClosedPage implements OnInit {
   }
 
   showPdf(url: string) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: { url }
+    const navigationExtras: NavigationExtras = {
+      queryParams: { url },
     };
 
-    let urlLoad = this.router.serializeUrl(
-      this.router.createUrlTree(['/pdf'], navigationExtras)
+    const urlLoad = this.router.serializeUrl(
+      this.router.createUrlTree(['/pdf'], navigationExtras),
     );
 
     window.open(urlLoad, '_blank');
   }
-
 }

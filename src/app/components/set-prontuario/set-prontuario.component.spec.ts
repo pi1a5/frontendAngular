@@ -1,5 +1,7 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-undef */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavParams } from '@ionic/angular';
 
 import { SetProntuarioComponent } from './set-prontuario.component';
 
@@ -9,8 +11,9 @@ describe('SetProntuarioComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SetProntuarioComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [SetProntuarioComponent],
+      imports: [IonicModule.forRoot()],
+      providers: [NavParams]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SetProntuarioComponent);

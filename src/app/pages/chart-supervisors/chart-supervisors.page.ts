@@ -1,4 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+/* eslint-disable no-plusplus */
+/* eslint-disable no-console */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
+import {
+  Component, ElementRef, OnInit, ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
@@ -9,27 +18,29 @@ import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
   styleUrls: ['./chart-supervisors.page.scss'],
 })
 export class ChartSupervisorsPage implements OnInit {
-
   @ViewChild('barCanvas', { static: true }) public barCanvas: ElementRef;
+
   public barChart: any;
+
   public supervisorsName: any = [];
+
   public supervisorsCount: any = [];
 
   constructor(
     public router: Router,
-    public apiSupervisor: ApiSupervisorService
+    public apiSupervisor: ApiSupervisorService,
   ) { }
 
   ngOnInit() {
-    this.apiSupervisor.checkOrientadoresAmount().subscribe(data => {
-      console.log(data);
+    this.apiSupervisor.checkOrientadoresAmount().subscribe((data) => {
+      //console.log(data);
       for (let index = 0; index < data.length; index++) {
         this.supervisorsName[index] = data[index].nome;
         this.supervisorsCount[index] = data[index].quantidade;
       }
 
       this.barChartMethod();
-    }, error => {
+    }, (error) => {
       console.log(error);
     });
   }
@@ -47,7 +58,7 @@ export class ChartSupervisorsPage implements OnInit {
           backgroundColor: '#00795F',
           hoverBackgroundColor: '#3eae91',
           data: this.supervisorsCount,
-        }]
+        }],
       },
       options: {
         plugins: {
@@ -56,12 +67,12 @@ export class ChartSupervisorsPage implements OnInit {
               // This more specific font property overrides the global property
               font: {
                 family: "'Nunito', sans-serif",
-              }
-            }
-          }
+              },
+            },
+          },
         },
         animation: {
-          duration: 2000
+          duration: 2000,
         },
         responsive: true,
         indexAxis: 'y',
@@ -71,18 +82,18 @@ export class ChartSupervisorsPage implements OnInit {
               font: {
                 family: "'Nunito', sans-serif",
               },
-            }
+            },
           },
           x: {
             ticks: {
               stepSize: 1,
             },
             suggestedMax: 6,
-            beginAtZero: true
-          }
-        }
-      }
-    })
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 
   goToProfile() {

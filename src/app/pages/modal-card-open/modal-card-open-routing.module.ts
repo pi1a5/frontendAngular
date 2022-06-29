@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,8 +8,8 @@ import { ModalCardOpenPage } from './modal-card-open.page';
 const routes: Routes = [
   {
     path: '',
-    component: ModalCardOpenPage
-  }
+    component: ModalCardOpenPage,
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,16 @@
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-await */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
+import {
+  LoadingController, ModalController, NavParams, ToastController,
+} from '@ionic/angular';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -10,8 +20,8 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./modal-card-open.page.scss'],
 })
 export class ModalCardOpenPage implements OnInit {
-
   public ticket: any = null;
+
   public textArea: any = null;
 
   constructor(
@@ -21,7 +31,7 @@ export class ModalCardOpenPage implements OnInit {
     public api: ApiService,
     public router: Router,
     public toastController: ToastController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -32,7 +42,7 @@ export class ModalCardOpenPage implements OnInit {
     const loading = await this.loadingController.create({
       cssClass: 'loading',
       message: 'Carregando...',
-      spinner: 'crescent'
+      spinner: 'crescent',
     });
     return await loading.present();
   }
@@ -40,9 +50,9 @@ export class ModalCardOpenPage implements OnInit {
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
-      color: color,
-      icon: icon,
-      duration: 2000
+      color,
+      icon,
+      duration: 2000,
     });
     toast.present();
   }
@@ -54,44 +64,43 @@ export class ModalCardOpenPage implements OnInit {
   async accept() {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, true).subscribe(data => {
-      //console.log(data);
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, true).subscribe((data) => {
+      // console.log(data);
       this.loadingController.dismiss();
       this.presentToast('Ticket Aceito', 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });
-    }, error => {
+    }, (error) => {
       console.log(error);
       this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
       this.dismiss();
-    })
+    });
   }
 
   async refuse() {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, false).subscribe(data => {
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, false).subscribe((data) => {
       this.loadingController.dismiss();
       this.presentToast('Ticket Recusado', 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });
-    }, error => {
+    }, (error) => {
       console.log(error);
       this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
       this.dismiss();
-    })
+    });
   }
 
   showPdf(url: string) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: { url }
+    const navigationExtras: NavigationExtras = {
+      queryParams: { url },
     };
 
-    let urlLoad = this.router.serializeUrl(
-      this.router.createUrlTree(['/pdf'], navigationExtras)
+    const urlLoad = this.router.serializeUrl(
+      this.router.createUrlTree(['/pdf'], navigationExtras),
     );
 
     window.open(urlLoad, '_blank');
   }
-
 }

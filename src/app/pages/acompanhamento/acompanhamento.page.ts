@@ -1,3 +1,11 @@
+/* eslint-disable no-console */
+/* eslint-disable no-return-await */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -9,16 +17,17 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
   styleUrls: ['./acompanhamento.page.scss'],
 })
 export class AcompanhamentoPage implements OnInit {
-
   public formData: FormData = new FormData();
+
   public arqRAE: any = null;
+
   public textArea: string = null;
 
   constructor(
     public router: Router,
     public apiStudent: ApiStudentService,
     public toastController: ToastController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -28,7 +37,7 @@ export class AcompanhamentoPage implements OnInit {
     const loading = await this.loadingController.create({
       cssClass: 'loading',
       message: 'Carregando...',
-      spinner: 'crescent'
+      spinner: 'crescent',
     });
     return await loading.present();
   }
@@ -36,21 +45,21 @@ export class AcompanhamentoPage implements OnInit {
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
-      color: color,
-      icon: icon,
-      duration: 2000
+      color,
+      icon,
+      duration: 2000,
     });
     toast.present();
   }
 
   calculateDataLimite() {
-    var mes: any = new Date().getMonth();
-    mes = mes + 2
+    let mes: any = new Date().getMonth();
+    mes += 2;
     if (mes < 10) {
-      mes = '0' + mes
+      mes = `0${mes}`;
     }
     if (mes > 12) {
-      mes = '01'
+      mes = '01';
     }
 
     return `${new Date().getFullYear()}-${mes}-${29} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()} -0300`;
@@ -58,30 +67,28 @@ export class AcompanhamentoPage implements OnInit {
 
   async submit() {
     if (this.validate()) {
-      
       await this.presentLoading();
 
-      // Files 
+      // Files
       this.formData.append('rae', this.arqRAE);
       // Body
-      this.formData.append('corpo_texto', this.textArea);
-      this.formData.append('data_limite', this.calculateDataLimite());
+      this.formData.append('corpoTexto', this.textArea);
+      this.formData.append('dataLimite', this.calculateDataLimite());
       this.formData.append('sub', localStorage.getItem('sub'));
       this.formData.append('eProfessor', 'false');
-  
-      this.apiStudent.sendTicketAcompanhamento(this.formData).subscribe(data => {
+
+      this.apiStudent.sendTicketAcompanhamento(this.formData).subscribe((data) => {
         console.log(data);
         this.loadingController.dismiss();
         this.presentToast(data, 'success', 'checkmark-circle');
         this.router.navigate(['student'], { replaceUrl: true });
-      }, error => {
+      }, (error) => {
         console.log(error);
         this.loadingController.dismiss();
         this.presentToast(error.error, 'danger', 'close-circle');
         this.router.navigate(['student'], { replaceUrl: true });
-      })
+      });
     }
-    return;
   }
 
   validate() {
@@ -103,5 +110,4 @@ export class AcompanhamentoPage implements OnInit {
 
     this.arqRAE = pdfFile;
   }
-
 }

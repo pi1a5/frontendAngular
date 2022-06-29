@@ -1,3 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -8,7 +14,6 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./select-ticket-type.page.scss'],
 })
 export class SelectTicketTypePage implements OnInit {
-
   public list = [
     { id: 0, icon: 'document', name: 'Início de Estágio' },
     { id: 1, icon: 'documents', name: 'Acompanhamento' },
@@ -16,7 +21,7 @@ export class SelectTicketTypePage implements OnInit {
     { id: 3, icon: 'document-lock', name: 'Dispensa de Estágio' },
     { id: 4, icon: 'document-attach', name: 'Equiparação' },
     { id: 5, icon: 'globe', name: 'Estágio no Exterior' },
-  ]
+  ];
 
   constructor(public toastController: ToastController, public router: Router) { }
 
@@ -25,7 +30,7 @@ export class SelectTicketTypePage implements OnInit {
       message: 'Indisponível',
       icon: 'warning',
       color: 'danger',
-      duration: 2000
+      duration: 2000,
     });
     toast.present();
   }
@@ -59,5 +64,4 @@ export class SelectTicketTypePage implements OnInit {
         break;
     }
   }
-
 }

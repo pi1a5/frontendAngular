@@ -1,3 +1,12 @@
+/* eslint-disable consistent-return */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-return-await */
+/* eslint-disable no-console */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
@@ -10,8 +19,8 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-course.page.scss'],
 })
 export class SelectCoursePage implements OnInit {
-
   public list: [any];
+
   public idCourse: number = undefined;
 
   constructor(
@@ -19,22 +28,22 @@ export class SelectCoursePage implements OnInit {
     public api: ApiService,
     public toastController: ToastController,
     public loadingController: LoadingController,
-    public modalController: ModalController
+    public modalController: ModalController,
   ) { }
 
   ngOnInit() {
-    this.api.getCourses().subscribe(data => {
+    this.api.getCourses().subscribe((data) => {
       this.list = data;
-    }, error => {
+    }, (error) => {
       console.log(error);
-    })
+    });
   }
 
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'loading',
       message: 'Carregando...',
-      spinner: 'crescent'
+      spinner: 'crescent',
     });
     return await loading.present();
   }
@@ -42,26 +51,26 @@ export class SelectCoursePage implements OnInit {
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
-      color: color,
-      icon: icon,
-      duration: 2000
+      color,
+      icon,
+      duration: 2000,
     });
     toast.present();
   }
 
   async presentModal(course: any) {
-    var modal = await this.modalController.create({
+    const modal = await this.modalController.create({
       component: SetProntuarioComponent,
       cssClass: 'set-prontuario',
-      componentProps: { course }
+      componentProps: { course },
     });
 
     await this.loadingController.dismiss();
     await modal.present();
 
-    var { data } = await modal.onDidDismiss();
+    const { data } = await modal.onDidDismiss();
 
-    if (data) return data
+    if (data) return data;
 
     return false;
   }
@@ -69,15 +78,15 @@ export class SelectCoursePage implements OnInit {
   loadIcon(id: number) {
     switch (id) {
       case 0:
-        return 'desktop'
+        return 'desktop';
       case 1:
-        return 'construct'
+        return 'construct';
       case 2:
-        return 'clipboard'
+        return 'clipboard';
       case 3:
-        return 'airplane'
+        return 'airplane';
       case 4:
-        return 'bulb'
+        return 'bulb';
       default:
         break;
     }
@@ -89,11 +98,11 @@ export class SelectCoursePage implements OnInit {
     const resp = await this.presentModal(course);
     if (!resp) return;
     await this.presentLoading();
-    this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async data => {
+    this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async (data) => {
       await this.loadingController.dismiss();
       await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
       this.userPage(data.email);
-    }, async error => {
+    }, async (error) => {
       console.log(error);
       await this.loadingController.dismiss();
       await this.presentToast(error.error, 'danger', 'close-circle');
@@ -107,5 +116,4 @@ export class SelectCoursePage implements OnInit {
       this.router.navigate(['supervisor'], { replaceUrl: true });
     }
   }
-
 }

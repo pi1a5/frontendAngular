@@ -1,3 +1,11 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
+/* eslint-disable no-return-await */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -10,13 +18,12 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   constructor(
     public ggAuth: GoogleAuthService,
     public api: ApiService,
     public router: Router,
     public loadingController: LoadingController,
-    public toastController: ToastController
+    public toastController: ToastController,
   ) { }
 
   async presentLoading() {
@@ -33,18 +40,18 @@ export class HomePage {
       message: error,
       duration: 2000,
       icon: 'information-circle',
-      color: 'danger'
+      color: 'danger',
     });
     toast.present();
   }
 
   async signIn() {
     try {
-      var user = await this.ggAuth.signIn();
+      const user = await this.ggAuth.signIn();
       if (!user) return;
       await this.presentLoading();
       console.log('user: ', user);
-      this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id)
+      this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id);
     } catch (error) {
       this.loadingController.dismiss();
       console.log(error);
@@ -52,20 +59,20 @@ export class HomePage {
   }
 
   apiLogin(name: string, email: string, imageUrl: string, idToken: string, sub: string) {
-    this.api.login(idToken, sub).subscribe(user => {
+    this.api.login(idToken, sub).subscribe((user) => {
       this.userPage(user.email);
-    }, error => {
+    }, (error) => {
       console.log(error);
-      this.api.newUser(name, email, imageUrl, idToken, sub).subscribe(resp => {
+      this.api.newUser(name, email, imageUrl, idToken, sub).subscribe((resp) => {
         console.log(resp);
-        this.api.login(idToken, sub).subscribe(user => {
+        this.api.login(idToken, sub).subscribe((user) => {
           this.goToSelectCoursePage();
-        }, error => {
+        }, (error) => {
           this.loadingController.dismiss();
           this.presentToast(error.error);
           console.log(error);
         });
-      }, error => {
+      }, (error) => {
         this.loadingController.dismiss();
         this.presentToast(error.error);
         console.log(error);
@@ -81,10 +88,9 @@ export class HomePage {
       this.router.navigate(['supervisor'], { replaceUrl: true });
     }
   }
-  
+
   goToSelectCoursePage() {
     this.loadingController.dismiss();
     this.router.navigate(['select-course'], { replaceUrl: true });
   }
-
 }

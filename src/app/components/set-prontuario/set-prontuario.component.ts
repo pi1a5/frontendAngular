@@ -1,3 +1,7 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
 
@@ -7,8 +11,8 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
   styleUrls: ['./set-prontuario.component.scss'],
 })
 export class SetProntuarioComponent implements OnInit {
-
   public prontuario: string = null;
+
   public course: any = null;
 
   constructor(
@@ -24,16 +28,16 @@ export class SetProntuarioComponent implements OnInit {
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
-      color: color,
-      icon: icon,
-      duration: 2000
+      color,
+      icon,
+      duration: 2000,
     });
     toast.present();
   }
 
   async confirm() {
     if (this.validate()) {
-      let prontuarioCaps = this.prontuario.toUpperCase(); // Deixar em caixa alta
+      const prontuarioCaps = this.prontuario.toUpperCase(); // Deixar em caixa alta
       this.modalController.dismiss({ prontuario: prontuarioCaps });
     }
   }
@@ -47,19 +51,18 @@ export class SetProntuarioComponent implements OnInit {
   }
 
   validate() {
-    // Checar se está vazio
+    // Verificar se está vazio
     if (!this.prontuario) {
       this.presentToast('Prontuário obrigatório', 'danger', 'close-circle');
       return false;
     }
-    
-    // Checar se tem 7 digitos e Checar se começa com SP
-    if (this.prontuario.length !== 9 || this.prontuario.substring(0, 2).toUpperCase() !== "SP") {
+
+    // Verificar se tem 7 dígitos e Verificar se começa com SP
+    if (this.prontuario.length !== 9 || this.prontuario.substring(0, 2).toUpperCase() !== 'SP') {
       this.presentToast('Prontuário incorreto', 'danger', 'close-circle');
       return false;
     }
 
     return true;
   }
-
 }

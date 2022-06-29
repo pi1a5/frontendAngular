@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {

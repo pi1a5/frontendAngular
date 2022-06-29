@@ -1,11 +1,14 @@
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable import/prefer-default-export */
 import { Injectable } from '@angular/core';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GoogleAuthService {
-
   constructor() {
     GoogleAuth.initialize();
   }

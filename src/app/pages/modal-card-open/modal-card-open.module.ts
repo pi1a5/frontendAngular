@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/prefer-default-export */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +15,8 @@ import { ModalCardOpenPage } from './modal-card-open.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ModalCardOpenPageRoutingModule
+    ModalCardOpenPageRoutingModule,
   ],
-  declarations: [ModalCardOpenPage]
+  declarations: [ModalCardOpenPage],
 })
 export class ModalCardOpenPageModule {}
