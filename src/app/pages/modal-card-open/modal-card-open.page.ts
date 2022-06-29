@@ -64,7 +64,7 @@ export class ModalCardOpenPage implements OnInit {
   async accept() {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, true).subscribe((data) => {
+    this.apiSupervisor.feedbackTicket({ idTicket: this.ticket.id, feedback: this.textArea, accept: true }).subscribe((data) => {
       // console.log(data);
       this.loadingController.dismiss();
       this.presentToast('Ticket Aceito', 'success', 'checkmark-circle');
@@ -80,7 +80,7 @@ export class ModalCardOpenPage implements OnInit {
   async refuse() {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, false).subscribe((data) => {
+    this.apiSupervisor.feedbackTicket({ idTicket: this.ticket.id, feedback: this.textArea, accept: false }).subscribe((data) => {
       this.loadingController.dismiss();
       this.presentToast('Ticket Recusado', 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });

@@ -63,7 +63,7 @@ export class HomePage {
       this.userPage(user.email);
     }, (error) => {
       console.log(error);
-      this.api.newUser(name, email, imageUrl, idToken, sub).subscribe((resp) => {
+      this.api.newUser({ name, email, picture: imageUrl, idToken, sub }).subscribe((resp) => {
         console.log(resp);
         this.api.login(idToken, sub).subscribe((user) => {
           this.goToSelectCoursePage();

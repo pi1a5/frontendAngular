@@ -36,7 +36,7 @@ export class ApiSupervisorService {
   }
 
   // Card Modal
-  feedbackTicket(idTicket: number, feedback: string, accept: boolean): Observable<any> {
+  feedbackTicket({ idTicket, feedback, accept }: { idTicket: number; feedback: string; accept: boolean; }): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: localStorage.getItem('sub'),
       idTicket,
