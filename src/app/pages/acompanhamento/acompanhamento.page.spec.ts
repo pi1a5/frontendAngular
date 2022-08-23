@@ -25,4 +25,19 @@ describe('AcompanhamentoPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('Dois Mais Dois é quatro', () => {
+    expect(2 + 2).toBe(4);
+  });
+
+
+  it('Valores do Objeto', () => {
+    const data = {name: "teste"}
+
+    expect(data).toEqual({name: "teste"})
+  });
+
+
+  
 });
