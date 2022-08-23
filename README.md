@@ -1,7 +1,7 @@
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#-Licença">Licença</a>
 </p>
 
 <p align="center">
@@ -13,23 +13,30 @@
 <br>
 
 <p align="center">
-  <img alt="" src="" width="100%">
+  <img alt="" src="https://user-images.githubusercontent.com/61792159/170903213-224dd3a9-7d0d-4fb3-ae89-a7ef7160930c.png" width="100%">
 </p>
 
-## 🚀 Tecnologias Usadas
+## 🚀 Tecnologias
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+Esse projeto foi desenvolvido com as seguintes tecnologias e dependências:
 
-- Ionic
 - Angular
+- Ionic
+- SaSS
+- react-google-login
+- gapi-script
 
+## 🚀 Objetivo
+
+O sistema de estágio do IFSP, tem como objetivo melhorar os processos atuais que é realizado para gerenciar estágio.
 
 ## 💻 Projeto
 
-Frontend do Projeto de Gestão de Estágio. <br>
-Confira: https://pi1a5frontend-angular.herokuapp.com
+Front End do projeto de Gestão de Estágio.
+
+<a href="https://www.figma.com/file/cbgdHgzfycaOF4mPxZeus1/Projeto-Integrado?node-id=0%3A1">Figma do Projeto</a>
 
 
 ## 📝 Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](.github/LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://opensource.org/licenses/MIT) para mais detalhes.
