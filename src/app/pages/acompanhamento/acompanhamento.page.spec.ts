@@ -38,6 +38,12 @@ describe('AcompanhamentoPage', () => {
     expect(data).toEqual({name: "teste"})
   });
 
+  it('Valores do Objeto', () => {
+    const data = {name: "teste"}
+
+    expect(data).toEqual({name: "teste"})
+  });
+
 
   
 });
