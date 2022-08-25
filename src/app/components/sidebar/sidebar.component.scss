@@ -1,0 +1,40 @@
+ion-list {
+  padding: 0;
+  height: 100%;
+}
+
+ion-list#inbox-list {
+  background-color: rgba(var(--ion-color-success));
+}
+
+ion-list#inbox-list ion-card {
+  padding: 1.5em;
+}
+
+ion-list#inbox-list ion-button {
+  font-family: 'Nunito', sans-serif;
+  font-size: medium;
+  padding: 0.4em;
+  border-radius: 4em;
+}
+
+ion-item {
+  --background: var(--ion-color-success);
+  --color: var(--ion-color-light);
+  --border-color: var(--ion-color-light);
+}
+
+ion-item {
+  --highlight-height: 2em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+  font-size: large;
+}
+
+.logoutbt {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+}

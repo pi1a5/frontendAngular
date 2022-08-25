@@ -1,3 +1,6 @@
+ion-header::after {
+  background-image: none;
+}
 
 ion-split-pane {
   --border: none !important;
@@ -19,38 +22,6 @@ ion-menu.md ion-content {
   --padding-bottom: 20px;
 }
 
-ion-menu.md ion-list {
-  padding: 0;
-  height: 100%;
-}
-
-ion-menu.md ion-list#inbox-list {
-  background-color: rgba(var(--ion-color-success));
-}
-
-ion-menu.md ion-list#inbox-list ion-card {
-  padding: 1.5em;
-}
-
-ion-menu.md ion-list#inbox-list ion-button {
-  font-family: 'Nunito', sans-serif;
-  font-size: medium;
-  padding: 0.4em;
-  border-radius: 4em;
-}
-
-ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
-}
-
-ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-ion-item.selected {
-  --color: var(--ion-color-primary);
-}
-
 .title {
   font-family: 'Nunito', sans-serif;
   font-size: 2em;
@@ -59,12 +30,15 @@ ion-item.selected {
 .list {
   max-height: 80vh;
   overflow: auto;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
-.list::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
+.list::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
 }
 
 .avatar {
@@ -79,4 +53,14 @@ ion-item.selected {
 
 .font {
   font-family: 'Nunito', sans-serif;
+}
+
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }

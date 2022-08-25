@@ -6,15 +6,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class ApiSupervisorService {
-  private url: string = 'https://pi1a5back.herokuapp.com/';
+  private url: string = this.api.getUrl();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private api: ApiService) { }
 
   // Dashboard
   getTicketsWithoutSupervisor(): Observable<any> {
@@ -36,7 +37,7 @@ export class ApiSupervisorService {
   }
 
   // Card Modal
-  feedbackTicket(idTicket: number, feedback: string, accept: boolean): Observable<any> {
+  feedbackTicket({ idTicket, feedback, accept }: { idTicket: number; feedback: string; accept: boolean; }): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: localStorage.getItem('sub'),
       idTicket,
