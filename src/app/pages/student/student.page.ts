@@ -60,14 +60,6 @@ export class StudentPage implements OnInit {
     return modal.present();
   }
 
-  goToNewTicket() {
-    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
-  }
-
-  goToProfile() {
-    this.router.navigate(['profile'], { replaceUrl: true });
-  }
-
   defineTickets(tickets: any) {
     for (let index = 0; index < tickets.length; index++) {
       if (tickets[index].feedback) {

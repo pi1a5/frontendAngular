@@ -9,15 +9,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private url: string = 'https://pi1a5back.herokuapp.com/';
+  // private url: string = 'https://pi1a5back.herokuapp.com/';
+  private url: string = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) { }
+
+  getUrl() {
+    return this.url;
+  }
 
   testConnection(): Observable<Response> {
     return this.http.get<Response>(this.url);

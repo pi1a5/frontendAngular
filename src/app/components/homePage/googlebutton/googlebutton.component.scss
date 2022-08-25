@@ -1,0 +1,105 @@
+ion-grid{
+  height: 100%;
+}
+ion-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+
+// Small screen
+@media only screen and (min-width: 0px) {
+
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.9em;
+    font-weight: 800;
+  }
+  
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1em;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container div {
+    flex: 1;
+    width: 100%
+  }
+  
+  .button {
+    font-weight: 900;
+    font-size: 0.7em;
+  }
+
+}
+
+// Medium screen
+@media only screen and (min-width: 992px) {
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.5em;
+    font-weight: 800;
+  }
+  
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5em;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container div {
+    flex: 1;
+    width: 100%
+  }
+  
+  .button {
+    font-weight: 900;
+    font-size: 1.2em;
+  }
+}
+
+// Large screen
+@media only screen and (min-width: 1435px) {
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 5.5em;
+    font-weight: 800;
+    margin-bottom: 0px;
+  }
+  
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2em;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container div {
+    flex: 1;
+    width: 100%
+  }
+  
+  .button {
+    font-weight: 900;
+    font-size: 1.2em;
+  }
+}
+
+

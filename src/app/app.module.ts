@@ -17,7 +17,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,

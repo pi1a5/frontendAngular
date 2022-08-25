@@ -5,14 +5,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiStudentService {
-  private url: string = 'https://pi1a5back.herokuapp.com/';
+  private url: string = this.api.getUrl();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private api: ApiService) { }
 
   getTicketsUser(): Observable<any> {
     return this.http.post(`${this.url}api/getTicketsUser`, {
