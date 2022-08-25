@@ -10,7 +10,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { SetProntuarioComponent } from 'src/app/components/SelectCoursePage/set-prontuario/set-prontuario.component';
+import { SetProntuarioComponent } from 'src/app/components/selectCoursePage/set-prontuario/set-prontuario.component';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
