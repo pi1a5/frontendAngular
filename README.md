@@ -22,9 +22,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias e dependências:
 
 - Angular
 - Ionic
-- SaSS
-- react-google-login
-- gapi-script
+- SCSS
+- Chart.js
 
 ## 🚀 Objetivo
 
