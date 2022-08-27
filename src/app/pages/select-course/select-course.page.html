@@ -1,24 +1,37 @@
 <ion-content color="success">
   <ion-card color="medium" class="container">
-    <ion-card-header >
-      <ion-title color="dark" class="title ion-text-center ion-margin ion-padding" >Selecione o seu Curso</ion-title>
+    <ion-card-header>
+      <ion-title color="dark" class="title ion-text-center ion-margin ion-padding">Selecione o seu Curso</ion-title>
     </ion-card-header>
     <ion-card-content class="ion-text-center">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-sm="12" size-md="12" size-lg="4" size-xl="4" *ngFor="let course of list">
-            <ion-card class="curso font" button="true" color="dark" (click)="setCourse(course)">
-              <ion-card-header>
-                <ion-icon color="primary" [name]="loadIcon(course.id)"></ion-icon>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-note color="primary" class="font sigla">{{course.sigla}}</ion-note>
-                <ion-title color="primary" class="nome">{{course.nome}}</ion-title>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-accordion-group>
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>First Accordion</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content" *ngFor="let course of list">
+            <ion-item lines="none" button="true" color="dark" (click)="setCourse(course)">
+              <ion-label>{{course.sigla}} {{course.nome}}</ion-label>
+            </ion-item>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Second Accordion</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            Second Content
+          </div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>Third Accordion</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            Third Content
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-card-content>
   </ion-card>
 </ion-content>

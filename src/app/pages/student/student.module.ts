@@ -9,6 +9,8 @@ import { IonicModule } from '@ionic/angular';
 import { StudentPageRoutingModule } from './student-routing.module';
 
 import { StudentPage } from './student.page';
+import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { StudentPage } from './student.page';
     IonicModule,
     StudentPageRoutingModule,
   ],
-  declarations: [StudentPage],
+  declarations: [StudentPage, LogoutbuttonComponent, SidebarComponent],
 })
 export class StudentPageModule {}

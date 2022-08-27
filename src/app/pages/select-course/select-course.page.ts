@@ -10,7 +10,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { SetProntuarioComponent } from 'src/app/components/set-prontuario/set-prontuario.component';
+import { SetProntuarioComponent } from 'src/app/components/selectCoursePage/set-prontuario/set-prontuario.component';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -31,11 +31,15 @@ export class SelectCoursePage implements OnInit {
     public modalController: ModalController,
   ) { }
 
-  ngOnInit() {
-    this.api.getCourses().subscribe((data) => {
+  async ngOnInit() {
+    await this.presentLoading();
+    this.api.getCourses().subscribe(async (data) => {
       this.list = data;
-    }, (error) => {
+      await this.loadingController.dismiss();
+    }, async (error) => {
       console.log(error);
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      await this.loadingController.dismiss();
     });
   }
 
@@ -75,23 +79,6 @@ export class SelectCoursePage implements OnInit {
     return false;
   }
 
-  loadIcon(id: number) {
-    switch (id) {
-      case 0:
-        return 'desktop';
-      case 1:
-        return 'construct';
-      case 2:
-        return 'clipboard';
-      case 3:
-        return 'airplane';
-      case 4:
-        return 'bulb';
-      default:
-        break;
-    }
-  }
-
   async setCourse(course: any) {
     await this.presentLoading();
     this.idCourse = course.id;
@@ -100,6 +87,7 @@ export class SelectCoursePage implements OnInit {
     await this.presentLoading();
     this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async (data) => {
       await this.loadingController.dismiss();
+      localStorage.setItem('courseSelected', 'true');
       await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
       this.userPage(data.email);
     }, async (error) => {
