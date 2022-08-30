@@ -15,26 +15,25 @@ ion-icon {
 }
 
 .container {
-  margin: 3em;
+  min-height: 90vh;
+  max-height: 90vh;
   border-radius: 2em;
-  height: 88vh;
-  overflow: auto;
-}
-
-.curso {
-  border-radius: 2em;
-  padding-top: 2em;
-  padding-bottom: 2em;
-}
-
-.nome {
-  font-size: 1.2em;
-}
-
-.sigla {
-  font-size: 2em;
+  overflow-y: scroll;
 }
 
 .font {
   font-family: 'Nunito', sans-serif;
 }
+
+ion-item.courseItem {
+  --border-radius: 0.5em;
+}
+
+ion-content.background {
+  --background: url(../../../assets/backgroundIF2.jpg);
+}
+
+div[slot="content"] {
+  background: rgba(var(--ion-color-success-rgb), 0.25)
+}
+

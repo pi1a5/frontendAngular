@@ -1,0 +1,28 @@
+<ion-list class="processes">
+  <ion-radio-group>
+    <ion-item lines="none" color="light">
+      <ion-label class="font">Padrão</ion-label>
+      <ion-radio color="success" slot="end" value="padrao" (click)="sendProcessName($event.target.value)"></ion-radio>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item lines="none" color="light">
+      <ion-label class="font">Acompanhamento</ion-label>
+      <ion-radio color="success" slot="end" value="acompanhamento" (click)="sendProcessName($event.target.value)"></ion-radio>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item lines="none" color="light">
+      <ion-label class="font">Equiparação</ion-label>
+      <ion-radio color="success" slot="end" value="equiparacao" (click)="sendProcessName($event.target.value)"></ion-radio>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item lines="none" color="light">
+      <ion-label class="font">Exterior</ion-label>
+      <ion-radio color="success" slot="end" value="exterior" (click)="sendProcessName($event.target.value)"></ion-radio>
+    </ion-item>
+    <br>
+    <br>
+  </ion-radio-group>
+</ion-list>

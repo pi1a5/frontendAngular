@@ -16,6 +16,8 @@ export class LogoutbuttonComponent implements OnInit {
   async signOut() {
     try {
       await this.ggAuth.signOut();
+      sessionStorage.removeItem('userEmail');
+      sessionStorage.removeItem('userId');
       this.router.navigate(['home'], { replaceUrl: true });
     } catch (error) {
       console.log(error);

@@ -17,7 +17,7 @@ export class ApiStudentService {
 
   getTicketsUser(): Observable<any> {
     return this.http.post(`${this.url}api/getTicketsUser`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 
@@ -35,7 +35,7 @@ export class ApiStudentService {
 
   checkIfFinalizou(): Observable<any> {
     return this.http.post(`${this.url}api/checkIfFinalizou`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 }

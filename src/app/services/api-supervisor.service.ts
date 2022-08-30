@@ -20,26 +20,26 @@ export class ApiSupervisorService {
   // Dashboard
   getTicketsWithoutSupervisor(): Observable<any> {
     return this.http.post(`${this.url}api/getTicketsWithoutSupervisor`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 
   getTicketsWithSupervisor(): Observable<any> {
     return this.http.post(`${this.url}api/getTicketsWithSupervisor`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 
   getClosedTicketsWithSupervisor(): Observable<any> {
     return this.http.post(`${this.url}api/getClosedTicketsWithSupervisor`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 
   // Card Modal
   feedbackTicket({ idTicket, feedback, accept }: { idTicket: number; feedback: string; accept: boolean; }): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
       idTicket,
       feedback,
       eAceito: accept,
@@ -49,7 +49,7 @@ export class ApiSupervisorService {
   // Chart Supervisors
   checkOrientadoresAmount(): Observable<any> {
     return this.http.post(`${this.url}api/checkOrientadoresAmount`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 }

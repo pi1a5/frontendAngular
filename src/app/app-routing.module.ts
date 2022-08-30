@@ -61,6 +61,14 @@ const routes: Routes = [
     path: 'chart-supervisors',
     loadChildren: () => import('./pages/chart-supervisors/chart-supervisors.module').then((m) => m.ChartSupervisorsPageModule),
   },
+  {
+    path: 'processes',
+    loadChildren: () => import('./pages/processes/processes.module').then( m => m.ProcessesPageModule)
+  },
+  {
+    path: 'internships',
+    loadChildren: () => import('./pages/internships/internships.module').then( m => m.InternshipsPageModule)
+  },
 ];
 
 @NgModule({

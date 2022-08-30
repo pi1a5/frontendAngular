@@ -1,0 +1,66 @@
+<ion-split-pane when="(min-width: 1600px)" contentId="main-content">
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content>
+      <app-sidebar></app-sidebar>
+    </ion-content>
+  </ion-menu>
+
+  <!-- content -->
+  <ion-router-outlet id="main-content">
+    <ion-content class="ion-justify-content-center" padding class="background">
+
+      <ion-card class="contentHeight">
+        <ion-card-header class="ion-text-center">
+          <ion-toolbar color="translucent">
+            <ion-menu-button color="success" slot="start"></ion-menu-button>
+            <ion-card-title color="success" class="title ion-margin ion-padding">
+              Gestão de Processos
+            </ion-card-title>
+          </ion-toolbar>
+          <hr>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-row>
+
+            <!-- Coluna da esquerda -->
+
+            <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
+              <app-processes-list (selectProcess)="receiveProcessName($event)"></app-processes-list>
+              <ion-button size="large" expand="block" fill="solid" color="success">
+                <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+            <!-- Coluna da direita -->
+
+            <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="6.5">
+              <ion-card>
+                <ion-card-header color="success">
+                  <ion-item lines="none" color="translucent">
+                    <ion-card-title class="font" style="font-size: 1.5em;">
+                      Etapas
+                    </ion-card-title>
+                    <ion-button slot="end" size="default" color="danger">
+                      <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-list class="fases">
+                    <!-- reorder -->
+                  </ion-list>
+                  <ion-button size="large" expand="block" fill="solid" color="success">
+                    <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
+                  </ion-button>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-content>
+  </ion-router-outlet>
+</ion-split-pane>

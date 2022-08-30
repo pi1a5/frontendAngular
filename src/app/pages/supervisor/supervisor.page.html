@@ -1,21 +1,7 @@
 <ion-split-pane when="(min-width: 1600px)" contentId="main-content">
   <ion-menu contentId="main-content" type="overlay">
     <ion-content>
-      <ion-list id="inbox-list">
-        <ion-card id="logoIF">
-          <ion-img src="../../../assets/logoIF.png"></ion-img>
-        </ion-card>
-
-        <ion-button color="light" expand="block" size="large" (click)="goToChartSupervisors()">
-          <ion-icon slot="start" name="bar-chart"></ion-icon>
-          <ion-label>Orientadores</ion-label>
-        </ion-button>
-        <ion-button color="light" expand="block" size="large" (click)="goToProfile()">
-          <ion-icon slot="start" name="person"></ion-icon>
-          <ion-label>Perfil</ion-label>
-        </ion-button>
-      </ion-list>
-
+      <app-sidebar></app-sidebar>
     </ion-content>
   </ion-menu>
 

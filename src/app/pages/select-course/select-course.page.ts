@@ -19,7 +19,12 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-course.page.scss'],
 })
 export class SelectCoursePage implements OnInit {
-  public list: [any];
+  public tecnicoIntegrado = [];
+  public tecnicoSubsequente = [];
+  public tecnologia = [];
+  public licenciatura = [];
+  public bacharelado = [];
+  public ead = [];
 
   public idCourse: number = undefined;
 
@@ -34,12 +39,12 @@ export class SelectCoursePage implements OnInit {
   async ngOnInit() {
     await this.presentLoading();
     this.api.getCourses().subscribe(async (data) => {
-      this.list = data;
       await this.loadingController.dismiss();
+      this.defineCourse(data);
     }, async (error) => {
+      await this.loadingController.dismiss();
       console.log(error);
       await this.presentToast(error.error, 'danger', 'close-circle');
-      await this.loadingController.dismiss();
     });
   }
 
@@ -60,6 +65,36 @@ export class SelectCoursePage implements OnInit {
       duration: 2000,
     });
     toast.present();
+  }
+
+  defineCourse(courses: [any]) {
+    for (let index = 0; index < courses.length; index++) {
+      const course = courses[index];
+
+      switch (course.tipo) {
+        case 'tecnicoIntegrado':
+          this.tecnicoIntegrado.push(course);
+          break;
+        case 'tecnicoSubsequente':
+          this.tecnicoSubsequente.push(course);
+          break;
+        case 'tecnologia':
+          this.tecnologia.push(course);
+          break;
+        case 'licenciatura':
+          this.licenciatura.push(course);
+          break;
+        case 'bacharelado':
+          this.bacharelado.push(course);
+          break;
+        case 'ead':
+          this.ead.push(course);
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 
   async presentModal(course: any) {
@@ -86,8 +121,9 @@ export class SelectCoursePage implements OnInit {
     if (!resp) return;
     await this.presentLoading();
     this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async (data) => {
+      console.log(data);
+
       await this.loadingController.dismiss();
-      localStorage.setItem('courseSelected', 'true');
       await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
       this.userPage(data.email);
     }, async (error) => {

@@ -27,8 +27,14 @@ ion-menu.md ion-content {
   font-size: 2em;
 }
 
+.contentHeight {
+  min-height: 68.25vh;
+  max-height: 68.25vh;
+}
+
 .list {
-  max-height: 80vh;
+  min-height: 70vh;
+  max-height: 70vh;
   overflow: auto;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
@@ -36,20 +42,10 @@ ion-menu.md ion-content {
   /* Firefox */
 }
 
-.list::-webkit-scrollbar {
-  display: none;
-  /* Safari and Chrome */
-}
-
-.avatar {
-  padding: 0.1em;
-}
-
-.cardChip:hover {
-  padding-top: 2em;
-  padding-bottom: 2em;
-  cursor: default;
-}
+// .list::-webkit-scrollbar {
+//   display: none;
+//   /* Safari and Chrome */
+// }
 
 .font {
   font-family: 'Nunito', sans-serif;
@@ -63,4 +59,18 @@ hr {
   font-size: 2em !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+.background {
+  --background: url(../../../assets/backgroundIF.jpg);
+}
+
+.emptyTicketIcon {
+  max-width: 30em;
+}
+
+ion-img {
+  display: block;
+  width: auto;
+  margin: auto;
 }

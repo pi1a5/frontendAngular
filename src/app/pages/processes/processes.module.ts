@@ -1,26 +1,23 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-unresolved */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { SupervisorPageRoutingModule } from './supervisor-routing.module';
+import { ProcessesPageRoutingModule } from './processes-routing.module';
 
-import { SupervisorPage } from './supervisor.page';
+import { ProcessesPage } from './processes.page';
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { ProcessesListComponent } from 'src/app/components/processes-list/processes-list.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SupervisorPageRoutingModule,
-    Ng2SearchPipeModule,
+    ProcessesPageRoutingModule
   ],
-  declarations: [SupervisorPage, LogoutbuttonComponent, SidebarComponent],
+  declarations: [ProcessesPage, LogoutbuttonComponent, SidebarComponent, ProcessesListComponent]
 })
-export class SupervisorPageModule {}
+export class ProcessesPageModule {}

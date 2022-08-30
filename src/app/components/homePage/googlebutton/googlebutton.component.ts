@@ -45,7 +45,9 @@ export class GooglebuttonComponent implements OnInit {
       const user = await this.ggAuth.signIn();
       if (!user) return;
       await this.presentLoading();
-      console.log('user: ', user);
+      //console.log('user: ', user);
+      sessionStorage.setItem('userEmail', user.email);
+      sessionStorage.setItem('userId', user.id);
       this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id);
     } catch (error) {
       this.loadingController.dismiss();
@@ -53,15 +55,14 @@ export class GooglebuttonComponent implements OnInit {
     }
   }
 
-  apiLogin(name: string, email: string, imageUrl: string, idToken: string, sub: string) {
-    this.api.login(idToken, sub).subscribe((user) => {
-      const courseSelected = localStorage.getItem('courseSelected');
-      if (courseSelected !== 'true') return this.goToSelectCoursePage();
+  apiLogin(name: string, email: string, imageUrl: string, token: string, sub: string) {
+    this.api.login(token, sub).subscribe((user) => {
+      if (isNaN(user.idcurso)) return this.goToSelectCoursePage();
       this.userPage(user.email);
     }, (error) => {
       console.log(error);
-      this.api.newUser({ name, email, picture: imageUrl, idToken, sub }).subscribe((resp) => {
-        this.api.login(idToken, sub).subscribe((user) => {
+      this.api.newUser({ name, email, picture: imageUrl, token, sub }).subscribe((resp) => {
+        this.api.login(token, sub).subscribe((user) => {
           this.goToSelectCoursePage();
         }, (error) => {
           this.loadingController.dismiss();

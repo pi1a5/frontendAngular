@@ -29,12 +29,12 @@ export class ApiService {
     return this.http.get<Response>(this.url);
   }
 
-  newUser({ name, email, picture, idToken, sub }: { name: string; email: string; picture: string; idToken: string; sub: string; }): Observable<Response> {
+  newUser({ name, email, picture, token, sub }: { name: string; email: string; picture: string; token: string; sub: string; }): Observable<Response> {
     return this.http.post<Response>(`${this.url}api/newUser`, {
       name,
       email,
       picture,
-      idToken,
+      token,
       sub,
     });
   }
@@ -48,7 +48,7 @@ export class ApiService {
 
   getUser(): Observable<User> {
     return this.http.post<User>(`${this.url}api/user`, {
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 
@@ -60,7 +60,7 @@ export class ApiService {
     return this.http.post<any>(`${this.url}api/setCourseProntuario`, {
       idCurso,
       prontuario,
-      sub: localStorage.getItem('sub'),
+      sub: sessionStorage.getItem('userId'),
     });
   }
 }
