@@ -9,7 +9,9 @@ import { ProcessesPageRoutingModule } from './processes-routing.module';
 import { ProcessesPage } from './processes.page';
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
-import { ProcessesListComponent } from 'src/app/components/processes-list/processes-list.component';
+import { ProcessesListComponent } from 'src/app/components/processesPage/processes-list/processes-list.component';
+import { ProcessEditComponent } from 'src/app/components/processesPage/process-edit/process-edit.component';
+import { ProcessUndefinedComponent } from 'src/app/components/process-undefined/process-undefined.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,13 @@ import { ProcessesListComponent } from 'src/app/components/processes-list/proces
     IonicModule,
     ProcessesPageRoutingModule
   ],
-  declarations: [ProcessesPage, LogoutbuttonComponent, SidebarComponent, ProcessesListComponent]
+  declarations: [
+    ProcessesPage, 
+    LogoutbuttonComponent, 
+    SidebarComponent, 
+    ProcessesListComponent, 
+    ProcessEditComponent, 
+    ProcessUndefinedComponent
+  ]
 })
-export class ProcessesPageModule {}
+export class ProcessesPageModule { }

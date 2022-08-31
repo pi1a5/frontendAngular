@@ -35,26 +35,8 @@
             <!-- Coluna da direita -->
 
             <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="6.5">
-              <ion-card>
-                <ion-card-header color="success">
-                  <ion-item lines="none" color="translucent">
-                    <ion-card-title class="font" style="font-size: 1.5em;">
-                      Etapas
-                    </ion-card-title>
-                    <ion-button slot="end" size="default" color="danger">
-                      <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
-                    </ion-button>
-                  </ion-item>
-                </ion-card-header>
-                <ion-card-content>
-                  <ion-list class="fases">
-                    <!-- reorder -->
-                  </ion-list>
-                  <ion-button size="large" expand="block" fill="solid" color="success">
-                    <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
-                  </ion-button>
-                </ion-card-content>
-              </ion-card>
+              <app-process-edit *ngIf="selectedProcess" [processData]="selectedProcess"></app-process-edit>
+              <app-process-undefined *ngIf="!selectedProcess"></app-process-undefined>
             </ion-col>
 
           </ion-row>
