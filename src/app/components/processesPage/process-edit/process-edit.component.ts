@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-process-edit',
@@ -7,10 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProcessEditComponent implements OnInit {
 
+  @Input() newProcess: boolean = false; 
   @Input() processData: any; 
+  @Output() cancelNewProcess = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {}
+
+  sendCancel() {
+    this.cancelNewProcess.emit();
+  }
 
 }

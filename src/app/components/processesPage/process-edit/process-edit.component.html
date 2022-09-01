@@ -1,14 +1,27 @@
 <ion-card>
   <ion-card-header color="success">
-    <ion-item lines="none" color="translucent">
-      <ion-card-title class="font" style="font-size: 1.5em; padding-right: 1em;">
-        Nome do processo: 
-      </ion-card-title>
-      <ion-input class="font" [(ngModel)]="processData"></ion-input>
-      <ion-button slot="end" size="default" color="danger">
-        <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
+    <ion-row>
+      <ion-col size="11" size-sm="11" size-md="11" size-lg="11" size-xl="3">
+        <ion-card-title class="font ion-padding-top">Nome do processo</ion-card-title>
+      </ion-col>
+      <ion-col size="11" size-sm="11" size-md="11" size-lg="11" size-xl="8">
+        <ion-item lines="none" color="light">
+          <ion-input class="font" [(ngModel)]="processData"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="11" size-sm="11" size-md="11" size-lg="11" size-xl="0" class="ion-text-center">
+        <ion-button *ngIf="newProcess" size="default" color="danger" (click)="sendCancel()">
+          <ion-icon slot="icon-only" size="large" name="close"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="!newProcess" size="default" color="danger">
+          <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+
+
   </ion-card-header>
   <ion-card-content>
     <br>
@@ -16,12 +29,12 @@
       Etapas
     </ion-card-title>
     <br>
-    <ion-list class="fases" >
+    <ion-list class="fases">
 
 
-    <ion-button size="large" expand="block" fill="solid" color="success">
-      <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
-    </ion-button>
+      <ion-button size="large" expand="block" fill="solid" color="success">
+        <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
+      </ion-button>
 
     </ion-list>
     <ion-button class="font" size="large" expand="block" fill="solid" color="success">

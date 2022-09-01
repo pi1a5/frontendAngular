@@ -1,5 +1,5 @@
 ion-list.fases {
-  height: 40vh;
+  height: 43vh;
   overflow-y: auto;
 }
 
@@ -8,6 +8,10 @@ ion-input {
 }
 
 // Botões de adição
+
+ion-button {
+  height: 3.5em;
+}
 
 ion-icon.add {
   font-size: 48px;

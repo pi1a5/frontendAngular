@@ -1,28 +1,8 @@
 <ion-list class="processes">
   <ion-radio-group>
-    <ion-item lines="none" color="light">
-      <ion-label class="font">Padrão</ion-label>
-      <ion-radio color="success" slot="end" value="Padrão" (click)="sendProcessName($event.target.value)"></ion-radio>
+    <ion-item *ngFor="let process of processes" [disabled]="newProcess" lines="none" color="light">
+      <ion-label class="font">{{process}}</ion-label>
+      <ion-radio color="success" slot="end" (click)="sendProcessName(process)"></ion-radio>
     </ion-item>
-    <br>
-    <br>
-    <ion-item lines="none" color="light">
-      <ion-label class="font">Acompanhamento</ion-label>
-      <ion-radio color="success" slot="end" value="Acompanhamento" (click)="sendProcessName($event.target.value)"></ion-radio>
-    </ion-item>
-    <br>
-    <br>
-    <ion-item lines="none" color="light">
-      <ion-label class="font">Equiparação</ion-label>
-      <ion-radio color="success" slot="end" value="Equiparação" (click)="sendProcessName($event.target.value)"></ion-radio>
-    </ion-item>
-    <br>
-    <br>
-    <ion-item lines="none" color="light">
-      <ion-label class="font">Exterior</ion-label>
-      <ion-radio color="success" slot="end" value="Exterior" (click)="sendProcessName($event.target.value)"></ion-radio>
-    </ion-item>
-    <br>
-    <br>
   </ion-radio-group>
 </ion-list>

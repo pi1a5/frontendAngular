@@ -26,7 +26,8 @@
             <!-- Coluna da esquerda -->
 
             <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
-              <app-processes-list (selectProcess)="receiveProcessName($event)"></app-processes-list>
+              <app-processes-list [newProcess]="isNewProcess" (selectProcess)="receiveProcessName($event)">
+              </app-processes-list>
               <ion-button size="large" expand="block" fill="solid" color="success" (click)="newProcess()">
                 <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
               </ion-button>
@@ -35,7 +36,7 @@
             <!-- Coluna da direita -->
 
             <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="6.5">
-              <app-process-edit *ngIf="selectedProcess" [processData]="selectedProcess"></app-process-edit>
+              <app-process-edit *ngIf="selectedProcess" [newProcess]="isNewProcess" [processData]="selectedProcess" (cancelNewProcess)="receiveCancelEvent()"></app-process-edit>
               <app-process-undefined *ngIf="!selectedProcess"></app-process-undefined>
             </ion-col>
 

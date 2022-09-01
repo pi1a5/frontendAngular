@@ -25,5 +25,9 @@ export class ProcessesPage implements OnInit {
     this.selectedProcess = $event;
   }
 
+  receiveCancelEvent() {
+    this.isNewProcess = false;
+    this.selectedProcess = undefined;
+  }
 
 }
