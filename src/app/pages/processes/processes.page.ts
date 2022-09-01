@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcessesPage implements OnInit {
 
+  isNewProcess: boolean = false;
   selectedProcess = undefined;
 
   constructor() { }
@@ -14,8 +15,15 @@ export class ProcessesPage implements OnInit {
   ngOnInit() {
   }
 
+  newProcess() {
+    this.isNewProcess = true;
+    this.selectedProcess = 'Novo processo';
+  }
+
   receiveProcessName($event) {
     console.log($event);
     this.selectedProcess = $event;
   }
+
+
 }

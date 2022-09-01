@@ -1,20 +1,31 @@
 <ion-card>
   <ion-card-header color="success">
     <ion-item lines="none" color="translucent">
-      <ion-card-title class="font" style="font-size: 1.5em;">
-        {{processData}}
+      <ion-card-title class="font" style="font-size: 1.5em; padding-right: 1em;">
+        Nome do processo: 
       </ion-card-title>
+      <ion-input class="font" [(ngModel)]="processData"></ion-input>
       <ion-button slot="end" size="default" color="danger">
         <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-card-header>
   <ion-card-content>
-    <ion-list class="fases">
-      <!-- reorder -->
-    </ion-list>
+    <br>
+    <ion-card-title class="font ion-text-center" color="medium-shade">
+      Etapas
+    </ion-card-title>
+    <br>
+    <ion-list class="fases" >
+
+
     <ion-button size="large" expand="block" fill="solid" color="success">
       <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
+    </ion-button>
+
+    </ion-list>
+    <ion-button class="font" size="large" expand="block" fill="solid" color="success">
+      Finalizar
     </ion-button>
   </ion-card-content>
 </ion-card>
