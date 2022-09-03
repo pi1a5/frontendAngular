@@ -10,7 +10,7 @@ export class ProcessesListComponent implements OnInit {
   @Input() newProcess = false;
   @Output() selectProcess = new EventEmitter<string>();
 
-  processes = ['Padrão', 'Acompanhamento', 'Aproveitamento', 'Equiparação', 'Exterior'];
+  processes = ['Padrão', 'Aproveitamento', 'Equiparação', 'Exterior'];
 
   constructor() { }
 

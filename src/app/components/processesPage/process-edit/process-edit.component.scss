@@ -1,10 +1,32 @@
-ion-list.fases {
-  height: 43vh;
-  overflow-y: auto;
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 ion-input {
   font-size: 1.5em;
+}
+
+// Etapas
+
+ion-list.fases {
+  height: 41vh;
+  overflow-y: auto;
+}
+
+ion-item ion-label {
+  font-family: 'Nunito', sans-serif;
+  color: var(--ion-color-success);
+  font-size: 1.5em;
+}
+
+ion-button ion-icon {
+  font-size: 2.5em;
 }
 
 // Botões de adição

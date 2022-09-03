@@ -28,8 +28,8 @@
             <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
               <app-processes-list [newProcess]="isNewProcess" (selectProcess)="receiveProcessName($event)">
               </app-processes-list>
-              <ion-button size="large" expand="block" fill="solid" color="success" (click)="newProcess()">
-                <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
+              <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="newProcess()">
+                Criar Processo
               </ion-button>
             </ion-col>
 

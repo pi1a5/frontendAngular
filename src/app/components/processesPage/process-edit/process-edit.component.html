@@ -1,15 +1,15 @@
 <ion-card>
   <ion-card-header color="success">
     <ion-row>
-      <ion-col size="11" size-sm="11" size-md="11" size-lg="11" size-xl="3">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
         <ion-card-title class="font ion-padding-top">Nome do processo</ion-card-title>
       </ion-col>
-      <ion-col size="11" size-sm="11" size-md="11" size-lg="11" size-xl="8">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="7">
         <ion-item lines="none" color="light">
           <ion-input class="font" [(ngModel)]="processData"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col size="11" size-sm="11" size-md="11" size-lg="11" size-xl="0" class="ion-text-center">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="0" class="ion-text-center">
         <ion-button *ngIf="newProcess" size="default" color="danger" (click)="sendCancel()">
           <ion-icon slot="icon-only" size="large" name="close"></ion-icon>
         </ion-button>
@@ -18,26 +18,44 @@
         </ion-button>
       </ion-col>
     </ion-row>
-
-
-
-
   </ion-card-header>
   <ion-card-content>
-    <br>
-    <ion-card-title class="font ion-text-center" color="medium-shade">
-      Etapas
-    </ion-card-title>
-    <br>
+    <ion-row>
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="9">
+        <ion-card-title class="font ion-text-center ion-padding-top" color="medium-shade">
+          Etapas
+        </ion-card-title>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
+        <ion-button class="font" color="success" (click)="newFase()">
+          <ion-icon slot="start" size="large" name="add-circle"></ion-icon>
+          <ion-label slot="end">Criar Etapa</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <hr>
     <ion-list class="fases">
 
+      <ion-reorder-group (ionItemReorder)="reorderFases($event)" disabled="false">
 
-      <ion-button size="large" expand="block" fill="solid" color="success">
-        <ion-icon class="add" slot="icon-only" name="add"></ion-icon>
-      </ion-button>
+        <ion-item *ngFor="let fase of fases;" class="ion-margin-top" lines="none" color="light">
+          <ion-reorder slot="start">
+            <ion-icon size="large" name="reorder-three"></ion-icon>
+          </ion-reorder>
+          <ion-label>
+            {{ fase.name }}
+          </ion-label>
+          <ion-button slot="end" color="secondary">
+            <ion-icon slot="icon-only" name="pencil"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" color="danger" (click)="deleteFase(fase.id)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
 
+      </ion-reorder-group>
     </ion-list>
-    <ion-button class="font" size="large" expand="block" fill="solid" color="success">
+    <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="confirm()">
       Finalizar
     </ion-button>
   </ion-card-content>

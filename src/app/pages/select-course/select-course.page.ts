@@ -67,6 +67,23 @@ export class SelectCoursePage implements OnInit {
     toast.present();
   }
 
+  async presentModal(course: any) {
+    const modal = await this.modalController.create({
+      component: SetProntuarioComponent,
+      cssClass: 'set-prontuario',
+      componentProps: { course },
+    });
+
+    await this.loadingController.dismiss();
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    if (data) return data;
+
+    return false;
+  }
+
   defineCourse(courses: [any]) {
     for (let index = 0; index < courses.length; index++) {
       const course = courses[index];
@@ -95,23 +112,6 @@ export class SelectCoursePage implements OnInit {
           break;
       }
     }
-  }
-
-  async presentModal(course: any) {
-    const modal = await this.modalController.create({
-      component: SetProntuarioComponent,
-      cssClass: 'set-prontuario',
-      componentProps: { course },
-    });
-
-    await this.loadingController.dismiss();
-    await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-
-    if (data) return data;
-
-    return false;
   }
 
   async setCourse(course: any) {
