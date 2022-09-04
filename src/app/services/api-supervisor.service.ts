@@ -52,4 +52,12 @@ export class ApiSupervisorService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  // Process Customization
+  newProcess(process: any): Observable<any> {
+    return this.http.post(`${this.url}api/createNewProcesso`, {
+      sub: sessionStorage.getItem('userId'),
+      processo: process
+    });
+  }
 }

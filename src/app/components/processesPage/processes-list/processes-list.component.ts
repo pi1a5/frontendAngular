@@ -11,9 +11,16 @@ export class ProcessesListComponent implements OnInit {
   @Input() processes: any[] = [];
   @Output() selectProcess = new EventEmitter<Object>();
 
+  public loaded: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+    
+  }
+
+  ngOnChanges() {
+    if (this.processes.length > 0) return this.loaded = true;
   }
 
   sendProcess(process: any) {

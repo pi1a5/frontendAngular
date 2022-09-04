@@ -29,8 +29,9 @@
               <app-processes-list [newProcess]="isNewProcess" [processes]="processes"
                 (selectProcess)="receiveProcess($event)">
               </app-processes-list>
-              <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="newProcess()">
-                Criar Processo
+              <ion-button class="font" [disabled]="processes.length === 0" size="large" expand="block" fill="solid" color="success" (click)="newProcess()">
+                <ion-icon slot="start" name="duplicate"></ion-icon>
+                <ion-label slot="end">Criar Processo</ion-label>
               </ion-button>
             </ion-col>
 

@@ -62,4 +62,11 @@ export class ApiService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  getAllProcesses(): Observable<any> {
+    return this.http.post<any>(`${this.url}api/findAllByCourse`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
 }

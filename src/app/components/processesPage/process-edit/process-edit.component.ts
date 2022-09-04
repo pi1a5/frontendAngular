@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ItemReorderCustomEvent, ModalController } from '@ionic/angular';
+import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
 
 @Component({
@@ -17,8 +18,11 @@ export class ProcessEditComponent implements OnInit {
 
   public editProcess: any = undefined;
 
+  public stepNumber = 0;
+
   constructor(
     public modalController: ModalController,
+    public apiSupervisor: ApiSupervisorService,
   ) { }
 
   ngOnInit() { }
@@ -26,17 +30,18 @@ export class ProcessEditComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.editProcess = {
       id: this.process.id,
-      name: this.process.name,
-      fases: this.process.fases
+      nome: this.process.nome,
+      etapas: this.process.etapas
     };
+    this.stepNumber = this.process.etapas.length;
   }
 
-  async presentModal(fase, documents) {
+  async presentModal(etapa, documentos) {
     const modal = await this.modalController.create({
       component: FaseEditComponent,
       componentProps: {
-        fase: fase,
-        documents: documents
+        etapa: etapa,
+        documentos: documentos
       },
     });
 
@@ -51,51 +56,51 @@ export class ProcessEditComponent implements OnInit {
 
   onChangeName(value: any) {
     if (value) {
-      this.editProcess.name = value;
+      this.editProcess.nome = value;
     } else {
-      this.editProcess.name = this.process.name;
+      this.editProcess.nome = this.process.nome;
     }
   }
 
   reorderFases(ev: ItemReorderCustomEvent) {
     ev.detail.complete(true);
-    const faseToMove = this.editProcess.fases.splice(ev.detail.from, 1)[0];
-    this.editProcess.fases.splice(ev.detail.to, 0, faseToMove);
+    const faseToMove = this.editProcess.etapas.splice(ev.detail.from, 1)[0];
+    this.editProcess.etapas.splice(ev.detail.to, 0, faseToMove);
   }
 
-  async editFase(fase: any) {
-    // const resp = await this.presentModal(fase);
-    // if (!resp) return console.log('cancel');
-    // console.log(resp);
+  async editStep(step: any) {
+    const resp = await this.presentModal(step, this.documents);
+    if (!resp) return console.log('cancel');
+    this.editProcess.etapas.pop(resp.id);
+    this.editProcess.etapas.push(resp);
   }
 
   deleteFase(faseId: number) {
-    this.editProcess.fases = this.editProcess.fases.filter(f => f.id !== faseId);
+    this.editProcess.etapas = this.editProcess.etapas.filter(f => f.id !== faseId);
   }
 
   async newFase() {
 
-    const fase = {
-      id: this.process.fases.length,
-      name: 'Nova etapa',
-      deadline: 10,
-      documents: []
+    const etapa = {
+      id: this.process.etapas.length,
+      nome: 'Nova etapa',
+      prazo: 10,
+      documentos: []
     }
-    const documents = this.documents;
+    const documentos = this.documents;
 
-
-    const resp = await this.presentModal(fase, documents);
+    const resp = await this.presentModal(etapa, documentos);
     if (!resp) return console.log('cancel');
-    console.log(resp);
-    // this.fases.push({
-    //   id: this.faseId,
-    //   name: 'Nova Etapa'
-    // });
-    // this.faseId++;
+    this.editProcess.etapas.push(resp);
+    this.stepNumber++;
   }
 
   confirm() {
     console.log(this.editProcess);
+    // this.apiSupervisor.newProcess(this.editProcess).subscribe(data => {
+    //   console.log(data);
+    //   this.sendCancel();
+    // })
   }
 
   sendDelete(id: number) {

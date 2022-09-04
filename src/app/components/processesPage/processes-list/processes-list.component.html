@@ -1,8 +1,19 @@
 <ion-list class="processes">
-  <ion-radio-group>
+  <ion-radio-group *ngIf="loaded">
     <ion-item *ngFor="let process of processes" [disabled]="newProcess" lines="none" color="light">
-      <ion-label class="font">{{process.name}}</ion-label>
+      <ion-label class="font">{{process.nome}}</ion-label>
       <ion-radio color="success" slot="end" (click)="sendProcess(process)"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-radio-group *ngIf="!loaded">
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
     </ion-item>
   </ion-radio-group>
 </ion-list>

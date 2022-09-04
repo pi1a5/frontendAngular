@@ -67,3 +67,30 @@ ion-item ion-label {
   color: var(--ion-color-success);
   font-size: 1.5em;
 }
+
+ion-select {
+  --placeholder-color: var(--ion-color-success);
+  --placeholder-opacity: 1;
+  width: 100%;
+  justify-content: center;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+  flex: 0 0 auto;
+}
+
+ion-select::part(placeholder)::first-letter {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+ion-select::part(text) {
+  color: var(--ion-color-success);
+  font-size: 1.6em;
+}
+
+ion-select::part(icon) {
+  color: var(--ion-color-success);
+  opacity: 1;
+}

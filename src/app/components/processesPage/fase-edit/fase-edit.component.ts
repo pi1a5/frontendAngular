@@ -8,10 +8,17 @@ import { ModalController, ToastController } from '@ionic/angular';
 })
 export class FaseEditComponent implements OnInit {
 
-  public fase: any = undefined;
-  public documents: any[] = [];
+  public etapa: any = undefined;
+  public documentos: any[] = [];
 
   public editFase: any = undefined;
+
+  currentDocuments = undefined;
+  customAlertOptions = {
+    header: 'Documentos cadastrados',
+    message: 'Selecione os documentos dessa etapa',
+    translucent: true,
+  };
 
   constructor(
     public modalController: ModalController,
@@ -20,10 +27,10 @@ export class FaseEditComponent implements OnInit {
 
   ngOnInit() {
     this.editFase = {
-      id: this.fase.id,
-      name: this.fase.name,
-      deadline: this.fase.deadline,
-      documents: this.fase.documents
+      id: this.etapa.id,
+      nome: this.etapa.nome,
+      prazo: this.etapa.prazo,
+      documentos: this.etapa.documentos
     };
   }
 
@@ -39,14 +46,14 @@ export class FaseEditComponent implements OnInit {
 
   onChangeName(value: string) {
     if (value) {
-      this.editFase.name = value;
+      this.editFase.nome = value;
     } else {
-      this.editFase.name = this.fase.name;
+      this.editFase.nome = this.etapa.nome;
     }
   }
 
   onDeadlineChange(ev: Event) {
-    this.editFase.deadline = (ev as CustomEvent).detail.value;
+    this.editFase.prazo = (ev as CustomEvent).detail.value;
   }
 
   async confirm() {
@@ -61,12 +68,32 @@ export class FaseEditComponent implements OnInit {
 
   validate() {
     // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
-    if (this.editFase.name.trim().length < 3) {
+    if (this.editFase.nome.trim().length < 3) {
       this.presentToast('Nome da etapa deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
       return false;
     }
-
     return true;
   }
+
+  compareWith(o1, o2) {
+    if (!o1 || !o2) {
+      return o1 === o2;
+    }
+
+    if (Array.isArray(o2)) {
+      return o2.some((o) => o.id === o1.id);
+    }
+
+    return o1.id === o2.id;
+  }
+
+  handleChangeDocuments(ev) {       
+    for (let index = 0; index < ev.target.value.length; index++) {
+      this.editFase.documentos.push(ev.target.value[index]);
+    }
+  }
+
+  
+
 
 }
