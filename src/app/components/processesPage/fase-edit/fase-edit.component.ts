@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-fase-edit',
@@ -8,16 +8,23 @@ import { ModalController, NavParams, ToastController } from '@ionic/angular';
 })
 export class FaseEditComponent implements OnInit {
 
-  public fase: any = null;
+  public fase: any = undefined;
+  public documents: any[] = [];
+
+  public editFase: any = undefined;
 
   constructor(
     public modalController: ModalController,
     public toastController: ToastController,
-    public navParams: NavParams,
-    ) {}
+  ) { }
 
   ngOnInit() {
-    this.fase = this.navParams.get('fase');
+    this.editFase = {
+      id: this.fase.id,
+      name: this.fase.name,
+      deadline: this.fase.deadline,
+      documents: this.fase.documents
+    };
   }
 
   async presentToast(msg: string, color: string, icon: string) {
@@ -30,35 +37,36 @@ export class FaseEditComponent implements OnInit {
     toast.present();
   }
 
-  // async confirm() {
-  //   if (this.validate()) {
-  //     const prontuarioCaps = this.prontuario.toUpperCase(); // Deixar em caixa alta
-  //     this.modalController.dismiss({ prontuario: prontuarioCaps });
-  //   }
-  // }
+  onChangeName(value: string) {
+    if (value) {
+      this.editFase.name = value;
+    } else {
+      this.editFase.name = this.fase.name;
+    }
+  }
 
-  // onChangeEvent(event: any) {
-  //   this.prontuario = event.target.value;
-  // }
+  onDeadlineChange(ev: Event) {
+    this.editFase.deadline = (ev as CustomEvent).detail.value;
+  }
+
+  async confirm() {
+    if (this.validate()) {
+      this.modalController.dismiss(this.editFase);
+    }
+  }
 
   dismiss() {
     this.modalController.dismiss();
   }
 
-  // validate() {
-  //   // Verificar se está vazio
-  //   if (!this.prontuario) {
-  //     this.presentToast('Prontuário obrigatório', 'danger', 'close-circle');
-  //     return false;
-  //   }
+  validate() {
+    // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
+    if (this.editFase.name.trim().length < 3) {
+      this.presentToast('Nome da etapa deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
+      return false;
+    }
 
-  //   // Verificar se tem 7 dígitos e Verificar se começa com SP
-  //   if (this.prontuario.length !== 9 || this.prontuario.substring(0, 2).toUpperCase() !== 'SP') {
-  //     this.presentToast('Prontuário incorreto', 'danger', 'close-circle');
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
+    return true;
+  }
 
 }

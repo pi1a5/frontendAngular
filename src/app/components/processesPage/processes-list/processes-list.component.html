@@ -1,8 +1,8 @@
 <ion-list class="processes">
   <ion-radio-group>
     <ion-item *ngFor="let process of processes" [disabled]="newProcess" lines="none" color="light">
-      <ion-label class="font">{{process}}</ion-label>
-      <ion-radio color="success" slot="end" (click)="sendProcessName(process)"></ion-radio>
+      <ion-label class="font">{{process.name}}</ion-label>
+      <ion-radio color="success" slot="end" (click)="sendProcess(process)"></ion-radio>
     </ion-item>
   </ion-radio-group>
 </ion-list>

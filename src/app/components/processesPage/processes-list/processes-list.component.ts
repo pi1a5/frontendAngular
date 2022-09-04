@@ -7,18 +7,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ProcessesListComponent implements OnInit {
 
-  @Input() newProcess = false;
-  @Output() selectProcess = new EventEmitter<string>();
-
-  processes = ['Padrão', 'Aproveitamento', 'Equiparação', 'Exterior'];
+  @Input() newProcess: boolean = false;
+  @Input() processes: any[] = [];
+  @Output() selectProcess = new EventEmitter<Object>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  sendProcessName(processName: string) {
-    this.selectProcess.emit(processName);
+  sendProcess(process: any) {
+    this.selectProcess.emit(process);
   }
 
 }

@@ -15,7 +15,7 @@ ion-input {
 // Etapas
 
 ion-list.fases {
-  height: 41vh;
+  height: 43vh;
   overflow-y: auto;
 }
 
@@ -29,11 +29,11 @@ ion-button ion-icon {
   font-size: 2.5em;
 }
 
-// Botões de adição
-
-ion-button {
+ion-button.cancelBtn {
   height: 3.5em;
 }
+
+// Botões de adição
 
 ion-icon.add {
   font-size: 48px;

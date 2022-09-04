@@ -1,3 +1,42 @@
-<p>
-  fase-edit works!
-</p>
+<ion-content>
+  <ion-card-header color="success">
+    <ion-row>
+      <ion-col size="3.5">
+        <ion-card-title class="font ion-padding-top">Nome da etapa</ion-card-title>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none" color="light">
+          <ion-input class="font" [placeholder]="fase.name" (change)="onChangeName($event.target.value)"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="0.5" class="ion-text-center">
+        <ion-button class="cancelBtn" size="default" color="danger" (click)="dismiss()">
+          <ion-icon slot="icon-only" size="large" name="close"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-card-title class="ion-padding-top">
+      <ion-label class="font">
+        Prazo de entrega dos documentos: {{ editFase.deadline }} dias.
+      </ion-label>
+      <ion-range [value]="editFase.deadline" [pin]="true" [ticks]="true" [snaps]="true" [min]="0" [max]="15"
+        (ionChange)="onDeadlineChange($event)"></ion-range>
+    </ion-card-title>
+    <ion-card-title class="font ion-text-center ion-padding-top" color="medium-shade">
+      Documentos:
+    </ion-card-title>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngFor="let document of documents">
+          {{document.name}}
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+    <ion-button class="font" expand="block" fill="solid" color="success" (click)="confirm()">
+      Confirmar
+    </ion-button>
+  </ion-card-content>
+</ion-content>

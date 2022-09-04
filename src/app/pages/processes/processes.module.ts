@@ -18,7 +18,7 @@ import { ProcessUndefinedComponent } from 'src/app/components/process-undefined/
     CommonModule,
     FormsModule,
     IonicModule,
-    ProcessesPageRoutingModule
+    ProcessesPageRoutingModule,
   ],
   declarations: [
     ProcessesPage, 
