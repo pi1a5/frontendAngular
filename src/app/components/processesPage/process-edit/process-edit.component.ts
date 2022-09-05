@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ItemReorderCustomEvent, ModalController } from '@ionic/angular';
+import { ItemReorderCustomEvent, ModalController, ToastController } from '@ionic/angular';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
 
@@ -23,6 +23,7 @@ export class ProcessEditComponent implements OnInit {
   constructor(
     public modalController: ModalController,
     public apiSupervisor: ApiSupervisorService,
+    public toastController: ToastController,
   ) { }
 
   ngOnInit() { }
@@ -36,12 +37,13 @@ export class ProcessEditComponent implements OnInit {
     this.stepNumber = this.process.etapas.length;
   }
 
-  async presentModal(etapa, documentos) {
+  async presentModal(etapa, documentos, novaEtapa) {
     const modal = await this.modalController.create({
       component: FaseEditComponent,
       componentProps: {
-        etapa: etapa,
-        documentos: documentos
+        etapa,
+        documentos,
+        novaEtapa,
       },
     });
 
@@ -52,6 +54,16 @@ export class ProcessEditComponent implements OnInit {
     if (data) return data;
 
     return false;
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   onChangeName(value: any) {
@@ -69,10 +81,7 @@ export class ProcessEditComponent implements OnInit {
   }
 
   async editStep(step: any) {
-    const resp = await this.presentModal(step, this.documents);
-    if (!resp) return console.log('cancel');
-    this.editProcess.etapas.pop(resp.id);
-    this.editProcess.etapas.push(resp);
+    this.handleModalResponse(await this.presentModal(step, this.documents, false));
   }
 
   deleteFase(faseId: number) {
@@ -87,20 +96,34 @@ export class ProcessEditComponent implements OnInit {
       prazo: 10,
       documentos: []
     }
-    const documentos = this.documents;
 
-    const resp = await this.presentModal(etapa, documentos);
-    if (!resp) return console.log('cancel');
-    this.editProcess.etapas.push(resp);
-    this.stepNumber++;
+    this.handleModalResponse(await this.presentModal(etapa, this.documents, true));
+
+  }
+
+  handleModalResponse(response) {
+    if (!response) return;
+
+    if (response.novaEtapa) {
+      this.editProcess.etapas.push(response.etapa);
+      this.stepNumber++;
+    } else {
+      for (let index = 0; index < this.editProcess.etapas.length; index++) {
+        if (this.editProcess.etapas[index].id === response.etapa.id) {
+          this.editProcess.etapas[index] = response.etapa;
+        }
+      }
+    }
   }
 
   confirm() {
-    console.log(this.editProcess);
-    // this.apiSupervisor.newProcess(this.editProcess).subscribe(data => {
-    //   console.log(data);
-    //   this.sendCancel();
-    // })
+    this.apiSupervisor.newProcess(this.editProcess).subscribe(async data => {
+      await this.presentToast(data, 'success', 'checkmark-circle');
+      this.sendCancel();
+    }, async error => {
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.sendCancel();
+    });
   }
 
   sendDelete(id: number) {

@@ -10,6 +10,7 @@ export class FaseEditComponent implements OnInit {
 
   public etapa: any = undefined;
   public documentos: any[] = [];
+  public novaEtapa: boolean = false;
 
   public editFase: any = undefined;
 
@@ -58,7 +59,7 @@ export class FaseEditComponent implements OnInit {
 
   async confirm() {
     if (this.validate()) {
-      this.modalController.dismiss(this.editFase);
+      this.modalController.dismiss({ novaEtapa: this.novaEtapa, etapa: this.editFase });
     }
   }
 
@@ -87,13 +88,8 @@ export class FaseEditComponent implements OnInit {
     return o1.id === o2.id;
   }
 
-  handleChangeDocuments(ev) {       
-    for (let index = 0; index < ev.target.value.length; index++) {
-      this.editFase.documentos.push(ev.target.value[index]);
-    }
+  handleChangeDocuments(ev) {
+    this.editFase.documentos = ev.target.value;
   }
-
-  
-
 
 }
