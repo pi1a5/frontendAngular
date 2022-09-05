@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ItemReorderCustomEvent, ModalController, ToastController } from '@ionic/angular';
-import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
 
 @Component({
@@ -13,7 +12,7 @@ export class ProcessEditComponent implements OnInit {
   @Input() newProcess: boolean = false;
   @Input() process: any = undefined;
   @Input() documents: any[] = [];
-  @Output() reloadProcesses = new EventEmitter<string>();
+  @Output() saveProcess = new EventEmitter<any>();
   @Output() deleteProcess = new EventEmitter<number>();
   @Output() cancelNewProcess = new EventEmitter<string>();
 
@@ -23,7 +22,6 @@ export class ProcessEditComponent implements OnInit {
 
   constructor(
     public modalController: ModalController,
-    public apiSupervisor: ApiSupervisorService,
     public toastController: ToastController,
   ) { }
 
@@ -117,18 +115,8 @@ export class ProcessEditComponent implements OnInit {
     }
   }
 
-  confirm() {
-    this.apiSupervisor.newProcess(this.editProcess).subscribe(async data => {
-      await this.presentToast(data, 'success', 'checkmark-circle');
-      this.sendRealod();
-    }, async error => {
-      await this.presentToast(error.error, 'danger', 'close-circle');
-      this.sendRealod();
-    });
-  }
-
-  sendRealod() {
-    this.reloadProcesses.emit();
+  sendSave() {
+    this.saveProcess.emit({isNew: this.newProcess, process: this.editProcess});
   }
 
   sendDelete(id: number) {

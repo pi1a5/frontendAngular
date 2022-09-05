@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class ProcessesPage implements OnInit {
 
   constructor(
     public api: ApiService,
+    public apiSupervisor: ApiSupervisorService,
     public toastController: ToastController,
     public loadingController: LoadingController,
   ) { }
@@ -65,8 +67,26 @@ export class ProcessesPage implements OnInit {
     this.selectedProcess = process;
   }
 
-  receiveReloadEvent() {
-    this.loadProcesses();
+  receiveSaveEvent(data: any) {
+    if (data.isNew) {
+      console.log(data);
+      
+      this.apiSupervisor.newProcess(data.process).subscribe(data => {
+
+      }, error => {
+        console.log(error);
+        
+      });
+      this.processes.push(data.process);
+    } else {
+      //
+      for (let index = 0; index < this.processes.length; index++) {
+        if (this.processes[index].id === data.process.id) {
+          this.processes[index] = data.process;
+        }
+      }
+    }
+    
     this.reset();
   }
 

@@ -42,7 +42,7 @@
                 [newProcess]="isNewProcess" 
                 [process]="selectedProcess" 
                 [documents]="documents"
-                (reloadProcesses)="receiveReloadEvent()"
+                (saveProcess)="receiveSaveEvent($event)"
                 (cancelNewProcess)="receiveCancelEvent()" 
                 (deleteProcess)="receiveDeleteEvent($event)"
               ></app-process-edit>
