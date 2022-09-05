@@ -13,6 +13,7 @@ export class ProcessEditComponent implements OnInit {
   @Input() newProcess: boolean = false;
   @Input() process: any = undefined;
   @Input() documents: any[] = [];
+  @Output() reloadProcesses = new EventEmitter<string>();
   @Output() deleteProcess = new EventEmitter<number>();
   @Output() cancelNewProcess = new EventEmitter<string>();
 
@@ -119,11 +120,15 @@ export class ProcessEditComponent implements OnInit {
   confirm() {
     this.apiSupervisor.newProcess(this.editProcess).subscribe(async data => {
       await this.presentToast(data, 'success', 'checkmark-circle');
-      this.sendCancel();
+      this.sendRealod();
     }, async error => {
       await this.presentToast(error.error, 'danger', 'close-circle');
-      this.sendCancel();
+      this.sendRealod();
     });
+  }
+
+  sendRealod() {
+    this.reloadProcesses.emit();
   }
 
   sendDelete(id: number) {

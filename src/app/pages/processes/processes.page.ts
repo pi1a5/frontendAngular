@@ -21,12 +21,8 @@ export class ProcessesPage implements OnInit {
     public loadingController: LoadingController,
   ) { }
 
-  async ngOnInit() {
-    this.api.getAllProcesses().subscribe(async data => {
-      this.processes = data.processos;
-      this.documents = data.documentos;
-      this.processNumber = this.processes.length;
-    });
+  ngOnInit() {
+    this.loadProcesses();
   }
 
   async presentLoading() {
@@ -48,6 +44,14 @@ export class ProcessesPage implements OnInit {
     toast.present();
   }
 
+  async loadProcesses() {
+    this.api.getAllProcesses().subscribe(async data => {
+      this.processes = data.processos;
+      this.documents = data.documentos;
+      this.processNumber = this.processes.length;
+    });
+  }
+
   newProcess() {
     this.isNewProcess = true;
     this.selectedProcess = {
@@ -61,13 +65,21 @@ export class ProcessesPage implements OnInit {
     this.selectedProcess = process;
   }
 
+  receiveReloadEvent() {
+    this.loadProcesses();
+    this.reset();
+  }
+
   receiveDeleteEvent(id: number) {
     this.processes = this.processes.filter(p => p.id !== id);
-    this.isNewProcess = false;
-    this.selectedProcess = undefined;
+    this.reset();
   }
 
   receiveCancelEvent() {
+    this.reset();
+  }
+
+  reset() {
     this.isNewProcess = false;
     this.selectedProcess = undefined;
   }
