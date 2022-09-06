@@ -69,7 +69,7 @@ export class ProcessesPage implements OnInit {
 
   receiveSaveEvent(data: any) {
     if (data.isNew) {
-      console.log(data)
+      console.log(data);
       
       this.apiSupervisor.newProcess(data.process).subscribe(data => {
 
