@@ -60,4 +60,17 @@ export class ApiSupervisorService {
       processo: process
     });
   }
+
+  updateProcess(process: any): Observable<any> {
+    return this.http.post(`${this.url}api/createNewProcesso`, {
+      sub: sessionStorage.getItem('userId'),
+      processo: process
+    });
+  }
+
+  deleteProcess(processId: number): Observable<any> {
+    return this.http.post(`${this.url}api/deleteProcesso`, {
+      idprocesso: processId
+    });
+  }
 }

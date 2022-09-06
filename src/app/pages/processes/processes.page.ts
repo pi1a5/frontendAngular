@@ -87,8 +87,16 @@ export class ProcessesPage implements OnInit {
     this.reset();
   }
 
-  receiveDeleteEvent(id: number) {
-    // TODO delete 
+  async receiveDeleteEvent(id: number) {
+    await this.presentLoading();
+    this.apiSupervisor.deleteProcess(id).subscribe(async data => {
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
+    }, async error => {
+      console.log(error.error);
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+    });
     this.processes = this.processes.filter(p => p.id !== id);
     this.reset();
   }
