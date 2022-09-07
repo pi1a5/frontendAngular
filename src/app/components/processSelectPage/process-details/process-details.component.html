@@ -1,0 +1,28 @@
+<ion-card>
+  <ion-card-header class="ion-text-center" color="success">
+    <ion-card-title class="font">Detalhes</ion-card-title>
+  </ion-card-header>
+
+  <!-- Etapas -->
+
+  <ion-card-content>
+
+    <ion-card-title class="font ion-text-center ion-padding-top" color="medium-shade">
+      Etapas
+    </ion-card-title>
+
+    <hr>
+
+    <!-- Editando processo -->
+    <ion-list class="fases">
+
+      <ion-item *ngFor="let etapa of process.etapas;" class="ion-margin-top" lines="none" color="light">
+        <ion-label slot="start" class="ion-text-center">
+          {{ etapa.nome }}
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+  </ion-card-content>
+</ion-card>

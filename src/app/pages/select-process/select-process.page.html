@@ -1,0 +1,54 @@
+<ion-split-pane when="(min-width: 1600px)" contentId="main-content">
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content>
+      <app-sidebar></app-sidebar>
+    </ion-content>
+  </ion-menu>
+
+  <!-- content -->
+  <ion-router-outlet id="main-content">
+    <ion-content class="ion-justify-content-center" padding class="background">
+
+      <ion-card class="contentHeight">
+        <ion-card-header class="ion-text-center">
+          <ion-toolbar color="translucent">
+            <ion-menu-button color="success" slot="start"></ion-menu-button>
+            <ion-card-title color="success" class="title ion-margin ion-padding">
+              Selecione o Processo Desejado
+            </ion-card-title>
+          </ion-toolbar>
+          <hr>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-row>
+
+            <!-- Coluna da esquerda -->
+
+            <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
+              <app-processes-list [processes]="processes"
+                (selectProcess)="receiveProcess($event)">
+              </app-processes-list>
+              <ion-button class="font" [disabled]="processes.length === 0 || selectedProcess === undefined" size="large" expand="block" fill="solid" color="success" (click)="confirm()">
+                <ion-icon slot="start" name="thumbs-up-sharp"></ion-icon>
+                <ion-label slot="end">Confirmar</ion-label>
+              </ion-button>
+            </ion-col>
+
+            <!-- Coluna da direita -->
+
+            <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="6.5">
+              <app-process-details 
+                *ngIf="selectedProcess" 
+                [process]="selectedProcess" 
+              ></app-process-details>
+              <app-process-undefined *ngIf="!selectedProcess"></app-process-undefined>
+            </ion-col>
+
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-content>
+  </ion-router-outlet>
+</ion-split-pane>

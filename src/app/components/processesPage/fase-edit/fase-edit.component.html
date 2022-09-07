@@ -35,8 +35,14 @@
     <br>
     <ion-list>
       <ion-item color="success" fill="outline" >
-        <ion-select class="font" [ngModel]="editFase.documentos" [interfaceOptions]="customAlertOptions"
-          [compareWith]="compareWith" placeholder="Selecione os documentos" (ionChange)="handleChangeDocuments($event)"
+        <ion-select 
+          class="font" 
+          [ngModel]="editFase.documentos" 
+          interface="alert"
+          [interfaceOptions]="customAlertOptions"
+          [compareWith]="compareWith" 
+          placeholder="Selecione os documentos" 
+          (ionChange)="handleChangeDocuments($event)"
           [multiple]="true">
           <ion-select-option *ngFor="let documento of documentos" [value]="documento">{{ documento.nome }}
           </ion-select-option>

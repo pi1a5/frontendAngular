@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable linebreak-style */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-return-await */
@@ -20,10 +22,15 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class SelectCoursePage implements OnInit {
   public tecnicoIntegrado = [];
+
   public tecnicoSubsequente = [];
+
   public tecnologia = [];
+
   public licenciatura = [];
+
   public bacharelado = [];
+
   public ead = [];
 
   public idCourse: number = undefined;

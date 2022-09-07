@@ -1,3 +1,8 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -31,7 +36,7 @@ export class SidebarComponent implements OnInit {
   }
 
   goToNewTicket() {
-    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
+    this.router.navigate(['select-process'], { replaceUrl: true });
   }
 
   goToProcesses() {
@@ -45,6 +50,4 @@ export class SidebarComponent implements OnInit {
   goToProfile() {
     this.router.navigate(['profile'], { replaceUrl: true });
   }
-  
-
 }

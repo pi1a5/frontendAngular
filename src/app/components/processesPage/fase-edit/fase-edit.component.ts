@@ -1,3 +1,8 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 
@@ -7,14 +12,16 @@ import { ModalController, ToastController } from '@ionic/angular';
   styleUrls: ['./fase-edit.component.scss'],
 })
 export class FaseEditComponent implements OnInit {
-
   public etapa: any = undefined;
+
   public documentos: any[] = [];
+
   public novaEtapa: boolean = false;
 
   public editFase: any = undefined;
 
   currentDocuments = undefined;
+
   customAlertOptions = {
     header: 'Documentos cadastrados',
     message: 'Selecione os documentos dessa etapa',
@@ -31,7 +38,16 @@ export class FaseEditComponent implements OnInit {
       id: this.etapa.id,
       nome: this.etapa.nome,
       prazo: this.etapa.prazo,
-      documentos: this.etapa.documentos
+      documentos: this.etapa.documentos,
+    };
+  }
+
+  ngOnChanges() {
+    this.editFase = {
+      id: this.etapa.id,
+      nome: this.etapa.nome,
+      prazo: this.etapa.prazo,
+      documentos: this.etapa.documentos,
     };
   }
 
@@ -91,5 +107,4 @@ export class FaseEditComponent implements OnInit {
   handleChangeDocuments(ev) {
     this.editFase.documentos = ev.target.value;
   }
-
 }

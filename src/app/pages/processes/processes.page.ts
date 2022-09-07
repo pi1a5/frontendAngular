@@ -1,3 +1,12 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-plusplus */
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-await */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
@@ -9,11 +18,14 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./processes.page.scss'],
 })
 export class ProcessesPage implements OnInit {
-
   public isNewProcess: boolean = false;
+
   public processes: any[] = [];
+
   public selectedProcess = undefined;
+
   public processNumber = 0;
+
   public documents: any[] = [];
 
   constructor(
@@ -47,10 +59,12 @@ export class ProcessesPage implements OnInit {
   }
 
   async loadProcesses() {
-    this.api.getAllProcesses().subscribe(async data => {
+    this.api.getAllProcesses().subscribe(async (data) => {
       this.processes = data.processos;
       this.documents = data.documentos;
       this.processNumber = this.processes.length;
+    }, async (error) => {
+      await this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
 
@@ -59,49 +73,68 @@ export class ProcessesPage implements OnInit {
     this.selectedProcess = {
       id: this.processNumber,
       nome: 'Novo processo',
-      etapas: []
-    }
+      etapas: [],
+    };
+  }
+
+  async saveNewProcess(process: any) {
+    await this.presentLoading();
+    this.apiSupervisor.newProcess(process).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
+      this.processes.push(process);
+      this.reset();
+    }, async (error) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
+    });
+  }
+
+  async saveEditedProcess(process: any) {
+    await this.presentLoading();
+    this.apiSupervisor.updateProcess(process).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
+      for (let index = 0; index < this.processes.length; index++) {
+        if (this.processes[index].id === process.id) {
+          this.processes[index] = process;
+        }
+      }
+      this.reset();
+    }, async (error) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
+    });
   }
 
   receiveProcess(process: any) {
     this.selectedProcess = process;
   }
 
-  async receiveSaveEvent(data: any) {
-    if (data.isNew) {
-      await this.presentLoading();
-      this.apiSupervisor.newProcess(data.process).subscribe(async data => {
-        await this.loadingController.dismiss();
-        await this.presentToast(data, 'success', 'checkmark-circle');
-        this.processes.push(data.process);
-      }, error => {
-        console.log(error);
-      });
-      
+  async receiveSaveEvent(process: any) {
+    if (process.isNew) {
+      this.saveNewProcess(process.process);
     } else {
-      // TODO save 
-      // for (let index = 0; index < this.processes.length; index++) {
-      //   if (this.processes[index].id === data.process.id) {
-      //     this.processes[index] = data.process;
-      //   }
-      // }
+      this.saveEditedProcess(process.process);
     }
-    
-    this.reset();
   }
 
   async receiveDeleteEvent(id: number) {
+    if (this.processes.length === 1) return await this.presentToast('Deverá ter pelo menos um processo', 'warning', 'warning-outline');
+
     await this.presentLoading();
-    this.apiSupervisor.deleteProcess(id).subscribe(async data => {
+    this.apiSupervisor.deleteProcess(id).subscribe(async (data) => {
       await this.loadingController.dismiss();
       await this.presentToast(data, 'success', 'checkmark-circle');
-    }, async error => {
-      console.log(error.error);
+      this.processes = this.processes.filter((p) => p.id !== id);
+      this.reset();
+    }, async (error) => {
       await this.loadingController.dismiss();
       await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
     });
-    this.processes = this.processes.filter(p => p.id !== id);
-    this.reset();
   }
 
   receiveCancelEvent() {
@@ -112,5 +145,4 @@ export class ProcessesPage implements OnInit {
     this.isNewProcess = false;
     this.selectedProcess = undefined;
   }
-
 }

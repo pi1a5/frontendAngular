@@ -1,5 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+/* eslint-disable linebreak-style */
+/* eslint-disable no-plusplus */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-empty-function */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
+import {
+  Component, EventEmitter, Input, OnInit, Output, SimpleChanges,
+} from '@angular/core';
+
 import { ItemReorderCustomEvent, ModalController, ToastController } from '@ionic/angular';
+
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
 
 @Component({
@@ -8,12 +20,16 @@ import { FaseEditComponent } from '../fase-edit/fase-edit.component';
   styleUrls: ['./process-edit.component.scss'],
 })
 export class ProcessEditComponent implements OnInit {
-
   @Input() newProcess: boolean = false;
+
   @Input() process: any = undefined;
+
   @Input() documents: any[] = [];
+
   @Output() saveProcess = new EventEmitter<any>();
+
   @Output() deleteProcess = new EventEmitter<number>();
+
   @Output() cancelNewProcess = new EventEmitter<string>();
 
   public editProcess: any = undefined;
@@ -31,7 +47,7 @@ export class ProcessEditComponent implements OnInit {
     this.editProcess = {
       id: this.process.id,
       nome: this.process.nome,
-      etapas: this.process.etapas
+      etapas: this.process.etapas,
     };
     this.stepNumber = this.process.etapas.length;
   }
@@ -84,20 +100,18 @@ export class ProcessEditComponent implements OnInit {
   }
 
   deleteFase(faseId: number) {
-    this.editProcess.etapas = this.editProcess.etapas.filter(f => f.id !== faseId);
+    this.editProcess.etapas = this.editProcess.etapas.filter((f) => f.id !== faseId);
   }
 
   async newFase() {
-
     const etapa = {
       id: this.process.etapas.length,
       nome: 'Nova etapa',
       prazo: 10,
-      documentos: []
-    }
+      documentos: [],
+    };
 
     this.handleModalResponse(await this.presentModal(etapa, this.documents, true));
-
   }
 
   handleModalResponse(response) {
@@ -116,7 +130,7 @@ export class ProcessEditComponent implements OnInit {
   }
 
   sendSave() {
-    this.saveProcess.emit({isNew: this.newProcess, process: this.editProcess});
+    this.saveProcess.emit({ isNew: this.newProcess, process: this.editProcess });
   }
 
   sendDelete(id: number) {
@@ -126,5 +140,4 @@ export class ProcessEditComponent implements OnInit {
   sendCancel() {
     this.cancelNewProcess.emit();
   }
-
 }

@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable max-len */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
@@ -57,20 +60,20 @@ export class ApiSupervisorService {
   newProcess(process: any): Observable<any> {
     return this.http.post(`${this.url}api/createNewProcesso`, {
       sub: sessionStorage.getItem('userId'),
-      processo: process
+      processo: process,
     });
   }
 
   updateProcess(process: any): Observable<any> {
-    return this.http.post(`${this.url}api/createNewProcesso`, {
+    return this.http.post(`${this.url}api/updateProcesso`, {
       sub: sessionStorage.getItem('userId'),
-      processo: process
+      processo: process,
     });
   }
 
   deleteProcess(processId: number): Observable<any> {
     return this.http.post(`${this.url}api/deleteProcesso`, {
-      idprocesso: processId
+      idprocesso: processId,
     });
   }
 }
