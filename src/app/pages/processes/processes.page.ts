@@ -67,14 +67,17 @@ export class ProcessesPage implements OnInit {
     this.selectedProcess = process;
   }
 
-  receiveSaveEvent(data: any) {
+  async receiveSaveEvent(data: any) {
     if (data.isNew) {
-      // TODO save new
-      // this.apiSupervisor.newProcess(data.process).subscribe(data => {
-      // }, error => {
-      //   console.log(error);
-      // });
-      this.processes.push(data.process);
+      await this.presentLoading();
+      this.apiSupervisor.newProcess(data.process).subscribe(async data => {
+        await this.loadingController.dismiss();
+        await this.presentToast(data, 'success', 'checkmark-circle');
+        this.processes.push(data.process);
+      }, error => {
+        console.log(error);
+      });
+      
     } else {
       // TODO save 
       // for (let index = 0; index < this.processes.length; index++) {
