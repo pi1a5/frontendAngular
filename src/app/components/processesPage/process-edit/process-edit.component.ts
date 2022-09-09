@@ -41,7 +41,7 @@ export class ProcessEditComponent implements OnInit {
     public toastController: ToastController,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.editProcess = {

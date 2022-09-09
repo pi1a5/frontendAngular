@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
@@ -42,15 +43,6 @@ export class FaseEditComponent implements OnInit {
     };
   }
 
-  ngOnChanges() {
-    this.editFase = {
-      id: this.etapa.id,
-      nome: this.etapa.nome,
-      prazo: this.etapa.prazo,
-      documentos: this.etapa.documentos,
-    };
-  }
-
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
@@ -75,7 +67,10 @@ export class FaseEditComponent implements OnInit {
 
   async confirm() {
     if (this.validate()) {
-      this.modalController.dismiss({ novaEtapa: this.novaEtapa, etapa: this.editFase });
+      this.modalController.dismiss({
+        novaEtapa: this.novaEtapa,
+        etapa: this.editFase,
+      });
     }
   }
 

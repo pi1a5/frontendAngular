@@ -79,17 +79,17 @@ export class ProcessesPage implements OnInit {
     };
   }
 
-  isTherePhase(process: any) {
+  isThereStep(process: any) {
     if (process.etapas.length <= 0) {
-      this.presentToast(`Processo deve conter pelo menos 1 etapa`, 'danger', 'close-circle');
-      return false;    
-    } 
+      this.presentToast('Processo deve conter pelo menos 1 etapa', 'danger', 'close-circle');
+      return false;
+    }
     return true;
   }
 
   async saveNewProcess(process: any) {
-    if (!this.isTherePhase(process)) return;
-    
+    if (!this.isThereStep(process)) return;
+
     await this.presentLoading();
     this.apiSupervisor.newProcess(process).subscribe(async (data) => {
       await this.loadingController.dismiss();
@@ -104,11 +104,9 @@ export class ProcessesPage implements OnInit {
   }
 
   async saveEditedProcess(process: any) {
-
     console.log(this.saveBeforeEdit);
     console.log(process);
-    
-    
+
     // await this.presentLoading();
     // this.apiSupervisor.updateProcess(process).subscribe(async (data) => {
     //   await this.loadingController.dismiss();
@@ -128,7 +126,7 @@ export class ProcessesPage implements OnInit {
 
   receiveProcess(process: any) {
     this.selectedProcess = process;
-    this.saveBeforeEdit = process;
+    this.saveBeforeEdit = structuredClone(process);
   }
 
   async receiveSaveEvent(process: any) {
