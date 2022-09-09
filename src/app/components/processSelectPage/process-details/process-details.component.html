@@ -3,22 +3,68 @@
     <ion-card-title class="font">Detalhes</ion-card-title>
   </ion-card-header>
 
-  <!-- Etapas -->
+  <!-- Content -->
 
   <ion-card-content>
 
-    <ion-card-title class="font ion-text-center ion-padding-top" color="medium-shade">
-      Etapas
-    </ion-card-title>
+    <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
+      Etapas:
+    </ion-card-title> 
 
-    <hr>
-
-    <!-- Editando processo -->
+    <!-- Etapas -->
     <ion-list class="fases">
 
       <ion-item *ngFor="let etapa of process.etapas;" class="ion-margin-top" lines="none" color="light">
-        <ion-label slot="start" class="ion-text-center">
+        <ion-label class="ion-text-center">
           {{ etapa.nome }}
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <hr>
+
+    <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
+      Documentos Envolvidos:
+    </ion-card-title>
+    
+
+    <!-- Documentos -->
+    <ion-list class="fases">
+
+      <ion-grid>
+        <ion-row class="ion-margin-top" lines="none" color="light">
+          <ion-col>
+            <ion-label>
+              Sigla
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              Nome
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              Template
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let documento of process.etapas[0].documentos;" class="ion-margin-top" lines="none" color="light">
+          <ion-col>
+            <ion-label>
+              Sigla
+            </ion-label>
+          </ion-col>
+          <ion-col>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item *ngFor="let documento of process.etapas[0].documentos;" class="ion-margin-top" lines="none" color="light">
+        
+        <ion-label class="ion-text-center">
+          {{ documento[0].nome }}
         </ion-label>
       </ion-item>
 

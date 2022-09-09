@@ -24,6 +24,8 @@ export class ProcessesPage implements OnInit {
 
   public selectedProcess = undefined;
 
+  public saveBeforeEdit = undefined;
+
   public processNumber = 0;
 
   public documents: any[] = [];
@@ -77,7 +79,17 @@ export class ProcessesPage implements OnInit {
     };
   }
 
+  isTherePhase(process: any) {
+    if (process.etapas.length <= 0) {
+      this.presentToast(`Processo deve conter pelo menos 1 etapa`, 'danger', 'close-circle');
+      return false;    
+    } 
+    return true;
+  }
+
   async saveNewProcess(process: any) {
+    if (!this.isTherePhase(process)) return;
+    
     await this.presentLoading();
     this.apiSupervisor.newProcess(process).subscribe(async (data) => {
       await this.loadingController.dismiss();
@@ -92,25 +104,31 @@ export class ProcessesPage implements OnInit {
   }
 
   async saveEditedProcess(process: any) {
-    await this.presentLoading();
-    this.apiSupervisor.updateProcess(process).subscribe(async (data) => {
-      await this.loadingController.dismiss();
-      await this.presentToast(data, 'success', 'checkmark-circle');
-      for (let index = 0; index < this.processes.length; index++) {
-        if (this.processes[index].id === process.id) {
-          this.processes[index] = process;
-        }
-      }
-      this.reset();
-    }, async (error) => {
-      await this.loadingController.dismiss();
-      await this.presentToast(error.error, 'danger', 'close-circle');
-      this.reset();
-    });
+
+    console.log(this.saveBeforeEdit);
+    console.log(process);
+    
+    
+    // await this.presentLoading();
+    // this.apiSupervisor.updateProcess(process).subscribe(async (data) => {
+    //   await this.loadingController.dismiss();
+    //   await this.presentToast(data, 'success', 'checkmark-circle');
+    //   for (let index = 0; index < this.processes.length; index++) {
+    //     if (this.processes[index].id === process.id) {
+    //       this.processes[index] = process;
+    //     }
+    //   }
+    //   this.reset();
+    // }, async (error) => {
+    //   await this.loadingController.dismiss();
+    //   await this.presentToast(error.error, 'danger', 'close-circle');
+    //   this.reset();
+    // });
   }
 
   receiveProcess(process: any) {
     this.selectedProcess = process;
+    this.saveBeforeEdit = process;
   }
 
   async receiveSaveEvent(process: any) {

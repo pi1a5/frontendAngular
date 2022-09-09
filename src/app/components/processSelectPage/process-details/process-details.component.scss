@@ -8,14 +8,12 @@ hr {
   visibility: visible !important;
 }
 
-ion-input {
-  font-size: 1.5em;
+ion-card-title {
+  font-size: 2em;
 }
 
-// Etapas
-
 ion-list.fases {
-  height: 43vh;
+  height: 25vh;
   overflow-y: auto;
 }
 

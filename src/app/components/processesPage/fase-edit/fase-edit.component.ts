@@ -89,6 +89,13 @@ export class FaseEditComponent implements OnInit {
       this.presentToast('Nome da etapa deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
       return false;
     }
+
+    // Verificar se tem pelo menos 1 documento
+    if (this.editFase.documentos.length <= 0) {
+      this.presentToast('Etapa deve conter pelo menos 1 documento', 'danger', 'close-circle');
+      return false;
+    }
+
     return true;
   }
 
