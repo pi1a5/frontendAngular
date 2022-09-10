@@ -64,10 +64,11 @@ export class ApiSupervisorService {
     });
   }
 
-  updateProcess(process: any): Observable<any> {
+  updateProcess(oldProcess: any, newProcess: any): Observable<any> {
     return this.http.post(`${this.url}api/updateProcesso`, {
       sub: sessionStorage.getItem('userId'),
-      processo: process,
+      processoAntigo: oldProcess,
+      processoNovo: newProcess,
     });
   }
 

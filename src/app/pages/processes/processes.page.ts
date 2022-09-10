@@ -104,24 +104,21 @@ export class ProcessesPage implements OnInit {
   }
 
   async saveEditedProcess(process: any) {
-    console.log(this.saveBeforeEdit);
-    console.log(process);
-
-    // await this.presentLoading();
-    // this.apiSupervisor.updateProcess(process).subscribe(async (data) => {
-    //   await this.loadingController.dismiss();
-    //   await this.presentToast(data, 'success', 'checkmark-circle');
-    //   for (let index = 0; index < this.processes.length; index++) {
-    //     if (this.processes[index].id === process.id) {
-    //       this.processes[index] = process;
-    //     }
-    //   }
-    //   this.reset();
-    // }, async (error) => {
-    //   await this.loadingController.dismiss();
-    //   await this.presentToast(error.error, 'danger', 'close-circle');
-    //   this.reset();
-    // });
+    await this.presentLoading();
+    this.apiSupervisor.updateProcess(this.saveBeforeEdit, process).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
+      for (let index = 0; index < this.processes.length; index++) {
+        if (this.processes[index].id === process.id) {
+          this.processes[index] = process;
+        }
+      }
+      this.reset();
+    }, async (error) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
+    });
   }
 
   receiveProcess(process: any) {

@@ -9,7 +9,7 @@
 
     <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
       Etapas:
-    </ion-card-title> 
+    </ion-card-title>
 
     <!-- Etapas -->
     <ion-list class="fases">
@@ -27,47 +27,33 @@
     <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
       Documentos Envolvidos:
     </ion-card-title>
-    
+
 
     <!-- Documentos -->
     <ion-list class="fases">
 
-      <ion-grid>
-        <ion-row class="ion-margin-top" lines="none" color="light">
-          <ion-col>
-            <ion-label>
-              Sigla
-            </ion-label>
+      <ion-grid class="font" style="font-size: 2em">
+        <ion-row *ngFor="let documento of process.etapas[0].documentos;" class="ion-margin-top" lines="none"
+          color="light">
+          <ion-col size="2">
+            <ion-title>
+              {{documento[0].sigla}}
+            </ion-title>
           </ion-col>
-          <ion-col>
-            <ion-label>
-              Nome
-            </ion-label>
+          <ion-col size="8">
+            <ion-title>
+              {{documento[0].nome}}
+            </ion-title>
           </ion-col>
-          <ion-col>
-            <ion-label>
-              Template
-            </ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngFor="let documento of process.etapas[0].documentos;" class="ion-margin-top" lines="none" color="light">
-          <ion-col>
-            <ion-label>
-              Sigla
-            </ion-label>
-          </ion-col>
-          <ion-col>
-
+          <ion-col size="2">
+            <ion-title>
+              <ion-button color="success" (click)="downloadTemplate(documento[0].template)">
+                <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+              </ion-button>
+            </ion-title>
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-item *ngFor="let documento of process.etapas[0].documentos;" class="ion-margin-top" lines="none" color="light">
-        
-        <ion-label class="ion-text-center">
-          {{ documento[0].nome }}
-        </ion-label>
-      </ion-item>
-
     </ion-list>
 
   </ion-card-content>

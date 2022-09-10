@@ -10,7 +10,9 @@ import {
   Component, EventEmitter, Input, OnInit, Output, SimpleChanges,
 } from '@angular/core';
 
-import { ItemReorderCustomEvent, ModalController, ToastController } from '@ionic/angular';
+import {
+  AlertController, ItemReorderCustomEvent, ModalController, ToastController,
+} from '@ionic/angular';
 
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
 
@@ -39,6 +41,7 @@ export class ProcessEditComponent implements OnInit {
   constructor(
     public modalController: ModalController,
     public toastController: ToastController,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {}
@@ -79,6 +82,30 @@ export class ProcessEditComponent implements OnInit {
       duration: 2000,
     });
     toast.present();
+  }
+
+  async presentAlert(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Cuidado!',
+      subHeader: 'Ao excluir um processo você não poderá recuperá-lo.',
+      message: 'Deseja mesmo excluir esse processo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Sim, desejo',
+          role: 'confirm',
+          handler: () => {
+            this.deleteProcess.emit(id);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   onChangeName(value: any) {
@@ -133,8 +160,8 @@ export class ProcessEditComponent implements OnInit {
     this.saveProcess.emit({ isNew: this.newProcess, process: this.editProcess });
   }
 
-  sendDelete(id: number) {
-    this.deleteProcess.emit(id);
+  async sendDelete(id: number) {
+    await this.presentAlert(id);
   }
 
   sendCancel() {

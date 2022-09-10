@@ -32,4 +32,8 @@ export class ProcessDetailsComponent implements OnInit {
     });
     toast.present();
   }
+
+  downloadTemplate(template: string) {
+    this.presentToast('Not implemented', 'danger', 'close');
+  }
 }
