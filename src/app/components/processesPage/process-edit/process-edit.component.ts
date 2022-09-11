@@ -96,7 +96,7 @@ export class ProcessEditComponent implements OnInit {
           handler: () => {},
         },
         {
-          text: 'Sim, desejo',
+          text: 'Sim, desejo  ',
           role: 'confirm',
           handler: () => {
             this.deleteProcess.emit(id);

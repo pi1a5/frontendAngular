@@ -24,7 +24,7 @@
       <ion-title color="success" class="font ion-text-center ion-padding ion-margin" style="font-size: 2em;">
         {{ editFase.prazo }} dias
       </ion-title>
-      <ion-range [value]="editFase.prazo" [pin]="true" [ticks]="true" [snaps]="true" [min]="0" [max]="15"
+      <ion-range [value]="editFase.prazo" [pin]="true" [ticks]="true" [snaps]="true" [min]="0" [max]="60"
         (ionChange)="onDeadlineChange($event)"></ion-range>
     </ion-card-title>
 
