@@ -1,3 +1,8 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+/* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,24 +12,42 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  user: string;
 
   constructor(
     public router: Router,
   ) { }
 
   ngOnInit() {
-  }
-
-  goToNewTicket() {
-    this.router.navigate(['select-ticket-type'], { replaceUrl: true });
+    const email = sessionStorage.getItem('userEmail');
+    if (email.includes('aluno')) {
+      this.user = 'student';
+    } else {
+      this.user = 'supervisor';
+    }
   }
 
   goToDashboard() {
-    this.router.navigate(['student'], { replaceUrl: true });
+    if (this.user === 'student') {
+      this.router.navigate(['student'], { replaceUrl: true });
+    } else {
+      this.router.navigate(['supervisor'], { replaceUrl: true });
+    }
+  }
+
+  goToNewTicket() {
+    this.router.navigate(['select-process'], { replaceUrl: true });
+  }
+
+  goToProcesses() {
+    this.router.navigate(['processes'], { replaceUrl: true });
+  }
+
+  goToInternships() {
+    this.router.navigate(['internships'], { replaceUrl: true });
   }
 
   goToProfile() {
     this.router.navigate(['profile'], { replaceUrl: true });
   }
-
 }

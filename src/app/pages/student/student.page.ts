@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-useless-escape */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable max-len */
@@ -37,19 +38,12 @@ export class StudentPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.apiStudent.checkIfFinalizou().subscribe((data) => {
-      // console.log('data:', data);
-
-    }, (error) => {
-      console.log('err:', error);
-    });
-
-    this.apiStudent.getTicketsUser().subscribe((tickets) => {
-      console.log(tickets);
-      this.defineTickets(tickets);
-    }, (error) => {
-      if (error.status !== 404) { return console.log(error); }
-    });
+    // this.apiStudent.getTicketsUser().subscribe((tickets) => {
+    //   console.log(tickets);
+    //   this.defineTickets(tickets);
+    // }, (error) => {
+    //   if (error.status !== 404) { return console.log(error); }
+    // });
   }
 
   async presentModal(ticket: any) {
@@ -67,23 +61,24 @@ export class StudentPage implements OnInit {
 
         const indexNovo = this.ticketsE.length;
 
-        if (tickets[index].data_criado) {
-          this.ticketsE[indexNovo - 1].data_criado = this.formatDate({ date: tickets[index].data_criado });
+        if (tickets[index].datacriado) {
+          this.ticketsE[indexNovo - 1].datacriado = this.formatDate({ date: tickets[index].datacriado });
         }
-        if (tickets[index].data_limite) {
-          this.ticketsE[indexNovo - 1].data_limite = this.formatDate({ date: tickets[index].data_limite });
+        if (tickets[index].datalimite) {
+          this.ticketsE[indexNovo - 1].datalimite = this.formatDate({ date: tickets[index].datalimite });
         }
-        if (tickets[index].data_fechado) {
-          this.ticketsE[indexNovo - 1].data_fechado = this.formatDate({ date: tickets[index].data_fechado });
+        if (tickets[index].datafechado) {
+          this.ticketsE[indexNovo - 1].datafechado = this.formatDate({ date: tickets[index].datafechado });
         }
       } else {
         this.ticketP = tickets[index];
+        console.log(this.ticketP);
 
-        if (tickets[index].data_criado) {
-          this.ticketP.data_criado = this.formatDate({ date: tickets[index].data_criado });
+        if (tickets[index].datacriado) {
+          this.ticketP.datacriado = this.formatDate({ date: tickets[index].datacriado });
         }
-        if (tickets[index].data_limite) {
-          this.ticketP.data_limite = this.formatDate({ date: tickets[index].data_limite });
+        if (tickets[index].datalimite) {
+          this.ticketP.datalimite = this.formatDate({ date: tickets[index].datalimite });
         }
       }
     }

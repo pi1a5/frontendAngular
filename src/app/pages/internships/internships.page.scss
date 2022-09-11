@@ -1,0 +1,31 @@
+ion-header::after {
+  background-image: none;
+}
+
+ion-split-pane {
+  --border: none !important;
+
+  ion-menu {
+    // --background: var(--ion-color-success) !important;
+
+    ion-content {
+      --background: var(--ion-color-success) !important;
+
+    }
+  }
+}
+
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 20px;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+.background {
+  --background: url(../../../assets/backgroundIF.jpg);
+}

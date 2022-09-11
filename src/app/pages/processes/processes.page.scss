@@ -1,0 +1,67 @@
+ion-header::after {
+  background-image: none;
+}
+
+ion-split-pane {
+  --border: none !important;
+
+  ion-menu {
+    // --background: var(--ion-color-success) !important;
+
+    ion-content {
+      --background: var(--ion-color-success) !important;
+    }
+  }
+}
+
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 20px;
+}
+
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5em;
+}
+
+.background {
+  --background: url(../../../assets/backgroundIF.jpg);
+}
+
+.contentHeight {
+  height: 94vh;
+  overflow-y: auto;
+}
+
+// Processos item 
+
+ion-item > ion-label {
+  --color: var(--ion-color-primary-contrast);
+}
+
+.item-radio-checked ion-label {
+  --color: var(--ion-color-success);
+}
+
+ion-item.item-radio-checked {
+  --border-color: var(--ion-color-success);
+}
+
+// Botões de adição
+
+ion-icon.add {
+  font-size: 48px;
+  --ionicon-stroke-width: 80px;
+}

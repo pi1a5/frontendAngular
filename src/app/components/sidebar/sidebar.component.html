@@ -2,14 +2,24 @@
 
   <ion-img src="../../../assets/logoIF2.png"></ion-img>
 
-  <ion-item lines="full" button (click)="goToNewTicket()">
+  <ion-item lines="full" button (click)="goToDashboard()">
+    <ion-icon size="large" color="light" slot="start" name="home"></ion-icon>
+    <ion-label class="font">Home</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="user === 'student'" lines="full" button (click)="goToNewTicket()">
     <ion-icon size="large" color="light" slot="start" name="ticket"></ion-icon>
     <ion-label class="font">Ticket</ion-label>
   </ion-item>
 
-  <ion-item lines="full" button (click)="goToDashboard()">
-    <ion-icon size="large" color="light" slot="start" name="list"></ion-icon>
-    <ion-label class="font">Dashboard</ion-label>
+  <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToProcesses()">
+    <ion-icon size="large" color="light" slot="start" name="create"></ion-icon>
+    <ion-label class="font">Processos</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToInternships()">
+    <ion-icon size="large" color="light" slot="start" name="layers"></ion-icon>
+    <ion-label class="font">Estágios</ion-label>
   </ion-item>
 
   <ion-item lines="full" button (click)="goToProfile()">

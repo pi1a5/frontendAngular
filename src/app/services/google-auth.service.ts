@@ -16,7 +16,6 @@ export class GoogleAuthService {
   async signIn() {
     try {
       const user = await GoogleAuth.signIn();
-      localStorage.setItem('sub', user.id);
       return user;
     } catch (error) {
       console.log(error);
@@ -35,7 +34,6 @@ export class GoogleAuthService {
   async signOut() {
     try {
       await GoogleAuth.signOut();
-      localStorage.removeItem('sub');
       return true;
     } catch (error) {
       console.log(error);

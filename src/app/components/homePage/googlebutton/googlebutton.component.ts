@@ -1,3 +1,14 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
+/* eslint-disable no-shadow */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-return-await */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -10,7 +21,6 @@ import { GoogleAuthService } from 'src/app/services/google-auth.service';
   styleUrls: ['./googlebutton.component.scss'],
 })
 export class GooglebuttonComponent implements OnInit {
-
   constructor(
     public api: ApiService,
     public ggAuth: GoogleAuthService,
@@ -45,33 +55,32 @@ export class GooglebuttonComponent implements OnInit {
       const user = await this.ggAuth.signIn();
       if (!user) return;
       await this.presentLoading();
-      console.log('user: ', user);
+      // console.log('user: ', user);
+      sessionStorage.setItem('userEmail', user.email);
+      sessionStorage.setItem('userId', user.id);
       this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id);
     } catch (error) {
       this.loadingController.dismiss();
-      console.log(error);
     }
   }
 
-  apiLogin(name: string, email: string, imageUrl: string, idToken: string, sub: string) {
-    this.api.login(idToken, sub).subscribe((user) => {
-      const courseSelected = localStorage.getItem('courseSelected');
-      if (courseSelected !== 'true') return this.goToSelectCoursePage();
+  apiLogin(name: string, email: string, imageUrl: string, token: string, sub: string) {
+    this.api.login(token, sub).subscribe((user) => {
+      if (isNaN(user.idcurso)) return this.goToSelectCoursePage();
       this.userPage(user.email);
     }, (error) => {
-      console.log(error);
-      this.api.newUser({ name, email, picture: imageUrl, idToken, sub }).subscribe((resp) => {
-        this.api.login(idToken, sub).subscribe((user) => {
+      this.api.newUser({
+        name, email, picture: imageUrl, token, sub,
+      }).subscribe((resp) => {
+        this.api.login(token, sub).subscribe((user) => {
           this.goToSelectCoursePage();
         }, (error) => {
           this.loadingController.dismiss();
           this.presentToast(error.error);
-          console.log(error);
         });
       }, (error) => {
         this.loadingController.dismiss();
         this.presentToast(error.error);
-        console.log(error);
       });
     });
   }
@@ -89,5 +98,4 @@ export class GooglebuttonComponent implements OnInit {
     this.loadingController.dismiss();
     this.router.navigate(['select-course'], { replaceUrl: true });
   }
-
 }

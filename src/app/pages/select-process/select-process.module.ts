@@ -1,0 +1,33 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { ProcessesListComponent } from 'src/app/components/processesPage/processes-list/processes-list.component';
+import { ProcessUndefinedComponent } from 'src/app/components/process-undefined/process-undefined.component';
+import { ProcessDetailsComponent } from 'src/app/components/processSelectPage/process-details/process-details.component';
+import { SelectProcessPage } from './select-process.page';
+import { SelectProcessPageRoutingModule } from './select-process-routing.module';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SelectProcessPageRoutingModule,
+  ],
+  declarations: [
+    SelectProcessPage,
+    LogoutbuttonComponent,
+    SidebarComponent,
+    ProcessDetailsComponent,
+    ProcessesListComponent,
+    ProcessUndefinedComponent,
+  ],
+})
+export class SelectProcessPageModule { }

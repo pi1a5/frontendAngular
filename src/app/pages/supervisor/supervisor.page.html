@@ -1,21 +1,7 @@
 <ion-split-pane when="(min-width: 1600px)" contentId="main-content">
   <ion-menu contentId="main-content" type="overlay">
     <ion-content>
-      <ion-list id="inbox-list">
-        <ion-card id="logoIF">
-          <ion-img src="../../../assets/logoIF.png"></ion-img>
-        </ion-card>
-
-        <ion-button color="light" expand="block" size="large" (click)="goToChartSupervisors()">
-          <ion-icon slot="start" name="bar-chart"></ion-icon>
-          <ion-label>Orientadores</ion-label>
-        </ion-button>
-        <ion-button color="light" expand="block" size="large" (click)="goToProfile()">
-          <ion-icon slot="start" name="person"></ion-icon>
-          <ion-label>Perfil</ion-label>
-        </ion-button>
-      </ion-list>
-
+      <app-sidebar></app-sidebar>
     </ion-content>
   </ion-menu>
 
@@ -33,12 +19,12 @@
         <ion-row>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
-            <ion-card class="font ion-text-center" color="primary">
+            <ion-card class="font ion-text-center" color="tertiary">
               <ion-card-header>
                 <ion-card-title>Alunos sem Orientador</ion-card-title>
               </ion-card-header>
 
-              <ion-list style="background-color: var(--ion-color-primary);" class="list"
+              <ion-list style="background-color: var(--ion-color-tertiary);" class="list"
                 *ngIf="ticketsWithoutSupervisor.length > 0">
 
                 <ion-card color="light" *ngFor="let ticket of ticketsWithoutSupervisor">
@@ -84,12 +70,12 @@
           </ion-col>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
-            <ion-card color="primary" class="font ion-text-center">
+            <ion-card color="tertiary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Alunos sob sua Orientação</ion-card-title>
               </ion-card-header>
 
-              <ion-list style="background-color: var(--ion-color-primary);" class="list"
+              <ion-list style="background-color: var(--ion-color-tertiary);" class="list"
                 *ngIf="ticketsWithSupervisor.length > 0">
 
                 <ion-card color="light" *ngFor="let ticket of ticketsWithSupervisor">
@@ -135,12 +121,12 @@
           </ion-col>
 
           <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
-            <ion-card color="primary" class="font ion-text-center">
+            <ion-card color="tertiary" class="font ion-text-center">
               <ion-card-header>
                 <ion-card-title>Tickets Respondidos</ion-card-title>
               </ion-card-header>
 
-              <ion-list style="background-color: var(--ion-color-primary);" class="list"
+              <ion-list style="background-color: var(--ion-color-tertiary);" class="list"
                 *ngIf="closedTicketsWithSupervisor.length > 0">
 
                 <ion-searchbar class="font" color="success" placeholder="Exemplo: 'sp1234567'" [(ngModel)]="searchTerm"
