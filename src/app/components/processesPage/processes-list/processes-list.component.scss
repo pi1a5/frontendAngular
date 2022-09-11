@@ -1,0 +1,19 @@
+// Lista dos processos
+
+.font {
+  font-family: 'Nunito', sans-serif;
+  color: var(--ion-color-medium-shade);
+}
+
+ion-list.processes {
+  height: 65vh;
+  overflow-y: auto;
+}
+
+ion-item {
+  font-size: 2em;
+  padding-bottom: 1.5em;
+}
+
+
+

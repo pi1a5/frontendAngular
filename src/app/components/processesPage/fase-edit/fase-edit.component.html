@@ -1,0 +1,58 @@
+<ion-content>
+  <ion-card-header color="success">
+    <ion-row>
+      <ion-col size="3.5">
+        <ion-card-title class="font ion-padding-top">Nome da etapa</ion-card-title>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none" color="light">
+          <ion-input class="font" [placeholder]="etapa.nome" (change)="onChangeName($event.target.value)"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="0.5" class="ion-text-center">
+        <ion-button class="cancelBtn" size="default" color="danger" (click)="dismiss()">
+          <ion-icon slot="icon-only" size="large" name="close"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-card-title class="ion-padding-top">
+      <ion-label color="success" class="font">
+        Prazo de entrega dos documentos:
+      </ion-label >
+      <ion-title color="success" class="font ion-text-center ion-padding ion-margin" style="font-size: 2em;">
+        {{ editFase.prazo }} dias
+      </ion-title>
+      <ion-range [value]="editFase.prazo" [pin]="true" [ticks]="true" [snaps]="true" [min]="0" [max]="60"
+        (ionChange)="onDeadlineChange($event)"></ion-range>
+    </ion-card-title>
+
+
+    <ion-card-title color="success" class="font ion-text-start ion-padding-top">
+      Documentos da etapa:
+    </ion-card-title>
+    <br>
+    <ion-list>
+      <ion-item color="success" fill="outline" >
+        <ion-select 
+          class="font" 
+          [ngModel]="editFase.documentos" 
+          interface="alert"
+          [interfaceOptions]="customAlertOptions"
+          [compareWith]="compareWith" 
+          placeholder="Selecione os documentos" 
+          (ionChange)="handleChangeDocuments($event)"
+          [multiple]="true">
+          <ion-select-option *ngFor="let documento of documentos" [value]="documento">{{ documento.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <br>
+    <br>
+    <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="confirm()">
+      Confirmar
+    </ion-button>
+  </ion-card-content>
+</ion-content>

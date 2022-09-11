@@ -1,0 +1,60 @@
+<ion-card>
+  <ion-card-header class="ion-text-center" color="success">
+    <ion-card-title class="font">Detalhes</ion-card-title>
+  </ion-card-header>
+
+  <!-- Content -->
+
+  <ion-card-content>
+
+    <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
+      Etapas:
+    </ion-card-title>
+
+    <!-- Etapas -->
+    <ion-list class="fases">
+
+      <ion-item *ngFor="let etapa of process.etapas;" class="ion-margin-top" lines="none" color="light">
+        <ion-label class="ion-text-center">
+          {{ etapa.nome }}
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <hr>
+
+    <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
+      Documentos Envolvidos:
+    </ion-card-title>
+
+
+    <!-- Documentos -->
+    <ion-list class="fases">
+
+      <ion-grid class="font" style="font-size: 2em">
+        <ion-row *ngFor="let documento of process.etapas[0].documentos;" class="ion-margin-top" lines="none"
+          color="light">
+          <ion-col size="2">
+            <ion-title>
+              {{documento[0].sigla}}
+            </ion-title>
+          </ion-col>
+          <ion-col size="8">
+            <ion-title>
+              {{documento[0].nome}}
+            </ion-title>
+          </ion-col>
+          <ion-col size="2">
+            <ion-title>
+              <ion-button color="success" (click)="downloadTemplate(documento[0].template)">
+                <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+              </ion-button>
+            </ion-title>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+  </ion-card-content>
+</ion-card>

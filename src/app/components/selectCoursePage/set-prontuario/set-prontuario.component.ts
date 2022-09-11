@@ -3,7 +3,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-set-prontuario',
@@ -18,11 +18,9 @@ export class SetProntuarioComponent implements OnInit {
   constructor(
     public modalController: ModalController,
     public toastController: ToastController,
-    public navParams: NavParams,
   ) { }
 
   ngOnInit() {
-    this.course = this.navParams.get('course');
   }
 
   async presentToast(msg: string, color: string, icon: string) {

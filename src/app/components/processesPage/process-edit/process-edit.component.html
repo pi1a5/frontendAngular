@@ -1,0 +1,82 @@
+<ion-card class="ion-no-margin ion-no-padding">
+  <ion-card-header color="success">
+    <ion-row>
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
+        <ion-card-title class="font ion-padding-top">Nome do processo</ion-card-title>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="7">
+        <ion-item lines="none" color="light">
+          <ion-input class="font" [placeholder]="process.nome" [value]="process.nome"
+            (change)="onChangeName($event.target.value)"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="0" class="ion-text-center">
+        <ion-button class="cancelBtn" *ngIf="newProcess" size="default" color="danger" (click)="sendCancel()">
+          <ion-icon slot="icon-only" size="large" name="close"></ion-icon>
+        </ion-button>
+        <ion-button class="cancelBtn" *ngIf="!newProcess" size="default" color="danger"
+          (click)="sendDelete(process.id)">
+          <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card-header>
+
+  <!-- Etapas -->
+
+  <ion-card-content>
+    <ion-row>
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="9">
+        <ion-card-title class="font ion-text-center ion-padding-top" color="medium-shade">
+          Etapas
+        </ion-card-title>
+      </ion-col>
+      <ion-col *ngIf="newProcess" size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
+        <ion-button class="font fase" color="success" (click)="newFase()">
+          <ion-icon slot="start" size="large" name="add-circle"></ion-icon>
+          <ion-label slot="end">Criar Etapa</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <hr>
+
+    <!-- Novo processo -->
+    <ion-list *ngIf="newProcess" class="fases">
+      <ion-reorder-group (ionItemReorder)="reorderFases($event)" disabled="false">
+        <ion-item *ngFor="let etapa of editProcess.etapas;" class="ion-margin-top" lines="none" color="light">
+          <ion-reorder slot="start">
+            <ion-icon size="large" name="reorder-three"></ion-icon>
+          </ion-reorder>
+          <ion-label>
+            {{ etapa.nome }}
+          </ion-label>
+          <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editStep(etapa)">
+            <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
+          </ion-button>
+          <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteFase(etapa.id)">
+            <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-reorder-group>
+    </ion-list>
+
+    <!-- Editando processo -->
+    <ion-list *ngIf="!newProcess" class="fases">
+
+      <ion-item *ngFor="let etapa of editProcess.etapas;" class="ion-margin-top" lines="none" color="light">
+        <ion-label slot="start" class="ion-text-center">
+          {{ etapa.nome }}
+        </ion-label>
+        <ion-button slot="end" class="cancelBtn" color="secondary" (click)="editStep(etapa)">
+          <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">
+      <ion-icon slot="start" name="save"></ion-icon>
+      <ion-label slot="end">Salvar</ion-label>
+    </ion-button>
+  </ion-card-content>
+</ion-card>

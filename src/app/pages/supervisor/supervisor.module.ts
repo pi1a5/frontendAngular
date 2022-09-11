@@ -10,6 +10,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SupervisorPageRoutingModule } from './supervisor-routing.module';
 
 import { SupervisorPage } from './supervisor.page';
+import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,6 @@ import { SupervisorPage } from './supervisor.page';
     SupervisorPageRoutingModule,
     Ng2SearchPipeModule,
   ],
-  declarations: [SupervisorPage],
+  declarations: [SupervisorPage, LogoutbuttonComponent, SidebarComponent],
 })
 export class SupervisorPageModule {}

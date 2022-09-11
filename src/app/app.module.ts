@@ -35,7 +35,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true,
-    }],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

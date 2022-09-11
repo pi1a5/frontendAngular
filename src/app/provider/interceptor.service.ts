@@ -3,18 +3,21 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable import/prefer-default-export */
 import {
-  HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest,
+  HttpEvent, HttpEventType, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InterceptorService implements HttpInterceptor {
-  constructor() { }
+  constructor(public router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     // Clone the request to add the new header
 
     const clonedRequest = req.clone({
@@ -30,5 +33,7 @@ export class InterceptorService implements HttpInterceptor {
 
     // Pass the cloned request instead of the original request to the next handle
     return next.handle(clonedRequest);
+
   }
+
 }
