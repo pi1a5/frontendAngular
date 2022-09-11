@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-empty-function */

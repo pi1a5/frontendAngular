@@ -40,12 +40,12 @@ export class GooglebuttonComponent implements OnInit {
     return await loading.present();
   }
 
-  async presentToast(error: string) {
+  async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
-      message: error,
+      message: msg,
+      color,
+      icon,
       duration: 2000,
-      icon: 'information-circle',
-      color: 'danger',
     });
     toast.present();
   }
@@ -55,13 +55,24 @@ export class GooglebuttonComponent implements OnInit {
       const user = await this.ggAuth.signIn();
       if (!user) return;
       await this.presentLoading();
-      // console.log('user: ', user);
-      sessionStorage.setItem('userEmail', user.email);
-      sessionStorage.setItem('userId', user.id);
-      this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id);
+      if (this.verifyEmail(user.email)) {
+        sessionStorage.setItem('userEmail', user.email);
+        sessionStorage.setItem('userId', user.id);
+        this.apiLogin(user.name, user.email, user.imageUrl, user.authentication.idToken, user.id);
+      } else {
+        this.loadingController.dismiss();
+        return this.presentToast('Entre apenas com email Institucional', 'danger', 'close-circle');
+      }
     } catch (error) {
       this.loadingController.dismiss();
     }
+  }
+
+  verifyEmail(email: string) {
+    if (email.includes('pl1a5.grupo5@gmail.com')) return true;
+    if (email.includes('ifsp.edu.br')) return true;
+
+    return false;
   }
 
   apiLogin(name: string, email: string, imageUrl: string, token: string, sub: string) {
@@ -76,11 +87,11 @@ export class GooglebuttonComponent implements OnInit {
           this.goToSelectCoursePage();
         }, (error) => {
           this.loadingController.dismiss();
-          this.presentToast(error.error);
+          this.presentToast(error.error, 'danger', 'close-circle');
         });
       }, (error) => {
         this.loadingController.dismiss();
-        this.presentToast(error.error);
+        this.presentToast(error.error, 'danger', 'close-circle');
       });
     });
   }

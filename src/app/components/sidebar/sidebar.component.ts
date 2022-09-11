@@ -1,7 +1,7 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

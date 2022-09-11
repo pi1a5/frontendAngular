@@ -1,4 +1,7 @@
-
+/* eslint-disable linebreak-style */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-empty-function */
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,7 +10,5 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(
-  ) { }
-
+  constructor() { }
 }

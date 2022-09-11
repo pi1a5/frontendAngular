@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */

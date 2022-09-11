@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import {
-  AlertController, ItemReorderCustomEvent, ModalController, ToastController,
+  AlertController, ItemReorderCustomEvent, ModalController,
 } from '@ionic/angular';
 
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
@@ -40,11 +40,10 @@ export class ProcessEditComponent implements OnInit {
 
   constructor(
     public modalController: ModalController,
-    public toastController: ToastController,
     public alertController: AlertController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     this.editProcess = {
@@ -74,16 +73,6 @@ export class ProcessEditComponent implements OnInit {
     return false;
   }
 
-  async presentToast(msg: string, color: string, icon: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      color,
-      icon,
-      duration: 2000,
-    });
-    toast.present();
-  }
-
   async presentAlert(id: number) {
     const alert = await this.alertController.create({
       header: 'Cuidado!',
@@ -93,7 +82,7 @@ export class ProcessEditComponent implements OnInit {
         {
           text: 'Cancelar',
           role: 'cancel',
-          handler: () => {},
+          handler: () => { },
         },
         {
           text: 'Sim, desejo  ',
