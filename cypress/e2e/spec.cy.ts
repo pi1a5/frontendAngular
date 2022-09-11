@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 describe('Realizar o Login com conta de Estudante e Professor', () => {
 
   it('realiza login estudante', () => {
@@ -15,7 +13,6 @@ describe('Realizar o Login com conta de Estudante e Professor', () => {
   
 });
 
-=======
 describe('Testes Sistema de Estágio IFSP', () => {
 
   
@@ -43,6 +40,3 @@ describe('Testes Sistema de Estágio IFSP', () => {
 
 
 });
-
-
->>>>>>> 1a84e417ef6cc7d18639fc68cbdf83365416d9c4
