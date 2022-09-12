@@ -57,7 +57,7 @@ export class SetProntuarioComponent implements OnInit {
       return false;
     }
 
-    // Verificar se tem 7 dígitos e Verificar se começa com SP
+    // Verificar se tem 9 dígitos e Verificar se começa com SP
     if (this.prontuario.length !== 9 || this.prontuario.substring(0, 2).toUpperCase() !== 'SP') {
       this.presentToast('Prontuário incorreto', 'danger', 'close-circle');
       return false;

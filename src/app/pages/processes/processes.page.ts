@@ -79,17 +79,7 @@ export class ProcessesPage implements OnInit {
     };
   }
 
-  isThereStep(process: any) {
-    if (process.etapas.length <= 0) {
-      this.presentToast('Processo deve conter pelo menos 1 etapa', 'danger', 'close-circle');
-      return false;
-    }
-    return true;
-  }
-
   async saveNewProcess(process: any) {
-    if (!this.isThereStep(process)) return;
-
     await this.presentLoading();
     this.apiSupervisor.newProcess(process).subscribe(async (data) => {
       await this.loadingController.dismiss();

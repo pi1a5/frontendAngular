@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import {
-  AlertController, ItemReorderCustomEvent, ModalController,
+  AlertController, ItemReorderCustomEvent, ModalController, ToastController,
 } from '@ionic/angular';
 
 import { FaseEditComponent } from '../fase-edit/fase-edit.component';
@@ -41,6 +41,7 @@ export class ProcessEditComponent implements OnInit {
   constructor(
     public modalController: ModalController,
     public alertController: AlertController,
+    public toastController: ToastController,
   ) { }
 
   ngOnInit() { }
@@ -52,6 +53,16 @@ export class ProcessEditComponent implements OnInit {
       etapas: this.process.etapas,
     };
     this.stepNumber = this.process.etapas.length;
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   async presentModal(etapa, documentos, novaEtapa) {
@@ -98,11 +109,7 @@ export class ProcessEditComponent implements OnInit {
   }
 
   onChangeName(value: any) {
-    if (value) {
-      this.editProcess.nome = value;
-    } else {
-      this.editProcess.nome = this.process.nome;
-    }
+    this.editProcess.nome = value;
   }
 
   reorderFases(ev: ItemReorderCustomEvent) {
@@ -145,8 +152,25 @@ export class ProcessEditComponent implements OnInit {
     }
   }
 
+  validate() {
+    // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
+    if (this.editProcess.nome.trim().length < 3) {
+      this.presentToast('Nome do processo deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
+      return false;
+    }
+    // Verificar se tem pelo menos 1 etapa
+    if (this.editProcess.etapas.length <= 0) {
+      this.presentToast('Processo deve conter pelo menos 1 etapa', 'danger', 'close-circle');
+      return false;
+    }
+
+    return true;
+  }
+
   sendSave() {
-    this.saveProcess.emit({ isNew: this.newProcess, process: this.editProcess });
+    if (this.validate()) {
+      this.saveProcess.emit({ isNew: this.newProcess, process: this.editProcess });
+    }
   }
 
   async sendDelete(id: number) {
