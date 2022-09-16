@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
 /* eslint-disable no-empty-function */
@@ -15,8 +16,8 @@ import { User } from '../interfaces/user';
   providedIn: 'root',
 })
 export class ApiService {
-  private url: string = 'https://pi1a5back.herokuapp.com/';
-  //private url: string = 'http://localhost:3000/';
+  // private url: string = 'https://pi1a5back.herokuapp.com/';
+  private url: string = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +29,9 @@ export class ApiService {
     return this.http.get<Response>(this.url);
   }
 
-  newUser({ name, email, picture, token, sub }: { name: string; email: string; picture: string; token: string; sub: string; }): Observable<Response> {
+  newUser({
+    name, email, picture, token, sub,
+  }: { name: string; email: string; picture: string; token: string; sub: string; }): Observable<Response> {
     return this.http.post<Response>(`${this.url}api/newUser`, {
       name,
       email,
@@ -68,5 +71,4 @@ export class ApiService {
       sub: sessionStorage.getItem('userId'),
     });
   }
-
 }

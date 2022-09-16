@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
 /* eslint-disable no-return-await */
@@ -17,9 +18,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-process.page.scss'],
 })
 export class SelectProcessPage implements OnInit {
-  public processes: any[] = [];
-
-  public selectedProcess = undefined;
+  public confirmedProcess: Object = undefined;
 
   constructor(
     public api: ApiService,
@@ -27,42 +26,13 @@ export class SelectProcessPage implements OnInit {
     public loadingController: LoadingController,
   ) { }
 
-  ngOnInit() {
-    this.loadProcesses();
+  ngOnInit() {}
+
+  receiveConfirmedProcess(process: Object) {
+    this.confirmedProcess = process;
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'loading',
-      message: 'Carregando...',
-      spinner: 'crescent',
-    });
-    return await loading.present();
-  }
-
-  async presentToast(msg: string, color: string, icon: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      color,
-      icon,
-      duration: 2000,
-    });
-    toast.present();
-  }
-
-  async loadProcesses() {
-    this.api.getAllProcesses().subscribe(async (data) => {
-      this.processes = data.processos;
-    }, async (error) => {
-      await this.presentToast(error.error, 'danger', 'close-circle');
-    });
-  }
-
-  confirm() {
-    console.log(this.selectedProcess);
-  }
-
-  receiveProcess(process: any) {
-    this.selectedProcess = process;
+  receiveGoBackEvent() {
+    this.confirmedProcess = undefined;
   }
 }

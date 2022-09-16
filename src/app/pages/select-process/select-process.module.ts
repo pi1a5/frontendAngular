@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import { NgModule } from '@angular/core';
@@ -10,7 +11,9 @@ import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbut
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { ProcessesListComponent } from 'src/app/components/processesPage/processes-list/processes-list.component';
 import { ProcessUndefinedComponent } from 'src/app/components/process-undefined/process-undefined.component';
-import { ProcessDetailsComponent } from 'src/app/components/processSelectPage/process-details/process-details.component';
+import { ProcessDetailsComponent } from 'src/app/components/selectProcessPage/select-details-process/process-details/process-details.component';
+import { FormComponent } from 'src/app/components/selectProcessPage/form/form.component';
+import { SelectDetailsProcessComponent } from 'src/app/components/selectProcessPage/select-details-process/select-details-process.component';
 import { SelectProcessPage } from './select-process.page';
 import { SelectProcessPageRoutingModule } from './select-process-routing.module';
 
@@ -28,6 +31,8 @@ import { SelectProcessPageRoutingModule } from './select-process-routing.module'
     ProcessDetailsComponent,
     ProcessesListComponent,
     ProcessUndefinedComponent,
+    FormComponent,
+    SelectDetailsProcessComponent,
   ],
 })
 export class SelectProcessPageModule { }
