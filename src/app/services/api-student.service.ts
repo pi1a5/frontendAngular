@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */
@@ -22,7 +24,7 @@ export class ApiStudentService {
   }
 
   sendTicketInicio(formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketInicio`, formData);
+    return this.http.post(`${this.url}api/newTicket`, formData);
   }
 
   sendTicketAcompanhamento(formData: FormData): Observable<any> {
