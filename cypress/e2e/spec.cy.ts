@@ -36,6 +36,7 @@ describe('Testes Sistema de Estágio IFSP', () => {
     cy.visit('/select-course');
     cy.contains('Gerenciamento de tickets');
     cy.check('.')
+    cy.get('area')
   });
 
 
