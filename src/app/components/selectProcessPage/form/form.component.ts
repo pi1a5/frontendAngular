@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+/* eslint-disable consistent-return */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-return-await */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
@@ -19,11 +22,9 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Input() confirmedProcess: Object = undefined;
+  @Input() confirmedProcess: any = undefined;
 
   @Output() goBack = new EventEmitter<boolean>();
-
-  public formData: FormData = new FormData();
 
   public today: any = new Date().toISOString();
 
@@ -31,9 +32,9 @@ export class FormComponent implements OnInit {
 
   public dateString: any = null;
 
-  public arqTCE: any = null;
+  public selectedHours: number = 6;
 
-  public arqPA: any = null;
+  public documentsControl: any[] = [];
 
   public textArea: string = null;
 
@@ -45,7 +46,8 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.confirmedProcess);
+    // console.log(this.confirmedProcess);
+    this.createDocumentsArray();
   }
 
   async presentLoading() {
@@ -71,54 +73,92 @@ export class FormComponent implements OnInit {
     this.goBack.emit();
   }
 
-  saveProcess() {
-    console.log(this.formData);
-  }
-
   formatDate(value: any) {
     this.dateValue = value;
-    // this.dateValue = format(parseISO(value), 'yyyy-MM-dd');
-    this.dateString = format(parseISO(value), 'dd/MM/yyyy');
+    this.dateString = format(parseISO(value), 'dd/MM/yy');
+  }
+
+  selectHours(hours: number) {
+    this.selectedHours = hours;
+  }
+
+  customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} caracteres restantes`;
+  }
+
+  submitTicket(formData: FormData) {
+    this.apiStudent.sendTicket(formData).subscribe((data) => {
+      // console.log(data);
+      this.loadingController.dismiss();
+      this.presentToast(data, 'success', 'checkmark-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
+    }, (error) => {
+      // console.log(error);
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
+    });
+  }
+
+  prepareData() {
+    const formData: FormData = new FormData();
+    // Files
+    for (let index = 0; index < this.documentsControl.length; index++) {
+      const document = this.documentsControl[index];
+      formData.append(document.sigla, document.pdfFile);
+    }
+    // Body
+    formData.append('corpoTexto', this.textArea);
+    formData.append('dataLimite', this.dateValue);
+    formData.append('sub', localStorage.getItem('sub'));
+
+    return formData;
   }
 
   async submit() {
     if (this.validate()) {
       await this.presentLoading();
+      const formData = this.prepareData();
+      this.submitTicket(formData);
+    }
+  }
 
-      // Files
-      this.formData.append('tce', this.arqTCE);
-      this.formData.append('pa', this.arqPA);
-      // Body
-      this.formData.append('corpoTexto', this.textArea);
-      this.formData.append('dataLimite', this.dateValue);
-      this.formData.append('sub', localStorage.getItem('sub'));
-      this.formData.append('eProfessor', 'false');
+  createDocumentsArray() {
+    const documents = this.confirmedProcess.etapas[0].documentos;
+    for (let index = 0; index < documents.length; index++) {
+      this.documentsControl.push({
+        nome: documents[index][0].nome,
+        sigla: documents[index][0].sigla,
+        pdfFile: undefined,
+      });
+    }
+  }
 
-      this.apiStudent.sendTicketInicio(this.formData).subscribe((data) => {
-        console.log(data);
-        this.loadingController.dismiss();
-        this.presentToast(data, 'success', 'checkmark-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      }, (error) => {
-        console.log(error);
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
+  handleFileUpdate(doc: any, pdfFile: any) {
+    for (let index = 0; index < this.documentsControl.length; index++) {
+      if (this.documentsControl[index].sigla === doc.sigla) {
+        this.documentsControl[index] = { nome: doc.nome, sigla: doc.sigla, pdfFile };
+        return true;
+      }
+    }
+    return false;
+  }
+
+  onFileChange(event: any, doc: any) {
+    const pdfFiles = event.target.files;
+    const pdfFile = pdfFiles.item(0);
+    if (!this.handleFileUpdate(doc, pdfFile)) {
+      this.documentsControl.push({
+        nome: doc.nome,
+        sigla: doc.sigla,
+        pdfFile,
       });
     }
   }
 
   validate() {
     if (!this.dateValue) {
-      this.presentToast('Data obrigatória', 'danger', 'close-circle');
-      return false;
-    }
-    if (!this.arqTCE) {
-      this.presentToast('TCE obrigatório', 'danger', 'close-circle');
-      return false;
-    }
-    if (!this.arqPA) {
-      this.presentToast('PA obrigatório', 'danger', 'close-circle');
+      this.presentToast('Prazo limite obrigatório', 'danger', 'close-circle');
       return false;
     }
     if (!this.textArea) {
@@ -126,20 +166,14 @@ export class FormComponent implements OnInit {
       return false;
     }
 
+    // Files
+    for (let index = 0; index < this.documentsControl.length; index++) {
+      if (this.documentsControl[index].pdfFile === undefined) {
+        this.presentToast(`Documento ${this.documentsControl[index].nome} é obrigatório`, 'danger', 'close-circle');
+        return false;
+      }
+    }
+
     return true;
-  }
-
-  arqTce(event: any) {
-    const pdfFiles = event.target.files;
-    const pdfFile = pdfFiles.item(0);
-
-    this.arqTCE = pdfFile;
-  }
-
-  arqPa(event: any) {
-    const pdfFiles = event.target.files;
-    const pdfFile = pdfFiles.item(0);
-
-    this.arqPA = pdfFile;
   }
 }

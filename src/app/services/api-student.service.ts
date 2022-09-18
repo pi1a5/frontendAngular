@@ -23,16 +23,8 @@ export class ApiStudentService {
     });
   }
 
-  sendTicketInicio(formData: FormData): Observable<any> {
+  sendTicket(formData: FormData): Observable<any> {
     return this.http.post(`${this.url}api/newTicket`, formData);
-  }
-
-  sendTicketAcompanhamento(formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketAcompanhamento`, formData);
-  }
-
-  sendTicketFim(formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketFim`, formData);
   }
 
   checkIfFinalizou(): Observable<any> {

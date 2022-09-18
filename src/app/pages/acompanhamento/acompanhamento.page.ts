@@ -77,17 +77,17 @@ export class AcompanhamentoPage implements OnInit {
       this.formData.append('sub', localStorage.getItem('sub'));
       this.formData.append('eProfessor', 'false');
 
-      this.apiStudent.sendTicketAcompanhamento(this.formData).subscribe((data) => {
-        console.log(data);
-        this.loadingController.dismiss();
-        this.presentToast(data, 'success', 'checkmark-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      }, (error) => {
-        console.log(error);
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-        this.router.navigate(['student'], { replaceUrl: true });
-      });
+      // this.apiStudent.sendTicketAcompanhamento(this.formData).subscribe((data) => {
+      //   console.log(data);
+      //   this.loadingController.dismiss();
+      //   this.presentToast(data, 'success', 'checkmark-circle');
+      //   this.router.navigate(['student'], { replaceUrl: true });
+      // }, (error) => {
+      //   console.log(error);
+      //   this.loadingController.dismiss();
+      //   this.presentToast(error.error, 'danger', 'close-circle');
+      //   this.router.navigate(['student'], { replaceUrl: true });
+      // });
     }
   }
 
