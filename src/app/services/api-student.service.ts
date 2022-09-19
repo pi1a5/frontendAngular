@@ -30,11 +30,7 @@ export class ApiStudentService {
   }
 
   newInternships(processId: number, hours: string, formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/createNewEstagio`, {
-      idProcesso: processId,
-      cargaHoraria: hours,
-      formData,
-    });
+    return this.http.post(`${this.url}api/createNewEstagio`, formData);
   }
 
   checkIfFinalizou(): Observable<any> {

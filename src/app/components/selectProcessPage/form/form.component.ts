@@ -117,6 +117,9 @@ export class FormComponent implements OnInit {
     formData.append('dataLimite', this.dateValue);
     formData.append('sub', localStorage.getItem('sub'));
 
+    formData.append('idProcesso', this.confirmedProcess.id);
+    formData.append('cargaHoraria', this.selectedHours);
+
     return formData;
   }
 
