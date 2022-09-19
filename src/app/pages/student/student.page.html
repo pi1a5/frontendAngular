@@ -24,22 +24,7 @@
           <!-- Ticket Pendente -->
 
           <ion-col *ngIf="ticketP" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
-            <ion-card color="tertiary" class="font ion-text-center">
-              <ion-card-header color="success">
-                <ion-card-title class="ion-text-start" style="color: #ededed; font-size: 2em;">Ticket Pendente
-                </ion-card-title>
-              </ion-card-header>
-              <ion-card-content class="contentHeight">
-                <ion-card-title class="ion-padding ion-margin">
-                  <ion-title class="font ion-text-center" style="font-size: 1em;">
-                    Finalização
-                  </ion-title>
-                </ion-card-title>
-                <hr>
-                <br>
-                <ion-note class="font">Data de Criação do Ticket: {{ticketP.datacriado}} </ion-note>
-              </ion-card-content>
-            </ion-card>
+           <app-pending-ticket></app-pending-ticket>
           </ion-col>
 
           <!-- Sem Ticket Pendente -->
@@ -56,7 +41,7 @@
                 </ion-card-title>
                 <hr>
                 <br>
-                <ion-img class="emptyTicketIcon" src="../../../assets/emptyTicketIcon.png"></ion-img>
+                <ion-img class="emptyTicketIcon" src="../../../assets/emptyTicketIcon2.png"></ion-img>
                 <br>
                 <br>
               </ion-card-content>

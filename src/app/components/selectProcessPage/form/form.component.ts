@@ -32,7 +32,7 @@ export class FormComponent implements OnInit {
 
   public dateString: any = null;
 
-  public selectedHours: number = 6;
+  public selectedHours: string = '6';
 
   public documentsControl: any[] = [];
 
@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
     this.dateString = format(parseISO(value), 'dd/MM/yy');
   }
 
-  selectHours(hours: number) {
+  selectHours(hours: string) {
     this.selectedHours = hours;
   }
 
@@ -87,17 +87,22 @@ export class FormComponent implements OnInit {
   }
 
   submitTicket(formData: FormData) {
-    this.apiStudent.sendTicket(formData).subscribe((data) => {
-      // console.log(data);
-      this.loadingController.dismiss();
-      this.presentToast(data, 'success', 'checkmark-circle');
-      this.router.navigate(['student'], { replaceUrl: true });
+    this.apiStudent.newInternships(this.confirmedProcess.id, this.selectedHours, formData).subscribe((data) => {
+      console.log(data);
     }, (error) => {
-      // console.log(error);
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
-      this.router.navigate(['student'], { replaceUrl: true });
+      console.log(error.error);
     });
+    // this.apiStudent.sendTicket(formData).subscribe((data) => {
+    //   // console.log(data);
+    //   this.loadingController.dismiss();
+    //   this.presentToast(data, 'success', 'checkmark-circle');
+    //   this.router.navigate(['student'], { replaceUrl: true });
+    // }, (error) => {
+    //   // console.log(error);
+    //   this.loadingController.dismiss();
+    //   this.presentToast(error.error, 'danger', 'close-circle');
+    //   this.router.navigate(['student'], { replaceUrl: true });
+    // });
   }
 
   prepareData() {

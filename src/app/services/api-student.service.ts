@@ -15,6 +15,8 @@ import { ApiService } from './api.service';
 export class ApiStudentService {
   private url: string = this.api.getUrl();
 
+  public pendingTicket: Object = undefined;
+
   constructor(private http: HttpClient, private api: ApiService) { }
 
   getTicketsUser(): Observable<any> {
@@ -25,6 +27,14 @@ export class ApiStudentService {
 
   sendTicket(formData: FormData): Observable<any> {
     return this.http.post(`${this.url}api/newTicket`, formData);
+  }
+
+  newInternships(processId: number, hours: string, formData: FormData): Observable<any> {
+    return this.http.post(`${this.url}api/createNewEstagio`, {
+      idProcesso: processId,
+      cargaHoraria: hours,
+      formData,
+    });
   }
 
   checkIfFinalizou(): Observable<any> {

@@ -10,6 +10,7 @@
 /* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { ApiStudentService } from 'src/app/services/api-student.service';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -20,13 +21,20 @@ import { ApiService } from 'src/app/services/api.service';
 export class SelectProcessPage implements OnInit {
   public confirmedProcess: Object = undefined;
 
+  public pendingTicket: Object = undefined;
+
+  public firstTicket: boolean = false;
+
   constructor(
     public api: ApiService,
+    public apiStudent: ApiStudentService,
     public toastController: ToastController,
     public loadingController: LoadingController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.pendingTicket = this.apiStudent.pendingTicket;
+  }
 
   receiveConfirmedProcess(process: Object) {
     this.confirmedProcess = process;
