@@ -29,7 +29,11 @@ export class ApiStudentService {
     return this.http.post(`${this.url}api/newTicket`, formData);
   }
 
-  newInternships(processId: number, hours: string, formData: FormData): Observable<any> {
+  sendFirstTicket(formData: FormData): Observable<any> {
+    return this.http.post(`${this.url}api/newFirstTicket`, formData);
+  }
+
+  newInternships(formData: FormData): Observable<any> {
     return this.http.post(`${this.url}api/createNewEstagio`, formData);
   }
 

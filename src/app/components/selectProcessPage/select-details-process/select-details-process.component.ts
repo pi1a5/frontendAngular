@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-return-await */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
@@ -8,7 +9,7 @@
 import {
   Component, EventEmitter, OnInit, Output,
 } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class SelectDetailsProcessComponent implements OnInit {
     public api: ApiService,
     public toastController: ToastController,
     public loadingController: LoadingController,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -54,6 +56,57 @@ export class SelectDetailsProcessComponent implements OnInit {
       duration: 2000,
     });
     toast.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Selecione suas horas de estágio',
+      subHeader: 'Important message',
+      message: 'This is an alert!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('cancel');
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            console.log('confirm');
+          },
+        },
+      ],
+      inputs: [
+        {
+          label: '4 Horas',
+          type: 'radio',
+          value: 4,
+        },
+        {
+          label: '6 Horas',
+          type: 'radio',
+          value: 6,
+        },
+        {
+          label: '8 Horas',
+          type: 'radio',
+          value: 8,
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const hours = await (await alert.onDidDismiss()).data.values;
+
+    return hours;
+  }
+
+  async confirm() {
+    console.log(await this.presentAlert());
   }
 
   sendConfirmedProcess() {

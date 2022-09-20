@@ -87,7 +87,7 @@ export class FormComponent implements OnInit {
   }
 
   submitTicket(formData: FormData) {
-    this.apiStudent.newInternships(this.confirmedProcess.id, this.selectedHours, formData).subscribe((data) => {
+    this.apiStudent.newInternships(formData).subscribe((data) => {
       console.log(data);
     }, (error) => {
       console.log(error.error);
@@ -116,7 +116,6 @@ export class FormComponent implements OnInit {
     formData.append('corpoTexto', this.textArea);
     formData.append('dataLimite', this.dateValue);
     formData.append('sub', localStorage.getItem('sub'));
-
     formData.append('idProcesso', this.confirmedProcess.id);
     formData.append('cargaHoraria', this.selectedHours);
 
