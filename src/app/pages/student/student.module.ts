@@ -9,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
-import { PendingTicketComponent } from 'src/app/components/selectProcessPage/pending-ticket/pending-ticket.component';
+import { PendingTicketComponent } from 'src/app/components/pending-ticket/pending-ticket.component';
 import { StudentPage } from './student.page';
 import { StudentPageRoutingModule } from './student-routing.module';
 

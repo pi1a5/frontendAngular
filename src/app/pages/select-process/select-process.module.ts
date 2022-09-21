@@ -14,7 +14,7 @@ import { ProcessUndefinedComponent } from 'src/app/components/process-undefined/
 import { ProcessDetailsComponent } from 'src/app/components/selectProcessPage/select-details-process/process-details/process-details.component';
 import { FormComponent } from 'src/app/components/selectProcessPage/form/form.component';
 import { SelectDetailsProcessComponent } from 'src/app/components/selectProcessPage/select-details-process/select-details-process.component';
-import { PendingTicketComponent } from 'src/app/components/selectProcessPage/pending-ticket/pending-ticket.component';
+import { PendingTicketComponent } from 'src/app/components/pending-ticket/pending-ticket.component';
 import { SelectProcessPage } from './select-process.page';
 import { SelectProcessPageRoutingModule } from './select-process-routing.module';
 

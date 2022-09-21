@@ -1,11 +1,11 @@
 <div class="flex-center">
   <ion-card color="light" class="ion-text-center">
     <ion-card-header class="font" color="success">  
-      <ion-card-title id="title" class="font">{{confirmedProcess.nome}}</ion-card-title>
+      <ion-card-title id="title" class="font">{{confirmedProcess ? confirmedProcess.nome : confirmedProcessFromBack.nome}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
-        <br>
+        <ion-title class="font">Etapa: {{step.nome}}</ion-title>
         <hr>
 
         <ion-row>
@@ -16,8 +16,8 @@
             </ion-title>
             <br>
             <ion-item id="textArea" lines="none" counter="true" [counterFormatter]="customCounterFormatter">
-              <ion-textarea color="success" [(ngModel)]="textArea" class="font ion-text-justify" rows="9" cols="20"
-                placeholder="Olá Orientador, boa tarde! Eu gostaria..." maxlength="400">
+              <ion-textarea color="success" [(ngModel)]="textArea" class="font ion-text-justify" rows="8" cols="20"
+                placeholder="Olá Orientador, boa tarde! Eu gostaria..." maxlength="500">
               </ion-textarea>
             </ion-item>
           </ion-col>

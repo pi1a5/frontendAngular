@@ -25,7 +25,9 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 export class FormComponent implements OnInit {
   @Input() confirmedProcess: any = undefined;
 
-  @Input() step: any = undefined;
+  @Input() confirmedProcessFromBack: any = undefined;
+
+  public step: any = undefined;
 
   public today: any = new Date().toISOString();
 
@@ -48,8 +50,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.confirmedProcess);
-    this.currentStep();
-    this.createDocumentsArray();
+    this.defineOrigin();
   }
 
   async presentLoading() {
@@ -70,15 +71,6 @@ export class FormComponent implements OnInit {
     });
     toast.present();
   }
-
-  // formatDate(value: any) {
-  //   this.dateValue = value;
-  //   this.dateString = format(parseISO(value), 'dd/MM/yyyy');
-  // }
-
-  // selectHours(hours: string) {
-  //   this.selectedHours = hours;
-  // }
 
   customCounterFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} caracteres restantes`;
@@ -121,34 +113,33 @@ export class FormComponent implements OnInit {
     }
   }
 
-  currentStep() {
-    for (const i in this.confirmedProcess.etapas) {
-      if (this.confirmedProcess.etapas[i].atual === true) {
-        this.step = this.confirmedProcess.etapas[i];
+  defineOrigin() {
+    if (this.confirmedProcessFromBack) {
+      this.getCurrentStep();
+    } else {
+      this.createDocumentsArray(this.confirmedProcess.etapas[0]);
+    }
+  }
+
+  getCurrentStep() {
+    for (const i in this.confirmedProcessFromBack.etapas) {
+      if (this.confirmedProcessFromBack.etapas[i].atual === true) {
+        const step = this.confirmedProcessFromBack.etapas[i];
+        this.createDocumentsArray(step);
         break;
       }
     }
   }
 
-  createDocumentsArray() {
-    if (this.step) {
-      const documents = this.step.documentos;
-      for (let index = 0; index < documents.length; index++) {
-        this.documentsControl.push({
-          nome: documents[index][0].nome,
-          sigla: documents[index][0].sigla,
-          pdfFile: undefined,
-        });
-      }
-    } else {
-      const documents = this.confirmedProcess.etapas[0].documentos;
-      for (let index = 0; index < documents.length; index++) {
-        this.documentsControl.push({
-          nome: documents[index][0].nome,
-          sigla: documents[index][0].sigla,
-          pdfFile: undefined,
-        });
-      }
+  createDocumentsArray(step: any) {
+    this.step = step;
+    const documents = step.documentos;
+    for (let index = 0; index < documents.length; index++) {
+      this.documentsControl.push({
+        nome: documents[index][0].nome,
+        sigla: documents[index][0].sigla,
+        pdfFile: undefined,
+      });
     }
   }
 
@@ -194,4 +185,13 @@ export class FormComponent implements OnInit {
 
     return true;
   }
+
+  // formatDate(value: any) {
+  //   this.dateValue = value;
+  //   this.dateString = format(parseISO(value), 'dd/MM/yyyy');
+  // }
+
+  // selectHours(hours: string) {
+  //   this.selectedHours = hours;
+  // }
 }

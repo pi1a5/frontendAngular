@@ -11,12 +11,9 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
-import { ApiService } from 'src/app/services/api.service';
-import { GoogleAuthService } from 'src/app/services/google-auth.service';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
 @Component({
@@ -27,13 +24,10 @@ import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page
 export class StudentPage implements OnInit {
   public pendingTicket: any = undefined;
 
-  public ticketsE: any = [];
+  public closedTickets: [] = [];
 
   constructor(
-    public ggAuth: GoogleAuthService,
-    public router: Router,
     public apiStudent: ApiStudentService,
-    public api: ApiService,
     public modalController: ModalController,
   ) { }
 
@@ -41,6 +35,12 @@ export class StudentPage implements OnInit {
     this.apiStudent.getPendingTicket().subscribe((pendingTicket) => {
       console.log(pendingTicket);
       this.pendingTicket = pendingTicket;
+    }, (error) => {
+      if (error.status !== 404) return console.log(error);
+    });
+    this.apiStudent.getClosedTickets().subscribe((closedTickets) => {
+      console.log(closedTickets);
+      this.closedTickets = closedTickets;
     }, (error) => {
       if (error.status !== 404) return console.log(error);
     });
@@ -86,17 +86,5 @@ export class StudentPage implements OnInit {
 
   formatDate({ date }: { date: string; }): string {
     return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
-  }
-
-  showPdf(url: string) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: { url },
-    };
-
-    const urlLoad = this.router.serializeUrl(
-      this.router.createUrlTree(['/pdf'], navigationExtras),
-    );
-
-    window.open(urlLoad, '_blank');
   }
 }

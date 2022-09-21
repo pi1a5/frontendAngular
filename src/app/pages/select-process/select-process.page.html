@@ -12,13 +12,13 @@
       <div *ngIf="internship">
 
         <!-- Formulário -->
-        <div *ngIf="!pendingTicket">
-          <app-form [confirmedProcess]="internship">
+        <div *ngIf="pendingTicket === null">
+          <app-form [confirmedProcessFromBack]="internship">
           </app-form>
         </div>
 
         <div *ngIf="pendingTicket">
-          <app-pending-ticket></app-pending-ticket>
+          <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
         </div>
 
       </div>

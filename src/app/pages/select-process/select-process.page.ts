@@ -11,7 +11,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { ApiStudentService } from 'src/app/services/api-student.service';
-import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-select-process',
@@ -26,7 +25,6 @@ export class SelectProcessPage implements OnInit {
   public internship: Object = undefined;
 
   constructor(
-    public api: ApiService,
     public apiStudent: ApiStudentService,
     public toastController: ToastController,
     public loadingController: LoadingController,
@@ -52,9 +50,9 @@ export class SelectProcessPage implements OnInit {
 
   getPendingTicket() {
     this.apiStudent.getPendingTicket().subscribe((pendingTicket) => {
-      console.log(pendingTicket);
       this.pendingTicket = pendingTicket;
     }, (error) => {
+      this.pendingTicket = null;
       if (error.status !== 404) return console.log(error);
     });
   }

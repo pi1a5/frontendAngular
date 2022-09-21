@@ -1,0 +1,41 @@
+.contentHeight {
+  height: 68.5vh;
+}
+
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+// Data de envio
+
+ion-badge {
+  --background: #38907A;
+  --color: #ededed;
+  --padding-end: 2em;
+  --padding-start: 2em;
+  --padding-bottom: 0.5em;
+  --padding-top: 0.5em;
+}
+
+// Documentos
+
+.contentCardHeight {
+  height: 40vh;
+  overflow-y: auto;
+  // background-color: var(--ion-color-light);
+}
+
+ion-item {
+  --border-radius: 0.2em;
+}
+
+.documentName {
+  font-size: 1.2em;
+  font-family: 'Nunito', sans-serif;
+}

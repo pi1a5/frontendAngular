@@ -24,7 +24,7 @@
           <!-- Ticket Pendente -->
 
           <ion-col *ngIf="pendingTicket" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
-           <app-pending-ticket></app-pending-ticket>
+           <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
           </ion-col>
 
           <!-- Sem Ticket Pendente -->
@@ -55,7 +55,7 @@
                 <ion-title style="color: #ededed; font-size: 2em;">Tickets Encerrados</ion-title>
               </ion-card-header>
 
-              <ion-list style="background-color: var(--ion-color-light);" class="list" *ngIf="ticketsE.length > 0">
+              <ion-list style="background-color: var(--ion-color-light);" class="list" *ngIf="closedTickets.length > 0">
 
                 <ion-item button lines="none" color="light">
                   <ion-label style="color:#4c4c4c; font-size: 1.5em;" class="font">
@@ -67,7 +67,7 @@
 
               </ion-list>
 
-              <div *ngIf="ticketsE.length == 0" class="list">
+              <div *ngIf="closedTickets.length == 0" class="list">
 
                 <ion-card-title class="ion-padding ion-margin">
                   <ion-note class="font ion-text-center" style="font-size: 1em;">
