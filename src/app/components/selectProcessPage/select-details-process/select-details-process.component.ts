@@ -10,6 +10,7 @@ import {
   Component, EventEmitter, OnInit, Output,
 } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { ApiStudentService } from 'src/app/services/api-student.service';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class SelectDetailsProcessComponent implements OnInit {
 
   constructor(
     public api: ApiService,
+    public apiStudent: ApiStudentService,
     public toastController: ToastController,
     public loadingController: LoadingController,
     public alertController: AlertController,
@@ -60,23 +62,16 @@ export class SelectDetailsProcessComponent implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Selecione suas horas de estágio',
-      subHeader: 'Important message',
-      message: 'This is an alert!',
+      header: 'Aviso: confirmando o processo você não poderá mudar!',
+      message: 'Informe sua carga horária',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            console.log('cancel');
-          },
         },
         {
           text: 'OK',
           role: 'confirm',
-          handler: () => {
-            console.log('confirm');
-          },
         },
       ],
       inputs: [
@@ -100,13 +95,29 @@ export class SelectDetailsProcessComponent implements OnInit {
 
     await alert.present();
 
-    const hours = await (await alert.onDidDismiss()).data.values;
+    const input = await alert.onDidDismiss();
 
-    return hours;
+    if (input.role === 'confirm') return input.data.values;
+
+    return false;
   }
 
   async confirm() {
-    console.log(await this.presentAlert());
+    const hours = await this.presentAlert();
+    if (hours) await this.createNewInternship(this.selectedProcess.id, hours);
+  }
+
+  async createNewInternship(processId: number, hours: number) {
+    this.sendConfirmedProcess();
+    // await this.presentLoading();
+    // this.apiStudent.newInternship(processId, hours).subscribe((data) => {
+    //   this.loadingController.dismiss();
+    //   this.presentToast(data, 'success', 'checkmark-circle');
+    //   this.sendConfirmedProcess();
+    // }, (error) => {
+    //   this.loadingController.dismiss();
+    //   this.presentToast(error.error, 'danger', 'close-circle');
+    // });
   }
 
   sendConfirmedProcess() {

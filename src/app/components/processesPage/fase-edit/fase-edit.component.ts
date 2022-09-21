@@ -81,7 +81,7 @@ export class FaseEditComponent implements OnInit {
   validate() {
     // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
     if (this.editFase.nome.trim().length < 3) {
-      this.presentToast('Nome da etapa deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
+      this.presentToast('Nome da etapa deve conter no mínimo 3 caracteres', 'danger', 'close-circle');
       return false;
     }
 

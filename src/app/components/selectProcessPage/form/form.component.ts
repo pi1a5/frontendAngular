@@ -73,36 +73,31 @@ export class FormComponent implements OnInit {
     this.goBack.emit();
   }
 
-  formatDate(value: any) {
-    this.dateValue = value;
-    this.dateString = format(parseISO(value), 'dd/MM/yy');
-  }
+  // formatDate(value: any) {
+  //   this.dateValue = value;
+  //   this.dateString = format(parseISO(value), 'dd/MM/yyyy');
+  // }
 
-  selectHours(hours: string) {
-    this.selectedHours = hours;
-  }
+  // selectHours(hours: string) {
+  //   this.selectedHours = hours;
+  // }
 
   customCounterFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} caracteres restantes`;
   }
 
   submitTicket(formData: FormData) {
-    this.apiStudent.newInternships(formData).subscribe((data) => {
-      console.log(data);
+    this.apiStudent.sendTicket(formData).subscribe((data) => {
+      // console.log(data);
+      this.loadingController.dismiss();
+      this.presentToast(data, 'success', 'checkmark-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
     }, (error) => {
-      console.log(error.error);
+      // console.log(error);
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+      this.router.navigate(['student'], { replaceUrl: true });
     });
-    // this.apiStudent.sendTicket(formData).subscribe((data) => {
-    //   // console.log(data);
-    //   this.loadingController.dismiss();
-    //   this.presentToast(data, 'success', 'checkmark-circle');
-    //   this.router.navigate(['student'], { replaceUrl: true });
-    // }, (error) => {
-    //   // console.log(error);
-    //   this.loadingController.dismiss();
-    //   this.presentToast(error.error, 'danger', 'close-circle');
-    //   this.router.navigate(['student'], { replaceUrl: true });
-    // });
   }
 
   prepareData() {
@@ -113,11 +108,9 @@ export class FormComponent implements OnInit {
       formData.append(document.sigla, document.pdfFile);
     }
     // Body
+    // formData.append('dataLimite', this.dateValue);
     formData.append('corpoTexto', this.textArea);
-    formData.append('dataLimite', this.dateValue);
     formData.append('sub', localStorage.getItem('sub'));
-    formData.append('idProcesso', this.confirmedProcess.id);
-    formData.append('cargaHoraria', this.selectedHours);
 
     return formData;
   }
@@ -164,10 +157,10 @@ export class FormComponent implements OnInit {
   }
 
   validate() {
-    if (!this.dateValue) {
-      this.presentToast('Prazo limite obrigatório', 'danger', 'close-circle');
-      return false;
-    }
+    // if (!this.dateValue) {
+    //   this.presentToast('Prazo limite obrigatório', 'danger', 'close-circle');
+    //   return false;
+    // }
     if (!this.textArea) {
       this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
       return false;
