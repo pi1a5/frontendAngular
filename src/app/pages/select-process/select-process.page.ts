@@ -23,7 +23,7 @@ export class SelectProcessPage implements OnInit {
 
   public pendingTicket: Object = undefined;
 
-  public firstTicket: boolean = false;
+  public internship: Object = undefined;
 
   constructor(
     public api: ApiService,
@@ -33,14 +33,33 @@ export class SelectProcessPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pendingTicket = this.apiStudent.pendingTicket;
+    this.apiStudent.checkIfHasInternship().subscribe((data) => {
+      this.internship = data;
+      if (data) this.getPendingTicket();
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'loading',
+      message: 'Carregando...',
+      spinner: 'crescent',
+    });
+    return await loading.present();
+  }
+
+  getPendingTicket() {
+    this.apiStudent.getPendingTicket().subscribe((pendingTicket) => {
+      console.log(pendingTicket);
+      this.pendingTicket = pendingTicket;
+    }, (error) => {
+      if (error.status !== 404) return console.log(error);
+    });
   }
 
   receiveConfirmedProcess(process: Object) {
     this.confirmedProcess = process;
-  }
-
-  receiveGoBackEvent() {
-    this.confirmedProcess = undefined;
   }
 }

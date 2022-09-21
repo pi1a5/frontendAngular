@@ -15,12 +15,22 @@ import { ApiService } from './api.service';
 export class ApiStudentService {
   private url: string = this.api.getUrl();
 
-  public pendingTicket: Object = undefined;
-
   constructor(private http: HttpClient, private api: ApiService) { }
 
-  getTicketsUser(): Observable<any> {
-    return this.http.post(`${this.url}api/getTicketsUser`, {
+  // getTicketsUser(): Observable<any> {
+  //   return this.http.post(`${this.url}api/getTicketsUser`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //   });
+  // }
+
+  // checkIfFinalizou(): Observable<any> {
+  //   return this.http.post(`${this.url}api/checkIfFinalizou`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //   });
+  // }
+
+  getPendingTicket(): Observable<any> {
+    return this.http.post(`${this.url}api/getPendingTicket`, {
       sub: sessionStorage.getItem('userId'),
     });
   }
@@ -37,8 +47,8 @@ export class ApiStudentService {
     });
   }
 
-  checkIfFinalizou(): Observable<any> {
-    return this.http.post(`${this.url}api/checkIfFinalizou`, {
+  checkIfHasInternship(): Observable<any> {
+    return this.http.post(`${this.url}api/checkIfHasEstagio`, {
       sub: sessionStorage.getItem('userId'),
     });
   }

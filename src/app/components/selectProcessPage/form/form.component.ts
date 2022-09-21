@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
@@ -24,7 +25,7 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 export class FormComponent implements OnInit {
   @Input() confirmedProcess: any = undefined;
 
-  @Output() goBack = new EventEmitter<boolean>();
+  @Input() step: any = undefined;
 
   public today: any = new Date().toISOString();
 
@@ -47,6 +48,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.confirmedProcess);
+    this.currentStep();
     this.createDocumentsArray();
   }
 
@@ -67,10 +69,6 @@ export class FormComponent implements OnInit {
       duration: 2000,
     });
     toast.present();
-  }
-
-  sendGoBack() {
-    this.goBack.emit();
   }
 
   // formatDate(value: any) {
@@ -110,7 +108,7 @@ export class FormComponent implements OnInit {
     // Body
     // formData.append('dataLimite', this.dateValue);
     formData.append('corpoTexto', this.textArea);
-    formData.append('sub', localStorage.getItem('sub'));
+    formData.append('sub', sessionStorage.getItem('userId'));
 
     return formData;
   }
@@ -123,14 +121,34 @@ export class FormComponent implements OnInit {
     }
   }
 
+  currentStep() {
+    for (const i in this.confirmedProcess.etapas) {
+      if (this.confirmedProcess.etapas[i].atual === true) {
+        this.step = this.confirmedProcess.etapas[i];
+        break;
+      }
+    }
+  }
+
   createDocumentsArray() {
-    const documents = this.confirmedProcess.etapas[0].documentos;
-    for (let index = 0; index < documents.length; index++) {
-      this.documentsControl.push({
-        nome: documents[index][0].nome,
-        sigla: documents[index][0].sigla,
-        pdfFile: undefined,
-      });
+    if (this.step) {
+      const documents = this.step.documentos;
+      for (let index = 0; index < documents.length; index++) {
+        this.documentsControl.push({
+          nome: documents[index][0].nome,
+          sigla: documents[index][0].sigla,
+          pdfFile: undefined,
+        });
+      }
+    } else {
+      const documents = this.confirmedProcess.etapas[0].documentos;
+      for (let index = 0; index < documents.length; index++) {
+        this.documentsControl.push({
+          nome: documents[index][0].nome,
+          sigla: documents[index][0].sigla,
+          pdfFile: undefined,
+        });
+      }
     }
   }
 

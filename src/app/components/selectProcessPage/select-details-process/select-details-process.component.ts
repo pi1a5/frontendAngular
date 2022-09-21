@@ -108,16 +108,15 @@ export class SelectDetailsProcessComponent implements OnInit {
   }
 
   async createNewInternship(processId: number, hours: number) {
-    this.sendConfirmedProcess();
-    // await this.presentLoading();
-    // this.apiStudent.newInternship(processId, hours).subscribe((data) => {
-    //   this.loadingController.dismiss();
-    //   this.presentToast(data, 'success', 'checkmark-circle');
-    //   this.sendConfirmedProcess();
-    // }, (error) => {
-    //   this.loadingController.dismiss();
-    //   this.presentToast(error.error, 'danger', 'close-circle');
-    // });
+    await this.presentLoading();
+    this.apiStudent.newInternship(processId, hours).subscribe((data) => {
+      this.loadingController.dismiss();
+      this.presentToast(data, 'success', 'checkmark-circle');
+      this.sendConfirmedProcess();
+    }, (error) => {
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+    });
   }
 
   sendConfirmedProcess() {

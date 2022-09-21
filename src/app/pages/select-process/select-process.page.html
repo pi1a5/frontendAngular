@@ -8,17 +8,30 @@
   <!-- content -->
   <ion-router-outlet id="main-content">
     <ion-content class="ion-justify-content-center" padding class="background">
-      <div *ngIf="pendingTicket" class="flex-center">
-        <app-pending-ticket ></app-pending-ticket>
+
+      <div *ngIf="internship">
+
+        <!-- Formulário -->
+        <div *ngIf="!pendingTicket">
+          <app-form [confirmedProcess]="internship">
+          </app-form>
+        </div>
+
+        <div *ngIf="pendingTicket">
+          <app-pending-ticket></app-pending-ticket>
+        </div>
+
       </div>
-      <div *ngIf="!pendingTicket">
+
+      <div *ngIf="internship === null">
         <!-- Selecionar Processo -->
         <app-select-details-process *ngIf="!confirmedProcess" (confirmedProcess)="receiveConfirmedProcess($event)">
         </app-select-details-process>
         <!-- Formulário -->
-        <app-form *ngIf="confirmedProcess" [confirmedProcess]="confirmedProcess" (goBack)="receiveGoBackEvent()">
+        <app-form *ngIf="confirmedProcess" [confirmedProcess]="confirmedProcess">
         </app-form>
       </div>
+
     </ion-content>
   </ion-router-outlet>
 </ion-split-pane>
