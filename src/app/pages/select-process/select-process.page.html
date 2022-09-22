@@ -9,7 +9,14 @@
   <ion-router-outlet id="main-content">
     <ion-content class="ion-justify-content-center" padding class="background">
 
-      <div *ngIf="internship">
+
+      <ion-header style="position: absolute;">
+        <ion-toolbar color="translucent" class="ion-text-center ion-padding">
+          <ion-menu-button slot="start"></ion-menu-button>
+        </ion-toolbar>
+      </ion-header>
+
+      <div *ngIf="internship" class="flex-center">
 
         <!-- Formulário -->
         <div *ngIf="pendingTicket === null">
@@ -17,8 +24,15 @@
           </app-form>
         </div>
 
-        <div *ngIf="pendingTicket">
-          <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
+        <div *ngIf="pendingTicket" class="ion-padding ion-margin">
+          <ion-row>
+            <ion-col size="4">
+              <app-pending-ticket-warning></app-pending-ticket-warning>
+            </ion-col>
+            <ion-col size="8">
+              <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
+            </ion-col>
+          </ion-row>
         </div>
 
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import { NgModule } from '@angular/core';
@@ -77,16 +78,17 @@ const routes: Routes = [
   {
     path: 'processes',
     canActivate: [SessionGuard],
-    loadChildren: () => import('./pages/processes/processes.module').then( m => m.ProcessesPageModule)
+    loadChildren: () => import('./pages/processes/processes.module').then((m) => m.ProcessesPageModule),
   },
   {
     path: 'internships',
     canActivate: [SessionGuard],
-    loadChildren: () => import('./pages/internships/internships.module').then( m => m.InternshipsPageModule)
+    loadChildren: () => import('./pages/internships/internships.module').then((m) => m.InternshipsPageModule),
   },
   {
     path: 'select-process',
-    loadChildren: () => import('./pages/select-process/select-process.module').then( m => m.SelectProcessPageModule)
+    canActivate: [SessionGuard],
+    loadChildren: () => import('./pages/select-process/select-process.module').then((m) => m.SelectProcessPageModule),
   },
 ];
 

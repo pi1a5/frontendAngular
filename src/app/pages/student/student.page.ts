@@ -12,7 +12,6 @@
 /* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { format } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
@@ -83,8 +82,4 @@ export class StudentPage implements OnInit {
   //     }
   //   }
   // }
-
-  formatDate({ date }: { date: string; }): string {
-    return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
-  }
 }

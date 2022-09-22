@@ -12,11 +12,18 @@ hr {
   visibility: visible !important;
 }
 
+// Títulos 
+
+.label {
+  font-size: 1.5em; 
+  color: var(--ion-color-medium-shade);
+}
+
 // Data de envio
 
 ion-badge {
   --background: #38907A;
-  --color: #ededed;
+  --color: white;
   --padding-end: 2em;
   --padding-start: 2em;
   --padding-bottom: 0.5em;
@@ -28,7 +35,7 @@ ion-badge {
 .contentCardHeight {
   height: 40vh;
   overflow-y: auto;
-  // background-color: var(--ion-color-light);
+  background-color: var(--ion-color-light);
 }
 
 ion-item {
