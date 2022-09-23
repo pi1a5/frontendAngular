@@ -64,13 +64,13 @@
 
     <ion-row class="ion-margin ion-padding">
       <ion-col size="6">
-        <ion-button expand="block" size="large" color="success" (click)="accept()">
+        <ion-button expand="block" size="large" color="success" (click)="confirm(true)">
           <ion-icon slot="start" name="thumbs-up-sharp"></ion-icon>
           <ion-label slot="end" class="font">Aceitar</ion-label>
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button expand="block" size="large" color="danger" (click)="refuse()">
+        <ion-button expand="block" size="large" color="danger" (click)="confirm(false)">
           <ion-icon slot="start" name="thumbs-down-sharp"></ion-icon>
           <ion-label slot="end" class="font">Recusar</ion-label>
         </ion-button>

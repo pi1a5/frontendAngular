@@ -33,13 +33,13 @@ export class TicketsWithSupervisorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.apiSupervisor.getTicketsWithSupervisor().subscribe((data) => {
-    //   console.log('Alunos com orientador: ', data);
-    //   this.tickets = data;
-    // }, (error) => {
-    //   console.log('Alunos com orientador: ', error);
-    //   this.presentToast(error.error, 'danger', 'close-circle');
-    // });
+    this.apiSupervisor.getTicketsWithSupervisor().subscribe((data) => {
+      console.log('Alunos com orientador: ', data);
+      this.tickets = data;
+    }, (error) => {
+      console.log('Alunos com orientador: ', error);
+      this.presentToast(error.error, 'danger', 'close-circle');
+    });
   }
 
   async presentToast(msg: string, color: string, icon: string) {

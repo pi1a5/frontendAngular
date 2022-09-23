@@ -58,32 +58,29 @@ export class ModalTicketOpenComponent implements OnInit {
     toast.present();
   }
 
-  accept() {
-    this.presentLoading();
+  confirm(accept: boolean) {
+    if (this.validate()) {
+      this.presentLoading();
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, true, this.ticket.etapa).subscribe((data) => {
-      this.loadingController.dismiss();
-      this.presentToast(data, 'success', 'checkmark-circle');
-      this.dismiss();
-    }, (error) => {
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
-      this.dismiss();
-    });
+      this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa).subscribe((data) => {
+        this.loadingController.dismiss();
+        this.presentToast(data, 'success', 'checkmark-circle');
+        this.dismiss();
+      }, (error) => {
+        this.loadingController.dismiss();
+        this.presentToast(error.error, 'danger', 'close-circle');
+        this.dismiss();
+      });
+    }
   }
 
-  refuse() {
-    this.presentLoading();
+  validate() {
+    if (!this.textArea) {
+      this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
+      return false;
+    }
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, false, this.ticket.etapa).subscribe((data) => {
-      this.loadingController.dismiss();
-      this.presentToast(data, 'success', 'checkmark-circle');
-      this.dismiss();
-    }, (error) => {
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
-      this.dismiss();
-    });
+    return true;
   }
 
   dismiss() {
