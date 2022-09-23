@@ -64,3 +64,15 @@ ion-img {
   width: auto;
   margin: auto;
 }
+
+// Closed tickets
+
+.closeTicketItem {
+  color: var(--ion-color-medium-shade); 
+  font-size: 1.5em;
+  font-family: 'Nunito', sans-serif;
+}
+
+.closeTicketItemIcon {
+  color: var(--ion-color-medium-shade); 
+}

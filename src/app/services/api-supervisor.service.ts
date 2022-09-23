@@ -40,12 +40,13 @@ export class ApiSupervisorService {
   }
 
   // Card Modal
-  feedbackTicket({ idTicket, feedback, accept }: { idTicket: number; feedback: string; accept: boolean; }): Observable<any> {
+  feedbackTicket(idTicket: number, feedback: string, accept: boolean, step: any): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: sessionStorage.getItem('userId'),
       idTicket,
       feedback,
-      eAceito: accept,
+      aceito: accept,
+      etapa: step,
     });
   }
 

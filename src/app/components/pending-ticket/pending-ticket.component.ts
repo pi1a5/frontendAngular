@@ -19,7 +19,7 @@ export class PendingTicketComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-    console.log(this.pendingTicket[0]);
+    // console.log(this.pendingTicket[0]);
     this.pendingTicket[0].datacriado = this.formatDate({ date: this.pendingTicket[0].datacriado });
   }
 

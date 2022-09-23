@@ -1,0 +1,68 @@
+<ion-card class="font ion-text-center">
+  <ion-card-header color="success">
+    <ion-card-title style="font-size: 2em;">Alunos sob sua Orientação</ion-card-title>
+  </ion-card-header>
+
+  <ion-list style="background-color: var(--ion-color-light);" class="list">
+
+    <!-- Carregando Tickets -->
+    <div *ngIf="tickets === undefined">
+      <ion-item color="light" lines="none">
+        <ion-label class="closeTicketItem">
+          <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item color="light" lines="none">
+        <ion-label class="closeTicketItem">
+          <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item color="light" lines="none">
+        <ion-label class="closeTicketItem">
+          <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <!-- Sem Tickets  -->
+    <div *ngIf="tickets === null">
+      <p>
+        <ion-label style="font-size: 1.5em;">Não há tickets pendentes...</ion-label>
+      </p>
+    </div>
+
+    <!-- Tickets Carregados -->
+    <ion-card color="light" *ngFor="let ticket of tickets">
+      <ion-card-header>
+
+        <ion-item color="light" lines="none">
+          <ion-avatar slot="start" class="cardAvatar">
+            <img src="{{ticket.foto}}">
+          </ion-avatar>
+          <ion-label class="font">
+            <h3>{{ticket.nome}}</h3>
+            <p>{{ticket.prontuario}}</p>
+          </ion-label>
+          <ion-chip class="cardChip" slot="end" color="secondary">
+            <ion-label class="font badge ion-text-wrap">{{ticket.tipo_estagios}}</ion-label>
+          </ion-chip>
+        </ion-item>
+
+        <ion-item lines="none" color="light">
+          <ion-label class="font ion-text-start">
+            <h3>Data limite: {{ticket.data_limite}}</h3>
+            <h3>Data de Envio: {{ticket.data_criado}}</h3>
+          </ion-label>
+          <ion-button (click)="presentModal(ticket)" class="font" size="default" slot="end" color="success">
+            <ion-icon slot="start" name="eye-sharp"></ion-icon>
+            Ver Detalhes
+          </ion-button>
+        </ion-item>
+
+      </ion-card-header>
+
+    </ion-card>
+
+  </ion-list>
+
+</ion-card>

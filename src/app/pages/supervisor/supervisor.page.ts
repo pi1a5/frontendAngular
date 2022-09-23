@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-useless-escape */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-var */
@@ -42,36 +43,6 @@ export class SupervisorPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    // this.apiSupervisor.getTicketsWithoutSupervisor().subscribe((data) => {
-    //   console.log('Alunos sem orientador: ', data);
-    //   this.ticketsWithoutSupervisor = data;
-    //   for (let index = 0; index < data.length; index++) {
-    //     if (data[index].data_criado) {
-    //       this.ticketsWithoutSupervisor[index].data_criado = this.formatDate({ date: data[index].data_criado });
-    //     }
-    //     if (data[index].data_limite) {
-    //       this.ticketsWithoutSupervisor[index].data_limite = this.formatDate({ date: data[index].data_limite });
-    //     }
-    //   }
-    // }, (error) => {
-    //   console.log('Alunos sem orientador: ', error);
-    // });
-
-    // this.apiSupervisor.getTicketsWithSupervisor().subscribe((data) => {
-    //   console.log('Alunos sob sua orientação: ', data);
-    //   this.ticketsWithSupervisor = data;
-    //   for (let index = 0; index < data.length; index++) {
-    //     if (data[index].data_criado) {
-    //       this.ticketsWithSupervisor[index].data_criado = this.formatDate({ date: data[index].data_criado });
-    //     }
-    //     if (data[index].data_limite) {
-    //       this.ticketsWithSupervisor[index].data_limite = this.formatDate({ date: data[index].data_limite });
-    //     }
-    //   }
-    // }, (error) => {
-    //   console.log('Alunos sob sua orientação: ', error);
-    // });
-
     // this.apiSupervisor.getClosedTicketsWithSupervisor().subscribe((data) => {
     //   console.log('Tickets respondidos: ', data);
     //   this.closedTicketsWithSupervisor = data;
@@ -108,23 +79,6 @@ export class SupervisorPage implements OnInit {
     if (data) {
       await this.ngOnInit();
     }
-  }
-
-  async signOut() {
-    try {
-      await this.ggAuth.signOut();
-      this.router.navigate(['home'], { replaceUrl: true });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  goToProfile() {
-    this.router.navigate(['profile'], { replaceUrl: true });
-  }
-
-  goToChartSupervisors() {
-    this.router.navigate(['chart-supervisors'], { replaceUrl: true });
   }
 
   formatDate({ date }: { date: string; }): string {

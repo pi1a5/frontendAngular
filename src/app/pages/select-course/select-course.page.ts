@@ -1,5 +1,5 @@
-/* eslint-disable no-plusplus */
 /* eslint-disable linebreak-style */
+/* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-return-await */

@@ -1,0 +1,88 @@
+<ion-card-header color="success">
+  <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
+    <ion-card-title slot="start" style="color: white; font-size: 2em;">{{ticket.usuario[0].nome}}
+    </ion-card-title>
+    <ion-badge slot="end" class="font" style="font-size: 1.2em;">{{ticket.etapa.etapa.nome}}
+    </ion-badge>
+    <ion-button slot="end" size="default" color="danger" (click)="dismiss()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-card-header>
+
+<ion-card-content class="contentHeight" style="background-color: var(--ion-color-light)">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8">
+        <ion-title class="font label ion-text-start">
+          Mensagem:
+        </ion-title>
+      </ion-col>
+      <ion-col size="4">
+        <ion-title class="font label ion-text-start">
+          Documentos:
+        </ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="8">
+        <ion-card class="contentCardHeight ion-no-padding ion-no-margin ion-margin-start ion-margin-end"
+          style="background-color: white;">
+          <div class="font ion-text-justify ion-padding ion-margin" style="font-size: 1.5em;">
+            {{ticket.mensagem}}</div>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-list class="contentCardHeight ion-no-margin ion-no-padding">
+          <ion-item *ngFor="let document of ticket.documentos" lines="none" color="success" button="true" shape="round"
+            (click)="showPdf(document.arquivo)" class="ion-margin-bottom">
+            <ion-icon slot="start" name="document"></ion-icon>
+            <ion-label class="documentName">{{document.nome}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-row>
+      <ion-title class="font label ion-text-start">
+        Feedback:
+      </ion-title>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item id="textArea" lines="none" counter="true" [counterFormatter]="customCounterFormatter" class="ion-margin-start">
+          <ion-textarea color="success" [(ngModel)]="textArea" class="font ion-text-justify" rows="5" cols="20"
+            placeholder="Olá, tudo bem? No documento X você precisa..." maxlength="800" style="color: var(--ion-color-medium-shade); font-size: 1.5em;">
+          </ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin ion-padding">
+      <ion-col size="6">
+        <ion-button expand="block" size="large" color="success" (click)="accept()">
+          <ion-icon slot="start" name="thumbs-up-sharp"></ion-icon>
+          <ion-label slot="end" class="font">Aceitar</ion-label>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" size="large" color="danger" (click)="refuse()">
+          <ion-icon slot="start" name="thumbs-down-sharp"></ion-icon>
+          <ion-label slot="end" class="font">Recusar</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-note class="font" style="color: var(--ion-color-medium-shade)">Data de criação: {{ticket.datacriado}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-card-content>

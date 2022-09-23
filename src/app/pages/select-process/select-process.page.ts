@@ -35,8 +35,18 @@ export class SelectProcessPage implements OnInit {
       this.internship = data;
       if (data) this.getPendingTicket();
     }, (error) => {
-      console.log(error);
+      this.presentToast(error.error, 'danger', 'close-circle');
     });
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   async presentLoading() {
@@ -53,7 +63,7 @@ export class SelectProcessPage implements OnInit {
       this.pendingTicket = pendingTicket;
     }, (error) => {
       this.pendingTicket = null;
-      if (error.status !== 404) return console.log(error);
+      this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
 

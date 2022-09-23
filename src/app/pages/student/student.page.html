@@ -32,11 +32,11 @@
           <ion-col *ngIf="!pendingTicket" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
             <ion-card color="light" class="font ion-text-center">
               <ion-card-header class="ion-text-start" color="success">
-                <ion-card-title style="color: #ededed; font-size: 2em;">Ticket Pendente</ion-card-title>
+                <ion-card-title style="color: white; font-size: 2em;">Ticket Pendente</ion-card-title>
               </ion-card-header>
               <ion-card-content class="contentHeight">
                 <ion-card-title class="ion-padding ion-margin">
-                  <ion-note class="font ion-text-center" style="font-size: 1em;">Você não possui ticket pendente
+                  <ion-note class="font ion-text-center" style="color: var(--ion-color-medium-shade); font-size: 1em;">Você não possui ticket pendente
                   </ion-note>
                 </ion-card-title>
                 <hr>
@@ -52,33 +52,50 @@
           <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="3">
             <ion-card color="light" class="font ion-text-center">
               <ion-card-header color="success">
-                <ion-title style="color: #ededed; font-size: 2em;">Tickets Encerrados</ion-title>
+                <ion-title style="color: white; font-size: 2em;">Tickets Encerrados</ion-title>
               </ion-card-header>
 
-              <ion-list style="background-color: var(--ion-color-light);" class="list" *ngIf="closedTickets">
-
-                <ion-item button lines="none" color="light">
-                  <ion-label style="color:#4c4c4c; font-size: 1.5em;" class="font">
-                    Acompanhamento
+              <!-- Tickets Fechados Carregados -->
+              <ion-list *ngIf="closedTickets" style="background-color: var(--ion-color-light);" class="list" >
+                <ion-item *ngFor="let ticket of closedTickets" button color="light" (click)="presentModal(ticket)">
+                  <ion-label class="closeTicketItem">
+                    {{ticket.etapa.etapa.nome}}
                   </ion-label>
-                  <ion-icon name="reader-outline" slot="end" size="large"></ion-icon>
-                  <ion-icon name="checkmark-circle-outline" slot="end" size="large"></ion-icon>
+                  <ion-icon name="reader-outline" slot="end" size="large" class="closeTicketItemIcon"></ion-icon>
+                  <ion-icon name="checkmark-circle-outline" slot="end" size="large" class="closeTicketItemIcon"></ion-icon>
                 </ion-item>
-
               </ion-list>
 
+              <!-- Sem Tickets Fechados -->
               <div *ngIf="closedTickets === null" class="list">
-
                 <ion-card-title class="ion-padding ion-margin">
                   <ion-note class="font ion-text-center" style="font-size: 1em; color: var(--ion-color-medium-shade);">
                     Nenhum ticket encerrado
                   </ion-note>
                 </ion-card-title>
-
                 <ion-card-content class="ion-no-padding ion-padding-horizontal">
                   <hr>
                 </ion-card-content>
               </div>
+
+              <!-- Carregando Tickets Fechados -->
+              <ion-list *ngIf="closedTickets === undefined" style="background-color: var(--ion-color-light);" class="list" >
+                <ion-item color="light">
+                  <ion-label class="closeTicketItem">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 2em;"></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item color="light">
+                  <ion-label class="closeTicketItem">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 2em;"></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item color="light">
+                  <ion-label class="closeTicketItem">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 2em;"></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
 
             </ion-card>
           </ion-col>
