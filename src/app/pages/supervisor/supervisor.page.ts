@@ -13,13 +13,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { format } from 'date-fns';
-import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
-import { GoogleAuthService } from 'src/app/services/google-auth.service';
-import { ModalCardOpenPage } from '../modal-card-open/modal-card-open.page';
-import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page';
 
 @Component({
   selector: 'app-supervisor',
@@ -27,61 +21,9 @@ import { ModelCardClosedPage } from '../model-card-closed/model-card-closed.page
   styleUrls: ['./supervisor.page.scss'],
 })
 export class SupervisorPage implements OnInit {
-  public searchTerm: string;
-
-  public ticketsWithoutSupervisor: any = [];
-
-  public ticketsWithSupervisor: any = [];
-
-  public closedTicketsWithSupervisor: any = [];
-
   constructor(
-    public ggAuth: GoogleAuthService,
-    public router: Router,
-    public apiSupervisor: ApiSupervisorService,
     public modalController: ModalController,
   ) { }
 
-  async ngOnInit() {
-    // this.apiSupervisor.getClosedTicketsWithSupervisor().subscribe((data) => {
-    //   console.log('Tickets respondidos: ', data);
-    //   this.closedTicketsWithSupervisor = data;
-    //   for (let index = 0; index < data.length; index++) {
-    //     if (data[index].data_criado) {
-    //       this.closedTicketsWithSupervisor[index].data_criado = this.formatDate({ date: data[index].data_criado });
-    //     }
-    //     if (data[index].data_limite) {
-    //       this.closedTicketsWithSupervisor[index].data_limite = this.formatDate({ date: data[index].data_limite });
-    //     }
-    //     if (data[index].data_fechado) {
-    //       this.closedTicketsWithSupervisor[index].data_fechado = this.formatDate({ date: data[index].data_fechado });
-    //     }
-    //   }
-    // }, (error) => {
-    //   console.log('Tickets respondidos: ', error);
-    // });
-  }
-
-  async presentModal(ticket: any): Promise<void> {
-    if (ticket.feedback) {
-      const modal = await this.modalController.create({
-        component: ModelCardClosedPage,
-        componentProps: { ticket },
-      });
-      return modal.present();
-    }
-    var modal = await this.modalController.create({
-      component: ModalCardOpenPage,
-      componentProps: { ticket },
-    });
-    await modal.present();
-    var { data } = await modal.onDidDismiss();
-    if (data) {
-      await this.ngOnInit();
-    }
-  }
-
-  formatDate({ date }: { date: string; }): string {
-    return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
-  }
+  ngOnInit() { }
 }

@@ -71,7 +71,7 @@ export class ModalTicketOpenComponent implements OnInit {
     this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa).subscribe((data) => {
       this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
-      this.dismiss();
+      this.modalController.dismiss({ data: true });
     }, (error) => {
       this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');

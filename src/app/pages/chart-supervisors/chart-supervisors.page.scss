@@ -1,3 +1,6 @@
+ion-header::after {
+  background-image: none;
+}
 
 ion-split-pane {
   --border: none !important;
@@ -6,7 +9,7 @@ ion-split-pane {
     // --background: var(--ion-color-success) !important;
 
     ion-content {
-      --background: #3eae91 !important;
+      --background: var(--ion-color-success) !important;
 
     }
   }
@@ -19,69 +22,17 @@ ion-menu.md ion-content {
   --padding-bottom: 20px;
 }
 
-ion-menu.md ion-list {
-  padding: 0;
-  height: 100%;
-}
-
-ion-menu.md ion-list#inbox-list {
-  background-color: #3eae91;
-}
-
-ion-menu.md ion-list#inbox-list ion-card {
-  padding: 1.5em;
-}
-
-ion-menu.md ion-list#inbox-list ion-button {
-  font-family: 'Nunito', sans-serif;
-  font-size: medium;
-  padding: 0.4em;
-  border-radius: 4em;
-}
-
-ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
-}
-
-ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-ion-menu.md ion-item ion-icon {
-  color: #616e7e;
-}
-
-ion-item.selected {
-  --color: var(--ion-color-primary);
-}
-
 .title {
   font-family: 'Nunito', sans-serif;
   font-size: 2em;
 }
 
-.list {
-  max-height: 80vh;
-  overflow: auto;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+.background {
+  --background: url(../../../assets/backgroundIF.jpg);
 }
 
-.list::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}
+// Chart
 
-.avatar {
-  padding: 0.1em;
-}
-
-.cardChip:hover {
-  padding-top: 2em;
-  padding-bottom: 2em;
-  cursor: default;
-}
-
-.icon {
-  position: absolute;
-  right: 0px;
+.chart {
+  height: 80vh;
 }

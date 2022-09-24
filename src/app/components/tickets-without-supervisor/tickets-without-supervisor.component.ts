@@ -57,6 +57,10 @@ export class TicketsWithoutSupervisorComponent implements OnInit {
       cssClass: 'modalClosedTickets',
       componentProps: { ticket },
     });
-    return modal.present();
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    if (data) this.ngOnInit();
   }
 }
