@@ -6,6 +6,7 @@
 /* eslint-disable import/prefer-default-export */
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
 
 @Component({
@@ -16,11 +17,21 @@ import { format } from 'date-fns';
 export class PendingTicketComponent implements OnInit {
   @Input() pendingTicket: any = undefined;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public toastController: ToastController) { }
 
   ngOnInit() {
     // console.log(this.pendingTicket[0]);
     this.pendingTicket[0].datacriado = this.formatDate({ date: this.pendingTicket[0].datacriado });
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   formatDate({ date }: { date: string; }): string {
@@ -28,6 +39,8 @@ export class PendingTicketComponent implements OnInit {
   }
 
   showPdf(url: string) {
+    if (!url) return this.presentToast('O documento não pode ser aberto', 'danger', 'close-circle');
+
     const navigationExtras: NavigationExtras = {
       queryParams: { url },
     };
@@ -36,6 +49,6 @@ export class PendingTicketComponent implements OnInit {
       this.router.createUrlTree(['/pdf'], navigationExtras),
     );
 
-    window.open(urlLoad, '_blank');
+    return window.open(urlLoad, '_blank');
   }
 }

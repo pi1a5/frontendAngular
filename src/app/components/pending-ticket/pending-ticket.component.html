@@ -4,7 +4,8 @@
     <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
       <ion-card-title slot="start" style="color: white; font-size: 2em;">Ticket Pendente
       </ion-card-title>
-      <ion-badge slot="end" class="font" style="font-size: 1.2em;">Data de envio: {{pendingTicket[0].datacriado}}</ion-badge>
+      <ion-badge slot="end" class="font" style="font-size: 1.2em;">Data de envio: {{pendingTicket[0].datacriado}}
+      </ion-badge>
     </ion-item>
   </ion-card-header>
 
@@ -31,17 +32,19 @@
 
       <ion-row>
         <ion-col size="8">
-          <ion-card class="contentCardHeight ion-no-padding ion-no-margin ion-margin-start ion-margin-end" style="background-color: white;">
-            <div class="font ion-text-justify ion-padding ion-margin" style="font-size: 1.5em;">{{pendingTicket[0].mensagem}}</div>
+          <ion-card class="contentCardHeight ion-no-padding ion-no-margin ion-margin-start ion-margin-end"
+            style="background-color: white;">
+            <div class="font ion-text-justify ion-padding ion-margin" style="font-size: 1.5em;">
+              {{pendingTicket[0].mensagem}}</div>
           </ion-card>
         </ion-col>
         <ion-col size="4">
           <ion-list class="contentCardHeight ion-no-margin ion-no-padding">
-            <ion-item *ngFor="let document of pendingTicket[0].documentos" lines="none" color="success" button="true" shape="round"
-              (click)="showPdf(document.arquivo)" class="ion-margin-bottom">
+            <ion-item *ngFor="let document of pendingTicket[0].documentos" lines="none" color="success" button="true"
+              shape="round" (click)="showPdf(document ? document.arquivo : null)" class="ion-margin-bottom">
               <ion-icon slot="start" name="document"></ion-icon>
-              <ion-label class="documentName">{{document.nome}}</ion-label>
-            </ion-item> 
+              <ion-label class="documentName">{{document ? document.nome : 'Documento'}}</ion-label>
+            </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>

@@ -44,9 +44,9 @@
       <ion-col size="4">
         <ion-list class="contentCardHeight ion-no-margin ion-no-padding">
           <ion-item *ngFor="let document of ticket.documentos" lines="none" color="success" button="true" shape="round"
-            (click)="showPdf(document.arquivo)" class="ion-margin-bottom">
+            (click)="showPdf(document ? document.arquivo : null)" class="ion-margin-bottom">
             <ion-icon slot="start" name="document"></ion-icon>
-            <ion-label class="documentName">{{document.nome}}</ion-label>
+            <ion-label class="documentName">{{document ? document.nome : 'Documento'}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>

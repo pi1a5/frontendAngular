@@ -101,6 +101,8 @@ export class ModalTicketOpenComponent implements OnInit {
   }
 
   showPdf(url: string) {
+    if (!url) return this.presentToast('O documento não pode ser aberto', 'danger', 'close-circle');
+
     const navigationExtras: NavigationExtras = {
       queryParams: { url },
     };
@@ -109,6 +111,6 @@ export class ModalTicketOpenComponent implements OnInit {
       this.router.createUrlTree(['/pdf'], navigationExtras),
     );
 
-    window.open(urlLoad, '_blank');
+    return window.open(urlLoad, '_blank');
   }
 }
