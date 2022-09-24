@@ -94,3 +94,16 @@ ion-select::part(icon) {
   color: var(--ion-color-success);
   opacity: 1;
 }
+
+// Checkbox
+
+ion-checkbox {
+  --size: 32px;
+  --background-checked: var(--ion-color-success);
+  --checkmark-color: white;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid var(--ion-color-success);
+}

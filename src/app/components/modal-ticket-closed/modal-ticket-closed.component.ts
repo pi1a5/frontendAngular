@@ -25,6 +25,9 @@ export class ModalTicketClosedComponent implements OnInit {
     if (this.ticket.datacriado.length > 10) {
       this.ticket.datacriado = this.formatDate({ date: this.ticket.datacriado });
     }
+    if (this.ticket.datafechado.length > 10) {
+      this.ticket.datafechado = this.formatDate({ date: this.ticket.datafechado });
+    }
   }
 
   dismiss() {

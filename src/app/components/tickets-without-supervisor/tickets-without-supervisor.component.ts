@@ -36,7 +36,7 @@ export class TicketsWithoutSupervisorComponent implements OnInit {
       console.log('Alunos sem orientador: ', data);
       this.tickets = data;
     }, (error) => {
-      console.log('Alunos sem orientador: ', error);
+      this.tickets = null;
       this.presentToast(error.error, 'danger', 'close-circle');
     });
   }

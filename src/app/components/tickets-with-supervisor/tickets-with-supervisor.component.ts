@@ -37,7 +37,7 @@ export class TicketsWithSupervisorComponent implements OnInit {
       console.log('Alunos com orientador: ', data);
       this.tickets = data;
     }, (error) => {
-      console.log('Alunos com orientador: ', error);
+      this.tickets = null;
       this.presentToast(error.error, 'danger', 'close-circle');
     });
   }

@@ -59,24 +59,29 @@ export class ModalTicketOpenComponent implements OnInit {
   }
 
   confirm(accept: boolean) {
-    if (this.validate()) {
-      this.presentLoading();
-
-      this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa).subscribe((data) => {
-        this.loadingController.dismiss();
-        this.presentToast(data, 'success', 'checkmark-circle');
-        this.dismiss();
-      }, (error) => {
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-        this.dismiss();
-      });
+    if (this.validate(accept)) {
+      if (accept === true && this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
+      this.submitFeedback(accept);
     }
   }
 
-  validate() {
-    if (!this.textArea) {
-      this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
+  submitFeedback(accept: boolean) {
+    this.presentLoading();
+
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa).subscribe((data) => {
+      this.loadingController.dismiss();
+      this.presentToast(data, 'success', 'checkmark-circle');
+      this.dismiss();
+    }, (error) => {
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+      this.dismiss();
+    });
+  }
+
+  validate(accept: boolean) {
+    if (accept === false && this.textArea.length < 100) {
+      this.presentToast('A mensagem deve conter no mínimo 100 caracteres', 'danger', 'close-circle');
       return false;
     }
 

@@ -40,6 +40,7 @@ export class FaseEditComponent implements OnInit {
       nome: this.etapa.nome,
       prazo: this.etapa.prazo,
       documentos: this.etapa.documentos,
+      loop: this.etapa.loop,
     };
   }
 
@@ -104,6 +105,10 @@ export class FaseEditComponent implements OnInit {
     }
 
     return o1.id === o2.id;
+  }
+
+  handleChangeCheckbox(ev) {
+    this.editFase.loop = ev;
   }
 
   handleChangeDocuments(ev) {

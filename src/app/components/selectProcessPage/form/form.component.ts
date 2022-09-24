@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
 
   public documentsControl: any[] = [];
 
-  public textArea: string = null;
+  public textArea: string = '';
 
   constructor(
     public router: Router,
@@ -170,8 +170,9 @@ export class FormComponent implements OnInit {
     //   this.presentToast('Prazo limite obrigatório', 'danger', 'close-circle');
     //   return false;
     // }
-    if (!this.textArea) {
-      this.presentToast('Mensagem obrigatória', 'danger', 'close-circle');
+
+    if (this.textArea.length < 100) {
+      this.presentToast('A mensagem deve conter no mínimo 100 caracteres', 'danger', 'close-circle');
       return false;
     }
 

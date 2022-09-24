@@ -132,6 +132,7 @@ export class ProcessEditComponent implements OnInit {
       nome: 'Nova etapa',
       prazo: 10,
       documentos: [],
+      loop: false,
     };
 
     this.handleModalResponse(await this.presentModal(etapa, this.documents, true));
