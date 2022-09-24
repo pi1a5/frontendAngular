@@ -58,4 +58,10 @@ export class ApiStudentService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  checkIfEnded(): Observable<any> {
+    return this.http.post(`${this.url}api/checkIfEnded`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
 }

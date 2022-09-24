@@ -1,0 +1,29 @@
+.contentHeight {
+  height: 85vh;
+  // overflow-y: auto;
+}
+
+// List accordion 
+
+.listHeight {
+  height: 68vh;
+  overflow-y: auto;
+}
+
+// font
+
+.fontSize {
+  font-size: 1.5em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+ion-item.courseItem {
+  --border-radius: 0.5em;
+}
+
+div[slot="content"] {
+  background: rgba(var(--ion-color-success-rgb), 0.25)
+}

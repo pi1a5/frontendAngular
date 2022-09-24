@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-empty-function */
@@ -8,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
+import { ApiStudentService } from 'src/app/services/api-student.service';
 
 @Component({
   selector: 'app-pending-ticket',
@@ -17,10 +19,13 @@ import { format } from 'date-fns';
 export class PendingTicketComponent implements OnInit {
   @Input() pendingTicket: any = undefined;
 
-  constructor(public router: Router, public toastController: ToastController) { }
+  constructor(
+    public apiStudent: ApiStudentService,
+    public router: Router,
+    public toastController: ToastController,
+  ) { }
 
   ngOnInit() {
-    // console.log(this.pendingTicket[0]);
     this.pendingTicket[0].datacriado = this.formatDate({ date: this.pendingTicket[0].datacriado });
   }
 

@@ -33,11 +33,11 @@ export class ApiSupervisorService {
     });
   }
 
-  getClosedTicketsWithSupervisor(): Observable<any> {
-    return this.http.post(`${this.url}api/getClosedTicketsWithSupervisor`, {
-      sub: sessionStorage.getItem('userId'),
-    });
-  }
+  // getClosedTicketsWithSupervisor(): Observable<any> {
+  //   return this.http.post(`${this.url}api/getClosedTicketsWithSupervisor`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //   });
+  // }
 
   // Card Modal
   feedbackTicket(idTicket: number, feedback: string, accept: boolean, step: any): Observable<any> {
@@ -76,6 +76,14 @@ export class ApiSupervisorService {
   deleteProcess(processId: number): Observable<any> {
     return this.http.post(`${this.url}api/deleteProcesso`, {
       idprocesso: processId,
+    });
+  }
+
+  // Internships
+
+  getAllBySupervisor(): Observable<any> {
+    return this.http.post(`${this.url}api/getAllBySupervisor`, {
+      sub: sessionStorage.getItem('userId'),
     });
   }
 }

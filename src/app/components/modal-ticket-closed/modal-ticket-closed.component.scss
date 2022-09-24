@@ -8,6 +8,10 @@ hr {
   visibility: visible !important;
 }
 
+.contentHeight {
+  height: 100vh;
+}
+
 // Títulos 
 
 .label {
@@ -29,7 +33,7 @@ ion-badge {
 // Documentos
 
 .contentCardHeight {
-  height: 25vh;
+  height: 22vh;
   overflow-y: auto;
   background-color: var(--ion-color-light);
 }
@@ -41,4 +45,12 @@ ion-item {
 .documentName {
   font-size: 1.2em;
   font-family: 'Nunito', sans-serif;
+}
+
+// Nomes dos usuarios
+
+.username {
+  font-size: 1.5em; 
+  font-family: 'Nunito', sans-serif;
+  color: var(--ion-color-medium-shade);
 }

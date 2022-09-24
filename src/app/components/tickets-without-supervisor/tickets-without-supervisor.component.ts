@@ -33,7 +33,7 @@ export class TicketsWithoutSupervisorComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getTicketsWithoutSupervisor().subscribe((data) => {
-      console.log('Alunos sem orientador: ', data);
+      // console.log('Alunos sem orientador: ', data);
       this.tickets = data;
     }, (error) => {
       this.tickets = null;

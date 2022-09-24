@@ -22,6 +22,8 @@ export class SelectProcessPage implements OnInit {
 
   public pendingTicket: Object = undefined;
 
+  public ended: string = undefined;
+
   public internship: Object = undefined;
 
   constructor(
@@ -33,7 +35,7 @@ export class SelectProcessPage implements OnInit {
   ngOnInit() {
     this.apiStudent.checkIfHasInternship().subscribe((data) => {
       this.internship = data;
-      if (data) this.getPendingTicket();
+      if (data) this.checkIfEnded();
     }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
@@ -56,6 +58,15 @@ export class SelectProcessPage implements OnInit {
       spinner: 'crescent',
     });
     return await loading.present();
+  }
+
+  checkIfEnded() {
+    this.apiStudent.checkIfEnded().subscribe((data) => {
+      this.ended = data;
+      if (data) this.getPendingTicket();
+    }, (error) => {
+      this.ended = null;
+    });
   }
 
   getPendingTicket() {

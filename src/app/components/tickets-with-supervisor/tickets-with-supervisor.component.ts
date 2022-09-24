@@ -34,7 +34,7 @@ export class TicketsWithSupervisorComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getTicketsWithSupervisor().subscribe((data) => {
-      console.log('Alunos com orientador: ', data);
+      // console.log('Alunos com orientador: ', data);
       this.tickets = data;
     }, (error) => {
       this.tickets = null;

@@ -21,7 +21,7 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
   styleUrls: ['./student.page.scss'],
 })
 export class StudentPage implements OnInit {
-  public pendingTicket: any = undefined;
+  public pendingTicket: [] = undefined;
 
   public closedTickets: [] = undefined;
 

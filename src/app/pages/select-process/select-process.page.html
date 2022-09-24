@@ -18,21 +18,30 @@
 
       <div *ngIf="internship" class="flex-center">
 
-        <!-- Formulário -->
-        <div *ngIf="pendingTicket === null">
-          <app-form [confirmedProcessFromBack]="internship">
-          </app-form>
+        <div *ngIf="ended === null">
+
+          <!-- Formulário -->
+          <div *ngIf="pendingTicket === null">
+            <app-form [confirmedProcessFromBack]="internship">
+            </app-form>
+          </div>
+
+          <div *ngIf="pendingTicket" class="ion-padding ion-margin">
+            <ion-row>
+              <ion-col size="4">
+                <app-pending-ticket-warning></app-pending-ticket-warning>
+              </ion-col>
+              <ion-col size="8">
+                <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
+              </ion-col>
+            </ion-row>
+          </div>
+
         </div>
 
-        <div *ngIf="pendingTicket" class="ion-padding ion-margin">
-          <ion-row>
-            <ion-col size="4">
-              <app-pending-ticket-warning></app-pending-ticket-warning>
-            </ion-col>
-            <ion-col size="8">
-              <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
-            </ion-col>
-          </ion-row>
+
+        <div *ngIf="ended">
+          <h3>{{ended}}</h3>
         </div>
 
       </div>
