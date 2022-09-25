@@ -33,7 +33,7 @@ export class ModalTicketOpenComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.ticket);
+    console.log(this.ticket);
     if (this.ticket.datacriado.length > 10) {
       this.ticket.datacriado = this.formatDate({ date: this.ticket.datacriado });
     }

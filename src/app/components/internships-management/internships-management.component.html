@@ -1,12 +1,13 @@
 <ion-card class="contentHeight">
-  <ion-card-header>
-    <ion-searchbar 
-      [(ngModel)]="searchTerm"
-      class="font searchbar" 
-      color="success" 
-      show-clear-button="always" 
-      clear-icon="trash-bin"
-      placeholder="Tente: SP1234567">
+  <ion-card-header class="ion-text-center">
+    <ion-toolbar color="translucent">
+      <ion-menu-button color="success" slot="start"></ion-menu-button>
+      <ion-card-title color="success" class="title ion-margin ion-padding">
+        Gestão de Estágios
+      </ion-card-title>
+    </ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar" color="success" show-clear-button="always"
+      clear-icon="trash-bin" placeholder="Tente: SP1234567">
     </ion-searchbar>
   </ion-card-header>
   <ion-card-content>
@@ -38,7 +39,20 @@
       </ion-grid>
     </ion-item>
     <div class="listHeight">
-      <ion-accordion-group expand="inset">
+
+      <!-- Estágios Carregando -->
+
+      <ion-accordion-group *ngIf="internships === undefined" expand="inset">
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+      </ion-accordion-group>
+
+      <!-- Estágios Carregados -->
+
+      <ion-accordion-group *ngIf="internships" expand="inset">
         <ion-accordion *ngFor="let internship of internships | filter:searchTerm">
           <ion-item slot="header" color="success">
 
@@ -47,7 +61,7 @@
                 <ion-col size="2">
                   <ion-item lines="none" color="transparent">
                     <ion-avatar slot="start" size="large">
-                      <img alt="Silhouette of a person's head" src="{{internship.aluno[0].foto}}" />
+                      <img [src]="internship.aluno[0].foto" onError="this.src = '../../../assets/avatarIcon.png'">
                     </ion-avatar>
                     <ion-label class="font">
                       <h3>{{internship.aluno[0].nome}}</h3>
@@ -105,14 +119,33 @@
               <ion-icon slot="start" name="ticket" size="large"></ion-icon>
               <ion-label class="font fontSize">{{ticket.etapa.etapa.nome}}</ion-label>
             </ion-item> -->
-            <ion-item class="ticketItem ion-padding" lines="none"
-              button="true" color="success" (click)="presentModal(internship.tickets)">
+            <ion-item class="ticketItem ion-padding" lines="none" button="true" color="success"
+              (click)="presentModal(internship.tickets)">
               <ion-icon slot="start" name="ticket" size="large"></ion-icon>
               <ion-label class="font fontSize">{{internship.tickets.etapa.etapa.nome}}</ion-label>
             </ion-item>
           </div>
         </ion-accordion>
       </ion-accordion-group>
+
+      <!-- Sem Estágios -->
+
+      <!-- <ion-accordion-group *ngIf="internships === null" expand="inset" class="flex-center ion-no-padding ion-no-margin">
+        <ion-item class="font ion-no-padding ion-no-margin" lines="none" style="font-size: 4em; color: var(--ion-color-medium-shade)">
+          Não há estágios
+        </ion-item>
+      </ion-accordion-group> -->
+
+      <ion-row *ngIf="internships === null" size="12" class="ion-padding ion-margin">
+        <ion-col class="flex-center ion-padding ion-margin">
+          <ion-card-title class="ion-padding ion-margin">
+            <ion-note class="font ion-text-center ion-padding ion-margin" style="color: var(--ion-color-medium-shade); font-size: 2em;">
+              Você não possui nenhum estágio
+            </ion-note>
+          </ion-card-title>
+        </ion-col>
+      </ion-row>
+
     </div>
   </ion-card-content>
 </ion-card>
