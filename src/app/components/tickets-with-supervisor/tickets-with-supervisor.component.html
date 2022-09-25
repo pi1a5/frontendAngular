@@ -38,7 +38,7 @@
 
         <ion-item lines="none" color="transparent">
           <ion-avatar slot="start" size="large">
-            <img src="{{ticket.usuario[0].foto}}">
+            <img [src]="ticket.usuario[0].foto" onError="this.src = '../../../assets/avatarIcon.png'">
           </ion-avatar>
           <ion-label class="font">
             <h3 style="color: var(--ion-color-medium-shade)">{{ticket.usuario[0].nome}}</h3>

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { InternshipsManagementComponent } from 'src/app/components/internships-management/internships-management.component';
@@ -19,6 +20,7 @@ import { InternshipsPageRoutingModule } from './internships-routing.module';
     FormsModule,
     IonicModule,
     InternshipsPageRoutingModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     InternshipsPage,

@@ -63,7 +63,7 @@ export class SelectProcessPage implements OnInit {
   checkIfEnded() {
     this.apiStudent.checkIfEnded().subscribe((data) => {
       this.ended = data;
-      if (data) this.getPendingTicket();
+      if (!data) this.getPendingTicket();
     }, (error) => {
       this.ended = null;
     });

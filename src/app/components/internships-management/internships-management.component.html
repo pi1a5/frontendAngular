@@ -1,7 +1,12 @@
 <ion-card class="contentHeight">
   <ion-card-header>
-    <ion-searchbar class="font" color="success" show-clear-button="always" clear-icon="trash-bin"
-      placeholder="sp1234567">
+    <ion-searchbar 
+      [(ngModel)]="searchTerm"
+      class="font searchbar" 
+      color="success" 
+      show-clear-button="always" 
+      clear-icon="trash-bin"
+      placeholder="Tente: SP1234567">
     </ion-searchbar>
   </ion-card-header>
   <ion-card-content>
@@ -34,7 +39,7 @@
     </ion-item>
     <div class="listHeight">
       <ion-accordion-group expand="inset">
-        <ion-accordion *ngFor="let internship of internships">
+        <ion-accordion *ngFor="let internship of internships | filter:searchTerm">
           <ion-item slot="header" color="success">
 
             <ion-grid>
@@ -74,10 +79,36 @@
           </ion-item>
 
           <div class="ion-padding" slot="content">
-            <ion-item *ngFor="let ticket of internship.tickets" class="courseItem ion-padding" lines="none"
+            <ion-item class="ion-text-center font" color="transparent" lines="none" style="font-size: 1.5em;">
+              <ion-grid style="color: var(--ion-color-medium-shade);">
+                <ion-row>
+                  <ion-col size="2">
+                    Etapa
+                  </ion-col>
+                  <ion-col size="2">
+                    Criado
+                  </ion-col>
+                  <ion-col size="2">
+                    Fechado
+                  </ion-col>
+                  <ion-col size="1.5">
+                    Aceito
+                  </ion-col>
+                  <ion-col size="2">
+                    Carga
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+            <!-- <ion-item *ngFor="let ticket of internship.tickets" class="ticketItem ion-padding" lines="none"
               button="true" color="success" (click)="presentModal(ticket)">
               <ion-icon slot="start" name="ticket" size="large"></ion-icon>
               <ion-label class="font fontSize">{{ticket.etapa.etapa.nome}}</ion-label>
+            </ion-item> -->
+            <ion-item class="ticketItem ion-padding" lines="none"
+              button="true" color="success" (click)="presentModal(internship.tickets)">
+              <ion-icon slot="start" name="ticket" size="large"></ion-icon>
+              <ion-label class="font fontSize">{{internship.tickets.etapa.etapa.nome}}</ion-label>
             </ion-item>
           </div>
         </ion-accordion>

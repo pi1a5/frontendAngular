@@ -20,10 +20,19 @@
   font-family: 'Nunito', sans-serif;
 }
 
-ion-item.courseItem {
+// ticket
+
+ion-item.ticketItem {
   --border-radius: 0.5em;
 }
 
 div[slot="content"] {
   background: rgba(var(--ion-color-success-rgb), 0.25)
+}
+
+// searchbar 
+
+ion-searchbar.searchbar {
+  --border-radius: 2em;
+  size: 4em;
 }

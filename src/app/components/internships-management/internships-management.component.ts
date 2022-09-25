@@ -18,6 +18,8 @@ import { ModalTicketOpenComponent } from '../modal-ticket-open/modal-ticket-open
   styleUrls: ['./internships-management.component.scss'],
 })
 export class InternshipsManagementComponent implements OnInit {
+  public searchTerm: string;
+
   public internships: any = undefined;
 
   constructor(
