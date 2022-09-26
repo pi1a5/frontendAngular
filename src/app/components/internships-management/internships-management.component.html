@@ -6,7 +6,7 @@
         Gestão de Estágios
       </ion-card-title>
     </ion-toolbar>
-    <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar" color="success" show-clear-button="always"
+    <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar ion-text-start" color="success" show-clear-button="always"
       clear-icon="trash-bin" placeholder="Tente: SP1234567">
     </ion-searchbar>
   </ion-card-header>
@@ -17,17 +17,17 @@
           <ion-col size="2">
             Aluno
           </ion-col>
-          <ion-col size="2">
+          <ion-col size="1.85">
             Curso
           </ion-col>
-          <ion-col size="2">
+          <ion-col size="2.1">
             Processo
           </ion-col>
           <ion-col size="1.5">
             Data Criado
           </ion-col>
           <ion-col size="2">
-            Status
+            Estado
           </ion-col>
           <ion-col size="2">
             Horas Atuais
@@ -59,18 +59,18 @@
             <ion-grid>
               <ion-row class="font ion-align-items-center">
                 <ion-col size="2">
-                  <ion-item lines="none" color="transparent">
+                  <ion-item lines="none" color="none" class="ion-no-padding ion-no-margin">
                     <ion-avatar slot="start" size="large">
-                      <img [src]="internship.aluno[0].foto" onError="this.src = '../../../assets/avatarIcon.png'">
+                      <img [src]="internship.aluno.foto" onError="this.src = '../../../assets/avatarIcon.png'">
                     </ion-avatar>
                     <ion-label class="font">
-                      <h3>{{internship.aluno[0].nome}}</h3>
-                      <p style="font-size: 1.2em;">{{internship.aluno[0].prontuario}}</p>
+                      <h3>{{internship.aluno.nome}}</h3>
+                      <p style="font-size: 1.2em;">{{internship.aluno.prontuario}}</p>
                     </ion-label>
                   </ion-item>
                 </ion-col>
                 <ion-col size="2" class="ion-text-center">
-                  {{internship.aluno[0].curso.nome}}
+                  {{internship.aluno.curso.nome}}
                 </ion-col>
                 <ion-col size="2" class="ion-text-center fontSize">
                   {{internship.processo}}
@@ -85,7 +85,7 @@
                   Fechado
                 </ion-col>
                 <ion-col size="2" class="ion-text-center fontSize">
-                  {{internship.aluno[0].cargatotal}} Hora(s)
+                  {{internship.aluno.cargatotal}} Hora(s)
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -96,33 +96,61 @@
             <ion-item class="ion-text-center font" color="transparent" lines="none" style="font-size: 1.5em;">
               <ion-grid style="color: var(--ion-color-medium-shade);">
                 <ion-row>
-                  <ion-col size="2">
+                  <ion-col size="1.2">
+                    <ion-icon name="ticket" size="large"></ion-icon>
+                  </ion-col>
+                  <ion-col size="2.2">
                     Etapa
                   </ion-col>
-                  <ion-col size="2">
+                  <ion-col size="2.7">
                     Criado
                   </ion-col>
-                  <ion-col size="2">
+                  <ion-col size="1.2">
                     Fechado
                   </ion-col>
-                  <ion-col size="1.5">
-                    Aceito
+                  <ion-col size="2.75">
+                    Status
                   </ion-col>
-                  <ion-col size="2">
-                    Carga
+                  <ion-col size="1.2">
+                    Horas +
                   </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-item>
-            <!-- <ion-item *ngFor="let ticket of internship.tickets" class="ticketItem ion-padding" lines="none"
-              button="true" color="success" (click)="presentModal(ticket)">
-              <ion-icon slot="start" name="ticket" size="large"></ion-icon>
-              <ion-label class="font fontSize">{{ticket.etapa.etapa.nome}}</ion-label>
-            </ion-item> -->
-            <ion-item class="ticketItem ion-padding" lines="none" button="true" color="success"
-              (click)="presentModal(internship.tickets)">
-              <ion-icon slot="start" name="ticket" size="large"></ion-icon>
-              <ion-label class="font fontSize">{{internship.tickets.etapa.etapa.nome}}</ion-label>
+            <ion-item *ngFor="let ticket of internship.tickets; let indexOfElement=index;" class="ticketItem ion-margin"
+              lines="none" button="true" color="success" (click)="presentModal(ticket)">
+              <ion-grid>
+                <ion-row class="font flex-center ion-text-center" style="font-size: 1.3em;">
+                  <ion-col size="0.5">
+                    {{indexOfElement+1}}
+                  </ion-col>
+                  <ion-col size="3">
+                    {{ticket.etapa}}
+                  </ion-col>
+                  <ion-col size="2">
+                    {{ticket.datacriado}}
+                  </ion-col>
+                  <ion-col *ngIf="ticket.datafechado === null" size="2">
+                    -
+                  </ion-col>
+                  <ion-col *ngIf="ticket.datafechado" size="2">
+                    {{ticket.datafechado}}
+                  </ion-col>
+                  <ion-col *ngIf="ticket.aceito === null" size="2">
+                    -
+                  </ion-col>
+                  <ion-col *ngIf="ticket.aceito" size="2">
+                    Aceito
+                  </ion-col>
+                  <ion-col *ngIf="ticket.aceito === false" size="2">
+                    Recusado
+                  </ion-col>
+                  <ion-col size="2">
+                    0 Hora(s)
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
             </ion-item>
           </div>
         </ion-accordion>
@@ -130,16 +158,11 @@
 
       <!-- Sem Estágios -->
 
-      <!-- <ion-accordion-group *ngIf="internships === null" expand="inset" class="flex-center ion-no-padding ion-no-margin">
-        <ion-item class="font ion-no-padding ion-no-margin" lines="none" style="font-size: 4em; color: var(--ion-color-medium-shade)">
-          Não há estágios
-        </ion-item>
-      </ion-accordion-group> -->
-
       <ion-row *ngIf="internships === null" size="12" class="ion-padding ion-margin">
         <ion-col class="flex-center ion-padding ion-margin">
           <ion-card-title class="ion-padding ion-margin">
-            <ion-note class="font ion-text-center ion-padding ion-margin" style="color: var(--ion-color-medium-shade); font-size: 2em;">
+            <ion-note class="font ion-text-center ion-padding ion-margin"
+              style="color: var(--ion-color-medium-shade); font-size: 2em;">
               Você não possui nenhum estágio
             </ion-note>
           </ion-card-title>

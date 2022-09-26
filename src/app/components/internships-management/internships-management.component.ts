@@ -29,8 +29,8 @@ export class InternshipsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getAllBySupervisor().subscribe((data) => {
-      console.log(data);
-      this.internships = data;
+      console.log(data.processos);
+      this.internships = data.processos;
     }, (error) => {
       console.log(error);
     });
@@ -41,8 +41,6 @@ export class InternshipsManagementComponent implements OnInit {
   }
 
   async presentModal(ticket: any) {
-    console.log(ticket);
-
     if (ticket.resposta) {
       const modal = await this.modalController.create({
         component: ModalTicketClosedComponent,

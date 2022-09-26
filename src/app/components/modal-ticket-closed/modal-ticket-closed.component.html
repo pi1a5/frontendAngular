@@ -15,7 +15,7 @@
 <ion-card-content class="contentHeight" style="background-color: var(--ion-color-light)">
   <ion-card-title class="ion-padding ion-no-margin ion-text-center" style="height: 9vh;">
     <ion-title class="font label flex-center">
-      {{ticket.etapa.etapa.nome}}
+      {{ticket.etapa}}
     </ion-title>
   </ion-card-title>
   <hr>
@@ -27,9 +27,9 @@
         </ion-title> -->
         <ion-item color="transparent" lines="none">
           <ion-avatar slot="start">
-            <img [src]="ticket.aluno[0].foto" onError="this.src = '../../../assets/avatarIcon.png'">
+            <img [src]="ticket.envolvidos ? ticket.envolvidos.aluno[0].foto : '../../../assets/avatarIcon.png'" onError="this.src = '../../../assets/avatarIcon.png'">
           </ion-avatar>
-          <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">{{ticket.aluno[0].nome}}
+          <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">{{ticket.envolvidos ? ticket.envolvidos.aluno[0].nome : 'Aluno'}}
           </ion-label>
         </ion-item>
       </ion-col>
@@ -68,9 +68,9 @@
       <ion-col>
         <ion-item color="transparent" lines="none">
           <ion-avatar slot="start">
-            <img [src]="ticket.orientador.foto" onError="this.src = '../../../assets/avatarIcon.png'">
+            <img [src]="ticket.envolvidos ? ticket.envolvidos.orientador[0].foto : '../../../assets/avatarIcon.png'" onError="this.src = '../../../assets/avatarIcon.png'">
           </ion-avatar>
-          <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">{{ticket.orientador.nome}}
+          <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">{{ticket.envolvidos ? ticket.envolvidos.orientador[0].nome : 'Orientador'}}
           </ion-label>
         </ion-item>
       </ion-col>
