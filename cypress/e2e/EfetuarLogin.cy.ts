@@ -2,14 +2,24 @@ describe('Efetuar Login', () => {
 
 
   beforeEach(() => {
-    cy.visit('/home')
+    cy.visit('/home');
+  
+    it('clicar botão de Login', () => {
+      cy.get('.button').click();
+    })
 
-    cy.get('[data-test-id="username"]').type('deivid.almeida@aluno.ifsp.edu.br')
-
-    cy.get('[data-test-id="username"]').type('deivid.almeida@aluno.ifsp.edu.br')
-    cy.get('[data-test-id="username"]').type('deivid.almeida@aluno.ifsp.edu.br')
-
+    
   });
+
+
+
+
+
+
+
+
+
+
 
   it('Visitar Página de Aluno', () => {
     cy.visit('/student')
