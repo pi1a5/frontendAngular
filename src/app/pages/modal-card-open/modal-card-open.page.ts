@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable no-return-await */
@@ -64,32 +65,32 @@ export class ModalCardOpenPage implements OnInit {
   async accept() {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
-    this.apiSupervisor.feedbackTicket({ idTicket: this.ticket.id, feedback: this.textArea, accept: true }).subscribe((data) => {
-      // console.log(data);
-      this.loadingController.dismiss();
-      this.presentToast('Ticket Aceito', 'success', 'checkmark-circle');
-      this.modalController.dismiss({ data: true });
-    }, (error) => {
-      console.log(error);
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
-      this.dismiss();
-    });
+    // this.apiSupervisor.feedbackTicket({ idTicket: this.ticket.id, feedback: this.textArea, accept: true }).subscribe((data) => {
+    //   // console.log(data);
+    //   this.loadingController.dismiss();
+    //   this.presentToast('Ticket Aceito', 'success', 'checkmark-circle');
+    //   this.modalController.dismiss({ data: true });
+    // }, (error) => {
+    //   console.log(error);
+    //   this.loadingController.dismiss();
+    //   this.presentToast(error.error, 'danger', 'close-circle');
+    //   this.dismiss();
+    // });
   }
 
   async refuse() {
     if (!this.textArea) return this.presentToast('Feedback obrigatório', 'danger', 'close-circle');
     await this.presentLoading();
-    this.apiSupervisor.feedbackTicket({ idTicket: this.ticket.id, feedback: this.textArea, accept: false }).subscribe((data) => {
-      this.loadingController.dismiss();
-      this.presentToast('Ticket Recusado', 'success', 'checkmark-circle');
-      this.modalController.dismiss({ data: true });
-    }, (error) => {
-      console.log(error);
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
-      this.dismiss();
-    });
+    // this.apiSupervisor.feedbackTicket({ idTicket: this.ticket.id, feedback: this.textArea, accept: false }).subscribe((data) => {
+    //   this.loadingController.dismiss();
+    //   this.presentToast('Ticket Recusado', 'success', 'checkmark-circle');
+    //   this.modalController.dismiss({ data: true });
+    // }, (error) => {
+    //   console.log(error);
+    //   this.loadingController.dismiss();
+    //   this.presentToast(error.error, 'danger', 'close-circle');
+    //   this.dismiss();
+    // });
   }
 
   showPdf(url: string) {

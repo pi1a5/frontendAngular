@@ -1,0 +1,43 @@
+.contentHeight {
+  height: 95vh;
+  // overflow-y: auto;
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5em;
+}
+
+// List accordion 
+
+.listHeight {
+  height: 68vh;
+  overflow-y: auto;
+}
+
+// font
+
+.fontSize {
+  font-size: 1.5em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+// ticket
+
+ion-item.ticketItem {
+  --border-radius: 0.5em;
+}
+
+div[slot="content"] {
+  background: rgba(var(--ion-color-success-rgb), 0.25)
+}
+
+// searchbar 
+
+ion-searchbar.searchbar {
+  --border-radius: 2em;
+  font-size: 4em;
+}

@@ -1,0 +1,51 @@
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+// Ticket card
+
+ion-card.ticketCard {
+  border-radius: 1.5em;
+}
+
+// Nome processo
+
+ion-badge {
+  --background: #91d9c6;
+  --color: white;
+  --padding-end: 2em;
+  --padding-start: 2em;
+  --padding-bottom: 0.5em;
+  --padding-top: 0.5em;
+  border-radius: 2em;
+  font-size: 1.2em;
+}
+
+// Tamanho da lista
+
+.list {
+  height: 75vh;
+}
+
+// Nome do curso
+
+ion-badge.course {
+  --background: #d4d4d4;
+  --color: white;
+  --padding-end: 2em;
+  --padding-start: 2em;
+  --padding-bottom: 0.5em;
+  --padding-top: 0.5em;
+  border-radius: 0.5em;
+  font-size: 1.5em;
+}

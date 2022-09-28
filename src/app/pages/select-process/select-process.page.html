@@ -9,45 +9,53 @@
   <ion-router-outlet id="main-content">
     <ion-content class="ion-justify-content-center" padding class="background">
 
-      <ion-card class="contentHeight">
-        <ion-card-header class="ion-text-center">
-          <ion-toolbar color="translucent">
-            <ion-menu-button color="success" slot="start"></ion-menu-button>
-            <ion-card-title color="success" class="title ion-margin ion-padding">
-              Selecione o Processo Desejado
-            </ion-card-title>
-          </ion-toolbar>
-          <hr>
-        </ion-card-header>
 
-        <ion-card-content>
-          <ion-row>
+      <ion-header style="position: absolute;">
+        <ion-toolbar color="translucent" class="ion-text-center ion-padding">
+          <ion-menu-button slot="start"></ion-menu-button>
+        </ion-toolbar>
+      </ion-header>
 
-            <!-- Coluna da esquerda -->
+      <div *ngIf="internship" class="flex-center">
 
-            <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
-              <app-processes-list [processes]="processes"
-                (selectProcess)="receiveProcess($event)">
-              </app-processes-list>
-              <ion-button class="font" [disabled]="processes.length === 0 || selectedProcess === undefined" size="large" expand="block" fill="solid" color="success" (click)="confirm()">
-                <ion-icon slot="start" name="thumbs-up-sharp"></ion-icon>
-                <ion-label slot="end">Confirmar</ion-label>
-              </ion-button>
-            </ion-col>
+        <div *ngIf="ended === null">
 
-            <!-- Coluna da direita -->
+          <!-- Formulário -->
+          <div *ngIf="pendingTicket === null">
+            <app-form [confirmedProcessFromBack]="internship">
+            </app-form>
+          </div>
 
-            <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="6.5">
-              <app-process-details 
-                *ngIf="selectedProcess" 
-                [process]="selectedProcess" 
-              ></app-process-details>
-              <app-process-undefined *ngIf="!selectedProcess"></app-process-undefined>
-            </ion-col>
 
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
+          <ion-grid *ngIf="pendingTicket" class="grid ion-padding ion-margin">
+            <ion-row>
+              <ion-col size="4">
+                <app-pending-ticket-warning></app-pending-ticket-warning>
+              </ion-col>
+              <ion-col size="8">
+                <app-pending-ticket [pendingTicket]="pendingTicket" (deleteTicket)="receiveDeleteTicket()"></app-pending-ticket>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+        </div>
+
+
+        <div *ngIf="ended">
+          <h3>{{ended}}</h3>
+        </div>
+
+      </div>
+
+      <div *ngIf="internship === null">
+        <!-- Selecionar Processo -->
+        <app-select-details-process *ngIf="!confirmedProcess" (confirmedProcess)="receiveConfirmedProcess($event)">
+        </app-select-details-process>
+        <!-- Formulário -->
+        <app-form *ngIf="confirmedProcess" [confirmedProcess]="confirmedProcess">
+        </app-form>
+      </div>
 
     </ion-content>
   </ion-router-outlet>

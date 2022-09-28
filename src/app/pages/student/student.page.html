@@ -14,7 +14,8 @@
       <ion-header>
         <ion-toolbar color="translucent" class="ion-text-center ion-padding">
           <ion-menu-button slot="start"></ion-menu-button>
-          <ion-title class="title" style="color:#4c4c4c;">Acompanhe seu Processo de Estágio</ion-title>
+          <ion-title class="title" style="color: var(--ion-color-medium-shade);">Acompanhe seu Processo de Estágio
+          </ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -23,77 +24,141 @@
 
           <!-- Ticket Pendente -->
 
-          <ion-col *ngIf="ticketP" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
-            <ion-card color="tertiary" class="font ion-text-center">
-              <ion-card-header color="success">
-                <ion-card-title class="ion-text-start" style="color: #ededed; font-size: 2em;">Ticket Pendente
-                </ion-card-title>
-              </ion-card-header>
-              <ion-card-content class="contentHeight">
-                <ion-card-title class="ion-padding ion-margin">
-                  <ion-title class="font ion-text-center" style="font-size: 1em;">
-                    Finalização
-                  </ion-title>
-                </ion-card-title>
-                <hr>
-                <br>
-                <ion-note class="font">Data de Criação do Ticket: {{ticketP.datacriado}} </ion-note>
-              </ion-card-content>
-            </ion-card>
+          <!-- Tickets Pendente Carregado -->
+
+          <ion-col *ngIf="pendingTicket" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
+            <app-pending-ticket [pendingTicket]="pendingTicket" (deleteTicket)="receiveDeleteTicket()"></app-pending-ticket>
           </ion-col>
 
           <!-- Sem Ticket Pendente -->
 
-          <ion-col *ngIf="!ticketP" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
+          <ion-col *ngIf="pendingTicket === null" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11"
+            size-xl="7.5">
             <ion-card color="light" class="font ion-text-center">
               <ion-card-header class="ion-text-start" color="success">
-                <ion-card-title style="color: #ededed; font-size: 2em;">Ticket Pendente</ion-card-title>
+                <ion-card-title style="color: white; font-size: 2em;">Ticket Pendente</ion-card-title>
               </ion-card-header>
               <ion-card-content class="contentHeight">
                 <ion-card-title class="ion-padding ion-margin">
-                  <ion-note class="font ion-text-center" style="font-size: 1em;">Você não possui ticket pendente
+                  <ion-note class="font ion-text-center" style="color: var(--ion-color-medium-shade); font-size: 1em;">
+                    Você não possui ticket pendente
                   </ion-note>
                 </ion-card-title>
                 <hr>
                 <br>
-                <ion-img class="emptyTicketIcon" src="../../../assets/emptyTicketIcon.png"></ion-img>
+                <ion-img class="emptyTicketIcon" src="../../../assets/emptyTicketIcon2.png"></ion-img>
                 <br>
                 <br>
               </ion-card-content>
             </ion-card>
           </ion-col>
 
+          <!-- Carregando Ticket Pendentes -->
+          <ion-col *ngIf="pendingTicket === undefined" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11"
+            size-xl="7.5">
+            <ion-card class="ion-text-center">
+
+              <ion-card-header color="success">
+                <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
+                  <ion-card-title slot="start" style="color: white; font-size: 2em;">Ticket Pendente
+                  </ion-card-title>
+                </ion-item>
+              </ion-card-header>
+
+              <ion-card-content class="contentHeight" style="background-color: var(--ion-color-light)">
+                <ion-card-title class="ion-padding ion-no-margin" style="height: 15vh;">
+                  <ion-title class="font label flex-center">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 4em;"></ion-skeleton-text>
+                  </ion-title>
+                </ion-card-title>
+                <hr>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="8">
+                      <ion-title class="font label ion-text-start">
+                        Mensagem:
+                      </ion-title>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-title class="font label ion-text-start">
+                        Documentos:
+                      </ion-title>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col size="8">
+                      <ion-skeleton-text class="ion-margin ion-padding" [animated]="true" style="width: auto; height: 40vh;"></ion-skeleton-text>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-list class="ion-no-margin ion-no-padding" style="background-color: var(--ion-color-light);">
+                        <ion-skeleton-text class="ion-margin ion-padding" [animated]="true" style="width: auto; height: 4em;"></ion-skeleton-text>
+                        <ion-skeleton-text class="ion-margin ion-padding" [animated]="true" style="width: auto; height: 4em;"></ion-skeleton-text>
+                        <ion-skeleton-text class="ion-margin ion-padding" [animated]="true" style="width: auto; height: 4em;"></ion-skeleton-text>
+                      </ion-list>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+
+          
           <!-- Tickets Encerrados -->
+
+
           <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="3">
             <ion-card color="light" class="font ion-text-center">
               <ion-card-header color="success">
-                <ion-title style="color: #ededed; font-size: 2em;">Tickets Encerrados</ion-title>
+                <ion-title style="color: white; font-size: 2em;">Tickets Encerrados</ion-title>
               </ion-card-header>
 
-              <ion-list style="background-color: var(--ion-color-light);" class="list" *ngIf="ticketsE.length > 0">
-
-                <ion-item button lines="none" color="light">
-                  <ion-label style="color:#4c4c4c; font-size: 1.5em;" class="font">
-                    Acompanhamento
+              <!-- Tickets Fechados Carregados -->
+              <ion-list *ngIf="closedTickets" style="background-color: var(--ion-color-light);" class="list">
+                <ion-item *ngFor="let ticket of closedTickets" button color="light" (click)="presentModal(ticket)">
+                  <ion-label class="closeTicketItem">
+                    {{ticket.etapa.etapa.nome}}
                   </ion-label>
-                  <ion-icon name="reader-outline" slot="end" size="large"></ion-icon>
-                  <ion-icon name="checkmark-circle-outline" slot="end" size="large"></ion-icon>
+                  <ion-icon name="reader-outline" slot="end" size="large" class="closeTicketItemIcon"></ion-icon>
+                  <ion-icon *ngIf="ticket.aceito" name="checkmark-circle-outline" slot="end" size="large"
+                    class="closeTicketItemIcon"></ion-icon>
+                  <ion-icon *ngIf="!ticket.aceito" name="close-circle-outline" slot="end" size="large"
+                    class="closeTicketItemIcon"></ion-icon>
                 </ion-item>
-
               </ion-list>
 
-              <div *ngIf="ticketsE.length == 0" class="list">
-
+              <!-- Sem Tickets Fechados -->
+              <div *ngIf="closedTickets === null" class="list">
                 <ion-card-title class="ion-padding ion-margin">
-                  <ion-note class="font ion-text-center" style="font-size: 1em;">
+                  <ion-note class="font ion-text-center" style="font-size: 1em; color: var(--ion-color-medium-shade);">
                     Nenhum ticket encerrado
                   </ion-note>
                 </ion-card-title>
-
                 <ion-card-content class="ion-no-padding ion-padding-horizontal">
                   <hr>
                 </ion-card-content>
               </div>
+
+              <!-- Carregando Tickets Fechados -->
+              <ion-list *ngIf="closedTickets === undefined" style="background-color: var(--ion-color-light);"
+                class="list">
+                <ion-item color="light">
+                  <ion-label class="closeTicketItem">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 2em;"></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item color="light">
+                  <ion-label class="closeTicketItem">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 2em;"></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item color="light">
+                  <ion-label class="closeTicketItem">
+                    <ion-skeleton-text [animated]="true" style="width: auto; height: 2em;"></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
 
             </ion-card>
           </ion-col>

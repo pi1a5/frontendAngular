@@ -40,6 +40,7 @@ export class FaseEditComponent implements OnInit {
       nome: this.etapa.nome,
       prazo: this.etapa.prazo,
       documentos: this.etapa.documentos,
+      loop: this.etapa.loop,
     };
   }
 
@@ -81,7 +82,7 @@ export class FaseEditComponent implements OnInit {
   validate() {
     // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
     if (this.editFase.nome.trim().length < 3) {
-      this.presentToast('Nome da etapa deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
+      this.presentToast('Nome da etapa deve conter no mínimo 3 caracteres', 'danger', 'close-circle');
       return false;
     }
 
@@ -104,6 +105,10 @@ export class FaseEditComponent implements OnInit {
     }
 
     return o1.id === o2.id;
+  }
+
+  handleChangeCheckbox(ev) {
+    this.editFase.loop = ev;
   }
 
   handleChangeDocuments(ev) {

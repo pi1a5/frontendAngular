@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { NgChartsModule } from 'ng2-charts';
+import { ChartComponent } from 'src/app/components/chart/chart.component';
+import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { ChartSupervisorsPageRoutingModule } from './chart-supervisors-routing.module';
 
 import { ChartSupervisorsPage } from './chart-supervisors.page';
@@ -19,6 +22,10 @@ import { ChartSupervisorsPage } from './chart-supervisors.page';
     ChartSupervisorsPageRoutingModule,
     NgChartsModule,
   ],
-  declarations: [ChartSupervisorsPage],
+  declarations: [
+    ChartSupervisorsPage,
+    ChartComponent,
+    LogoutbuttonComponent,
+    SidebarComponent],
 })
-export class ChartSupervisorsPageModule {}
+export class ChartSupervisorsPageModule { }

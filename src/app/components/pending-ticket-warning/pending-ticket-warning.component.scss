@@ -1,0 +1,20 @@
+.contentHeight {
+  height: 65vh;
+}
+
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+// Títulos 
+
+.label {
+  font-size: 1.5em; 
+  color: var(--ion-color-medium-shade);
+}

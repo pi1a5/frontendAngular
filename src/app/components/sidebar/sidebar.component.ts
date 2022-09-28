@@ -47,6 +47,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['internships'], { replaceUrl: true });
   }
 
+  goToChart() {
+    this.router.navigate(['chart-supervisors'], { replaceUrl: true });
+  }
+
   goToProfile() {
     this.router.navigate(['profile'], { replaceUrl: true });
   }

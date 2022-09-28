@@ -1,0 +1,63 @@
+<ion-card class="font ion-text-center">
+  <ion-card-header color="success">
+    <ion-card-title style="font-size: 2em;">Alunos sob sua Orientação</ion-card-title>
+  </ion-card-header>
+
+  <ion-list style="background-color: #f1f1f1;" class="list">
+
+    <!-- Carregando Tickets -->
+    <div *ngIf="tickets === undefined">
+      <ion-item color="transparent" lines="none">
+        <ion-label class="closeTicketItem">
+          <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item color="transparent" lines="none">
+        <ion-label class="closeTicketItem">
+          <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+      <ion-item color="transparent" lines="none">
+        <ion-label class="closeTicketItem">
+          <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <!-- Sem Tickets  -->
+    <div *ngIf="tickets === null">
+      <p>
+        <ion-label style="font-size: 1.5em;">Não há tickets pendentes...</ion-label>
+      </p>
+    </div>
+
+    <!-- Tickets Carregados -->
+    <ion-card *ngFor="let ticket of tickets" class="ticketCard" style="background-color: white;" button
+      (click)="presentModal(ticket)">
+      <div class="ion-margin">
+
+        <ion-item lines="none" color="transparent">
+          <ion-avatar slot="start" size="large">
+            <img [src]="ticket.usuario[0].foto" onError="this.src = '../../../assets/avatarIcon.png'">
+          </ion-avatar>
+          <ion-label class="font">
+            <h3 style="color: var(--ion-color-medium-shade)">{{ticket.usuario[0].nome}}</h3>
+            <p style="color: #cfcfcf; font-size: 1.5em;">{{ticket.usuario[0].prontuario}}</p>
+          </ion-label>
+          <ion-badge slot="end">
+            <ion-label class="font">{{ticket.etapa.nome}} - {{ticket.etapa.etapa.nome}}</ion-label>
+          </ion-badge>
+        </ion-item>
+
+        <hr>
+
+        <div class="ion-text-center ion-margin">
+          <ion-badge class="course font">{{ticket.curso}}</ion-badge>
+        </div>
+
+      </div>
+    </ion-card>
+
+  </ion-list>
+
+</ion-card>

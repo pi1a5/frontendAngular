@@ -28,8 +28,7 @@ ion-menu.md ion-content {
 }
 
 .contentHeight {
-  min-height: 68.25vh;
-  max-height: 68.25vh;
+  height: 68.5vh;
 }
 
 .list {
@@ -64,4 +63,16 @@ ion-img {
   display: block;
   width: auto;
   margin: auto;
+}
+
+// Closed tickets
+
+.closeTicketItem {
+  color: var(--ion-color-medium-shade); 
+  font-size: 1.5em;
+  font-family: 'Nunito', sans-serif;
+}
+
+.closeTicketItemIcon {
+  color: var(--ion-color-medium-shade); 
 }

@@ -7,14 +7,39 @@
 
   <!-- content -->
   <ion-router-outlet id="main-content">
-    <ion-header>
-      <ion-toolbar color="success" class="ion-text-center ion-padding">
-        <ion-menu-button slot="start"></ion-menu-button>
-        <ion-label class="title">Gerenciamento de Tickets</ion-label>
-      </ion-toolbar>
-    </ion-header>
 
-    <ion-content color="medium" class="ion-justify-content-center">
+    <ion-content class="ion-justify-content-center" padding class="background">
+
+      <ion-header>
+        <ion-toolbar color="translucent" class="ion-text-center ion-padding">
+          <ion-menu-button slot="start"></ion-menu-button>
+          <ion-title class="title" style="color: var(--ion-color-medium-shade);">Gestão de Tickets</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-grid>
+        <ion-row>
+
+          <!-- Alunos sem orientador -->
+
+          <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
+            <app-tickets-without-supervisor></app-tickets-without-supervisor>
+          </ion-col>
+
+          <!-- Tickets Pendentes -->
+          <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="6.5">
+            <app-tickets-with-supervisor></app-tickets-with-supervisor>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+    </ion-content>
+
+  </ion-router-outlet>
+</ion-split-pane>
+
+<!-- <ion-content color="medium" class="ion-justify-content-center">
       <ion-grid>
         <ion-row>
 
@@ -179,6 +204,4 @@
 
         </ion-row>
       </ion-grid>
-    </ion-content>
-  </ion-router-outlet>
-</ion-split-pane>
+    </ion-content>-->

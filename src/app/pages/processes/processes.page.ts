@@ -83,8 +83,8 @@ export class ProcessesPage implements OnInit {
     await this.presentLoading();
     this.apiSupervisor.newProcess(process).subscribe(async (data) => {
       await this.loadingController.dismiss();
-      await this.presentToast(data, 'success', 'checkmark-circle');
-      this.processes.push(process);
+      await this.presentToast('Processo criado com sucesso!', 'success', 'checkmark-circle');
+      this.processes.push(data.processo);
       this.reset();
     }, async (error) => {
       await this.loadingController.dismiss();

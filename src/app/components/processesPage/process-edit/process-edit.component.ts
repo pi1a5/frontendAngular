@@ -132,6 +132,7 @@ export class ProcessEditComponent implements OnInit {
       nome: 'Nova etapa',
       prazo: 10,
       documentos: [],
+      loop: false,
     };
 
     this.handleModalResponse(await this.presentModal(etapa, this.documents, true));
@@ -155,7 +156,7 @@ export class ProcessEditComponent implements OnInit {
   validate() {
     // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
     if (this.editProcess.nome.trim().length < 3) {
-      this.presentToast('Nome do processo deve conter no mínimo 3 dígitos', 'danger', 'close-circle');
+      this.presentToast('Nome do processo deve conter no mínimo 3 caracteres', 'danger', 'close-circle');
       return false;
     }
     // Verificar se tem pelo menos 1 etapa

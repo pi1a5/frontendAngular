@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */
@@ -15,26 +17,57 @@ export class ApiStudentService {
 
   constructor(private http: HttpClient, private api: ApiService) { }
 
-  getTicketsUser(): Observable<any> {
-    return this.http.post(`${this.url}api/getTicketsUser`, {
+  // getTicketsUser(): Observable<any> {
+  //   return this.http.post(`${this.url}api/getTicketsUser`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //   });
+  // }
+
+  // checkIfFinalizou(): Observable<any> {
+  //   return this.http.post(`${this.url}api/checkIfFinalizou`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //   });
+  // }
+
+  getClosedTickets(): Observable<any> {
+    return this.http.post(`${this.url}api/getClosedTickets`, {
       sub: sessionStorage.getItem('userId'),
     });
   }
 
-  sendTicketInicio(formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketInicio`, formData);
+  getPendingTicket(): Observable<any> {
+    return this.http.post(`${this.url}api/getPendingTicket`, {
+      sub: sessionStorage.getItem('userId'),
+    });
   }
 
-  sendTicketAcompanhamento(formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketAcompanhamento`, formData);
+  deletePendingTicket(ticketId: number): Observable<any> {
+    return this.http.post(`${this.url}api/deletePendingTicket`, {
+      idTicket: ticketId,
+      sub: sessionStorage.getItem('userId'),
+    });
   }
 
-  sendTicketFim(formData: FormData): Observable<any> {
-    return this.http.post(`${this.url}api/newTicketFim`, formData);
+  sendTicket(formData: FormData): Observable<any> {
+    return this.http.post(`${this.url}api/newTicket`, formData);
   }
 
-  checkIfFinalizou(): Observable<any> {
-    return this.http.post(`${this.url}api/checkIfFinalizou`, {
+  newInternship(processId: number, hours: number): Observable<any> {
+    return this.http.post(`${this.url}api/createNewEstagio`, {
+      idProcesso: processId,
+      cargaHoraria: hours,
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  checkIfHasInternship(): Observable<any> {
+    return this.http.post(`${this.url}api/checkIfHasEstagio`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  checkIfEnded(): Observable<any> {
+    return this.http.post(`${this.url}api/checkIfEnded`, {
       sub: sessionStorage.getItem('userId'),
     });
   }
