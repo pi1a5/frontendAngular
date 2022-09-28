@@ -27,7 +27,7 @@
           <!-- Tickets Pendente Carregado -->
 
           <ion-col *ngIf="pendingTicket" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
-            <app-pending-ticket [pendingTicket]="pendingTicket"></app-pending-ticket>
+            <app-pending-ticket [pendingTicket]="pendingTicket" (deleteTicket)="receiveDeleteTicket()"></app-pending-ticket>
           </ion-col>
 
           <!-- Sem Ticket Pendente -->

@@ -81,4 +81,8 @@ export class SelectProcessPage implements OnInit {
   receiveConfirmedProcess(process: Object) {
     this.confirmedProcess = process;
   }
+
+  receiveDeleteTicket() {
+    this.ngOnInit();
+  }
 }

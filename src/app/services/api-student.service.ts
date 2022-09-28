@@ -41,6 +41,13 @@ export class ApiStudentService {
     });
   }
 
+  deletePendingTicket(ticketId: number): Observable<any> {
+    return this.http.post(`${this.url}api/deletePendingTicket`, {
+      idTicket: ticketId,
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
   sendTicket(formData: FormData): Observable<any> {
     return this.http.post(`${this.url}api/newTicket`, formData);
   }

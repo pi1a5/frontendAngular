@@ -63,4 +63,8 @@ export class StudentPage implements OnInit {
     });
     return modal.present();
   }
+
+  receiveDeleteTicket() {
+    this.ngOnInit();
+  }
 }

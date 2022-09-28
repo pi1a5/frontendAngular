@@ -6,6 +6,9 @@
       </ion-card-title>
       <ion-badge slot="end" class="font" style="font-size: 1.2em;">Data de envio: {{pendingTicket[0].datacriado}}
       </ion-badge>
+      <ion-button slot="end" color="danger" size="default" (click)="delete(pendingTicket[0].id)" >
+        <ion-icon name="trash" size="large"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-card-header>
 
