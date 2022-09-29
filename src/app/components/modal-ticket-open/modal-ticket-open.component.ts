@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-return-await */

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-empty-function */

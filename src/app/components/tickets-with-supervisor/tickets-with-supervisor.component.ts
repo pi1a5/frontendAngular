@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
+/* eslint-disable no-undef */
 /* eslint-disable no-useless-escape */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-var */

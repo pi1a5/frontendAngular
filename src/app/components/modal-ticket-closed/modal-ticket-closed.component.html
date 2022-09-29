@@ -68,9 +68,10 @@
       <ion-col>
         <ion-item color="transparent" lines="none">
           <ion-avatar slot="start">
-            <img [src]="ticket.envolvidos ? ticket.envolvidos.orientador[0].foto : '../../../assets/avatarIcon.png'" onError="this.src = '../../../assets/avatarIcon.png'">
+            <img [src]=" ticket.envolvidos.orientado ? ticket.envolvidos.orientador[0].foto : '../../../assets/avatarIcon.png'" >
           </ion-avatar>
-          <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">{{ticket.envolvidos ? ticket.envolvidos.orientador[0].nome : 'Orientador'}}
+          <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">
+            {{ticket.envolvidos.orientador ? ticket.envolvidos.orientador[0].nome : 'Orientador'}}
           </ion-label>
         </ion-item>
       </ion-col>

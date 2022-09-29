@@ -3,7 +3,7 @@
     <ion-card-title slot="start" style="color: white; font-size: 1.5em;" class="ion-margin-start">
       {{ticket.envolvidos.aluno[0].nome}}
     </ion-card-title>
-    <ion-badge slot="end" class="font" style="font-size: 1.2em;">{{ticket.etapa}}
+    <ion-badge slot="end" class="font" style="font-size: 1.2em;">{{ticket.etapa.nome}}
     </ion-badge>
     <ion-button slot="end" size="default" color="danger" (click)="dismiss()">
       <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -59,10 +59,10 @@
       <ion-col>
         <ion-item color="transparent" lines="none">
           <ion-avatar slot="start">
-            <img [src]="ticket.envolvidos.orientador[0].foto" onError="this.src = '../../../assets/avatarIcon.png'">
+            <img [src]=" ticket.envolvidos.orientado ? ticket.envolvidos.orientador[0].foto : '../../../assets/avatarIcon.png'" >
           </ion-avatar>
           <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">
-            {{ticket.envolvidos.orientador[0].nome}}
+            {{ticket.envolvidos.orientador ? ticket.envolvidos.orientador[0].nome : 'Orientador'}}
           </ion-label>
         </ion-item>
       </ion-col>

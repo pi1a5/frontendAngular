@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
@@ -54,6 +56,10 @@ export class InternshipsManagementComponent implements OnInit {
       cssClass: 'modalClosedTickets',
       componentProps: { ticket },
     });
-    return modal.present();
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    if (data) this.ngOnInit();
   }
 }
