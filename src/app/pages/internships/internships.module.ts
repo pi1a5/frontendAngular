@@ -11,6 +11,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { InternshipsManagementComponent } from 'src/app/components/internships-management/internships-management.component';
+import { TransferComponent } from 'src/app/components/transfer/transfer.component';
 import { InternshipsPage } from './internships.page';
 import { InternshipsPageRoutingModule } from './internships-routing.module';
 
@@ -27,6 +28,7 @@ import { InternshipsPageRoutingModule } from './internships-routing.module';
     LogoutbuttonComponent,
     SidebarComponent,
     InternshipsManagementComponent,
+    TransferComponent,
   ],
 })
 export class InternshipsPageModule { }

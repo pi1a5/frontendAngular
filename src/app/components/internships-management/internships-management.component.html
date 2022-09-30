@@ -23,10 +23,10 @@
           <ion-col size="2.1">
             Processo
           </ion-col>
-          <ion-col size="1.5">
+          <ion-col size="1.6">
             Data Criado
           </ion-col>
-          <ion-col size="2">
+          <ion-col size="2.1">
             Estado
           </ion-col>
           <ion-col size="2">
@@ -93,6 +93,24 @@
           </ion-item>
 
           <div class="ion-padding" slot="content">
+            <ion-row *ngIf="!internship.fechado" class="ion-text-center ion-padding">
+              <ion-col size="6">
+                <ion-button expand="block" color="light" size="large" (click)="presentTransfer(internship.id)">
+                  <ion-label slot="end" class="font">
+                    tranferir estágio
+                  </ion-label>
+                  <ion-icon slot="start" name="repeat" size="large"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button expand="block" color="light" size="large" (click)="presentAlert(internship.id)">
+                  <ion-label slot="end" class="font">
+                    encerrar estágio
+                  </ion-label>
+                  <ion-icon slot="start" name="archive" size="large"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
             <ion-item class="ion-text-center font" color="transparent" lines="none" style="font-size: 1.5em;">
               <ion-grid style="color: var(--ion-color-medium-shade);">
                 <ion-row>
