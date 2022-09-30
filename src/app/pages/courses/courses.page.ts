@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
@@ -29,8 +30,6 @@ export class CoursesPage implements OnInit {
 
   public courseNumber = 0;
 
-  public documents: any[] = [];
-
   constructor(
     public api: ApiService,
     public apiSupervisor: ApiSupervisorService,
@@ -39,7 +38,7 @@ export class CoursesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.loadCourses();
+    this.loadCourses();
   }
 
   async presentLoading() {
@@ -61,15 +60,14 @@ export class CoursesPage implements OnInit {
     toast.present();
   }
 
-  // async loadProcesses() {
-  //   this.api.getAllCourses().subscribe(async (data) => {
-  //     this.courses = data.processos;
-  //     this.documents = data.documentos;
-  //     this.courseNumber = this.courses.length;
-  //   }, async (error) => {
-  //     await this.presentToast(error.error, 'danger', 'close-circle');
-  //   });
-  // }
+  async loadCourses() {
+    this.apiSupervisor.getAreasWithCourses().subscribe(async (data) => {
+      this.courses = data;
+      this.courseNumber = this.courses.length;
+    }, async (error) => {
+      await this.presentToast(error.error, 'danger', 'close-circle');
+    });
+  }
 
   newProcess() {
     this.isNewCourse = true;
@@ -117,29 +115,30 @@ export class CoursesPage implements OnInit {
     this.saveBeforeEdit = structuredClone(course);
   }
 
-  // async receiveSaveEvent(course: any) {
-  //   if (course.isNew) {
-  //     this.saveNewProcess(course.process);
-  //   } else {
-  //     this.saveEditedProcess(course.process);
-  //   }
-  // }
+  async receiveSaveEvent(course: any) {
+    if (course.isNew) {
+      // this.saveNewCourse(course.course);
+    } else {
+      // this.saveEditedCourse(course.course);
+    }
+  }
 
-  // async receiveDeleteEvent(id: number) {
-  //   if (this.processes.length === 1) return await this.presentToast('Deverá ter pelo menos um processo', 'warning', 'warning-outline');
+  async receiveDeleteEvent(id: number) {
+    if (this.courses.length === 1) return await this.presentToast('Deverá ter pelo menos um processo', 'warning', 'warning-outline');
 
-  //   await this.presentLoading();
-  //   this.apiSupervisor.deleteProcess(id).subscribe(async (data) => {
-  //     await this.loadingController.dismiss();
-  //     await this.presentToast(data, 'success', 'checkmark-circle');
-  //     this.processes = this.processes.filter((p) => p.id !== id);
-  //     this.reset();
-  //   }, async (error) => {
-  //     await this.loadingController.dismiss();
-  //     await this.presentToast(error.error, 'danger', 'close-circle');
-  //     this.reset();
-  //   });
-  // }
+    console.log(id);
+    // await this.presentLoading();
+    // this.apiSupervisor.deleteCourse(id).subscribe(async (data) => {
+    //   await this.loadingController.dismiss();
+    //   await this.presentToast(data, 'success', 'checkmark-circle');
+    //   this.courses = this.courses.filter((p) => p.id !== id);
+    //   this.reset();
+    // }, async (error) => {
+    //   await this.loadingController.dismiss();
+    //   await this.presentToast(error.error, 'danger', 'close-circle');
+    //   this.reset();
+    // });
+  }
 
   receiveCancelEvent() {
     this.reset();

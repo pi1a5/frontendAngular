@@ -33,7 +33,7 @@ export class CoursesListComponent implements OnInit {
     if (this.courses.length > 0) return this.loaded = true;
   }
 
-  sendProcess(course: any) {
+  sendCourse(course: any) {
     this.selectCourse.emit(course);
   }
 }

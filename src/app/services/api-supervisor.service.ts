@@ -105,4 +105,9 @@ export class ApiSupervisorService {
       idestagio: internshipId,
     });
   }
+
+  // Admin
+  getAreasWithCourses(): Observable<any> {
+    return this.http.get(`${this.url}api/getAreasWithCourses`);
+  }
 }

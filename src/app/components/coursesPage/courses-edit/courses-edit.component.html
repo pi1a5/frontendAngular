@@ -21,7 +21,7 @@
     </ion-row>
   </ion-card-header>
 
-  <!-- Etapas -->
+  <!-- Cursos -->
 
   <ion-card-content>
     <ion-row>
@@ -41,30 +41,27 @@
 
     <!-- Novo curso -->
     <ion-list *ngIf="newCourse" class="subcourses">
-      <ion-item *ngFor="let etapa of editProcess.etapas;" class="ion-margin-top" lines="none" color="light">
-        <ion-reorder slot="start">
-          <ion-icon size="large" name="reorder-three"></ion-icon>
-        </ion-reorder>
+      <ion-item *ngFor="let subcourse of editCourse.cursos;" class="ion-margin-top" lines="none" color="light">
         <ion-label>
-          {{ etapa.nome }}
+          {{ subcourse.nome }}
         </ion-label>
-        <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editStep(etapa)">
+        <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editSubcourse(subcourse)">
           <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
         </ion-button>
-        <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteFase(etapa.id)">
+        <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteSubcourse(subcourse.id)">
           <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
 
-    <!-- Editando processo -->
-    <ion-list *ngIf="!newProcess" class="fases">
+    <!-- Editando area -->
+    <ion-list *ngIf="!newCourse" class="subcourses">
 
-      <ion-item *ngFor="let etapa of editProcess.etapas;" class="ion-margin-top" lines="none" color="light">
-        <ion-label slot="start" class="ion-text-center">
-          {{ etapa.nome }}
+      <ion-item *ngFor="let subcourse of editCourse.cursos;" class="ion-margin-top" lines="none" color="light">
+        <ion-label class="ion-text-center">
+          {{ subcourse.nome }}
         </ion-label>
-        <ion-button slot="end" class="cancelBtn" color="secondary" (click)="editStep(etapa)">
+        <ion-button slot="end" class="cancelBtn" color="secondary" (click)="editSubcourse(subcourse)">
           <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
         </ion-button>
       </ion-item>
