@@ -77,7 +77,7 @@ export class GooglebuttonComponent implements OnInit {
 
   apiLogin(name: string, email: string, imageUrl: string, token: string, sub: string) {
     this.api.login(token, sub).subscribe((user) => {
-      if (isNaN(user.idcurso)) return this.goToSelectCoursePage();
+      if (user.idcurso === null) return this.goToSelectCoursePage();
       this.userPage(user.email);
     }, (error) => {
       this.api.newUser({

@@ -89,7 +89,11 @@ const routes: Routes = [
     path: 'select-process',
     canActivate: [SessionGuard],
     loadChildren: () => import('./pages/select-process/select-process.module').then((m) => m.SelectProcessPageModule),
+  },  {
+    path: 'courses',
+    loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
   },
+
 ];
 
 @NgModule({

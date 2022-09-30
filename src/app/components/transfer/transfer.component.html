@@ -1,0 +1,21 @@
+<ion-header >
+  <ion-toolbar class="font" color="success">
+    <ion-title>Orientadores da sua Área</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="font" (click)="modal.dismiss()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-list >
+    <ion-item *ngFor="let supervisor of supervisors" button="true" (click)="presentAlert(supervisor.id, supervisor.nome)">
+      <ion-avatar slot="start">
+        <ion-img [src]="supervisor.foto ? supervisor.foto : '../../../assets/avatarIcon.png'"></ion-img>
+      </ion-avatar>
+      <ion-label class="font">
+        <h2>{{supervisor.nome}}</h2>
+        <p>{{supervisor.curso}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

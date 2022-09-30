@@ -1,0 +1,22 @@
+<ion-list class="courses" >
+  <ion-radio-group *ngIf="loaded">
+    <ion-item *ngFor="let course of courses" [disabled]="newCourse" lines="none" color="light">
+      <ion-label class="font">{{course.nome}}</ion-label>
+      <ion-radio color="success" slot="end" (click)="sendCourse(course)"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-radio-group *ngIf="!loaded">
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text [animated]="true" style="width: 18em; height: 2em;"></ion-skeleton-text>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>

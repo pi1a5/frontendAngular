@@ -86,4 +86,23 @@ export class ApiSupervisorService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  getSupervisorsByArea(): Observable<any> {
+    return this.http.post(`${this.url}api/getSupervisorsByArea`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  transferInternship(supervisorId: number, internshipId: number): Observable<any> {
+    return this.http.post(`${this.url}api/transferInternship`, {
+      idorientador: supervisorId,
+      idestagio: internshipId,
+    });
+  }
+
+  endInternship(internshipId: number): Observable<any> {
+    return this.http.post(`${this.url}api/endInternship`, {
+      idestagio: internshipId,
+    });
+  }
 }
