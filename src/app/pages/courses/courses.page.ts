@@ -30,6 +30,8 @@ export class CoursesPage implements OnInit {
 
   public courseNumber = 0;
 
+  public modalidades: any[] = [];
+
   constructor(
     public api: ApiService,
     public apiSupervisor: ApiSupervisorService,
@@ -62,53 +64,54 @@ export class CoursesPage implements OnInit {
 
   async loadCourses() {
     this.apiSupervisor.getAreasWithCourses().subscribe(async (data) => {
-      this.courses = data;
+      this.courses = data.areas;
+      this.modalidades = data.modalidades;
       this.courseNumber = this.courses.length;
     }, async (error) => {
       await this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
 
-  newProcess() {
+  newCourse() {
     this.isNewCourse = true;
     this.selectedCourse = {
       id: this.courseNumber,
-      nome: 'Novo curso',
+      nome: 'Nova área',
       cursos: [],
     };
   }
 
-  // async saveNewCourse(course: any) {
-  //   await this.presentLoading();
-  //   this.apiSupervisor.newCourse(course).subscribe(async (data) => {
-  //     await this.loadingController.dismiss();
-  //     await this.presentToast('Area criada com sucesso!', 'success', 'checkmark-circle');
-  //     this.courses.push(data.processo);
-  //     this.reset();
-  //   }, async (error) => {
-  //     await this.loadingController.dismiss();
-  //     await this.presentToast(error.error, 'danger', 'close-circle');
-  //     this.reset();
-  //   });
-  // }
+  async saveNewCourse(course: any) {
+    await this.presentLoading();
+    this.apiSupervisor.newArea(course).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast('Area criada com sucesso!', 'success', 'checkmark-circle');
+      this.courses.push(data.area);
+      this.reset();
+    }, async (error) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
+    });
+  }
 
-  // async saveEditedProcess(process: any) {
-  //   await this.presentLoading();
-  //   this.apiSupervisor.updateProcess(this.saveBeforeEdit, process).subscribe(async (data) => {
-  //     await this.loadingController.dismiss();
-  //     await this.presentToast(data, 'success', 'checkmark-circle');
-  //     for (let index = 0; index < this.processes.length; index++) {
-  //       if (this.processes[index].id === process.id) {
-  //         this.processes[index] = process;
-  //       }
-  //     }
-  //     this.reset();
-  //   }, async (error) => {
-  //     await this.loadingController.dismiss();
-  //     await this.presentToast(error.error, 'danger', 'close-circle');
-  //     this.reset();
-  //   });
-  // }
+  async saveEditedCourse(course: any) {
+    await this.presentLoading();
+    this.apiSupervisor.updateArea(this.saveBeforeEdit, course).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
+      for (let index = 0; index < this.courses.length; index++) {
+        if (this.courses[index].id === course.id) {
+          this.courses[index] = course;
+        }
+      }
+      this.reset();
+    }, async (error) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
+    });
+  }
 
   receiveCourse(course: any) {
     this.selectedCourse = course;
@@ -117,27 +120,25 @@ export class CoursesPage implements OnInit {
 
   async receiveSaveEvent(course: any) {
     if (course.isNew) {
-      // this.saveNewCourse(course.course);
+      this.saveNewCourse(course.course);
     } else {
-      // this.saveEditedCourse(course.course);
+      this.saveEditedCourse(course.course);
     }
   }
 
   async receiveDeleteEvent(id: number) {
     if (this.courses.length === 1) return await this.presentToast('Deverá ter pelo menos um processo', 'warning', 'warning-outline');
-
-    console.log(id);
-    // await this.presentLoading();
-    // this.apiSupervisor.deleteCourse(id).subscribe(async (data) => {
-    //   await this.loadingController.dismiss();
-    //   await this.presentToast(data, 'success', 'checkmark-circle');
-    //   this.courses = this.courses.filter((p) => p.id !== id);
-    //   this.reset();
-    // }, async (error) => {
-    //   await this.loadingController.dismiss();
-    //   await this.presentToast(error.error, 'danger', 'close-circle');
-    //   this.reset();
-    // });
+    await this.presentLoading();
+    this.apiSupervisor.deleteArea(id).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
+      this.courses = this.courses.filter((p) => p.id !== id);
+      this.reset();
+    }, async (error) => {
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+      this.reset();
+    });
   }
 
   receiveCancelEvent() {

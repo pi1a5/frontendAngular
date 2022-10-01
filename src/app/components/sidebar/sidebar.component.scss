@@ -1,3 +1,13 @@
+hr {
+  border-bottom: 1px solid white;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 ion-list {
   padding: 0;
   height: 100%;
@@ -37,4 +47,9 @@ ion-item {
   position: absolute;
   bottom: 0;
   left: 20%;
+}
+
+.contentList {
+  height: 80vh;
+  overflow-y: auto;
 }

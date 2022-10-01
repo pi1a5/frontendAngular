@@ -16,17 +16,11 @@ import { ModalController, ToastController } from '@ionic/angular';
 export class SubcourseEditComponent implements OnInit {
   public subcourse: any = undefined;
 
+  public modalidades: any[] = [];
+
   public newSubcourse: boolean = false;
 
   public editSubcourse: any = undefined;
-
-  // currentDocuments = undefined;
-
-  // customAlertOptions = {
-  //   header: 'Documentos cadastrados',
-  //   message: 'Selecione os documentos dessa etapa',
-  //   translucent: true,
-  // };
 
   constructor(
     public modalController: ModalController,
@@ -34,9 +28,14 @@ export class SubcourseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.subcourse);
+
     this.editSubcourse = {
       id: this.subcourse.id,
       nome: this.subcourse.nome,
+      cargaHoraria: this.subcourse.cargaHoraria,
+      areaId: this.subcourse.areaId,
+      modalidade: this.subcourse.modalidade,
     };
   }
 
@@ -53,14 +52,8 @@ export class SubcourseEditComponent implements OnInit {
   onChangeName(value: string) {
     if (value) {
       this.editSubcourse.nome = value;
-    } else {
-      this.editSubcourse.nome = this.subcourse.nome;
     }
   }
-
-  // onDeadlineChange(ev: Event) {
-  //   this.editSubcourse.prazo = (ev as CustomEvent).detail.value;
-  // }
 
   async confirm() {
     if (this.validate()) {
@@ -76,38 +69,40 @@ export class SubcourseEditComponent implements OnInit {
   }
 
   validate() {
-    // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
-    if (this.editSubcourse.nome.trim().length < 3) {
-      this.presentToast('Nome da etapa deve conter no mínimo 3 caracteres', 'danger', 'close-circle');
+    // Verificar se tem no mínimo 5 dígitos sem contar espaços em branco
+    if (this.editSubcourse.nome.trim().length < 5) {
+      this.presentToast('Nome do curso deve conter no mínimo 5 caracteres', 'danger', 'close-circle');
       return false;
     }
 
-    // Verificar se tem pelo menos 1 documento
-    if (this.editSubcourse.documentos.length <= 0) {
-      this.presentToast('Etapa deve conter pelo menos 1 documento', 'danger', 'close-circle');
+    // Verificar se a carga horária é superior a zero
+    if (this.editSubcourse.cargaHoraria <= 0) {
+      this.presentToast('Carga Horária deverá ser superior a zero', 'danger', 'close-circle');
+      return false;
+    }
+
+    // Verificar se tem uma modalidade atribuída
+    if (!this.editSubcourse.modalidade) {
+      this.presentToast('Curso deve conter uma modalidade atribuída', 'danger', 'close-circle');
       return false;
     }
 
     return true;
   }
 
-  // compareWith(o1, o2) {
-  //   if (!o1 || !o2) {
-  //     return o1 === o2;
-  //   }
+  compareWith(o1, o2) {
+    if (!o1 || !o2) {
+      return o1 === o2;
+    }
 
-  //   if (Array.isArray(o2)) {
-  //     return o2.some((o) => o.id === o1.id);
-  //   }
+    if (Array.isArray(o2)) {
+      return o2.some((o) => o.id === o1.id);
+    }
 
-  //   return o1.id === o2.id;
-  // }
+    return o1.id === o2.id;
+  }
 
-  // handleChangeCheckbox(ev) {
-  //   this.editSubcourse.loop = ev;
-  // }
-
-  // handleChangeDocuments(ev) {
-  //   this.editSubcourse.documentos = ev.target.value;
-  // }
+  handleChangeModalidade(ev) {
+    this.editSubcourse.modalidade = ev.target.value;
+  }
 }

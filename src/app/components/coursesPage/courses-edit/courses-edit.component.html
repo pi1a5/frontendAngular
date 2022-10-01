@@ -41,14 +41,14 @@
 
     <!-- Novo curso -->
     <ion-list *ngIf="newCourse" class="subcourses">
-      <ion-item *ngFor="let subcourse of editCourse.cursos;" class="ion-margin-top" lines="none" color="light">
+      <ion-item *ngFor="let curso of editCourse.cursos;" class="ion-margin-top" lines="none" color="light">
         <ion-label>
-          {{ subcourse.nome }}
+          {{ curso.nome }}
         </ion-label>
-        <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editSubcourse(subcourse)">
+        <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editSubcourse(curso)">
           <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
         </ion-button>
-        <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteSubcourse(subcourse.id)">
+        <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteSubcourse(curso.id)">
           <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
         </ion-button>
       </ion-item>

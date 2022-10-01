@@ -25,6 +25,8 @@ export class CoursesEditComponent implements OnInit {
 
   @Input() course: any = undefined;
 
+  @Input() modalidades: any[] = [];
+
   @Output() saveCourse = new EventEmitter<any>();
 
   @Output() deleteCourse = new EventEmitter<number>();
@@ -41,7 +43,7 @@ export class CoursesEditComponent implements OnInit {
     public toastController: ToastController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.course);
@@ -63,11 +65,12 @@ export class CoursesEditComponent implements OnInit {
     toast.present();
   }
 
-  async presentModal(subcourse, newSubcourse) {
+  async presentModal(subcourse, modalidades, newSubcourse) {
     const modal = await this.modalController.create({
       component: SubcourseEditComponent,
       componentProps: {
         subcourse,
+        modalidades,
         newSubcourse,
       },
     });
@@ -110,49 +113,49 @@ export class CoursesEditComponent implements OnInit {
   }
 
   async editSubcourse(subcourse: any) {
-    this.handleModalResponse(await this.presentModal(subcourse, false));
+    this.handleModalResponse(await this.presentModal(subcourse, this.modalidades, false));
   }
 
   deleteSubcourse(subcourseId: number) {
-    this.editCourse.etapas = this.editCourse.etapas.filter((s) => s.id !== subcourseId);
+    this.editCourse.cursos = this.editCourse.cursos.filter((c) => c.id !== subcourseId);
   }
 
   async newSubcourse() {
     const subcourse = {
-      id: this.course.subcourses.length,
-      nome: 'Novo curso',
+      id: this.course.cursos.length,
+      nome: '',
       cargaHoraria: 0,
       areaId: this.course.id,
-      tipo: 'algum tipo',
+      modalidade: undefined,
     };
 
-    this.handleModalResponse(await this.presentModal(subcourse, true));
+    this.handleModalResponse(await this.presentModal(subcourse, this.modalidades, true));
   }
 
   handleModalResponse(response) {
     if (!response) return;
 
-    if (response.novoSubcourse) {
-      this.editCourse.subcourses.push(response.subcourse);
+    if (response.newSubcourse) {
+      this.editCourse.cursos.push(response.subcourse);
       this.subcourseNumber++;
     } else {
-      for (let index = 0; index < this.editCourse.subcourses.length; index++) {
-        if (this.editCourse.subcourses[index].id === response.subcourse.id) {
-          this.editCourse.subcourses[index] = response.subcourse;
+      for (let index = 0; index < this.editCourse.cursos.length; index++) {
+        if (this.editCourse.cursos[index].id === response.subcourse.id) {
+          this.editCourse.cursos[index] = response.subcourse;
         }
       }
     }
   }
 
   validate() {
-    // Verificar se tem no mínimo 3 dígitos sem contar espaços em branco
-    if (this.editCourse.nome.trim().length < 3) {
-      this.presentToast('Nome do processo deve conter no mínimo 3 caracteres', 'danger', 'close-circle');
+    // Verificar se tem no mínimo 5 dígitos sem contar espaços em branco
+    if (this.editCourse.nome.trim().length < 5) {
+      this.presentToast('Nome da área deve conter no mínimo 5 caracteres', 'danger', 'close-circle');
       return false;
     }
-    // Verificar se tem pelo menos 1 etapa
-    if (this.editCourse.etapas.length <= 0) {
-      this.presentToast('Processo deve conter pelo menos 1 etapa', 'danger', 'close-circle');
+    // Verificar se tem pelo menos 1 curso
+    if (this.editCourse.cursos.length <= 0) {
+      this.presentToast('Área deve conter pelo menos 1 curso', 'danger', 'close-circle');
       return false;
     }
 
@@ -161,7 +164,7 @@ export class CoursesEditComponent implements OnInit {
 
   sendSave() {
     if (this.validate()) {
-      this.saveCourse.emit({ isNew: this.newCourse, process: this.editCourse });
+      this.saveCourse.emit({ isNew: this.newCourse, course: this.editCourse });
     }
   }
 

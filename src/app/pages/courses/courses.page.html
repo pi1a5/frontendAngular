@@ -41,6 +41,7 @@
               <app-courses-edit *ngIf="selectedCourse" 
                 [newCourse]="isNewCourse" 
                 [course]="selectedCourse" 
+                [modalidades]="modalidades"
                 (saveCourse)="receiveSaveEvent($event)"
                 (cancelNewCourse)="receiveCancelEvent()" 
                 (deleteCourse)="receiveDeleteEvent($event)"

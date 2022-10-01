@@ -1,46 +1,54 @@
 <ion-list id="inbox-list">
 
-  <ion-img src="../../../assets/logoIF2.png"></ion-img>
+  <div class="contentList">
+    <ion-img src="../../../assets/logoIF2.png"></ion-img>
 
-  <ion-item lines="full" button (click)="goToDashboard()">
-    <ion-icon size="large" color="light" slot="start" name="home"></ion-icon>
-    <ion-label class="font">Home</ion-label>
-  </ion-item>
+    <ion-item lines="full" button (click)="goToDashboard()">
+      <ion-icon size="large" color="light" slot="start" name="home"></ion-icon>
+      <ion-label class="font">Home</ion-label>
+    </ion-item>
 
-  <ion-item *ngIf="user === 'student'" lines="full" button (click)="goToNewTicket()">
-    <ion-icon size="large" color="light" slot="start" name="ticket"></ion-icon>
-    <ion-label class="font">Ticket</ion-label>
-  </ion-item>
+    <ion-item *ngIf="user === 'student'" lines="full" button (click)="goToNewTicket()">
+      <ion-icon size="large" color="light" slot="start" name="ticket"></ion-icon>
+      <ion-label class="font">Ticket</ion-label>
+    </ion-item>
 
-  <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToProcesses()">
-    <ion-icon size="large" color="light" slot="start" name="create"></ion-icon>
-    <ion-label class="font">Processos</ion-label>
-  </ion-item>
+    <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToProcesses()">
+      <ion-icon size="large" color="light" slot="start" name="create"></ion-icon>
+      <ion-label class="font">Processos</ion-label>
+    </ion-item>
 
-  <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToInternships()">
-    <ion-icon size="large" color="light" slot="start" name="layers"></ion-icon>
-    <ion-label class="font">Estágios</ion-label>
-  </ion-item>
+    <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToInternships()">
+      <ion-icon size="large" color="light" slot="start" name="layers"></ion-icon>
+      <ion-label class="font">Estágios</ion-label>
+    </ion-item>
 
-  <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToChart()">
-    <ion-icon size="large" color="light" slot="start" name="bar-chart"></ion-icon>
-    <ion-label class="font">Gráfico</ion-label>
-  </ion-item>
+    <ion-item *ngIf="user === 'supervisor'" lines="full" button (click)="goToChart()">
+      <ion-icon size="large" color="light" slot="start" name="bar-chart"></ion-icon>
+      <ion-label class="font">Gráfico</ion-label>
+    </ion-item>
 
-  <ion-item lines="full" button (click)="goToProfile()">
-    <ion-icon size="large" color="light" slot="start" name="person"></ion-icon>
-    <ion-label class="font">Perfil</ion-label>
-  </ion-item>
+    <ion-item lines="full" button (click)="goToProfile()">
+      <ion-icon size="large" color="light" slot="start" name="person"></ion-icon>
+      <ion-label class="font">Perfil</ion-label>
+    </ion-item>
 
-  <ion-item lines="full" button (click)="goToCourses()">
-    <ion-icon size="large" color="light" slot="start" name="school"></ion-icon>
-    <ion-label class="font">Cursos</ion-label>
-  </ion-item>
+    <br>
 
-  <ion-item lines="full" button (click)="goToSupervisors()">
-    <ion-icon size="large" color="light" slot="start" name="settings-sharp"></ion-icon>
-    <ion-label class="font">Orientadores</ion-label>
-  </ion-item>
+    <ion-item lines="none" class="ion-text-center">
+      <ion-label class="font" style="font-size: 1.8em;">Admin</ion-label>
+    </ion-item>
+
+    <ion-item lines="full" button (click)="goToCourses()">
+      <ion-icon size="large" color="light" slot="start" name="library"></ion-icon>
+      <ion-label class="font">Cursos</ion-label>
+    </ion-item>
+
+    <ion-item lines="full" button (click)="goToSupervisors()">
+      <ion-icon size="large" color="light" slot="start" name="school"></ion-icon>
+      <ion-label class="font">Orientadores</ion-label>
+    </ion-item>
+  </div>
 
   <app-logoutbutton class="logoutbt"></app-logoutbutton>
 
