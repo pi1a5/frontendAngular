@@ -32,10 +32,10 @@
       <br>
       <br>
       <ion-list>
-        <ion-radio-group [ngModel]="newSubcourse ? 0 : editSubcourse.modalidade" (ionChange)="handleChangeModalidade($event)">
+        <ion-radio-group [ngModel]="newSubcourse ? 0 : editSubcourse.modalidade" (ionChange)="handleChangeModalidade($event)" >
           <ion-item *ngFor="let modalidade of modalidades;">
             <ion-label>{{modalidade.nome}}</ion-label>
-            <ion-radio slot="start" [value]="modalidade" color="success"></ion-radio>
+            <ion-radio slot="start" [value]="modalidade" color="success" ></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>

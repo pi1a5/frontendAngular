@@ -28,8 +28,6 @@ export class SubcourseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.subcourse);
-
     this.editSubcourse = {
       id: this.subcourse.id,
       nome: this.subcourse.nome,

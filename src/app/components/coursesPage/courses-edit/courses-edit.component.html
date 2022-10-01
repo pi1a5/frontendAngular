@@ -30,7 +30,7 @@
           Cursos
         </ion-card-title>
       </ion-col>
-      <ion-col *ngIf="newCourse" size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
         <ion-button class="font fase" color="success" (click)="newSubcourse()">
           <ion-icon slot="start" size="large" name="add-circle"></ion-icon>
           <ion-label slot="end">Criar Curso</ion-label>
@@ -39,8 +39,8 @@
     </ion-row>
     <hr>
 
-    <!-- Novo curso -->
-    <ion-list *ngIf="newCourse" class="subcourses">
+    <!-- Curso -->
+    <ion-list class="subcourses">
       <ion-item *ngFor="let curso of editCourse.cursos;" class="ion-margin-top" lines="none" color="light">
         <ion-label>
           {{ curso.nome }}
@@ -52,20 +52,6 @@
           <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
         </ion-button>
       </ion-item>
-    </ion-list>
-
-    <!-- Editando area -->
-    <ion-list *ngIf="!newCourse" class="subcourses">
-
-      <ion-item *ngFor="let subcourse of editCourse.cursos;" class="ion-margin-top" lines="none" color="light">
-        <ion-label class="ion-text-center">
-          {{ subcourse.nome }}
-        </ion-label>
-        <ion-button slot="end" class="cancelBtn" color="secondary" (click)="editSubcourse(subcourse)">
-          <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
-        </ion-button>
-      </ion-item>
-
     </ion-list>
 
     <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">
