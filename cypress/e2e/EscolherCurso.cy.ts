@@ -1,12 +1,13 @@
 describe('Escolher Curso Desejado', () => {
 
+
     beforeEach(() => {
-        cy.visit('/select-course')
+        cy.visit('/student');
       });
 
     it('Selecionar Nome do Curso Desejado', () => {
 
-        cy.get('[value="first"] > .ion-color > .sc-ion-label-md-h');
+        cy.get('.ion-text-center > .button').click();
         cy.contains('Técnico Integrado');
       });
 

@@ -6,7 +6,7 @@ describe('Controle de Sessão Professores', () => {
 
     
   });
-    it('Controle de Sessã sem estar logado', () => {
+    it('Controle de Sessão sem estar logado', () => {
         cy.visit('/supervisor')
     })
 
