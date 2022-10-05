@@ -26,12 +26,15 @@
             <!-- Coluna da esquerda -->
 
             <ion-col offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="4">
+              <ion-card-title class="title ion-text-center ion-margin" style="color: var(--ion-color-medium-shade);">
+                Áreas
+              </ion-card-title>
               <app-courses-list [newCourse]="isNewCourse" [courses]="courses"
                 (selectCourse)="receiveCourse($event)">
               </app-courses-list>
               <ion-button class="font" [disabled]="courses.length === 0" size="large" expand="block" fill="solid" color="success" (click)="newCourse()">
                 <ion-icon slot="start" name="duplicate"></ion-icon>
-                <ion-label slot="end">Criar Curso</ion-label>
+                <ion-label slot="end">Criar área</ion-label>
               </ion-button>
             </ion-col>
 

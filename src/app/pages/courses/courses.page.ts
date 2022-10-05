@@ -113,12 +113,37 @@ export class CoursesPage implements OnInit {
     });
   }
 
+  verifyObjects(oldObj: any, newObj: any) {
+    const aProps = Object.getOwnPropertyNames(oldObj);
+    const bProps = Object.getOwnPropertyNames(newObj);
+
+    // Verificar se o número de propriedades é igual
+    if (aProps.length !== bProps.length) {
+      return false;
+    }
+
+    for (let i = 0; i < aProps.length; i++) {
+      const propName = aProps[i];
+
+      // Verificar se os valores da mesma propriedade são iguais
+      if (JSON.stringify(oldObj[propName]) !== JSON.stringify(newObj[propName])) {
+        return false;
+      }
+    }
+
+    // São iguais
+    return true;
+  }
+
   receiveCourse(course: any) {
     this.selectedCourse = course;
     this.saveBeforeEdit = structuredClone(course);
   }
 
   async receiveSaveEvent(course: any) {
+    // Verificar se os objetos são diferentes
+    if (this.verifyObjects(this.saveBeforeEdit, course.course)) return await this.presentToast('Não foi identificado nenhuma mudança', 'warning', 'warning-outline');
+
     if (course.isNew) {
       this.saveNewCourse(course.course);
     } else {

@@ -6,7 +6,8 @@
       </ion-col>
       <ion-col size="7">
         <ion-item lines="none" color="light">
-          <ion-input class="font" placeholder="Novo curso" [ngModel]="editSubcourse.nome" (ionChange)="onChangeName($event.target.value)">
+          <ion-input class="font" placeholder="Novo curso" [ngModel]="editSubcourse.nome"
+            (ionChange)="onChangeName($event.target.value)">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -32,10 +33,10 @@
       <br>
       <br>
       <ion-list>
-        <ion-radio-group [ngModel]="editSubcourse.modalidade " (ionChange)="handleChangeModalidade($event)" >
+        <ion-radio-group [ngModel]="editSubcourse.modalidade " (ionChange)="handleChangeModalidade($event)">
           <ion-item *ngFor="let modalidade of modalidades;">
             <ion-label>{{modalidade.nome}}</ion-label>
-            <ion-radio slot="start" [value]="modalidade" color="success" ></ion-radio>
+            <ion-radio slot="start" [value]="modalidade" color="success"></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>

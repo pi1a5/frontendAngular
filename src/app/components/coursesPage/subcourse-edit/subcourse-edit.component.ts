@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-empty-function */
@@ -28,14 +30,13 @@ export class SubcourseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.subcourse);
-    
+    // console.log(this.subcourse);
     this.editSubcourse = {
       id: this.subcourse.id,
       nome: this.subcourse.nome,
       carga: this.subcourse.carga,
       idarea: this.subcourse.idarea,
-      modalidade: this.modalidades.filter(m => m.id === this.subcourse.idmodalidade)[0],
+      modalidade: this.modalidades.filter((m) => m.id === this.subcourse.idmodalidade)[0],
       idmodalidade: this.subcourse.idmodalidade,
     };
   }
@@ -105,8 +106,8 @@ export class SubcourseEditComponent implements OnInit {
 
   handleChangeModalidade(ev) {
     // console.log( ev.target.value);
-    
     this.editSubcourse.idmodalidade = ev.target.value.id;
-    this.editSubcourse.modalidade = this.modalidades.filter(m => m.id === this.subcourse.idmodalidade)[0];
+    this.editSubcourse.modalidade = this.modalidades.filter((m) => m.id === this.editSubcourse.idmodalidade)[0];
+    // console.log(this.editSubcourse.modalidade);
   }
 }

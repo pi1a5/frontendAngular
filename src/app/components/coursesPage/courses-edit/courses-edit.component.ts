@@ -1,4 +1,7 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable max-len */
+/* eslint-disable consistent-return */
+/* eslint-disable no-unreachable-loop */
 /* eslint-disable no-plusplus */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-empty-function */
@@ -11,7 +14,7 @@ import {
 } from '@angular/core';
 
 import {
-  AlertController, ItemReorderCustomEvent, ModalController, ToastController,
+  AlertController, ModalController, ToastController,
 } from '@ionic/angular';
 import { SubcourseEditComponent } from '../subcourse-edit/subcourse-edit.component';
 
@@ -134,6 +137,9 @@ export class CoursesEditComponent implements OnInit {
   handleModalResponse(response) {
     if (!response) return;
 
+    // Verifica se o nome do curso já existe nessa área
+    if (!this.verifyName(response.subcourse)) return this.presentToast('Não são permitidos nomes repetidos', 'danger', 'close-circle');
+
     if (response.newSubcourse) {
       this.editCourse.curso.push(response.subcourse);
       this.subcourseNumber++;
@@ -144,6 +150,14 @@ export class CoursesEditComponent implements OnInit {
         }
       }
     }
+  }
+
+  verifyName(newCourse: any) {
+    for (let index = 0; index < this.editCourse.curso.length; index++) {
+      const registeredCourse = this.editCourse.curso[index];
+      if (newCourse.nome === registeredCourse.nome && newCourse.id !== registeredCourse.id) return false;
+    }
+    return true;
   }
 
   validate() {

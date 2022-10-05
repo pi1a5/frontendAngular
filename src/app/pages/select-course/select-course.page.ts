@@ -47,6 +47,8 @@ export class SelectCoursePage implements OnInit {
     await this.presentLoading();
     this.api.getCourses().subscribe(async (data) => {
       await this.loadingController.dismiss();
+      console.log(data);
+
       this.defineCourse(data);
     }, async (error) => {
       await this.loadingController.dismiss();
