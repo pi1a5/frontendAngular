@@ -28,12 +28,15 @@ export class SubcourseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.subcourse);
+    
     this.editSubcourse = {
       id: this.subcourse.id,
       nome: this.subcourse.nome,
-      cargaHoraria: this.subcourse.cargaHoraria,
-      areaId: this.subcourse.areaId,
-      modalidade: this.subcourse.modalidade,
+      carga: this.subcourse.carga,
+      idarea: this.subcourse.idarea,
+      modalidade: this.modalidades.filter(m => m.id === this.subcourse.idmodalidade)[0],
+      idmodalidade: this.subcourse.idmodalidade,
     };
   }
 
@@ -101,6 +104,9 @@ export class SubcourseEditComponent implements OnInit {
   }
 
   handleChangeModalidade(ev) {
-    this.editSubcourse.modalidade = ev.target.value;
+    // console.log( ev.target.value);
+    
+    this.editSubcourse.idmodalidade = ev.target.value.id;
+    this.editSubcourse.modalidade = this.modalidades.filter(m => m.id === this.subcourse.idmodalidade)[0];
   }
 }

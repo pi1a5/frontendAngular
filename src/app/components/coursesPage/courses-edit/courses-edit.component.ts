@@ -49,9 +49,9 @@ export class CoursesEditComponent implements OnInit {
     this.editCourse = {
       id: this.course.id,
       nome: this.course.nome,
-      cursos: this.course.cursos,
+      curso: this.course.curso,
     };
-    this.subcourseNumber = this.course.cursos.length;
+    this.subcourseNumber = this.course.curso.length;
   }
 
   async presentToast(msg: string, color: string, icon: string) {
@@ -116,16 +116,16 @@ export class CoursesEditComponent implements OnInit {
   }
 
   deleteSubcourse(subcourseId: number) {
-    this.editCourse.cursos = this.editCourse.cursos.filter((c) => c.id !== subcourseId);
+    this.editCourse.curso = this.editCourse.curso.filter((c) => c.id !== subcourseId);
   }
 
   async newSubcourse() {
     const subcourse = {
-      id: this.course.cursos.length,
+      id: this.course.curso.length,
       nome: '',
-      cargaHoraria: 0,
-      areaId: this.course.id,
-      modalidade: undefined,
+      carga: 0,
+      idarea: this.course.id,
+      idmodalidade: this.modalidades[0].id,
     };
 
     this.handleModalResponse(await this.presentModal(subcourse, this.modalidades, true));
@@ -135,12 +135,12 @@ export class CoursesEditComponent implements OnInit {
     if (!response) return;
 
     if (response.newSubcourse) {
-      this.editCourse.cursos.push(response.subcourse);
+      this.editCourse.curso.push(response.subcourse);
       this.subcourseNumber++;
     } else {
-      for (let index = 0; index < this.editCourse.cursos.length; index++) {
-        if (this.editCourse.cursos[index].id === response.subcourse.id) {
-          this.editCourse.cursos[index] = response.subcourse;
+      for (let index = 0; index < this.editCourse.curso.length; index++) {
+        if (this.editCourse.curso[index].id === response.subcourse.id) {
+          this.editCourse.curso[index] = response.subcourse;
         }
       }
     }
@@ -153,7 +153,7 @@ export class CoursesEditComponent implements OnInit {
       return false;
     }
     // Verificar se tem pelo menos 1 curso
-    if (this.editCourse.cursos.length <= 0) {
+    if (this.editCourse.curso.length <= 0) {
       this.presentToast('Área deve conter pelo menos 1 curso', 'danger', 'close-circle');
       return false;
     }

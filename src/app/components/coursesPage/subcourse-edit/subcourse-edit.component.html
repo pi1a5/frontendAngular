@@ -20,19 +20,19 @@
   <ion-card-content>
     <ion-item lines="full" class="ion-text-center">
       <ion-label position="floating" color="success">Carga horária para cumprimento do estágio</ion-label>
-      <ion-input [(ngModel)]="editSubcourse.cargaHoraria" type="number" color="success" class="font"> </ion-input>
+      <ion-input [(ngModel)]="editSubcourse.carga" type="number" color="success" class="font"> </ion-input>
     </ion-item>
 
     <br>
 
     <ion-card-title color="success" class="font ion-text-center ion-padding-top" style="font-size: 2em;">
       <ion-label>
-        Modalidade: {{editSubcourse.modalidade ? editSubcourse.modalidade.nome : ''}}
+        Modalidade: {{editSubcourse.modalidade.nome}}
       </ion-label>
       <br>
       <br>
       <ion-list>
-        <ion-radio-group [ngModel]="newSubcourse ? 0 : editSubcourse.modalidade" (ionChange)="handleChangeModalidade($event)" >
+        <ion-radio-group [ngModel]="editSubcourse.modalidade " (ionChange)="handleChangeModalidade($event)" >
           <ion-item *ngFor="let modalidade of modalidades;">
             <ion-label>{{modalidade.nome}}</ion-label>
             <ion-radio slot="start" [value]="modalidade" color="success" ></ion-radio>
