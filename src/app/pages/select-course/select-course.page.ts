@@ -21,40 +21,26 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-course.page.scss'],
 })
 export class SelectCoursePage implements OnInit {
-  public tecnicoIntegrado = [];
-
-  public tecnicoSubsequente = [];
-
-  public tecnologia = [];
-
-  public licenciatura = [];
-
-  public bacharelado = [];
-
-  public ead = [];
-
-  public idCourse: number = undefined;
+  public confirmedCourse: Object = undefined;
 
   constructor(
-    public router: Router,
     public api: ApiService,
+    public router: Router,
+    public modalController: ModalController,
     public toastController: ToastController,
     public loadingController: LoadingController,
-    public modalController: ModalController,
   ) { }
 
-  async ngOnInit() {
-    await this.presentLoading();
-    this.api.getCourses().subscribe(async (data) => {
-      await this.loadingController.dismiss();
-      console.log(data);
+  ngOnInit() {}
 
-      this.defineCourse(data);
-    }, async (error) => {
-      await this.loadingController.dismiss();
-      console.log(error);
-      await this.presentToast(error.error, 'danger', 'close-circle');
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
     });
+    toast.present();
   }
 
   async presentLoading() {
@@ -66,14 +52,13 @@ export class SelectCoursePage implements OnInit {
     return await loading.present();
   }
 
-  async presentToast(msg: string, color: string, icon: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      color,
-      icon,
-      duration: 2000,
-    });
-    toast.present();
+  receiveConfirmedCourse(course: Object) {
+    this.confirmedCourse = course;
+    console.log(course);
+  }
+
+  receiveDeleteTicket() {
+    this.ngOnInit();
   }
 
   async presentModal(course: any) {
@@ -93,53 +78,23 @@ export class SelectCoursePage implements OnInit {
     return false;
   }
 
-  defineCourse(courses: [any]) {
-    for (let index = 0; index < courses.length; index++) {
-      const course = courses[index];
-
-      switch (course.tipo) {
-        case 'tecnicoIntegrado':
-          this.tecnicoIntegrado.push(course);
-          break;
-        case 'tecnicoSubsequente':
-          this.tecnicoSubsequente.push(course);
-          break;
-        case 'tecnologia':
-          this.tecnologia.push(course);
-          break;
-        case 'licenciatura':
-          this.licenciatura.push(course);
-          break;
-        case 'bacharelado':
-          this.bacharelado.push(course);
-          break;
-        case 'ead':
-          this.ead.push(course);
-          break;
-
-        default:
-          break;
-      }
-    }
-  }
-
   async setCourse(course: any) {
-    await this.presentLoading();
-    this.idCourse = course.id;
-    const resp = await this.presentModal(course);
-    if (!resp) return;
-    await this.presentLoading();
-    this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async (data) => {
-      console.log(data);
+    // await this.presentLoading();
+    // this.idCourse = course.id;
+    // const resp = await this.presentModal(course);
+    // if (!resp) return;
+    // await this.presentLoading();
+    // this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async (data) => {
+    //   console.log(data);
 
-      await this.loadingController.dismiss();
-      await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
-      this.userPage(data.email);
-    }, async (error) => {
-      console.log(error);
-      await this.loadingController.dismiss();
-      await this.presentToast(error.error, 'danger', 'close-circle');
-    });
+    //   await this.loadingController.dismiss();
+    //   await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
+    //   this.userPage(data.email);
+    // }, async (error) => {
+    //   console.log(error);
+    //   await this.loadingController.dismiss();
+    //   await this.presentToast(error.error, 'danger', 'close-circle');
+    // });
   }
 
   userPage(email: string) {

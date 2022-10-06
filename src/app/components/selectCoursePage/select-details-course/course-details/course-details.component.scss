@@ -1,0 +1,44 @@
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+ion-card-title {
+  font-size: 2em;
+}
+
+ion-list.fases {
+  height: 24.8vh;
+  overflow-y: auto;
+}
+
+ion-item ion-label {
+  font-family: 'Nunito', sans-serif;
+  color: var(--ion-color-success);
+  font-size: 1.5em;
+}
+
+// Botões etapa
+ion-button.fase {
+  margin-top: 1em;
+}
+
+ion-button ion-icon.fase {
+  font-size: 2.5em;
+}
+
+ion-button.cancelBtn {
+  height: 3.5em;
+}
+
+// Botões de adição
+
+ion-icon.add {
+  font-size: 48px;
+  --ionicon-stroke-width: 80px;
+}

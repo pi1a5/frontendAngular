@@ -10,36 +10,34 @@
 import {
   Component, EventEmitter, OnInit, Output,
 } from '@angular/core';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { ApiStudentService } from 'src/app/services/api-student.service';
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
+import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-select-details-process',
-  templateUrl: './select-details-process.component.html',
-  styleUrls: ['./select-details-process.component.scss'],
+  selector: 'app-select-details-course',
+  templateUrl: './select-details-course.component.html',
+  styleUrls: ['./select-details-course.component.scss'],
 })
-export class SelectDetailsProcessComponent implements OnInit {
-  public processes: any[] = [];
+export class SelectDetailsCourseComponent implements OnInit {
+  public courses: any[] = [];
 
-  public selectedProcess = undefined;
+  public modalidades: any[] = [];
 
-  @Output() confirmedProcess = new EventEmitter<Object>();
+  public selectedCourse = undefined;
+
+  @Output() confirmedCourse = new EventEmitter<Object>();
 
   constructor(
     public api: ApiService,
-    public apiStudent: ApiStudentService,
+    public apiSupervisor: ApiSupervisorService,
     public toastController: ToastController,
     public loadingController: LoadingController,
     public alertController: AlertController,
   ) { }
 
   ngOnInit() {
-    this.api.getAllProcesses().subscribe(async (data) => {
-      this.processes = data.processos;
-    }, async (error) => {
-      await this.presentToast(error.error, 'danger', 'close-circle');
-    });
+    this.loadCourses();
   }
 
   async presentLoading() {
@@ -61,10 +59,10 @@ export class SelectDetailsProcessComponent implements OnInit {
     toast.present();
   }
 
-  async presentAlert() {
+  async presentAlert(curso: string) {
     const alert = await this.alertController.create({
-      header: 'Aviso: confirmando o processo você não poderá mudar!',
-      message: 'Informe sua carga horária',
+      header: curso,
+      message: 'Informe seu prontuário',
       buttons: [
         {
           text: 'Cancel',
@@ -73,26 +71,14 @@ export class SelectDetailsProcessComponent implements OnInit {
         {
           text: 'OK',
           role: 'confirm',
-          // handler: () => {
-          //   this.alert = 'Alert canceled';
-          // },
         },
       ],
       inputs: [
         {
-          label: '4 Horas',
-          type: 'radio',
-          value: 4,
-        },
-        {
-          label: '6 Horas',
-          type: 'radio',
-          value: 6,
-        },
-        {
-          label: '8 Horas',
-          type: 'radio',
-          value: 8,
+          placeholder: 'Nickname (max 8 characters)',
+          attributes: {
+            maxlength: 8,
+          },
         },
       ],
     });
@@ -106,28 +92,37 @@ export class SelectDetailsProcessComponent implements OnInit {
     return false;
   }
 
-  async confirm() {
-    const hours = await this.presentAlert();
-    if (hours) await this.createNewInternship(this.selectedProcess.id, hours);
+  async loadCourses() {
+    this.apiSupervisor.getAreasWithCourses().subscribe(async (data) => {
+      this.courses = data.areas;
+      this.modalidades = data.modalidades;
+    }, async (error) => {
+      await this.presentToast(error.error, 'danger', 'close-circle');
+    });
   }
 
-  async createNewInternship(processId: number, hours: number) {
+  async confirm() {
+    const hours = await this.presentAlert(this.selectedCourse.nome);
+    if (hours) await this.setCourse(this.selectedCourse.id, hours);
+  }
+
+  async setCourse(idCurso: number, prontuario: string) {
     await this.presentLoading();
-    this.apiStudent.newInternship(processId, hours).subscribe((data) => {
+    this.api.setCourseProntuario(idCurso, prontuario).subscribe((data) => {
       this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
-      this.sendConfirmedProcess();
+      this.sendConfirmedCourse();
     }, (error) => {
       this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
 
-  sendConfirmedProcess() {
-    this.confirmedProcess.emit(this.selectedProcess);
+  sendConfirmedCourse() {
+    this.confirmedCourse.emit(this.selectedCourse);
   }
 
-  receiveProcess(process: any) {
-    this.selectedProcess = process;
+  receiveCourse(course: any) {
+    this.selectedCourse = course;
   }
 }

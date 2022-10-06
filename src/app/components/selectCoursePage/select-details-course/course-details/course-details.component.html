@@ -1,0 +1,53 @@
+<ion-card>
+  <ion-card-header class="ion-text-center" color="success">
+    <ion-card-title class="font">Detalhes</ion-card-title>
+  </ion-card-header>
+
+  <!-- Content -->
+
+  <ion-card-content>
+
+    <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
+      Cursos:
+    </ion-card-title>
+
+    <!-- Etapas -->
+    <ion-list class="fases">
+
+      <ion-item *ngFor="let curso of course.curso;" class="ion-margin-top" lines="none" color="light">
+        <ion-label class="ion-text-center">
+          {{ curso.nome }}
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <hr>
+
+    <ion-card-title class="font ion-text-start ion-padding-top" color="medium-shade">
+      Modalidades:
+    </ion-card-title>
+
+
+    <!-- Documentos -->
+    <ion-list class="fases">
+
+      <ion-grid class="font" style="font-size: 2em">
+        <ion-row *ngFor="let course of courseModalidade;" class="ion-margin-top" lines="none"
+          color="light">
+          <ion-col size="6">
+            <ion-title>
+              {{course.nome}}
+            </ion-title>
+          </ion-col>
+          <ion-col size="6">
+            <ion-title>
+              {{course.modalidade}}
+            </ion-title>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+  </ion-card-content>
+</ion-card>
