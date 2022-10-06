@@ -11,8 +11,7 @@
 /* eslint-disable import/no-unresolved */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { SetProntuarioComponent } from 'src/app/components/selectCoursePage/set-prontuario/set-prontuario.component';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -21,17 +20,69 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-course.page.scss'],
 })
 export class SelectCoursePage implements OnInit {
-  public confirmedCourse: Object = undefined;
+  public modalidades:  any[] = [];
 
   constructor(
     public api: ApiService,
     public router: Router,
-    public modalController: ModalController,
+    public alertController: AlertController,
     public toastController: ToastController,
     public loadingController: LoadingController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadCourses();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Aviso: confirmando o processo você não poderá mudar!',
+      message: 'Informe sua carga horária',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          // handler: () => {
+          //   this.alert = 'Alert canceled';
+          // },
+        },
+      ],
+      inputs: [
+        {
+          label: '4 Horas',
+          type: 'radio',
+          value: 4,
+        },
+        {
+          label: '6 Horas',
+          type: 'radio',
+          value: 6,
+        },
+        {
+          label: '8 Horas',
+          type: 'radio',
+          value: 8,
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const input = await alert.onDidDismiss();
+
+    if (input.role === 'confirm') return input.data.values;
+
+    return false;
+  }
+
+  async confirm() {
+    const hours = await this.presentAlert();
+    if (hours) await this.setCourse(`fsaf`);
+  }
 
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
@@ -52,33 +103,20 @@ export class SelectCoursePage implements OnInit {
     return await loading.present();
   }
 
-  receiveConfirmedCourse(course: Object) {
-    this.confirmedCourse = course;
-    console.log(course);
-  }
-
-  receiveDeleteTicket() {
-    this.ngOnInit();
-  }
-
-  async presentModal(course: any) {
-    const modal = await this.modalController.create({
-      component: SetProntuarioComponent,
-      cssClass: 'set-prontuario',
-      componentProps: { course },
+  loadCourses() {
+    this.api.getCourses().subscribe(data => {
+      console.log(data);
+      
+      this.modalidades = data;
+    }, error => {
+      this.presentToast(error.error, 'danger', 'close-circle');
     });
-
-    await this.loadingController.dismiss();
-    await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-
-    if (data) return data;
-
-    return false;
+    
   }
 
   async setCourse(course: any) {
+    console.log(course);
+    
     // await this.presentLoading();
     // this.idCourse = course.id;
     // const resp = await this.presentModal(course);

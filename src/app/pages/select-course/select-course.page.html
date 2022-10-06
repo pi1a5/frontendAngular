@@ -1,18 +1,30 @@
-<!-- content -->
-<ion-router-outlet id="main-content">
-  <ion-content class="ion-justify-content-center" padding class="background">
-
-    <!-- Selecionar Curso -->
-    <ion-grid>
-      <ion-row>
-        <ion-col></ion-col>
-        <ion-col>
-          <app-select-details-course (confirmedCourse)="receiveConfirmedCourse($event)">
-          </app-select-details-course>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    </ion-grid>
-
-  </ion-content>
-</ion-router-outlet>
+<ion-content padding class="background">
+  <ion-grid class="ion-padding-top" style='height: 100%'>
+    <ion-row style='height: 100%'>
+      <ion-col offset-sm="1" offset-md="1" offset-xl="2.5" size-sm="10" size-md="10" size-lg="10" size-xl="7">
+        <ion-card color="light" class="container ion-padding-top" style="border-radius: 0px;">
+          <ion-card-header class="ion-text-center">
+            <ion-card-title class="title ion-margin ion-padding">
+              Selecione seu Curso
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <ion-accordion-group expand="inset">
+              <ion-accordion *ngFor="let modalidade of modalidades">
+                <ion-item slot="header" color="success">
+                  <ion-icon size="large" slot="start" name="bag-add-outline"></ion-icon>
+                  <ion-label class="font">{{modalidade.nome}}</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content" *ngFor="let course of modalidade.curso">
+                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
+                    <ion-label class="font">{{course.nome}}</ion-label>
+                  </ion-item>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
