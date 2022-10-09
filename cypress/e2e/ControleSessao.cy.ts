@@ -1,39 +1,36 @@
-describe('Controle de Sessão Professores', () => {
+describe('TESTE 01: Controle de Sessão de rotas', () => {
 
 
   beforeEach(() => {
-    cy.visit('/supervisor')
+    cy.visit('localhost:4200/select-course')
 
     
   });
-    it('Controle de Sessão sem estar logado', () => {
-        cy.visit('/supervisor')
+
+    it('Acessar uma rota sem estar logado (Escolher Curso)', () => {
+      cy.get('.title')
+      cy.get('.accordion-expanded > :nth-child(2) > .courseItem > .font').click();
     })
+
 
 
 });
 
-describe('Controle de Sessão Alunos sem estar logado', () => {
+describe('TESTE 02: Controle de Sessão de rotas', () => {
 
-beforeEach(() => {
-    cy.visit('/student')
+
+  beforeEach(() => {
+    cy.visit('localhost:4200/home')
 
     
   });
-    it('Direcionar para página de professores sem estar logado', () => {
-        cy.visit('/student')
+
+    it('Acessar uma rota sem estar logado (Escolher Curso)', () => {
+      cy.get('.title')
+      cy.get('.accordion-expanded > :nth-child(2) > .courseItem > .font').click();
     })
+
+
+
 });
 
-
-describe('Acessar uma rota estando logado', () => {
-
-    beforeEach(() => {
-        cy.visit('/student')
-    
-        
-      });
-        it('Direcionar para página de professores sem estar logado', () => {
-            cy.visit('/student')
-        })
-    });
