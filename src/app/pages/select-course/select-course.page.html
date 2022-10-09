@@ -4,7 +4,7 @@
       <ion-col offset-sm="1" offset-md="1" offset-xl="2.5" size-sm="10" size-md="10" size-lg="10" size-xl="7">
         <ion-card color="light" class="container ion-padding-top" style="border-radius: 0px;">
           <ion-card-header class="ion-text-center">
-            <ion-card-title class="title ion-margin ion-padding">
+            <ion-card-title class="title ion-margin ion-padding font">
               Selecione seu Curso
             </ion-card-title>
           </ion-card-header>
@@ -12,7 +12,7 @@
             <ion-accordion-group expand="inset">
               <ion-accordion *ngFor="let modalidade of modalidades">
                 <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="bag-add-outline"></ion-icon>
+                  <ion-icon size="large" slot="start" name="ribbon"></ion-icon>
                   <ion-label class="font">{{modalidade.nome}}</ion-label>
                 </ion-item>
                 <div class="ion-padding" slot="content" *ngFor="let course of modalidade.curso">

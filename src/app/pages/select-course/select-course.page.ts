@@ -35,7 +35,7 @@ export class SelectCoursePage implements OnInit {
 
   ngOnInit() {
     this.api.getUser().subscribe((user) => {
-      console.log(user);
+      // console.log(user);
       if (user.idcurso !== null) return this.userPage(sessionStorage.getItem('userEmail'));
     }, (error) => {
       console.log(error);
@@ -142,7 +142,7 @@ export class SelectCoursePage implements OnInit {
     this.api.setCourseProntuario(courseId, prontuario).subscribe(async (data) => {
       await this.loadingController.dismiss();
       await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
-      this.userPage(data.email);
+      this.userPage(sessionStorage.getItem('userEmail'));
     }, async (error) => {
       console.log(error);
       await this.loadingController.dismiss();

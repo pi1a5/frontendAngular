@@ -62,9 +62,15 @@ export class ProcessesPage implements OnInit {
 
   async loadProcesses() {
     this.api.getAllProcesses().subscribe(async (data) => {
-      this.processes = data.processos;
-      this.documents = data.documentos;
-      this.processNumber = this.processes.length;
+      if (!data.processos) {
+        this.processes = null;
+        this.documents = data.documentos;
+        this.processNumber = 0;
+      } else {
+        this.processes = data.processos;
+        this.documents = data.documentos;
+        this.processNumber = this.processes.length;
+      }
     }, async (error) => {
       this.processes = null;
       await this.presentToast(error.error, 'danger', 'close-circle');
@@ -75,7 +81,7 @@ export class ProcessesPage implements OnInit {
     this.isNewProcess = true;
     this.selectedProcess = {
       id: this.processNumber,
-      nome: 'Novo processo',
+      nome: '',
       etapas: [],
     };
   }
@@ -83,9 +89,10 @@ export class ProcessesPage implements OnInit {
   async saveNewProcess(process: any) {
     await this.presentLoading();
     this.apiSupervisor.newProcess(process).subscribe(async (data) => {
+      // console.log(data);
       await this.loadingController.dismiss();
       await this.presentToast('Processo criado com sucesso!', 'success', 'checkmark-circle');
-      this.processes.push(data.processo);
+      this.loadProcesses();
       this.reset();
     }, async (error) => {
       await this.loadingController.dismiss();

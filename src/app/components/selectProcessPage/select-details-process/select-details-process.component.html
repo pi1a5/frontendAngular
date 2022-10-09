@@ -18,7 +18,7 @@
         <app-processes-list [processes]="processes"
           (selectProcess)="receiveProcess($event)">
         </app-processes-list>
-        <ion-button class="font" [disabled]="processes || selectedProcess === undefined" size="large" expand="block" fill="solid" color="success" (click)="confirm()">
+        <ion-button class="font" [disabled]="processes === null || processes === undefined || selectedProcess === undefined" size="large" expand="block" fill="solid" color="success" (click)="confirm()">
           <ion-icon slot="start" name="thumbs-up-sharp"></ion-icon>
           <ion-label slot="end">Confirmar</ion-label>
         </ion-button>
