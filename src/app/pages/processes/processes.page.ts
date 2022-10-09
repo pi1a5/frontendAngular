@@ -20,7 +20,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class ProcessesPage implements OnInit {
   public isNewProcess: boolean = false;
 
-  public processes: any[] = [];
+  public processes: any[] = undefined;
 
   public selectedProcess = undefined;
 
@@ -66,6 +66,7 @@ export class ProcessesPage implements OnInit {
       this.documents = data.documentos;
       this.processNumber = this.processes.length;
     }, async (error) => {
+      this.processes = null;
       await this.presentToast(error.error, 'danger', 'close-circle');
     });
   }

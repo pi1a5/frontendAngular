@@ -20,7 +20,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-details-process.component.scss'],
 })
 export class SelectDetailsProcessComponent implements OnInit {
-  public processes: any[] = [];
+  public processes: any[] = undefined;
 
   public selectedProcess = undefined;
 
@@ -38,6 +38,7 @@ export class SelectDetailsProcessComponent implements OnInit {
     this.api.getAllProcesses().subscribe(async (data) => {
       this.processes = data.processos;
     }, async (error) => {
+      this.processes = null;
       await this.presentToast(error.error, 'danger', 'close-circle');
     });
   }

@@ -21,3 +21,11 @@ ion-menu.md ion-content {
 .background {
   --background: url(../../../assets/backgroundIF2.jpg);
 }
+
+ion-item.courseItem {
+  --border-radius: 0.5em;
+}
+
+div[slot="content"] {
+  background: rgba(var(--ion-color-success-rgb), 0.25)
+}

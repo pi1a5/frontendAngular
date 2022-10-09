@@ -16,7 +16,10 @@
                   <ion-label class="font">{{modalidade.nome}}</ion-label>
                 </ion-item>
                 <div class="ion-padding" slot="content" *ngFor="let course of modalidade.curso">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
+                  <ion-item *ngIf="!course" class="courseItem" lines="none" button="true" color="success">
+                    <ion-label class="font">Curso null</ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="course" class="courseItem" lines="none" button="true" color="success" (click)="selectCourse(course)">
                     <ion-label class="font">{{course.nome}}</ion-label>
                   </ion-item>
                 </div>

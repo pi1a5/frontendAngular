@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     const email = sessionStorage.getItem('userEmail');
+
     if (email.includes('aluno')) {
       this.user = 'student';
     } else {

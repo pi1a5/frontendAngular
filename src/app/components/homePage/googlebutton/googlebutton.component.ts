@@ -76,25 +76,30 @@ export class GooglebuttonComponent implements OnInit {
   }
 
   apiLogin(name: string, email: string, imageUrl: string, token: string, sub: string) {
-    this.api.login(token, sub).subscribe((user) => {
+    this.api.login(name, email, imageUrl, token, sub).subscribe((user) => {
       if (user.idcurso === null) return this.goToSelectCoursePage();
       this.userPage(user.email);
     }, (error) => {
-      this.api.newUser({
-        name, email, picture: imageUrl, token, sub,
-      }).subscribe((resp) => {
-        this.api.login(token, sub).subscribe((user) => {
-          this.goToSelectCoursePage();
-        }, (error) => {
-          this.loadingController.dismiss();
-          this.presentToast(error.error, 'danger', 'close-circle');
-        });
-      }, (error) => {
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-      });
+      this.presentToast(error.error, 'danger', 'close-circle');
+      // if (error.status === 404) this.newUser(name, email, imageUrl, token, sub);
     });
   }
+
+  // newUser(name: string, email: string, imageUrl: string, token: string, sub: string) {
+  //   this.api.newUser({
+  //     name, email, picture: imageUrl, token, sub,
+  //   }).subscribe((resp) => {
+  //     this.api.login(token, sub).subscribe((user) => {
+  //       this.goToSelectCoursePage();
+  //     }, (error) => {
+  //       this.loadingController.dismiss();
+  //       this.presentToast(error.error, 'danger', 'close-circle');
+  //     });
+  //   }, (error) => {
+  //     this.loadingController.dismiss();
+  //     this.presentToast(error.error, 'danger', 'close-circle');
+  //   });
+  // }
 
   userPage(email: string) {
     this.loadingController.dismiss();

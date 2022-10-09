@@ -1,4 +1,7 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable max-len */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
@@ -20,7 +23,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./select-course.page.scss'],
 })
 export class SelectCoursePage implements OnInit {
-  public modalidades:  any[] = [];
+  public modalidades: any[] = [];
 
   constructor(
     public api: ApiService,
@@ -31,13 +34,19 @@ export class SelectCoursePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.api.getUser().subscribe((user) => {
+      console.log(user);
+      if (user.idcurso !== null) return this.userPage(sessionStorage.getItem('userEmail'));
+    }, (error) => {
+      console.log(error);
+    });
     this.loadCourses();
   }
 
-  async presentAlert() {
+  async presentAlert(courseName: string) {
     const alert = await this.alertController.create({
-      header: 'Aviso: confirmando o processo você não poderá mudar!',
-      message: 'Informe sua carga horária',
+      header: courseName,
+      message: 'Informe seu prontuário sem "SP"',
       buttons: [
         {
           text: 'Cancel',
@@ -46,26 +55,14 @@ export class SelectCoursePage implements OnInit {
         {
           text: 'OK',
           role: 'confirm',
-          // handler: () => {
-          //   this.alert = 'Alert canceled';
-          // },
         },
       ],
       inputs: [
         {
-          label: '4 Horas',
-          type: 'radio',
-          value: 4,
-        },
-        {
-          label: '6 Horas',
-          type: 'radio',
-          value: 6,
-        },
-        {
-          label: '8 Horas',
-          type: 'radio',
-          value: 8,
+          placeholder: '123456',
+          attributes: {
+            maxlength: 7,
+          },
         },
       ],
     });
@@ -77,11 +74,6 @@ export class SelectCoursePage implements OnInit {
     if (input.role === 'confirm') return input.data.values;
 
     return false;
-  }
-
-  async confirm() {
-    const hours = await this.presentAlert();
-    if (hours) await this.setCourse(`fsaf`);
   }
 
   async presentToast(msg: string, color: string, icon: string) {
@@ -104,35 +96,58 @@ export class SelectCoursePage implements OnInit {
   }
 
   loadCourses() {
-    this.api.getCourses().subscribe(data => {
-      console.log(data);
-      
+    this.api.getCourses().subscribe((data) => {
+      // console.log(data);
       this.modalidades = data;
-    }, error => {
+    }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
-    
   }
 
-  async setCourse(course: any) {
-    console.log(course);
-    
-    // await this.presentLoading();
-    // this.idCourse = course.id;
-    // const resp = await this.presentModal(course);
-    // if (!resp) return;
-    // await this.presentLoading();
-    // this.api.setCourseProntuario(this.idCourse, resp.prontuario).subscribe(async (data) => {
-    //   console.log(data);
+  async selectCourse(course: any) {
+    const prontuario = await this.presentAlert(course.nome);
 
-    //   await this.loadingController.dismiss();
-    //   await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
-    //   this.userPage(data.email);
-    // }, async (error) => {
-    //   console.log(error);
-    //   await this.loadingController.dismiss();
-    //   await this.presentToast(error.error, 'danger', 'close-circle');
-    // });
+    if (prontuario[0]) {
+      if (this.isProntuarioValid(prontuario[0])) return await this.setCourse(course.id, prontuario[0]);
+    }
+  }
+
+  isProntuarioValid(prontuario: string) {
+    if (prontuario.length < 6 || !this.modulo11(prontuario)) {
+      this.presentToast('Prontuário inválido', 'danger', 'close-circle');
+      return false;
+    }
+
+    return true;
+  }
+
+  modulo11(prontuario: any) {
+    const corpo = prontuario.slice(0, prontuario.length - 1);
+    const verificador = prontuario.slice(prontuario.length - 1);
+    const multiplicadores = [7, 6, 5, 4, 3, 2];
+
+    let total = 0;
+    for (let index = 0; index < corpo.length; index++) total += corpo[index] * multiplicadores[index];
+
+    const resto = (total * 10) % 11;
+
+    if (resto === 10 && verificador.toUpperCase() === 'X') return true;
+    if (Number(verificador) === resto) return true;
+
+    return false;
+  }
+
+  async setCourse(courseId: number, prontuario: string) {
+    await this.presentLoading();
+    this.api.setCourseProntuario(courseId, prontuario).subscribe(async (data) => {
+      await this.loadingController.dismiss();
+      await this.presentToast('Bem-vindo!', 'success', 'checkmark-circle');
+      this.userPage(data.email);
+    }, async (error) => {
+      console.log(error);
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
+    });
   }
 
   userPage(email: string) {
