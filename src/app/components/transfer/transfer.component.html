@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content >
-  <ion-list >
+  <ion-list *ngIf="supervisors">
     <ion-item *ngFor="let supervisor of supervisors" button="true" (click)="presentAlert(supervisor.id, supervisor.nome)">
       <ion-avatar slot="start">
         <ion-img [src]="supervisor.foto ? supervisor.foto : '../../../assets/avatarIcon.png'"></ion-img>
@@ -17,5 +17,13 @@
         <p>{{supervisor.curso}}</p>
       </ion-label>
     </ion-item>
+  </ion-list>
+  <ion-list *ngIf="supervisors === null" class="flex-center">
+    <ion-title class="font ion-text-center" style="color: var(--ion-color-medium-shade)">
+      Sem Orientador Disponível
+    </ion-title>
+  </ion-list>
+  <ion-list *ngIf="supervisors === undefined" class="flex-center">
+    <ion-spinner name="crescent" color="success"></ion-spinner>
   </ion-list>
 </ion-content>

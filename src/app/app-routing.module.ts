@@ -93,6 +93,10 @@ const routes: Routes = [
     path: 'courses',
     loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
   },
+  {
+    path: 'admin-supervisors',
+    loadChildren: () => import('./pages/admin-supervisors/admin-supervisors.module').then( m => m.AdminSupervisorsPageModule)
+  },
 
 ];
 

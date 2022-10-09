@@ -142,7 +142,10 @@ export class ProcessEditComponent implements OnInit {
     if (!response) return;
 
     // Verifica se o nome da etapa já existe nesse processo
-    if (!this.verifyName(response.etapa)) this.presentToast('Não são permitidos nomes repetidos', 'danger', 'close-circle');
+    if (!this.verifyName(response.etapa)) {
+      this.presentToast('Não são permitidos nomes repetidos', 'danger', 'close-circle');
+      return;
+    }
 
     if (response.novaEtapa) {
       this.editProcess.etapas.push(response.etapa);

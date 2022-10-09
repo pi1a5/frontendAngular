@@ -23,6 +23,8 @@ export class SidebarComponent implements OnInit {
 
     if (email.includes('aluno')) {
       this.user = 'student';
+    } else if (email === 'adm.g5.pi2a6@gmail.com') {
+      this.user = 'admin';
     } else {
       this.user = 'supervisor';
     }
@@ -61,6 +63,6 @@ export class SidebarComponent implements OnInit {
   }
 
   goToSupervisors() {
-    this.router.navigate(['supervisors'], { replaceUrl: true });
+    this.router.navigate(['admin-supervisors'], { replaceUrl: true });
   }
 }
