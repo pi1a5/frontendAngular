@@ -104,30 +104,4 @@ export class ApiSupervisorService {
       idestagio: internshipId,
     });
   }
-
-  // Admin
-  getAreasWithCourses(): Observable<any> {
-    return this.http.get(`${this.url}api/getAreasWithCourses`);
-  }
-
-  newArea(area: any): Observable<any> {
-    return this.http.post(`${this.url}api/createNewArea`, {
-      sub: sessionStorage.getItem('userId'),
-      area,
-    });
-  }
-
-  updateArea(oldArea: any, newArea: any): Observable<any> {
-    return this.http.post(`${this.url}api/updateArea`, {
-      sub: sessionStorage.getItem('userId'),
-      areaAntiga: oldArea,
-      areaNova: newArea,
-    });
-  }
-
-  deleteArea(areaId: number): Observable<any> {
-    return this.http.post(`${this.url}api/deleteArea`, {
-      idarea: areaId,
-    });
-  }
 }

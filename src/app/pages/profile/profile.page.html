@@ -1,4 +1,4 @@
-<ion-split-pane contentId="main-content">
+<ion-split-pane when="(min-width: 1600px)" contentId="main-content">
   <ion-menu contentId="main-content" type="overlay">
     <ion-content>
       <app-sidebar></app-sidebar>
@@ -7,32 +7,24 @@
 
   <!-- content -->
   <ion-router-outlet id="main-content">
-    <ion-header>
-      <ion-toolbar color="success">
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title class="title">Perfil</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content color="tertiary">
+    <ion-content class="ion-justify-content-center" padding class="background">
+      <ion-header style="position: absolute;">
+        <ion-toolbar color="translucent" class="ion-text-center ion-padding">
+          <ion-menu-button slot="start"></ion-menu-button>
+        </ion-toolbar>
+      </ion-header>
       <ion-grid>
         <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-card>
-              <ion-card-content>
-                <ion-item *ngIf="user">
-                  <ion-avatar slot="start">
-                    <img [src]="user.foto" alt="user image">
-                  </ion-avatar>
-                  <ion-label>
-                    {{user.nome}}
-                    <p>{{user.email}}</p>
-                  </ion-label>
-                </ion-item>
-              </ion-card-content>
-            </ion-card>
+          <ion-col>
+            <app-profile-card></app-profile-card>
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              <app-supervisor-card></app-supervisor-card>
+            </ion-row>
+            <ion-row>
+              <app-internship-card></app-internship-card>
+            </ion-row>
           </ion-col>
         </ion-row>
       </ion-grid>

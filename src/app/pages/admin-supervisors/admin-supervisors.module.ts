@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { SupervisorsListComponent } from 'src/app/components/supervisors-list/supervisors-list.component';
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminSupervisorsPage } from './admin-supervisors.page';
 import { AdminSupervisorsPageRoutingModule } from './admin-supervisors-routing.module';
 
@@ -18,6 +19,7 @@ import { AdminSupervisorsPageRoutingModule } from './admin-supervisors-routing.m
     FormsModule,
     IonicModule,
     AdminSupervisorsPageRoutingModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     AdminSupervisorsPage,

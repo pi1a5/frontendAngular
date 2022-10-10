@@ -108,7 +108,7 @@ export class SelectCoursePage implements OnInit {
     const prontuario = await this.presentAlert(course.nome);
 
     if (prontuario[0]) {
-      if (this.isProntuarioValid(prontuario[0])) return await this.setCourse(course.id, prontuario[0]);
+      if (this.isProntuarioValid(prontuario[0])) return await this.setCourse(course.id, `SP${prontuario[0]}`);
     }
   }
 
