@@ -6,6 +6,7 @@ export default defineConfig({
   screenshotsFolder: 'cypress/screenshots',
   fixturesFolder: 'cypress/fixtures',
   e2e: {
+    experimentalStudio: true,
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
     },
