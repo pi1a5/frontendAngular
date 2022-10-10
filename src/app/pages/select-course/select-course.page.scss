@@ -1,39 +1,35 @@
-ion-button {
-  --padding-start: 4em;
-  --padding-end: 4em;
-  --padding-top: 4em;
-  --padding-bottom: 4em;
+
+ion-split-pane {
+  --border: none !important;
+
+  ion-menu {
+    // --background: var(--ion-color-success) !important;
+
+    ion-content {
+      --background: var(--ion-color-success) !important;
+    }
+  }
 }
 
-ion-icon {
-  font-size: 6em;
-}
-
-.title {
-  font-family: 'Nunito', sans-serif;
-  font-size: 3em;
-}
-
-.container {
-  min-height: 40vh;
-  max-height: 90vh;
-  border-radius: 2em;
-  overflow-y: scroll;
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 20px;
 }
 
 .font {
   font-family: 'Nunito', sans-serif;
 }
 
-ion-item.courseItem {
-  --border-radius: 0.5em;
+.background {
+  --background: url(../../../assets/backgroundIF2.jpg);
 }
 
-ion-content.background {
-  --background: url(../../../assets/backgroundIF2.jpg);
+ion-item.courseItem {
+  --border-radius: 0.5em;
 }
 
 div[slot="content"] {
   background: rgba(var(--ion-color-success-rgb), 0.25)
 }
-

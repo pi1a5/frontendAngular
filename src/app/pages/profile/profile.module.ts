@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/prefer-default-export */
 import { NgModule } from '@angular/core';
@@ -6,11 +7,13 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
-
-import { ProfilePage } from './profile.page';
 import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { ProfileCardComponent } from 'src/app/components/profilePage/profile-card/profile-card.component';
+import { SupervisorCardComponent } from 'src/app/components/profilePage/supervisor-card/supervisor-card.component';
+import { InternshipCardComponent } from 'src/app/components/profilePage/internship-card/internship-card.component';
+import { ProfilePage } from './profile.page';
+import { ProfilePageRoutingModule } from './profile-routing.module';
 
 @NgModule({
   imports: [
@@ -19,6 +22,13 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
     IonicModule,
     ProfilePageRoutingModule,
   ],
-  declarations: [ProfilePage, SidebarComponent, LogoutbuttonComponent],
+  declarations: [
+    ProfilePage,
+    SidebarComponent,
+    LogoutbuttonComponent,
+    ProfileCardComponent,
+    SupervisorCardComponent,
+    InternshipCardComponent,
+  ],
 })
 export class ProfilePageModule {}

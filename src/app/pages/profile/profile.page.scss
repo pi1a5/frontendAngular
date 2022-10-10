@@ -1,3 +1,6 @@
+ion-header::after {
+  background-image: none;
+}
 
 ion-split-pane {
   --border: none !important;
@@ -7,7 +10,6 @@ ion-split-pane {
 
     ion-content {
       --background: var(--ion-color-success) !important;
-
     }
   }
 }
@@ -19,9 +21,8 @@ ion-menu.md ion-content {
   --padding-bottom: 20px;
 }
 
-.title {
-  font-family: 'Nunito', sans-serif;
-  font-size: 2em;
+.background {
+  --background: url(../../../assets/backgroundIF.jpg);
 }
 
 .font {

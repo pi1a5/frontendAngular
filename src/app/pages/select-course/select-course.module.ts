@@ -6,9 +6,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SelectCoursePageRoutingModule } from './select-course-routing.module';
-
+import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbutton.component';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { SelectCoursePage } from './select-course.page';
+import { SelectCoursePageRoutingModule } from './select-course-routing.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,10 @@ import { SelectCoursePage } from './select-course.page';
     IonicModule,
     SelectCoursePageRoutingModule,
   ],
-  declarations: [SelectCoursePage],
+  declarations: [
+    SelectCoursePage,
+    LogoutbuttonComponent,
+    SidebarComponent,
+  ],
 })
 export class SelectCoursePageModule {}

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
@@ -26,5 +27,4 @@ export class ProfilePage implements OnInit {
       this.router.navigate(['home'], { replaceUrl: true });
     });
   }
-
 }

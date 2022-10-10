@@ -21,7 +21,7 @@
     </ion-row>
   </ion-card-header>
 
-  <!-- Etapas -->
+  <!-- Cursos -->
 
   <ion-card-content>
     <ion-row>
@@ -30,7 +30,7 @@
           Cursos
         </ion-card-title>
       </ion-col>
-      <ion-col *ngIf="newCourse" size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
         <ion-button class="font fase" color="success" (click)="newSubcourse()">
           <ion-icon slot="start" size="large" name="add-circle"></ion-icon>
           <ion-label slot="end">Criar Curso</ion-label>
@@ -39,36 +39,19 @@
     </ion-row>
     <hr>
 
-    <!-- Novo curso -->
-    <ion-list *ngIf="newCourse" class="subcourses">
-      <ion-item *ngFor="let etapa of editProcess.etapas;" class="ion-margin-top" lines="none" color="light">
-        <ion-reorder slot="start">
-          <ion-icon size="large" name="reorder-three"></ion-icon>
-        </ion-reorder>
+    <!-- Curso -->
+    <ion-list class="subcourses">
+      <ion-item *ngFor="let curso of editCourse.curso;" class="ion-margin-top" lines="none" color="light">
         <ion-label>
-          {{ etapa.nome }}
+          {{ curso.nome }}
         </ion-label>
-        <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editStep(etapa)">
+        <ion-button class="cancelBtn" slot="end" color="secondary" (click)="editSubcourse(curso)">
           <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
         </ion-button>
-        <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteFase(etapa.id)">
+        <ion-button class="cancelBtn" slot="end" color="danger" (click)="deleteSubcourse(curso.id)">
           <ion-icon slot="icon-only" size="large" name="trash"></ion-icon>
         </ion-button>
       </ion-item>
-    </ion-list>
-
-    <!-- Editando processo -->
-    <ion-list *ngIf="!newProcess" class="fases">
-
-      <ion-item *ngFor="let etapa of editProcess.etapas;" class="ion-margin-top" lines="none" color="light">
-        <ion-label slot="start" class="ion-text-center">
-          {{ etapa.nome }}
-        </ion-label>
-        <ion-button slot="end" class="cancelBtn" color="secondary" (click)="editStep(etapa)">
-          <ion-icon slot="icon-only" size="large" name="pencil"></ion-icon>
-        </ion-button>
-      </ion-item>
-
     </ion-list>
 
     <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">

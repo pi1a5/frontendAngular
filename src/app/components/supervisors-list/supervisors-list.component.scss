@@ -1,0 +1,37 @@
+.contentHeight {
+  height: 95vh;
+  // overflow-y: auto;
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5em;
+}
+
+.listHeight {
+  height: 70vh;
+  overflow-y: auto;
+}
+
+// font
+
+.fontSize {
+  font-size: 1.5em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+// searchbar 
+
+ion-searchbar.searchbar {
+  --border-radius: 2em;
+  font-size: 4em;
+}
+
+// Curso
+.badge {
+  font-size: 1.1em;
+  padding: 0.5em;
+}

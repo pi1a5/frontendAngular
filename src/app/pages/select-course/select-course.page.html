@@ -4,74 +4,22 @@
       <ion-col offset-sm="1" offset-md="1" offset-xl="2.5" size-sm="10" size-md="10" size-lg="10" size-xl="7">
         <ion-card color="light" class="container ion-padding-top" style="border-radius: 0px;">
           <ion-card-header class="ion-text-center">
-            <ion-card-title class="title ion-margin ion-padding">
+            <ion-card-title class="title ion-margin ion-padding font">
               Selecione seu Curso
             </ion-card-title>
           </ion-card-header>
           <ion-card-content class="ion-text-center">
             <ion-accordion-group expand="inset">
-              <ion-accordion value="tecnicoIntegrado">
+              <ion-accordion *ngFor="let modalidade of modalidades">
                 <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="bag-add-outline"></ion-icon>
-                  <ion-label class="font">Técnico Integrado</ion-label>
+                  <ion-icon size="large" slot="start" name="ribbon"></ion-icon>
+                  <ion-label class="font">{{modalidade.nome}}</ion-label>
                 </ion-item>
-                <div class="ion-padding" slot="content" *ngFor="let course of tecnicoIntegrado">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
-                    <ion-label class="font">{{course.nome}}</ion-label>
+                <div class="ion-padding" slot="content" *ngFor="let course of modalidade.curso">
+                  <ion-item *ngIf="!course" class="courseItem" lines="none" button="true" color="success">
+                    <ion-label class="font">Curso null</ion-label>
                   </ion-item>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="tecnicoSubsequente">
-                <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="bag-check-outline"></ion-icon>
-                  <ion-label class="font">Técnico Subsequente</ion-label>
-                </ion-item>
-                <div class="ion-padding" slot="content" *ngFor="let course of tecnicoSubsequente">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
-                    <ion-label class="font">{{course.nome}}</ion-label>
-                  </ion-item>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="tecnologia">
-                <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="construct-outline"></ion-icon>
-                  <ion-label class="font">Tecnologia</ion-label>
-                </ion-item>
-                <div class="ion-padding" slot="content" *ngFor="let course of tecnologia">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
-                    <ion-label class="font">{{course.nome}}</ion-label>
-                  </ion-item>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="licenciatura">
-                <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="library-outline"></ion-icon>
-                  <ion-label class="font">Licenciatura</ion-label>
-                </ion-item>
-                <div class="ion-padding" slot="content" *ngFor="let course of licenciatura">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
-                    <ion-label class="font">{{course.nome}}</ion-label>
-                  </ion-item>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="bacharelado">
-                <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="school-outline"></ion-icon>
-                  <ion-label class="font">Bacharelado</ion-label>
-                </ion-item>
-                <div class="ion-padding" slot="content" *ngFor="let course of bacharelado">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
-                    <ion-label class="font">{{course.nome}}</ion-label>
-                  </ion-item>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="ead">
-                <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="desktop-outline"></ion-icon>
-                  <ion-label class="font">Educação a Distância</ion-label>
-                </ion-item>
-                <div class="ion-padding" slot="content" *ngFor="let course of ead">
-                  <ion-item class="courseItem" lines="none" button="true" color="success" (click)="setCourse(course)">
+                  <ion-item *ngIf="course" class="courseItem" lines="none" button="true" color="success" (click)="selectCourse(course)">
                     <ion-label class="font">{{course.nome}}</ion-label>
                   </ion-item>
                 </div>

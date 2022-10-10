@@ -29,21 +29,24 @@ export class ApiService {
     return this.http.get<Response>(this.url);
   }
 
-  newUser({
-    name, email, picture, token, sub,
-  }: { name: string; email: string; picture: string; token: string; sub: string; }): Observable<Response> {
-    return this.http.post<Response>(`${this.url}api/newUser`, {
+  // newUser({
+  //   name, email, picture, token, sub,
+  // }: { name: string; email: string; picture: string; token: string; sub: string; }): Observable<Response> {
+  //   return this.http.post<Response>(`${this.url}api/newUser`, {
+  //     name,
+  //     email,
+  //     picture,
+  //     token,
+  //     sub,
+  //   });
+  // }
+
+  login(name: string, email: string, picture: string, token: string, sub: string): Observable<User> {
+    return this.http.post<User>(`${this.url}api/login`, {
       name,
       email,
       picture,
       token,
-      sub,
-    });
-  }
-
-  login(idToken: string, sub: string): Observable<User> {
-    return this.http.post<User>(`${this.url}api/login`, {
-      idToken,
       sub,
     });
   }

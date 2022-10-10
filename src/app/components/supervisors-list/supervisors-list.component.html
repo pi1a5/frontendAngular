@@ -1,0 +1,63 @@
+<ion-card class="contentHeight">
+  <ion-card-header class="ion-text-center">
+    <ion-toolbar color="translucent">
+      <ion-menu-button color="success" slot="start"></ion-menu-button>
+      <ion-card-title color="success" class="title ion-margin ion-padding">
+        Gestão de Orientadores
+      </ion-card-title>
+    </ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar ion-text-start" color="success"
+      show-clear-button="always" clear-icon="trash-bin" placeholder="Procure pelo nome ou prontuário">
+    </ion-searchbar>
+  </ion-card-header>
+  <ion-card-content>
+    <!-- <ion-item class="ion-text-center font" style="font-size: 1.5em; color: var(--ion-color-medium-shade)">
+    </ion-item> -->
+    <div class="listHeight">
+
+      <!-- Orientadores Carregando -->
+
+      <ion-accordion-group *ngIf="supervisors === undefined" expand="inset">
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
+      </ion-accordion-group>
+
+      <!-- Orientadores Carregados -->
+
+      <ion-list *ngIf="supervisors" expand="inset">
+        <ion-item *ngFor="let supervisor of supervisors | filter:searchTerm" lines="full">
+          <ion-avatar slot="start" size="large">
+            <img [src]="supervisor.foto" onError="this.src = '../../../assets/avatarIcon.png'">
+          </ion-avatar>
+          <ion-label slot="start" class="font">
+            <h3>{{supervisor.nome}}</h3>
+            <p style="font-size: 1.2em;">{{supervisor.prontuario}}</p>
+          </ion-label>
+          <ion-badge slot="start" color="success" class="badge">
+            <ion-label class="font">{{supervisor.curso}}</ion-label>
+          </ion-badge>
+          <ion-button slot="end" color="danger" size="default" (click)="presentAlert(supervisor.id, supervisor.nome)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+
+      <!-- Sem Orientadores -->
+
+      <ion-row *ngIf="supervisors === null" size="12" class="ion-padding ion-margin">
+        <ion-col class="flex-center ion-padding ion-margin">
+          <ion-card-title class="ion-padding ion-margin">
+            <ion-note class="font ion-text-center ion-padding ion-margin"
+              style="color: var(--ion-color-medium-shade); font-size: 2em;">
+              Não há Orientadores
+            </ion-note>
+          </ion-card-title>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-card-content>
+</ion-card>

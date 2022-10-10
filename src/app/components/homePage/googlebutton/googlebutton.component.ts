@@ -70,36 +70,48 @@ export class GooglebuttonComponent implements OnInit {
 
   verifyEmail(email: string) {
     if (email.includes('pl1a5.grupo5@gmail.com')) return true;
+    if (email.includes('teste.orientador.g5.pi2a6@gmail.com')) return true;
+    if (email.includes('teste.aluno.g5.pi2a6@gmail.com')) return true;
+    if (email.includes('adm.g5.pi2a6@gmail.com')) return true;
     if (email.includes('ifsp.edu.br')) return true;
 
     return false;
   }
 
   apiLogin(name: string, email: string, imageUrl: string, token: string, sub: string) {
-    this.api.login(token, sub).subscribe((user) => {
+    this.api.login(name, email, imageUrl, token, sub).subscribe((user) => {
+      this.loadingController.dismiss();
       if (user.idcurso === null) return this.goToSelectCoursePage();
       this.userPage(user.email);
     }, (error) => {
-      this.api.newUser({
-        name, email, picture: imageUrl, token, sub,
-      }).subscribe((resp) => {
-        this.api.login(token, sub).subscribe((user) => {
-          this.goToSelectCoursePage();
-        }, (error) => {
-          this.loadingController.dismiss();
-          this.presentToast(error.error, 'danger', 'close-circle');
-        });
-      }, (error) => {
-        this.loadingController.dismiss();
-        this.presentToast(error.error, 'danger', 'close-circle');
-      });
+      this.loadingController.dismiss();
+      this.presentToast(error.error, 'danger', 'close-circle');
+      // if (error.status === 404) this.newUser(name, email, imageUrl, token, sub);
     });
   }
 
+  // newUser(name: string, email: string, imageUrl: string, token: string, sub: string) {
+  //   this.api.newUser({
+  //     name, email, picture: imageUrl, token, sub,
+  //   }).subscribe((resp) => {
+  //     this.api.login(token, sub).subscribe((user) => {
+  //       this.goToSelectCoursePage();
+  //     }, (error) => {
+  //       this.loadingController.dismiss();
+  //       this.presentToast(error.error, 'danger', 'close-circle');
+  //     });
+  //   }, (error) => {
+  //     this.loadingController.dismiss();
+  //     this.presentToast(error.error, 'danger', 'close-circle');
+  //   });
+  // }
+
   userPage(email: string) {
-    this.loadingController.dismiss();
-    if (email.includes('aluno')) {
+    const splitted = email.split('@');
+    if (splitted[1].includes('aluno')) {
       this.router.navigate(['student'], { replaceUrl: true });
+    } else if (email === 'adm.g5.pi2a6@gmail.com') {
+      this.router.navigate(['courses'], { replaceUrl: true });
     } else {
       this.router.navigate(['supervisor'], { replaceUrl: true });
     }

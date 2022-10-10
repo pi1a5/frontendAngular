@@ -141,6 +141,12 @@ export class ProcessEditComponent implements OnInit {
   handleModalResponse(response) {
     if (!response) return;
 
+    // Verifica se o nome da etapa já existe nesse processo
+    if (!this.verifyName(response.etapa)) {
+      this.presentToast('Não são permitidos nomes repetidos', 'danger', 'close-circle');
+      return;
+    }
+
     if (response.novaEtapa) {
       this.editProcess.etapas.push(response.etapa);
       this.stepNumber++;
@@ -151,6 +157,14 @@ export class ProcessEditComponent implements OnInit {
         }
       }
     }
+  }
+
+  verifyName(newStep: any) {
+    for (let index = 0; index < this.editProcess.etapas.length; index++) {
+      const registeredStep = this.editProcess.etapas[index];
+      if (newStep.nome === registeredStep.nome && newStep.id !== registeredStep.id) return false;
+    }
+    return true;
   }
 
   validate() {

@@ -80,7 +80,6 @@ export class ApiSupervisorService {
   }
 
   // Internships
-
   getAllBySupervisor(): Observable<any> {
     return this.http.post(`${this.url}api/getAllBySupervisor`, {
       sub: sessionStorage.getItem('userId'),
