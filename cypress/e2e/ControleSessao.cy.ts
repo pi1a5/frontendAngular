@@ -38,3 +38,29 @@ describe('TESTE 02: Controle de Sessão de rotas', () => {
 
 });
 
+// Está retornando pra home?? A persistência não ocorre quando realizou o login no sistema
+// É possível avançar no sistema
+describe('TESTE 03: Controle de Sessão de rotas', () => {
+
+
+  beforeEach(() => {
+    cy.visit('https://pi1a5frontend-angular.herokuapp.com/select-course')
+
+    
+  });
+
+    it('Usuário, estando na etapa de selecionar curso, tenta a qualquer momento acessar outra rota do sistema', () => {
+      
+      cy.get('[value="tecnologia"] > .item-has-start-slot > .ion-accordion-toggle-icon').click();
+      
+      cy.visit({
+        url: 'https://pi1a5frontend-angular.herokuapp.com/orientador',
+        method: 'GET',
+      })
+     
+      })
+
+
+
+});
+
