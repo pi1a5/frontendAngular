@@ -1,3 +1,90 @@
-<p>
-  internship-card works!
-</p>
+<ion-card *ngIf="internship">
+  <ion-card-header>
+    <ion-card-title class="font ion-margin-start ion-margin-top ion-padding-start" style="font-size: 2em;">
+      Estágio
+    </ion-card-title>
+  </ion-card-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <div class="flex-center">
+          <ion-avatar slot="start" style="height: 12em; width: 12em;">
+            <ion-spinner name="crescent" color="success"></ion-spinner>
+          </ion-avatar>
+        </div>
+      </ion-col>
+      <ion-col size="7">
+        <ion-list>
+          <ion-item class="ion-margin-start ion-margin-end" lines="full">
+            <ion-title slot="start" class="font ion-no-margin ion-no-padding">Data de Início</ion-title>
+            <ion-label slot="end" class="font" style="color: var(--ion-color-medium-shade);">{{internship.criado}}
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-margin-top ion-margin-start ion-margin-end" lines="full">
+            <ion-title slot="start" class="font ion-no-margin ion-no-padding">Necessário</ion-title>
+            <ion-label slot="end" class="font" style="color: var(--ion-color-medium-shade);">{{internship.necessario}}
+              Horas</ion-label>
+          </ion-item>
+          <ion-item class="ion-margin-top ion-margin-start ion-margin-end" lines="full">
+            <ion-title slot="start" class="font ion-no-margin ion-no-padding">Cumprido</ion-title>
+            <ion-label *ngIf="internship.cumprido === 0" slot="end" class="font"
+              style="color: var(--ion-color-medium-shade);"> -- </ion-label>
+            <ion-label *ngIf="internship.cumprido !== 0" slot="end" class="font"
+              style="color: var(--ion-color-medium-shade);">{{internship.cumprido}} Horas</ion-label>
+          </ion-item>
+          <ion-item class="ion-margin-top ion-margin-start ion-margin-end" lines="full">
+            <ion-title slot="start" class="font ion-no-margin ion-no-padding">Faltante</ion-title>
+            <ion-label slot="end" class="font" style="color: var(--ion-color-medium-shade);">{{internship.faltante}}
+              Horas</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center ion-margin-top ion-padding-top">
+      <ion-col>
+        <ion-label class="font" style="color: var(--ion-color-medium-shade); font-size: 2.5em;">
+          {{internship.tickets}}
+        </ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="font" style="color: var(--ion-color-medium-shade); font-size: 2.5em;">
+          {{internship.aceito}}
+        </ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="font" style="color: var(--ion-color-medium-shade); font-size: 2.5em;">
+          {{internship.recusado}}
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-label class="font" style="font-size: 1.5em;">
+          Tickets
+        </ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="font" style="font-size: 1.5em;">
+          Aceitos
+        </ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="font" style="font-size: 1.5em;">
+          Recusados
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+
+<ion-card *ngIf="internship === undefined">
+  <div class="flex-center">
+    <ion-spinner name="crescent" color="success"></ion-spinner>
+  </div>
+</ion-card>
+
+<ion-card *ngIf="internship === null">
+  <div class="flex-center ion-text-center">
+    <ion-title class="font" style="color: var(--ion-color-medium-shade);">Você ainda não começou o estágio</ion-title>
+  </div>
+</ion-card>

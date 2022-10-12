@@ -1,0 +1,19 @@
+ion-card {
+  border-radius: 1em;
+  height: 58vh;
+  width: 43.5vw;
+  overflow-y: auto;
+}
+
+ion-item ion-label {
+  font-size: 1.2em;
+}
+
+.font {
+  font-family: 'Nunito', sans-serif;
+}
+
+ion-spinner {
+  width: 4em;
+  height: 4em;
+}

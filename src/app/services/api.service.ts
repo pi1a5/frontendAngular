@@ -16,8 +16,8 @@ import { User } from '../interfaces/user';
   providedIn: 'root',
 })
 export class ApiService {
-  private url: string = 'https://pi1a5back.herokuapp.com/';
-  // private url: string = 'http://localhost:3000/';
+  // private url: string = 'https://pi1a5back.herokuapp.com/';
+  private url: string = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) { }
 
@@ -71,6 +71,12 @@ export class ApiService {
 
   getAllProcesses(): Observable<any> {
     return this.http.post<any>(`${this.url}api/findAllByCourse`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getUserProfile(): Observable<any> {
+    return this.http.post<any>(`${this.url}api/getUserProfile`, {
       sub: sessionStorage.getItem('userId'),
     });
   }
