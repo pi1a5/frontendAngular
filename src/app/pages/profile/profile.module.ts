@@ -12,6 +12,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { ProfileCardComponent } from 'src/app/components/profilePage/profile-card/profile-card.component';
 import { SupervisorCardComponent } from 'src/app/components/profilePage/supervisor-card/supervisor-card.component';
 import { InternshipCardComponent } from 'src/app/components/profilePage/internship-card/internship-card.component';
+import { CircularProgressBarComponent } from 'src/app/components/circular-progress-bar/circular-progress-bar.component';
 import { ProfilePage } from './profile.page';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
@@ -29,6 +30,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     ProfileCardComponent,
     SupervisorCardComponent,
     InternshipCardComponent,
+    CircularProgressBarComponent,
   ],
 })
 export class ProfilePageModule {}

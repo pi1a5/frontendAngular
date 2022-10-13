@@ -71,4 +71,16 @@ export class ApiStudentService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  getUserSupervisor(): Observable<any> {
+    return this.http.post<any>(`${this.url}api/getUserSupervisor`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getUserInternshipData(): Observable<any> {
+    return this.http.post<any>(`${this.url}api/getUserInternshipData`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
 }

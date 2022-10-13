@@ -1,6 +1,6 @@
-<ion-card>
+<ion-card *ngIf="user">
   <ion-card-header>
-    <ion-card-title class="font ion-padding ion-margin">
+    <ion-card-title class="font ion-padding ion-margin" style="font-size: 2em;">
       Perfil
     </ion-card-title>
   </ion-card-header>
@@ -8,26 +8,38 @@
     <ion-list>
       <div class="flex-center">
         <ion-avatar slot="start" style="height: 20em; width: 20em;">
-          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          <img [src]="user.foto" onError="this.src = '../../../assets/avatarIcon.png'">
         </ion-avatar>
       </div>
 
-      <ion-item class="ion-margin-top ion-padding-top" lines="full">
-        <ion-title slot="start" class="font">Nome</ion-title>
-        <ion-title slot="end" class="font" style="color: var(--ion-color-medium-shade);">Andre Correia Zarzur</ion-title>
+      <ion-item class="ion-margin-top ion-padding-top ion-margin-start ion-margin-end" lines="full">
+        <ion-title slot="start" class="font ion-no-margin">Nome</ion-title>
+        <ion-label class="font" style="color: var(--ion-color-medium-shade);">{{user.nome}}</ion-label>
       </ion-item>
-      <ion-item class="ion-margin-top ion-padding-top" lines="full">
-        <ion-title slot="start" class="font">Prontuário</ion-title>
-        <ion-title slot="end" class="font" style="color: var(--ion-color-medium-shade);">SP305201X</ion-title>
+      <ion-item class="ion-margin-top ion-padding-top ion-margin-start ion-margin-end" lines="full">
+        <ion-title slot="start" class="font ion-no-margin">Prontuário</ion-title>
+        <ion-label slot="end" class="font" style="color: var(--ion-color-medium-shade);">{{user.prontuario}}</ion-label>
       </ion-item>
-      <ion-item class="ion-margin-top ion-padding-top" lines="full">
-        <ion-title slot="start" class="font">E-mail</ion-title>
-        <ion-title slot="end" class="font" style="color: var(--ion-color-medium-shade);">andre.zarzur@aluno.ifsp.edu.br</ion-title>
+      <ion-item class="ion-margin-top ion-padding-top ion-margin-start ion-margin-end" lines="full">
+        <ion-title slot="start" class="font ion-no-margin">E-mail</ion-title>
+        <ion-label class="font" style="color: var(--ion-color-medium-shade);">{{user.email}}</ion-label>
       </ion-item>
-      <ion-item class="ion-margin-top ion-padding-top" lines="full">
-        <ion-title slot="start" class="font">Curso</ion-title>
-        <ion-title slot="end" class="font" style="color: var(--ion-color-medium-shade);">Análise e Desenvolvimento de Sistemas</ion-title>
+      <ion-item class="ion-margin-top ion-padding-top ion-margin-start ion-margin-end" lines="full">
+        <ion-title slot="start" class="font ion-no-margin">Curso</ion-title>
+        <ion-label class="font" style="color: var(--ion-color-medium-shade);">{{user.curso}}</ion-label>
       </ion-item>
     </ion-list>
   </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="user === undefined">
+  <div class="flex-center">
+    <ion-spinner name="crescent" color="success"></ion-spinner>
+  </div>
+</ion-card>
+
+<ion-card *ngIf="user === null">
+  <div class="flex-center ion-text-center">
+    <ion-title class="font" style="color: var(--ion-color-medium-shade);">Erro ao carregar dados do usuário</ion-title>
+  </div>
 </ion-card>

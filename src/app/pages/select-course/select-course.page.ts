@@ -151,8 +151,11 @@ export class SelectCoursePage implements OnInit {
   }
 
   userPage(email: string) {
-    if (email.includes('aluno')) {
+    const splitted = email.split('@');
+    if (splitted[1].includes('aluno') || email === 'teste.aluno.g5.pi2a6@gmail.com') {
       this.router.navigate(['student'], { replaceUrl: true });
+    } else if (email === 'adm.g5.pi2a6@gmail.com') {
+      this.router.navigate(['courses'], { replaceUrl: true });
     } else {
       this.router.navigate(['supervisor'], { replaceUrl: true });
     }

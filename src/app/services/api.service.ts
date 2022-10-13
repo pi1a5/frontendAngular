@@ -74,4 +74,10 @@ export class ApiService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  getUserProfile(): Observable<any> {
+    return this.http.post<any>(`${this.url}api/getUserProfile`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
 }

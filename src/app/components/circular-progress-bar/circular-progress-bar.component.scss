@@ -1,0 +1,25 @@
+.circular-progress {
+  position: relative;
+  height: 14em;
+  width: 14em;
+  background-color: #b1ded3;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.circular-progress:before {
+  content: "";
+  position: absolute;
+  height: 74%;
+  width: 74%;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.value-container {
+  position: relative;
+  font-family: 'Nunito', sans-serif;
+  font-size: 3em;
+  color: #3eae91;
+}
