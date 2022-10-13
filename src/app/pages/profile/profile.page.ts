@@ -15,16 +15,17 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  public user: any;
+  public isSupervisor: boolean = undefined;
 
   constructor(public router: Router, public api: ApiService) { }
 
   ngOnInit() {
-    this.api.getUser().subscribe((user) => {
-      this.user = user;
-    }, (error) => {
-      console.log(error);
-      this.router.navigate(['home'], { replaceUrl: true });
-    });
+    const email = sessionStorage.getItem('userEmail');
+    const splitted = email.split('@');
+    if (splitted[1].includes('aluno') || email === 'teste.aluno.g5.pi2a6@gmail.com') {
+      this.isSupervisor = false;
+    } else {
+      this.isSupervisor = true;
+    }
   }
 }

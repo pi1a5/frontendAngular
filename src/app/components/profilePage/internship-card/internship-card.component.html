@@ -7,9 +7,9 @@
   <ion-grid>
     <ion-row>
       <ion-col size="5">
-        <div class="flex-center">
+        <div class="flex-center ion-text-center ion-no-margin ion-no-padding">
           <ion-avatar slot="start" style="height: 12em; width: 12em;">
-            <ion-spinner name="crescent" color="success"></ion-spinner>
+            <app-circular-progress-bar [progressEndValue]="internshipProgress"></app-circular-progress-bar>
           </ion-avatar>
         </div>
       </ion-col>
@@ -27,9 +27,7 @@
           </ion-item>
           <ion-item class="ion-margin-top ion-margin-start ion-margin-end" lines="full">
             <ion-title slot="start" class="font ion-no-margin ion-no-padding">Cumprido</ion-title>
-            <ion-label *ngIf="internship.cumprido === 0" slot="end" class="font"
-              style="color: var(--ion-color-medium-shade);"> -- </ion-label>
-            <ion-label *ngIf="internship.cumprido !== 0" slot="end" class="font"
+            <ion-label slot="end" class="font"
               style="color: var(--ion-color-medium-shade);">{{internship.cumprido}} Horas</ion-label>
           </ion-item>
           <ion-item class="ion-margin-top ion-margin-start ion-margin-end" lines="full">

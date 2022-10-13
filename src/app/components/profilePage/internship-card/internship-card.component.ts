@@ -19,14 +19,24 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 export class InternshipCardComponent implements OnInit {
   public internship = undefined;
 
+  public internshipProgress = 0;
+
   constructor(public apiStudent: ApiStudentService) { }
 
   ngOnInit() {
     this.apiStudent.getUserInternshipData().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.internship = data[0];
+      // this.internship.cumprido = 270;
+      this.internshipProgress = this.calculateProgress(data[0].necessario, data[0].cumprido);
     }, (error) => {
       console.log(error);
     });
+  }
+
+  calculateProgress(neededHours: number, completedHours: number) {
+    this.internship.faltante = neededHours - completedHours;
+    const progress = Math.round((completedHours * 100) / neededHours);
+    return progress;
   }
 }
