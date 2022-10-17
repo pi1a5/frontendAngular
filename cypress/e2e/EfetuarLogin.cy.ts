@@ -24,8 +24,39 @@ describe('Acessar Rota para Efetuar Login', () => {
 
 
   it('Acessar Botão de Login', () => {
-
     cy.get('.font').click();
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get('.font').click();
+    cy.get('.ion-text-center > .button').click();
+    cy.get('.contentList > :nth-child(3)').click();
+    cy.get('ion-card-header.ion-text-center > .ion-color-translucent > .button').click();
+    cy.get('.contentList > :nth-child(4)').click();
+    cy.get('.ion-text-center > .md').click();
+    cy.get('.contentList > :nth-child(2)').click();
+    cy.get('.ion-text-center > .button').click();
+    cy.get('p > .ion-color').click();
+    cy.get('.font').click();
+    cy.get('.ion-text-center > .button').click();
+    cy.get(':nth-child(4) > .font').click();
+    cy.get('.ion-text-center > .md').click();
+    cy.get('.contentList > :nth-child(2)').click();
+    /* ==== End Cypress Studio ==== */
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get('.font').click();
+    cy.get('.ion-text-center > .button').click();
+    cy.get('.contentList > :nth-child(3)').click();
+    cy.get('ion-card-header.ion-text-center > .ion-color-translucent > .button').click();
+    cy.get('.contentList > :nth-child(4)').click();
+    cy.get('.ion-text-center > .md').click();
+    cy.get('.contentList > :nth-child(2)').click();
+    cy.get('.ion-text-center > .button').click();
+    cy.get('p > .ion-color').click();
+    cy.get('.font').click();
+    cy.get('.ion-text-center > .button').click();
+    cy.get(':nth-child(4) > .font').click();
+    cy.get('.ion-text-center > .md').click();
+    cy.get('.contentList > :nth-child(2)').click();
+    /* ==== End Cypress Studio ==== */
   });
 });
 
