@@ -9,6 +9,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 
 @Component({
@@ -19,14 +20,28 @@ import { ApiStudentService } from 'src/app/services/api-student.service';
 export class SupervisorCardComponent implements OnInit {
   public supervisor = undefined;
 
-  constructor(public apiStudent: ApiStudentService) { }
+  constructor(
+    public apiStudent: ApiStudentService,
+    public toastController: ToastController,
+  ) { }
 
   ngOnInit() {
     this.apiStudent.getUserSupervisor().subscribe((data) => {
       // console.log(data);
       this.supervisor = data[0];
     }, (error) => {
-      console.log(error);
+      // console.log(error);
+      this.presentToast(error.error, 'danger', 'close-circle');
     });
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 }

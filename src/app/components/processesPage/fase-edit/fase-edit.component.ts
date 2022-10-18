@@ -35,6 +35,8 @@ export class FaseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.etapa);
+
     this.editFase = {
       id: this.etapa.id,
       nome: this.etapa.nome,
@@ -113,5 +115,9 @@ export class FaseEditComponent implements OnInit {
 
   handleChangeDocuments(ev) {
     this.editFase.documentos = ev.target.value;
+  }
+
+  selectedChanged(ev) {
+    this.editFase.documentos = ev;
   }
 }

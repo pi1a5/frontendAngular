@@ -14,6 +14,7 @@ import { ProcessesListComponent } from 'src/app/components/processesPage/process
 import { ProcessEditComponent } from 'src/app/components/processesPage/process-edit/process-edit.component';
 import { ProcessUndefinedComponent } from 'src/app/components/process-undefined/process-undefined.component';
 import { FaseEditComponent } from 'src/app/components/processesPage/fase-edit/fase-edit.component';
+import { SearchableSelectComponent } from 'src/app/components/searchable-select/searchable-select.component';
 import { ProcessesPage } from './processes.page';
 import { ProcessesPageRoutingModule } from './processes-routing.module';
 
@@ -32,6 +33,7 @@ import { ProcessesPageRoutingModule } from './processes-routing.module';
     ProcessEditComponent,
     ProcessUndefinedComponent,
     FaseEditComponent,
+    SearchableSelectComponent,
   ],
 })
 export class ProcessesPageModule { }

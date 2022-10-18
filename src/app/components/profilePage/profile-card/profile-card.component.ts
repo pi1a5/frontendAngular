@@ -9,6 +9,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -19,14 +20,28 @@ import { ApiService } from 'src/app/services/api.service';
 export class ProfileCardComponent implements OnInit {
   public user = undefined;
 
-  constructor(public api: ApiService) { }
+  constructor(
+    public api: ApiService,
+    public toastController: ToastController,
+  ) { }
 
   ngOnInit() {
     this.api.getUserProfile().subscribe((user) => {
       // console.log(user);
       this.user = user[0];
     }, (error) => {
-      console.log(error);
+      // console.log(error);
+      this.presentToast(error.error, 'danger', 'close-circle');
     });
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 }

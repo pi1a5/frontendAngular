@@ -32,13 +32,14 @@
     <ion-card-title color="success" class="font ion-text-start ion-padding-top">
       Documentos da etapa:
       <ion-list>
-        <ion-item color="success" fill="outline">
-          <ion-select class="font" [ngModel]="editFase.documentos" interface="alert"
+        <ion-item fill="outline" (click)="select.open()">
+          <app-searchable-select [documents]="documentos" #select (selectedChanged)="selectedChanged($event)"></app-searchable-select>
+          <!-- <ion-select class="font" [ngModel]="editFase.documentos" interface="alert"
             [interfaceOptions]="customAlertOptions" [compareWith]="compareWith" placeholder="Selecione os documentos"
             (ionChange)="handleChangeDocuments($event)" [multiple]="true">
             <ion-select-option *ngFor="let documento of documentos" [value]="documento">{{ documento.nome }}
             </ion-select-option>
-          </ion-select>
+          </ion-select> -->
         </ion-item>
       </ion-list>
     </ion-card-title>
