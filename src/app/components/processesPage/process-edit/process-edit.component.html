@@ -4,13 +4,13 @@
       <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="4">
         <ion-card-title class="font ion-padding-top">Nome do processo</ion-card-title>
       </ion-col>
-      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="7">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="6.5">
         <ion-item lines="none" color="light">
           <ion-input class="font" placeholder="Novo processo" [value]="process.nome"
             (change)="onChangeName($event.target.value)"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="0" class="ion-text-center">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="1.5" class="ion-text-center">
         <ion-button class="cancelBtn" *ngIf="newProcess" size="default" color="danger" (click)="sendCancel()">
           <ion-icon slot="icon-only" size="large" name="close"></ion-icon>
         </ion-button>

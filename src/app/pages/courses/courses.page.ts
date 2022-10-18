@@ -86,7 +86,7 @@ export class CoursesPage implements OnInit {
     this.apiAdmin.newArea(course).subscribe(async (data) => {
       await this.loadingController.dismiss();
       await this.presentToast('Area criada com sucesso!', 'success', 'checkmark-circle');
-      this.courses.push(data.area);
+      this.loadCourses();
       this.reset();
     }, async (error) => {
       await this.loadingController.dismiss();
@@ -100,9 +100,7 @@ export class CoursesPage implements OnInit {
     this.apiAdmin.updateArea(this.saveBeforeEdit, course).subscribe(async (data) => {
       await this.loadingController.dismiss();
       await this.presentToast(data, 'success', 'checkmark-circle');
-      for (let index = 0; index < this.courses.length; index++) {
-        if (this.courses[index].id === course.id) this.courses[index] = course;
-      }
+      this.loadCourses();
       this.reset();
     }, async (error) => {
       await this.loadingController.dismiss();
