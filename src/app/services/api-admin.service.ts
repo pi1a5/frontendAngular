@@ -25,7 +25,7 @@ export class ApiAdminService {
   }
 
   newArea(area: any): Observable<any> {
-    return this.http.post(`${this.url}api/createNewArea`, {
+    return this.http.post(`${this.url}api/createArea`, {
       sub: sessionStorage.getItem('userId'),
       area,
     });

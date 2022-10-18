@@ -49,11 +49,14 @@ export class CoursesEditComponent implements OnInit {
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(this.course);
+
     this.editCourse = {
       id: this.course.id,
       nome: this.course.nome,
       curso: this.course.curso,
     };
+
     this.subcourseNumber = this.course.curso.length;
   }
 

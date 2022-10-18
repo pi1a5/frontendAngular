@@ -76,8 +76,8 @@ export class CoursesPage implements OnInit {
     this.isNewCourse = true;
     this.selectedCourse = {
       id: this.courseNumber,
-      nome: 'Nova área',
-      cursos: [],
+      nome: '',
+      curso: [],
     };
   }
 
@@ -101,9 +101,7 @@ export class CoursesPage implements OnInit {
       await this.loadingController.dismiss();
       await this.presentToast(data, 'success', 'checkmark-circle');
       for (let index = 0; index < this.courses.length; index++) {
-        if (this.courses[index].id === course.id) {
-          this.courses[index] = course;
-        }
+        if (this.courses[index].id === course.id) this.courses[index] = course;
       }
       this.reset();
     }, async (error) => {
@@ -141,8 +139,10 @@ export class CoursesPage implements OnInit {
   }
 
   async receiveSaveEvent(course: any) {
-    // Verificar se os objetos são diferentes
-    if (this.verifyObjects(this.saveBeforeEdit, course.course)) return await this.presentToast('Não foi identificado nenhuma mudança', 'warning', 'warning-outline');
+    if (!this.isNewCourse) {
+      // Verificar se os objetos são diferentes
+      if (this.verifyObjects(this.saveBeforeEdit, course.course)) return await this.presentToast('Não foi identificado nenhuma mudança', 'warning', 'warning-outline');
+    }
 
     if (course.isNew) {
       this.saveNewCourse(course.course);
