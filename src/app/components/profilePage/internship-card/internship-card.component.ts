@@ -30,9 +30,13 @@ export class InternshipCardComponent implements OnInit {
   ngOnInit() {
     this.apiStudent.getUserInternshipData().subscribe((data) => {
       // console.log(data);
-      this.internship = data[0];
-      // this.internship.cumprido = 270;
-      this.internshipProgress = this.calculateProgress(data[0].necessario, data[0].cumprido);
+      if (!data) {
+        this.internship = null;
+      } else {
+        this.internship = data[0];
+        this.internshipProgress = this.calculateProgress(data[0].necessario, data[0].cumprido);
+      }
+      
     }, (error) => {
       // console.log(error);
       this.presentToast(error.error, 'danger', 'close-circle');

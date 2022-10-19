@@ -33,7 +33,7 @@
       Documentos da etapa:
       <ion-list>
         <ion-item fill="outline" (click)="select.open()">
-          <app-searchable-select [documents]="documentos" #select (selectedChanged)="selectedChanged($event)"></app-searchable-select>
+          <app-searchable-select [documents]="documentos" [selected]="editFase.documentos" #select (selectedChanged)="selectedChanged($event)"></app-searchable-select>
           <!-- <ion-select class="font" [ngModel]="editFase.documentos" interface="alert"
             [interfaceOptions]="customAlertOptions" [compareWith]="compareWith" placeholder="Selecione os documentos"
             (ionChange)="handleChangeDocuments($event)" [multiple]="true">

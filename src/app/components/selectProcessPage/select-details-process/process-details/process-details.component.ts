@@ -21,7 +21,10 @@ export class ProcessDetailsComponent implements OnInit {
     public toastController: ToastController,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    console.log(this.process);
+    
+  }
 
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({

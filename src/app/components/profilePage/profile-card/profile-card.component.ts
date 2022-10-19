@@ -26,9 +26,13 @@ export class ProfileCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.api.getUserProfile().subscribe((user) => {
+    this.api.getUserProfile().subscribe((data) => {
       // console.log(user);
-      this.user = user[0];
+      if (!data) {
+        this.user = null;
+      } else {
+        this.user = data[0];
+      }
     }, (error) => {
       // console.log(error);
       this.presentToast(error.error, 'danger', 'close-circle');

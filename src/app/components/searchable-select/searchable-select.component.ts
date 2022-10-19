@@ -6,7 +6,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable import/prefer-default-export */
 import {
-  Component, EventEmitter, Input, OnInit, Output, SimpleChanges,
+  Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges,
 } from '@angular/core';
 import { SearchbarCustomEvent } from '@ionic/angular';
 
@@ -16,13 +16,13 @@ import { SearchbarCustomEvent } from '@ionic/angular';
   styleUrls: ['./searchable-select.component.scss'],
 })
 export class SearchableSelectComponent implements OnInit {
-  @Input() documents: any[];
+  @Input() documents: any;
+
+  @Input() selected = [];
 
   @Output() selectedChanged: EventEmitter<any> = new EventEmitter();
 
   isOpen = false;
-
-  selected = [];
 
   filtered = [];
 
@@ -32,6 +32,20 @@ export class SearchableSelectComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.filtered = this.documents;
+    this.clearCheckedDocuments();
+    this.loadCheckedDocuments();
+  }
+
+  clearCheckedDocuments() {
+    this.documents.map((doc) => doc.selected = false);
+  }
+
+  loadCheckedDocuments() {
+    for (let index = 0; index < this.selected.length; index++) {
+      this.documents.map((doc) => {
+        if(doc.id === this.selected[index].id) return doc.selected = true;
+      });
+    }
   }
 
   open() {

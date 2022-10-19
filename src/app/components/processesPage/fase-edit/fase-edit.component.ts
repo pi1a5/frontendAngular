@@ -35,7 +35,7 @@ export class FaseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.etapa);
+    // console.log(this.etapa);
 
     this.editFase = {
       id: this.etapa.id,

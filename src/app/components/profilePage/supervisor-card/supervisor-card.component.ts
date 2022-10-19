@@ -28,7 +28,11 @@ export class SupervisorCardComponent implements OnInit {
   ngOnInit() {
     this.apiStudent.getUserSupervisor().subscribe((data) => {
       // console.log(data);
-      this.supervisor = data[0];
+      if (!data) {
+        this.supervisor = null;
+      } else {
+        this.supervisor = data[0];
+      }
     }, (error) => {
       // console.log(error);
       this.presentToast(error.error, 'danger', 'close-circle');
