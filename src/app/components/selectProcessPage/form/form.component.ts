@@ -135,8 +135,8 @@ export class FormComponent implements OnInit {
     formData.append('sub', sessionStorage.getItem('userId'));
     if (this.step.loop) {
       const days = await this.presentAlert();
-      if (!days) return false;
-      formData.append('diastrabalhados', `${days}`);
+      if (!days[0]) return false;
+      formData.append('diastrabalhados', `${days[0]}`);
       return formData;
     }
     const days = 0;
