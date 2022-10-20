@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
@@ -10,11 +11,10 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/prefer-default-export */
 import {
-  Component, EventEmitter, Input, OnInit, Output,
+  Component, Input, OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
-import { format, parseISO } from 'date-fns';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.confirmedProcessFromBack);
+    // console.log(this.confirmedProcessFromBack);
     this.defineOrigin();
   }
 
@@ -118,7 +118,7 @@ export class FormComponent implements OnInit {
       this.getCurrentStep();
     } else {
       // console.log(this.confirmedProcess);
-      
+
       this.createDocumentsArray(this.confirmedProcess.etapas[0]);
     }
   }
@@ -138,8 +138,8 @@ export class FormComponent implements OnInit {
     const documents = step.documentos;
     for (let index = 0; index < documents.length; index++) {
       this.documentsControl.push({
-        nome: documents[index][0].nome,
-        sigla: documents[index][0].sigla,
+        nome: documents[index].nome,
+        sigla: documents[index].sigla,
         pdfFile: undefined,
       });
     }

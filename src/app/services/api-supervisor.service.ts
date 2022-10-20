@@ -40,16 +40,27 @@ export class ApiSupervisorService {
   // }
 
   // Card Modal
-  feedbackTicket(idTicket: number, feedback: string, accept: boolean, step: any, frequency: number, status: string, isUnique: boolean): Observable<any> {
+  // feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number, step: any, status: string, isUnique: boolean, days: number): Observable<any> {
+  //   return this.http.post(`${this.url}api/feedbackTicket`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //     idTicket,
+  //     feedback,
+  //     aceito: accept,
+  //     idfrequencia: frequency,
+  //     etapa: step,
+  //     status,
+  //     etapaunica: isUnique,
+  //     diastrabalhados: days,
+  //   });
+  // }
+
+  feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: sessionStorage.getItem('userId'),
       idTicket,
       feedback,
       aceito: accept,
-      etapa: step,
       idfrequencia: frequency,
-      status,
-      etapaunica: isUnique,
     });
   }
 

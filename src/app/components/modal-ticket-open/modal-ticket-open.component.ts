@@ -10,7 +10,9 @@
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import {
+  AlertController, LoadingController, ModalController, ToastController,
+} from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 
@@ -62,8 +64,7 @@ export class ModalTicketOpenComponent implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Aviso: confirmando a frequência você não poderá mudar!',
-      message: 'Informe sua carga horária',
+      header: 'Qual será a frequência dos relatórios desse Estágio?',
       buttons: [
         {
           text: 'Cancel',
@@ -72,9 +73,6 @@ export class ModalTicketOpenComponent implements OnInit {
         {
           text: 'OK',
           role: 'confirm',
-          // handler: () => {
-          //   this.alert = 'Alert canceled';
-          // },
         },
       ],
       inputs: [
@@ -107,19 +105,23 @@ export class ModalTicketOpenComponent implements OnInit {
 
   async confirm(accept: boolean) {
     if (this.validate(accept)) {
-      if (accept === true && this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
-      if (accept === true && this.ticket.status === "Aberto" && !this.ticket.etapaunica) {
-        const frequency = await this.presentAlert();
-        if (frequency) await this.submitFeedback(accept, frequency, this.ticket.status, this.ticket.etapaunica); 
+      if (accept) {
+        if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
+        if (this.ticket.status === 'Aberto' && this.ticket.etapaunica === false) {
+          const frequency = await this.presentAlert();
+          if (frequency) return await this.submitFeedback(accept, frequency);
+          return false;
+        }
       }
-      this.submitFeedback(accept, 0, this.ticket.status, this.ticket.etapaunica);
+      return await this.submitFeedback(accept, 0);
     }
+    return false;
   }
 
-  async submitFeedback(accept: boolean, frequency: number, status: string, isUnique: boolean) {
+  async submitFeedback(accept: boolean, frequency: number) {
     this.presentLoading();
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa, frequency, status, isUnique).subscribe((data) => {
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, frequency).subscribe((data) => {
       this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });
