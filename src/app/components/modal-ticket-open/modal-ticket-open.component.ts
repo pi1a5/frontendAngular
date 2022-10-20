@@ -120,7 +120,7 @@ export class ModalTicketOpenComponent implements OnInit {
       if (frequency) return await this.submitFeedback(accept, frequency);
       return false;
     }
-    return false;
+    return await this.submitFeedback(accept, 0);
   }
 
   async submitFeedback(accept: boolean, frequency: number) {

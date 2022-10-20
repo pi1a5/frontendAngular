@@ -34,7 +34,7 @@ export class InternshipsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getAllBySupervisor().subscribe((data) => {
-      // console.log(data.processos);
+      console.log(data.processos);
       this.internships = data.processos;
     }, (error) => {
       // console.log(error);
@@ -75,9 +75,9 @@ export class InternshipsManagementComponent implements OnInit {
     toast.present();
   }
 
-  formatDate({ date }: { date: string; }): string {
-    return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
-  }
+  // formatDate({ date }: { date: string; }): string {
+  //   return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
+  // }
 
   async presentTransfer(internshipId: number) {
     const modal = await this.modalController.create({

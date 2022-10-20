@@ -165,7 +165,6 @@ export class FormComponent implements OnInit {
     for (const i in this.confirmedProcessFromBack.etapas) {
       if (this.confirmedProcessFromBack.etapas[i].atual === true) {
         const step = this.confirmedProcessFromBack.etapas[i];
-        console.log(step);
         this.createDocumentsArray(step);
         break;
       }
