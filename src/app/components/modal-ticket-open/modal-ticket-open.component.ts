@@ -10,7 +10,7 @@
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 
@@ -30,6 +30,7 @@ export class ModalTicketOpenComponent implements OnInit {
     public modalController: ModalController,
     public toastController: ToastController,
     public loadingController: LoadingController,
+    public alertController: AlertController,
   ) {
   }
 
@@ -59,17 +60,66 @@ export class ModalTicketOpenComponent implements OnInit {
     toast.present();
   }
 
-  confirm(accept: boolean) {
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Aviso: confirmando a frequência você não poderá mudar!',
+      message: 'Informe sua carga horária',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          // handler: () => {
+          //   this.alert = 'Alert canceled';
+          // },
+        },
+      ],
+      inputs: [
+        {
+          label: 'Mensal',
+          type: 'radio',
+          value: 1,
+        },
+        {
+          label: 'Trimestral',
+          type: 'radio',
+          value: 2,
+        },
+        {
+          label: 'Semestral',
+          type: 'radio',
+          value: 3,
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const input = await alert.onDidDismiss();
+
+    if (input.role === 'confirm') return input.data.values;
+
+    return false;
+  }
+
+  async confirm(accept: boolean) {
     if (this.validate(accept)) {
       if (accept === true && this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
-      this.submitFeedback(accept);
+      if (accept === true && this.ticket.status === "Aberto" && !this.ticket.etapaunica) {
+        const frequency = await this.presentAlert();
+        if (frequency) await this.submitFeedback(accept, frequency, this.ticket.status, this.ticket.etapaunica); 
+      }
+      this.submitFeedback(accept, 0, this.ticket.status, this.ticket.etapaunica);
     }
   }
 
-  submitFeedback(accept: boolean) {
+  async submitFeedback(accept: boolean, frequency: number, status: string, isUnique: boolean) {
     this.presentLoading();
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa).subscribe((data) => {
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa, frequency, status, isUnique).subscribe((data) => {
       this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });

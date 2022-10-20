@@ -49,7 +49,7 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.confirmedProcess);
+    console.log(this.confirmedProcessFromBack);
     this.defineOrigin();
   }
 
@@ -117,6 +117,8 @@ export class FormComponent implements OnInit {
     if (this.confirmedProcessFromBack) {
       this.getCurrentStep();
     } else {
+      // console.log(this.confirmedProcess);
+      
       this.createDocumentsArray(this.confirmedProcess.etapas[0]);
     }
   }
