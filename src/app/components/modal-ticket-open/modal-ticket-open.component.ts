@@ -105,28 +105,33 @@ export class ModalTicketOpenComponent implements OnInit {
 
   async confirm(accept: boolean) {
     if (this.validate(accept)) {
-      if (accept) {
-        if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
-        if (this.ticket.status === 'Aberto' && this.ticket.etapaunica === false) {
-          const frequency = await this.presentAlert();
-          if (frequency) return await this.submitFeedback(accept, frequency);
-          return false;
-        }
-      }
+      if (accept) return await this.setFrequency(accept);
       return await this.submitFeedback(accept, 0);
     }
     return false;
   }
 
-  async submitFeedback(accept: boolean, frequency: number) {
-    this.presentLoading();
+  async setFrequency(accept: boolean) {
+    // Tratar mensagem automática quando aceita
+    if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
+    // Selecionar frequência
+    if (this.ticket.status === 'Aberto' && this.ticket.etapaunica === false) {
+      const frequency = await this.presentAlert();
+      if (frequency) return await this.submitFeedback(accept, frequency);
+      return false;
+    }
+    return false;
+  }
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, frequency).subscribe((data) => {
-      this.loadingController.dismiss();
+  async submitFeedback(accept: boolean, frequency: number) {
+    await this.presentLoading();
+
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, frequency).subscribe(async (data) => {
+      await this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });
-    }, (error) => {
-      this.loadingController.dismiss();
+    }, async (error) => {
+      await this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
       this.dismiss();
     });
