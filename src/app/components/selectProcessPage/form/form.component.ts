@@ -136,10 +136,11 @@ export class FormComponent implements OnInit {
     if (this.step.loop) {
       const days = await this.presentAlert();
       if (!days) return false;
-      formData.append('diastrabalhados', String(days));
+      formData.append('diastrabalhados', `${days}`);
+      return formData;
     }
     const days = 0;
-    formData.append('diastrabalhados', String(days));
+    formData.append('diastrabalhados', `${days}`);
 
     return formData;
   }
