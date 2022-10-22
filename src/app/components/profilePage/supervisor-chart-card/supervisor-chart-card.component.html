@@ -1,0 +1,28 @@
+<ion-card *ngIf="data">
+  <ion-card-header>
+    <ion-card-title class="font ion-margin-start ion-margin-top ion-padding-start ion-padding-top" style="font-size: 2em;">
+      Estados dos Estágios
+    </ion-card-title>
+  </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div class="flex-center">
+            <app-pie-chart></app-pie-chart>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-card>
+
+<ion-card *ngIf="data === undefined">
+  <div class="flex-center">
+    <ion-spinner name="crescent" color="success"></ion-spinner>
+  </div>
+</ion-card>
+
+<ion-card *ngIf="data === null">
+  <div class="flex-center ion-text-center">
+    <ion-title class="font" style="color: var(--ion-color-medium-shade);">Você ainda não possui estágios</ion-title>
+  </div>
+</ion-card>

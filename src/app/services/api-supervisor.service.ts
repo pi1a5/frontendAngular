@@ -71,6 +71,12 @@ export class ApiSupervisorService {
     });
   }
 
+  getInternshipsAmountByStatus(): Observable<any> {
+    return this.http.post(`${this.url}api/getInternshipsAmountByStatus`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
   // Process Customization
   newProcess(process: any): Observable<any> {
     return this.http.post(`${this.url}api/createNewProcesso`, {
