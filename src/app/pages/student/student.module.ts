@@ -11,6 +11,7 @@ import { LogoutbuttonComponent } from 'src/app/components/logoutbutton/logoutbut
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 import { PendingTicketComponent } from 'src/app/components/pending-ticket/pending-ticket.component';
 import { ModalTicketClosedComponent } from 'src/app/components/modal-ticket-closed/modal-ticket-closed.component';
+import { LateWarningComponent } from 'src/app/components/late-warning/late-warning.component';
 import { StudentPage } from './student.page';
 import { StudentPageRoutingModule } from './student-routing.module';
 
@@ -27,6 +28,7 @@ import { StudentPageRoutingModule } from './student-routing.module';
     SidebarComponent,
     PendingTicketComponent,
     ModalTicketClosedComponent,
+    LateWarningComponent,
   ],
 })
 export class StudentPageModule {}

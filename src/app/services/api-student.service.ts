@@ -29,6 +29,12 @@ export class ApiStudentService {
   //   });
   // }
 
+  getStatus(): Observable<any> {
+    return this.http.post(`${this.url}api/getStatus`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
   getClosedTickets(): Observable<any> {
     return this.http.post(`${this.url}api/getClosedTickets`, {
       sub: sessionStorage.getItem('userId'),

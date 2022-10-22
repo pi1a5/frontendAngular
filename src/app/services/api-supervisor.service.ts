@@ -77,6 +77,12 @@ export class ApiSupervisorService {
     });
   }
 
+  getTicketsStatusByDate(): Observable<any> {
+    return this.http.post(`${this.url}api/getTicketsStatusByDate`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
   // Process Customization
   newProcess(process: any): Observable<any> {
     return this.http.post(`${this.url}api/createNewProcesso`, {

@@ -49,7 +49,7 @@ export class PieChartComponent implements OnInit {
       data: {
         labels: this.statusName,
         datasets: [{
-          // label: 'Estágio',
+          label: 'Estágio teste',
           data: this.statusCount,
           // borderColor: [
           //   'rgb(255, 99, 132)',
@@ -84,8 +84,10 @@ export class PieChartComponent implements OnInit {
       options: {
         plugins: {
           legend: {
+            position: 'right',
             labels: {
               // This more specific font property overrides the global property
+              usePointStyle: true,
               font: {
                 family: "'Nunito', sans-serif",
                 size: 20,
@@ -96,7 +98,7 @@ export class PieChartComponent implements OnInit {
         animation: {
           duration: 2000,
         },
-        responsive: true,
+        responsive: false,
       },
     });
   }

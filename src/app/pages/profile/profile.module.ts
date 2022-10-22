@@ -15,6 +15,8 @@ import { InternshipCardComponent } from 'src/app/components/profilePage/internsh
 import { CircularProgressBarComponent } from 'src/app/components/circular-progress-bar/circular-progress-bar.component';
 import { SupervisorChartCardComponent } from 'src/app/components/profilePage/supervisor-chart-card/supervisor-chart-card.component';
 import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
+import { TicketBarChartComponent } from 'src/app/components/ticket-bar-chart/ticket-bar-chart.component';
+import { SupervisorChartCard2Component } from 'src/app/components/profilePage/supervisor-chart-card2/supervisor-chart-card2.component';
 import { ProfilePage } from './profile.page';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
@@ -35,6 +37,8 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     CircularProgressBarComponent,
     SupervisorChartCardComponent,
     PieChartComponent,
+    SupervisorChartCard2Component,
+    TicketBarChartComponent,
   ],
 })
 export class ProfilePageModule {}

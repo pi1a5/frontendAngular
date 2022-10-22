@@ -25,6 +25,8 @@ export class StudentPage implements OnInit {
 
   public closedTickets: [] = undefined;
 
+  public isLate: any = undefined;
+
   constructor(
     public apiStudent: ApiStudentService,
     public modalController: ModalController,
@@ -40,6 +42,12 @@ export class StudentPage implements OnInit {
     this.apiStudent.getClosedTickets().subscribe((closedTickets) => {
       // console.log(closedTickets);
       this.closedTickets = closedTickets;
+    }, (error) => {
+      this.presentToast(error.error, 'danger', 'close-circle');
+    });
+    this.apiStudent.getStatus().subscribe((data) => {
+      console.log(data);
+      if (data.nome === 'Atrasado') this.isLate = data;
     }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
