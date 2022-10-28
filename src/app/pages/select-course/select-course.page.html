@@ -12,14 +12,14 @@
             <ion-accordion-group expand="inset">
               <ion-accordion *ngFor="let modalidade of modalidades">
                 <ion-item slot="header" color="success">
-                  <ion-icon size="large" slot="start" name="ribbon"></ion-icon>
+                  <ion-icon size="large" slot="start" name="bookmark-outline"></ion-icon>
                   <ion-label class="font">{{modalidade.nome}}</ion-label>
                 </ion-item>
                 <div class="ion-padding" slot="content" *ngFor="let course of modalidade.curso">
                   <ion-item *ngIf="!course" class="courseItem" lines="none" button="true" color="success">
                     <ion-label class="font">Curso null</ion-label>
                   </ion-item>
-                  <ion-item *ngIf="course" class="courseItem" lines="none" button="true" color="success" (click)="selectCourse(course)">
+                  <ion-item *ngIf="course" class="courseItem" lines="none" button="true" color="success" (click)="presentAlert(course)">
                     <ion-label class="font">{{course.nome}}</ion-label>
                   </ion-item>
                 </div>

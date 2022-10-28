@@ -1,8 +1,14 @@
 <ion-card-header color="success">
   <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
-    <ion-card-title slot="start" style="color: white; font-size: 1.5em;" class="ion-margin-start">
-      {{ticket.envolvidos.aluno[0].nome}}
-    </ion-card-title>
+    <div *ngIf="ticket.etapa.etapa.loop">
+      <ion-badge slot="start" class="font ion-margin-start" style="font-size: 0.3em;">
+        <ion-icon name="calendar" size="large"></ion-icon>
+      </ion-badge>
+      <ion-badge slot="start" class="font ion-margin-start" style="font-size: 1.2em;">DIAS TRABALHADOS</ion-badge>
+      <ion-badge slot="start" class="font ion-margin-start" style="font-size: 1.2em;">{{ticket.diastrabalhados}} DIAS</ion-badge>
+    </div>
+    <ion-title *ngIf="!ticket.etapa.etapa.loop" slot="start" class="font ion-margin-start" style="font-size: 1.8em;">{{ticket.etapa.etapa.nome}}
+    </ion-title >
     <ion-badge slot="end" class="font" style="font-size: 1.2em;">{{ticket.etapa.nome}}
     </ion-badge>
     <ion-button slot="end" size="default" color="danger" (click)="dismiss()">
@@ -59,7 +65,8 @@
       <ion-col>
         <ion-item color="transparent" lines="none">
           <ion-avatar slot="start">
-            <img [src]=" ticket.envolvidos.orientado ? ticket.envolvidos.orientador[0].foto : '../../../assets/avatarIcon.png'" >
+            <img
+              [src]=" ticket.envolvidos.orientado ? ticket.envolvidos.orientador[0].foto : '../../../assets/avatarIcon.png'">
           </ion-avatar>
           <ion-label class="username" style="font-size: 1.5em; font-family: 'Nunito', sans-serif;">
             {{ticket.envolvidos.orientador ? ticket.envolvidos.orientador[0].nome : 'Orientador'}}

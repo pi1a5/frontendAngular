@@ -16,6 +16,7 @@ import { FormComponent } from 'src/app/components/selectProcessPage/form/form.co
 import { SelectDetailsProcessComponent } from 'src/app/components/selectProcessPage/select-details-process/select-details-process.component';
 import { PendingTicketComponent } from 'src/app/components/pending-ticket/pending-ticket.component';
 import { PendingTicketWarningComponent } from 'src/app/components/pending-ticket-warning/pending-ticket-warning.component';
+import { InternshipCardComponent } from 'src/app/components/profilePage/internship-card/internship-card.component';
 import { SelectProcessPage } from './select-process.page';
 import { SelectProcessPageRoutingModule } from './select-process-routing.module';
 
@@ -37,6 +38,7 @@ import { SelectProcessPageRoutingModule } from './select-process-routing.module'
     SelectDetailsProcessComponent,
     PendingTicketComponent,
     PendingTicketWarningComponent,
+    InternshipCardComponent,
   ],
 })
 export class SelectProcessPageModule { }

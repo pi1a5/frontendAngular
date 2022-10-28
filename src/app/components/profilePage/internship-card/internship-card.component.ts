@@ -9,6 +9,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 
 @Component({
@@ -21,17 +22,35 @@ export class InternshipCardComponent implements OnInit {
 
   public internshipProgress = 0;
 
-  constructor(public apiStudent: ApiStudentService) { }
+  constructor(
+    public apiStudent: ApiStudentService,
+    public toastController: ToastController,
+  ) { }
 
   ngOnInit() {
     this.apiStudent.getUserInternshipData().subscribe((data) => {
       // console.log(data);
-      this.internship = data[0];
-      // this.internship.cumprido = 270;
-      this.internshipProgress = this.calculateProgress(data[0].necessario, data[0].cumprido);
+      if (!data) {
+        this.internship = null;
+      } else {
+        this.internship = data[0];
+        this.internshipProgress = this.calculateProgress(data[0].necessario, data[0].cumprido);
+      }
+      
     }, (error) => {
-      console.log(error);
+      // console.log(error);
+      this.presentToast(error.error, 'danger', 'close-circle');
     });
+  }
+
+  async presentToast(msg: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      color,
+      icon,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   calculateProgress(neededHours: number, completedHours: number) {

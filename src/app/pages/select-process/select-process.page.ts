@@ -34,6 +34,7 @@ export class SelectProcessPage implements OnInit {
 
   ngOnInit() {
     this.apiStudent.checkIfHasInternship().subscribe((data) => {
+      // console.log(data);
       this.internship = data;
       if (data) this.checkIfEnded();
     }, (error) => {

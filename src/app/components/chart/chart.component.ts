@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-plusplus */
@@ -8,7 +9,6 @@
 import {
   Component, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 
@@ -29,7 +29,6 @@ export class ChartComponent implements OnInit {
   public supervisorsCount: any = [];
 
   constructor(
-    public router: Router,
     public apiSupervisor: ApiSupervisorService,
   ) { }
 

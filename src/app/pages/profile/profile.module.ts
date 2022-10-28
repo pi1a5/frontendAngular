@@ -13,6 +13,10 @@ import { ProfileCardComponent } from 'src/app/components/profilePage/profile-car
 import { SupervisorCardComponent } from 'src/app/components/profilePage/supervisor-card/supervisor-card.component';
 import { InternshipCardComponent } from 'src/app/components/profilePage/internship-card/internship-card.component';
 import { CircularProgressBarComponent } from 'src/app/components/circular-progress-bar/circular-progress-bar.component';
+import { SupervisorChartCardComponent } from 'src/app/components/profilePage/supervisor-chart-card/supervisor-chart-card.component';
+import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
+import { TicketBarChartComponent } from 'src/app/components/ticket-bar-chart/ticket-bar-chart.component';
+import { SupervisorChartCard2Component } from 'src/app/components/profilePage/supervisor-chart-card2/supervisor-chart-card2.component';
 import { ProfilePage } from './profile.page';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
@@ -31,6 +35,10 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     SupervisorCardComponent,
     InternshipCardComponent,
     CircularProgressBarComponent,
+    SupervisorChartCardComponent,
+    PieChartComponent,
+    SupervisorChartCard2Component,
+    TicketBarChartComponent,
   ],
 })
 export class ProfilePageModule {}

@@ -43,9 +43,9 @@ export class SelectCoursePage implements OnInit {
     this.loadCourses();
   }
 
-  async presentAlert(courseName: string) {
+  async presentAlert(course: any) {
     const alert = await this.alertController.create({
-      header: courseName,
+      header: course.nome,
       message: 'Informe seu prontuário sem "SP"',
       buttons: [
         {
@@ -55,6 +55,10 @@ export class SelectCoursePage implements OnInit {
         {
           text: 'OK',
           role: 'confirm',
+          handler: (prontuario) => {
+            if (!this.isProntuarioValid(prontuario[0])) return false;
+            this.setCourse(course.id, `SP${prontuario[0]}`);
+          },
         },
       ],
       inputs: [
@@ -102,14 +106,6 @@ export class SelectCoursePage implements OnInit {
     }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
-  }
-
-  async selectCourse(course: any) {
-    const prontuario = await this.presentAlert(course.nome);
-
-    if (prontuario[0]) {
-      if (this.isProntuarioValid(prontuario[0])) return await this.setCourse(course.id, `SP${prontuario[0]}`);
-    }
   }
 
   isProntuarioValid(prontuario: string) {

@@ -1,0 +1,39 @@
+<div *ngIf="selected.length; else placeholder">
+  <span *ngFor="let document of selected; let last = last" class="span">
+    {{ document.nome }}{{ last ? "" : ", " }}
+  </span>
+</div>
+
+<ng-template #placeholder>
+  <ion-label class="span">
+    Nenhum documento selecionado  
+  </ion-label>
+</ng-template>
+
+<ion-modal [isOpen]="isOpen">
+  <ng-template >
+    <ion-header>
+      <ion-toolbar color="success">
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">
+            <ion-icon slot="icon-only" name="return-up-back-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title class="font">Documentos Cadastrados</ion-title>
+        <ion-buttons slot="end">
+          <ion-button class="font" (click)="select()" >SELECIONAR</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar color="success">
+        <ion-searchbar class="font" placeholder="ex. Termo de Recisão" (ionChange)="filter($event)"></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-item *ngFor="let document of filtered" >
+        <ion-checkbox slot="start" [(ngModel)]="document.selected" color="success" (ionChange)="documentSelected()">
+        </ion-checkbox>
+        <ion-label class="span">{{document.nome}}</ion-label>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>

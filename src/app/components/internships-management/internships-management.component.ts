@@ -9,7 +9,6 @@
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
-import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 import { ModalTicketClosedComponent } from '../modal-ticket-closed/modal-ticket-closed.component';
 import { ModalTicketOpenComponent } from '../modal-ticket-open/modal-ticket-open.component';
@@ -73,10 +72,6 @@ export class InternshipsManagementComponent implements OnInit {
       duration: 2000,
     });
     toast.present();
-  }
-
-  formatDate({ date }: { date: string; }): string {
-    return format(new Date(date.replace(/-/g, '\/').replace(/T.+/, '')), 'dd/MM/yyyy');
   }
 
   async presentTransfer(internshipId: number) {

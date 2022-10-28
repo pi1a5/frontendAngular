@@ -40,19 +40,45 @@ export class ApiSupervisorService {
   // }
 
   // Card Modal
-  feedbackTicket(idTicket: number, feedback: string, accept: boolean, step: any): Observable<any> {
+  // feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number, step: any, status: string, isUnique: boolean, days: number): Observable<any> {
+  //   return this.http.post(`${this.url}api/feedbackTicket`, {
+  //     sub: sessionStorage.getItem('userId'),
+  //     idTicket,
+  //     feedback,
+  //     aceito: accept,
+  //     idfrequencia: frequency,
+  //     etapa: step,
+  //     status,
+  //     etapaunica: isUnique,
+  //     diastrabalhados: days,
+  //   });
+  // }
+
+  feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: sessionStorage.getItem('userId'),
       idTicket,
       feedback,
       aceito: accept,
-      etapa: step,
+      idfrequencia: frequency,
     });
   }
 
   // Chart Supervisors
   checkOrientadoresAmount(): Observable<any> {
     return this.http.post(`${this.url}api/checkOrientadoresAmount`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getInternshipsAmountByStatus(): Observable<any> {
+    return this.http.post(`${this.url}api/getInternshipsAmountByStatus`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getTicketsStatusByDate(): Observable<any> {
+    return this.http.post(`${this.url}api/getTicketsStatusByDate`, {
       sub: sessionStorage.getItem('userId'),
     });
   }

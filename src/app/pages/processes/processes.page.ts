@@ -108,11 +108,7 @@ export class ProcessesPage implements OnInit {
     this.apiSupervisor.updateProcess(this.saveBeforeEdit, process).subscribe(async (data) => {
       await this.loadingController.dismiss();
       await this.presentToast(data, 'success', 'checkmark-circle');
-      for (let index = 0; index < this.processes.length; index++) {
-        if (this.processes[index].id === process.id) {
-          this.processes[index] = process;
-        }
-      }
+      this.loadProcesses();
       this.reset();
     }, async (error) => {
       await this.loadingController.dismiss();

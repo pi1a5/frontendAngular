@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
@@ -10,11 +11,10 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/prefer-default-export */
 import {
-  Component, EventEmitter, Input, OnInit, Output,
+  Component, Input, OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController, LoadingController } from '@ionic/angular';
-import { format, parseISO } from 'date-fns';
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { ApiStudentService } from 'src/app/services/api-student.service';
 
 @Component({
@@ -46,10 +46,11 @@ export class FormComponent implements OnInit {
     public apiStudent: ApiStudentService,
     public toastController: ToastController,
     public loadingController: LoadingController,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {
-    // console.log(this.confirmedProcess);
+    // console.log(this.confirmedProcessFromBack);
     this.defineOrigin();
   }
 
@@ -72,25 +73,56 @@ export class FormComponent implements OnInit {
     toast.present();
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Coloque os dias trabalhados',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+        },
+      ],
+      inputs: [
+        {
+          label: 'Dias trabalhados',
+          type: 'number',
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const input = await alert.onDidDismiss();
+
+    if (input.role === 'confirm') return input.data.values;
+
+    return false;
+  }
+
   customCounterFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} caracteres restantes`;
   }
 
-  submitTicket(formData: FormData) {
-    this.apiStudent.sendTicket(formData).subscribe((data) => {
+  async submitTicket(formData: FormData) {
+    await this.presentLoading();
+    this.apiStudent.sendTicket(formData).subscribe(async (data) => {
       // console.log(data);
-      this.loadingController.dismiss();
-      this.presentToast(data, 'success', 'checkmark-circle');
+      await this.loadingController.dismiss();
+      await this.presentToast(data, 'success', 'checkmark-circle');
       this.router.navigate(['student'], { replaceUrl: true });
-    }, (error) => {
+    }, async (error) => {
       // console.log(error);
-      this.loadingController.dismiss();
-      this.presentToast(error.error, 'danger', 'close-circle');
+      await this.loadingController.dismiss();
+      await this.presentToast(error.error, 'danger', 'close-circle');
       this.router.navigate(['student'], { replaceUrl: true });
     });
   }
 
-  prepareData() {
+  async prepareData() {
     const formData: FormData = new FormData();
     // Files
     for (let index = 0; index < this.documentsControl.length; index++) {
@@ -101,15 +133,23 @@ export class FormComponent implements OnInit {
     // formData.append('dataLimite', this.dateValue);
     formData.append('corpoTexto', this.textArea);
     formData.append('sub', sessionStorage.getItem('userId'));
+    if (this.step.loop) {
+      const days = await this.presentAlert();
+      if (!days[0]) return false;
+      formData.append('diastrabalhados', `${days[0]}`);
+      return formData;
+    }
+    const days = 0;
+    formData.append('diastrabalhados', `${days}`);
 
     return formData;
   }
 
   async submit() {
     if (this.validate()) {
-      await this.presentLoading();
-      const formData = this.prepareData();
-      this.submitTicket(formData);
+      const formData = await this.prepareData();
+      if (!formData) return false;
+      await this.submitTicket(formData);
     }
   }
 
@@ -136,8 +176,8 @@ export class FormComponent implements OnInit {
     const documents = step.documentos;
     for (let index = 0; index < documents.length; index++) {
       this.documentsControl.push({
-        nome: documents[index][0].nome,
-        sigla: documents[index][0].sigla,
+        nome: documents[index].nome,
+        sigla: documents[index].sigla,
         pdfFile: undefined,
       });
     }

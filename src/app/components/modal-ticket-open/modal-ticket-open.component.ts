@@ -10,7 +10,9 @@
 /* eslint-disable import/prefer-default-export */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import {
+  AlertController, LoadingController, ModalController, ToastController,
+} from '@ionic/angular';
 import { format } from 'date-fns';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 
@@ -30,6 +32,7 @@ export class ModalTicketOpenComponent implements OnInit {
     public modalController: ModalController,
     public toastController: ToastController,
     public loadingController: LoadingController,
+    public alertController: AlertController,
   ) {
   }
 
@@ -59,22 +62,76 @@ export class ModalTicketOpenComponent implements OnInit {
     toast.present();
   }
 
-  confirm(accept: boolean) {
-    if (this.validate(accept)) {
-      if (accept === true && this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
-      this.submitFeedback(accept);
-    }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Qual será a frequência dos relatórios desse Estágio?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+        },
+      ],
+      inputs: [
+        {
+          label: 'Mensal',
+          type: 'radio',
+          value: 1,
+        },
+        {
+          label: 'Trimestral',
+          type: 'radio',
+          value: 2,
+        },
+        {
+          label: 'Semestral',
+          type: 'radio',
+          value: 3,
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const input = await alert.onDidDismiss();
+
+    if (input.role === 'confirm') return input.data.values;
+
+    return false;
   }
 
-  submitFeedback(accept: boolean) {
-    this.presentLoading();
+  async confirm(accept: boolean) {
+    if (this.validate(accept)) {
+      if (accept) return await this.setFrequency(accept);
+      return await this.submitFeedback(accept, 0);
+    }
+    return false;
+  }
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, this.ticket.etapa).subscribe((data) => {
-      this.loadingController.dismiss();
+  async setFrequency(accept: boolean) {
+    // Tratar mensagem automática quando aceita
+    if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
+    // Selecionar frequência
+    if (this.ticket.status === 'Aberto' && this.ticket.etapaunica === false) {
+      const frequency = await this.presentAlert();
+      if (frequency) return await this.submitFeedback(accept, frequency);
+      return false;
+    }
+    return await this.submitFeedback(accept, 0);
+  }
+
+  async submitFeedback(accept: boolean, frequency: number) {
+    await this.presentLoading();
+
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, frequency).subscribe(async (data) => {
+      await this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });
-    }, (error) => {
-      this.loadingController.dismiss();
+    }, async (error) => {
+      await this.loadingController.dismiss();
       this.presentToast(error.error, 'danger', 'close-circle');
       this.dismiss();
     });

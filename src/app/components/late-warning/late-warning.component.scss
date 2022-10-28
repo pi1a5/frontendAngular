@@ -1,0 +1,24 @@
+.contentHeight {
+  height: 68.5vh;
+}
+
+hr {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+  width: 100%;
+  display: block !important;
+  font-size: 2em !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+// Data de envio
+
+ion-badge {
+  --background: #38907A;
+  --color: white;
+  --padding-end: 2em;
+  --padding-start: 2em;
+  --padding-bottom: 0.5em;
+  --padding-top: 0.5em;
+}
