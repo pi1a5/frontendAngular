@@ -59,6 +59,7 @@
     "@briebug/cypress-schematic": "^5.0.1",
     "@capacitor/cli": "3.5.1",
     "@ionic/angular-toolkit": "^6.0.0",
+    "@ionic/eslint-plugin": "^0.0.1",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^17.0.29",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
