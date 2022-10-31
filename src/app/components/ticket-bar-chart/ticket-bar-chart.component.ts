@@ -81,7 +81,6 @@ export class TicketBarChartComponent implements OnInit {
           legend: {
             position: 'top',
             labels: {
-              // This more specific font property overrides the global property
               font: {
                 family: "'Nunito', sans-serif",
                 size: 20,
@@ -96,6 +95,7 @@ export class TicketBarChartComponent implements OnInit {
         indexAxis: 'x',
         scales: {
           y: {
+            stacked: true,
             ticks: {
               stepSize: 1,
               font: {
@@ -104,6 +104,7 @@ export class TicketBarChartComponent implements OnInit {
             },
           },
           x: {
+            stacked: true,
             ticks: {
               stepSize: 1,
               font: {

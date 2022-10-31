@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class LateWarningComponent implements OnInit {
   @Input() days: number = 0;
 
+  @Input() date: String = 'erro';
+
   constructor(public router: Router) { }
 
   ngOnInit() { }

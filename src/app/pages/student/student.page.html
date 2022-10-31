@@ -25,7 +25,7 @@
           <!-- Ticket Atrasado -->
 
           <ion-col *ngIf="isLate" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
-            <app-late-warning [days]="isLate.dias"></app-late-warning>
+            <app-late-warning [days]="isLate.dias" [date]="isLate.dataPrevista"></app-late-warning>
           </ion-col>
 
           <!-- Ticket Pendente -->
