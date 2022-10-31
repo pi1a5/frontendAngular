@@ -46,7 +46,8 @@ export class StudentPage implements OnInit {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
     this.apiStudent.getStatus().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
+      if (!data) this.isLate = undefined;
       if (data.nome === 'Atrasado') this.isLate = data;
     }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');

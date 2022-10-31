@@ -21,6 +21,9 @@
 
 <ion-card *ngIf="data === null">
   <div class="flex-center ion-text-center">
-    <ion-title class="font" style="color: var(--ion-color-medium-shade);">Você ainda não possui estágios</ion-title>
+    <ion-row class="flex-center">
+      <ion-title class="font" style="color: var(--ion-color-medium-shade);">Você ainda não possui estágios</ion-title>
+      <ion-img class="emptyTicketIcon" src="../../../assets/undrawImages/emptyPieChartImage.svg"></ion-img>
+    </ion-row>
   </div>
 </ion-card>

@@ -36,7 +36,6 @@ export class InternshipCardComponent implements OnInit {
         this.internship = data[0];
         this.internshipProgress = this.calculateProgress(data[0].necessario, data[0].cumprido);
       }
-      
     }, (error) => {
       // console.log(error);
       this.presentToast(error.error, 'danger', 'close-circle');

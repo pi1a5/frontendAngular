@@ -1,5 +1,5 @@
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-plusplus */
@@ -37,6 +37,7 @@ export class PieChartComponent implements OnInit {
         this.statusName.push(key);
         this.statusCount.push(value);
       }
+
       this.pieChartMethod();
     }, (error) => {
       console.log(error);

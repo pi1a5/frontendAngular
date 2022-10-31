@@ -33,7 +33,7 @@ export class InternshipsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getAllBySupervisor().subscribe((data) => {
-      // console.log(data.processos);
+      console.log(data.processos);
       this.internships = data.processos;
     }, (error) => {
       // console.log(error);
@@ -41,7 +41,7 @@ export class InternshipsManagementComponent implements OnInit {
     });
   }
 
-  async presentAlert(id: number, supervisorName: string) {
+  async presentAlert(id: number) {
     const alert = await this.alertController.create({
       header: 'Cuidado!',
       subHeader: 'Tem certeza que deseja encerrar esse estágio?',

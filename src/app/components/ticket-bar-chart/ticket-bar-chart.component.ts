@@ -1,6 +1,6 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable linebreak-style */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
@@ -41,7 +41,6 @@ export class TicketBarChartComponent implements OnInit {
   ngOnInit() {
     this.apiSupervisor.getTicketsStatusByDate().subscribe((data) => {
       this.year = Object.entries(data)[0][0];
-      console.log(Object.entries(Object.entries(data)[0][1]));
       for (const [key, value] of Object.entries(Object.entries(data)[0][1])) {
         this.months.push(key);
         this.acceptedTickets.push(value.aceito);

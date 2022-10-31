@@ -26,6 +26,8 @@ export class SelectProcessPage implements OnInit {
 
   public internship: Object = undefined;
 
+  public waitWarning: Object = undefined;
+
   constructor(
     public apiStudent: ApiStudentService,
     public toastController: ToastController,
@@ -73,8 +75,22 @@ export class SelectProcessPage implements OnInit {
   getPendingTicket() {
     this.apiStudent.getPendingTicket().subscribe((pendingTicket) => {
       this.pendingTicket = pendingTicket;
+      if (!pendingTicket) this.getStatus();
     }, (error) => {
       this.pendingTicket = null;
+      this.presentToast(error.error, 'danger', 'close-circle');
+    });
+  }
+
+  getStatus() {
+    this.apiStudent.getStatus().subscribe((data) => {
+      console.log(data);
+      if (data.nome === 'Em Dia') {
+        this.waitWarning = data;
+      } else {
+        this.waitWarning = null;
+      }
+    }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
