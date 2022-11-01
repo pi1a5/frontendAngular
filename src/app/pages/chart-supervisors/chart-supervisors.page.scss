@@ -33,6 +33,8 @@ ion-menu.md ion-content {
 
 // Chart
 
-.chart {
+.chart-container {
+  position: relative;
   height: 80vh;
+  width: auto;
 }
