@@ -17,7 +17,7 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-segment class="font" value="default" color="success">
+      <ion-segment [(ngModel)]="chart" class="font" value="default" color="success" >
         <ion-segment-button value="first">
           <ion-label>Alunos por Orientador</ion-label>
         </ion-segment-button>
@@ -30,11 +30,22 @@
       </ion-segment>
 
 
-      <ion-card class="ion-margin-start ion-margin-end" style="overflow-y: auto;">
-        <app-chart class="flex-center"></app-chart>
+      <ion-card *ngIf="loaded && chart === 'first'" class="ion-margin-start ion-margin-end" style="overflow-y: auto;">
+        <app-chart [data]="checkOrientadoresAmount" class="flex-center"></app-chart>
+      </ion-card>
+
+      <ion-card *ngIf="loaded && chart === 'second'" class="ion-margin-start ion-margin-end" style="overflow-y: auto;">
+        <app-pie-courses [data]="internshipsAmountByCourse" class="flex-center"></app-pie-courses>
       </ion-card>
     
-
+      <ion-card *ngIf="!loaded" class="ion-margin-start ion-margin-end" style="overflow-y: auto; height: 80vh;">
+        <div class="flex-center ion-text-center">
+          <div class="flex-center">
+            <ion-spinner name="crescent" color="success"></ion-spinner>
+          </div>
+        </div>
+      </ion-card>
+     
 
     </ion-content>
 
