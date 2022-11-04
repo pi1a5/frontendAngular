@@ -91,6 +91,18 @@ export class PieCoursesComponent implements OnInit {
       options: {
         animation: false,
         plugins: {
+          title: {
+            display: true,
+            font: {
+              size: 25,
+              family: "'Nunito', sans-serif",
+            },
+            padding: {
+              top: 10,
+              bottom: 30,
+            },
+            text: 'Estágios por curso',
+          },
           legend: {
             position: 'bottom',
             labels: {
@@ -98,7 +110,7 @@ export class PieCoursesComponent implements OnInit {
               usePointStyle: true,
               font: {
                 family: "'Nunito', sans-serif",
-                size: 20,
+                size: 15,
               },
             },
           },

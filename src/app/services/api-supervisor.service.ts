@@ -68,6 +68,24 @@ export class ApiSupervisorService {
     });
   }
 
+  getInternshipsAmountByMonth(): Observable<any> {
+    return this.http.post(`${this.url}api/getInternshipsAmountByMonth`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getUserTicketAmountAndTotalHours(): Observable<any> {
+    return this.http.post(`${this.url}api/getUserTicketAmountAndTotalHours`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getCourseAverageWorkedHours(): Observable<any> {
+    return this.http.post(`${this.url}api/getCourseAverageWorkedHours`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
   // Process Customization
   newProcess(process: any): Observable<any> {
     return this.http.post(`${this.url}api/createNewProcesso`, {

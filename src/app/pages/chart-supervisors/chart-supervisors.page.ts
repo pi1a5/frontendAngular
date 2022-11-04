@@ -27,11 +27,14 @@ export class ChartSupervisorsPage implements OnInit {
 
   internshipsAmountByCourse = undefined;
 
+  courseAverageWorkedHours = undefined;
+
   constructor(public apiSupervisor: ApiSupervisorService) { }
 
   ngOnInit() {
     this.getOrientadoresAmount();
     this.getInternshipsAmountByCourse();
+    this.getCourseAverageWorkedHours();
   }
 
   getOrientadoresAmount() {
@@ -48,6 +51,15 @@ export class ChartSupervisorsPage implements OnInit {
     this.apiSupervisor.getInternshipsAmountByCourse()
       .subscribe((data) => {
         this.internshipsAmountByCourse = data;
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  getCourseAverageWorkedHours() {
+    this.apiSupervisor.getCourseAverageWorkedHours()
+      .subscribe((data) => {
+        this.courseAverageWorkedHours = data;
       }, (error) => {
         console.log(error);
       });
