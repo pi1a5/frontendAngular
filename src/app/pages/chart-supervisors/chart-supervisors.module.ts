@@ -15,6 +15,7 @@ import { PieCoursesComponent } from 'src/app/components/pie-courses/pie-courses.
 import { ChartSupervisorsPageRoutingModule } from './chart-supervisors-routing.module';
 
 import { ChartSupervisorsPage } from './chart-supervisors.page';
+import { BarCoursesComponent } from 'src/app/components/bar-courses/bar-courses.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ChartSupervisorsPage } from './chart-supervisors.page';
     LogoutbuttonComponent,
     SidebarComponent,
     PieCoursesComponent,
+    BarCoursesComponent,
   ],
 })
 export class ChartSupervisorsPageModule { }

@@ -8,42 +8,51 @@
   <!-- content -->
   <ion-router-outlet id="main-content">
 
-    <ion-content class="ion-justify-content-center" padding class="background">
+    <ion-content class="flex-center" padding class="background">
 
-      <ion-header>
-        <ion-toolbar color="translucent" class="ion-text-center ion-padding">
-          <ion-menu-button slot="start"></ion-menu-button>
-          <ion-title class="title" style="color: var(--ion-color-medium-shade);">Gráficos</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-segment [(ngModel)]="chart" class="font" value="default" color="success" >
-        <ion-segment-button value="first">
-          <ion-label>Alunos por Orientador</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="second">
-          <ion-label>Segundo</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="third">
-          <ion-label>Terceiro</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-
-
-      <ion-card *ngIf="loaded && chart === 'first'" class="ion-margin-start ion-margin-end" style="overflow-y: auto;">
-        <app-chart [data]="checkOrientadoresAmount" class="flex-center"></app-chart>
-      </ion-card>
-
-      <ion-card *ngIf="loaded && chart === 'second'" class="ion-margin-start ion-margin-end" style="overflow-y: auto;">
-        <app-pie-courses [data]="internshipsAmountByCourse" class="flex-center"></app-pie-courses>
-      </ion-card>
     
-      <ion-card *ngIf="!loaded" class="ion-margin-start ion-margin-end" style="overflow-y: auto; height: 80vh;">
-        <div class="flex-center ion-text-center">
-          <div class="flex-center">
-            <ion-spinner name="crescent" color="success"></ion-spinner>
-          </div>
+
+      <ion-card class="ion-margin">
+        <ion-header>
+          <ion-toolbar color="translucent" class="ion-text-center ion-padding">
+            <ion-menu-button slot="start"></ion-menu-button>
+            <ion-card-title color="success" class="title ion-margin-top ion-padding-top">
+              Gráficos da sua Área
+            </ion-card-title>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-segment [(ngModel)]="chart" class="font" value="default" color="success" >
+          <ion-segment-button value="first">
+            <ion-label>Alunos por Orientador</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="second">
+            <ion-label>Estágios por Curso</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <div *ngIf="loaded && chart === 'first'" class="ion-margin" style="overflow-y: auto;">
+          <app-chart [data]="checkOrientadoresAmount" class="flex-center"></app-chart>
         </div>
+
+        <div *ngIf="loaded && chart === 'second'" class="ion-margin-start ion-margin-end" style="overflow-y: auto;">
+          <ion-row>
+            <ion-col size="4">
+              <app-pie-courses [data]="internshipsAmountByCourse" class="flex-center"></app-pie-courses>
+            </ion-col>
+            <ion-col size="8">
+              <app-bar-courses [data]="internshipsAmountByCourse" class="flex-center"></app-bar-courses>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <ion-card *ngIf="!loaded" style="overflow-y: auto; height: 80vh;">
+          <div class="flex-center ion-text-center">
+            <div class="flex-center">
+              <ion-spinner name="crescent" color="success"></ion-spinner>
+            </div>
+          </div>
+        </ion-card>
       </ion-card>
      
 

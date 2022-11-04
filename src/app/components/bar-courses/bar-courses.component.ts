@@ -6,47 +6,40 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
-import {
-  Component, ElementRef, Input, OnInit, ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+  selector: 'app-bar-courses',
+  templateUrl: './bar-courses.component.html',
+  styleUrls: ['./bar-courses.component.scss'],
 })
-export class ChartComponent implements OnInit {
+export class BarCoursesComponent implements OnInit {
   @ViewChild('barCanvas', { static: true }) public barCanvas: ElementRef;
-
-  public loaded: boolean = false;
 
   public barChart: any;
 
   @Input() data: any = undefined;
 
-  public supervisorsName: any = [];
+  public courseName: any = [];
 
-  public supervisorsCountOpen: any = [];
+  public internshipAmount: any = [];
 
   // public supervisorsCountClosed: any = [];
 
-  constructor(
-    public apiSupervisor: ApiSupervisorService,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     if (this.data) {
-      // for (let index = 0; index < this.data.length; index++) {
-      //   const element = this.data[index];
-      //   this.supervisorsName.push(element.nome);
-      //   this.supervisorsCountOpen.push(element.quantidade);
-      // }
-      for (let index = 0; index < 6; index++) {
-        this.supervisorsName.push(`Orientador ${index}`);
-        this.supervisorsCountOpen.push(Math.ceil(Math.random() * 15));
+      for (let index = 0; index < Object.entries(this.data).length; index++) {
+        const element = Object.entries(this.data)[index];
+        this.courseName.push(element[0]);
+        this.internshipAmount.push(element[1]);
       }
+      // for (let index = 0; index < 6; index++) {
+      //   this.supervisorsName.push(`Orientador ${index}`);
+      //   this.supervisorsCountOpen.push(Math.ceil(Math.random() * 15));
+      // }
       this.barChartMethod();
     }
   }
@@ -55,12 +48,12 @@ export class ChartComponent implements OnInit {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'bar',
       data: {
-        labels: this.supervisorsName,
+        labels: this.courseName,
         datasets: [
           {
             barPercentage: 0.8,
             barThickness: 'flex',
-            label: 'Estágios em andamento',
+            label: this.courseName,
             stack: 'Base',
             backgroundColor: [
               'rgb(255, 99, 132)',
@@ -81,19 +74,19 @@ export class ChartComponent implements OnInit {
             'rgba(255, 255, 255, 0.8)',
           ],
             // hoverBackgroundColor: '#3eae91',
-            data: this.supervisorsCountOpen.sort((a, b) => b - a),
+            data: this.internshipAmount,
           },
         ],
       },
       options: {
         plugins: {
           legend: {
-            display: false,
+            display: false, 
           }
         },
         animation: false,
         responsive: true,
-        indexAxis: 'y',
+        indexAxis: 'x',
         scales: {
           y: {
             ticks: {
@@ -105,6 +98,9 @@ export class ChartComponent implements OnInit {
           x: {
             ticks: {
               stepSize: 1,
+              font: {
+                family: "'Nunito', sans-serif",
+              },
             },
             suggestedMax: 6,
             beginAtZero: true,

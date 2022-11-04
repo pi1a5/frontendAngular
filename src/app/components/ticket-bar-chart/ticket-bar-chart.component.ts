@@ -11,7 +11,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable import/prefer-default-export */
 import {
-  Component, ElementRef, OnInit, ViewChild,
+  Component, ElementRef, Input, OnInit, ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
@@ -26,6 +26,8 @@ export class TicketBarChartComponent implements OnInit {
 
   public pieChart: any;
 
+  @Input() data = undefined;
+
   public months: any[] = [];
 
   public acceptedTickets: any[] = [];
@@ -39,17 +41,13 @@ export class TicketBarChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiSupervisor.getTicketsStatusByDate().subscribe((data) => {
-      this.year = Object.entries(data)[0][0];
-      for (const [key, value] of Object.entries(Object.entries(data)[0][1])) {
-        this.months.push(key);
-        this.acceptedTickets.push(value.aceito);
-        this.refusedTickets.push(value.recusado);
-      }
-      this.pieChartMethod();
-    }, (error) => {
-      console.log(error);
-    });
+    this.year = Object.entries(this.data)[0][0];
+    for (const [key, value] of Object.entries(Object.entries(this.data)[0][1])) {
+      this.months.push(key);
+      this.acceptedTickets.push(value.aceito);
+      this.refusedTickets.push(value.recusado);
+    }
+    this.pieChartMethod();
   }
 
   pieChartMethod() {
@@ -91,7 +89,7 @@ export class TicketBarChartComponent implements OnInit {
         animation: {
           duration: 2000,
         },
-        responsive: true,
+        responsive: false,
         indexAxis: 'x',
         scales: {
           y: {

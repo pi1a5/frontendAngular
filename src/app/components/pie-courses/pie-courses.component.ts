@@ -28,7 +28,7 @@ export class PieCoursesComponent implements OnInit {
 
   public courseName: any = [];
 
-  public studentsAmount: any = [];
+  public internshipAmount: any = [];
 
   // public supervisorsCountClosed: any = [];
 
@@ -41,7 +41,7 @@ export class PieCoursesComponent implements OnInit {
       for (let index = 0; index < Object.entries(this.data).length; index++) {
         const element = Object.entries(this.data)[index];
         this.courseName.push(element[0]);
-        this.studentsAmount.push(element[1]);
+        this.internshipAmount.push(element[1]);
       }
       // for (let index = 0; index < 6; index++) {
       //   this.supervisorsName.push(`Orientador ${index}`);
@@ -53,11 +53,11 @@ export class PieCoursesComponent implements OnInit {
 
   barChartMethod() {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
-      type: 'pie',
+      type: 'polarArea',
       data: {
         labels: this.courseName,
         datasets: [{
-          data: this.studentsAmount,
+          data: this.internshipAmount,
           // borderColor: [
           //   'rgb(255, 99, 132)',
           //   'rgb(54, 162, 235)',
@@ -92,7 +92,7 @@ export class PieCoursesComponent implements OnInit {
         animation: false,
         plugins: {
           legend: {
-            position: 'top',
+            position: 'bottom',
             labels: {
               // This more specific font property overrides the global property
               usePointStyle: true,
