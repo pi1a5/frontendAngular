@@ -42,6 +42,11 @@
       <ion-icon size="large" color="light" slot="start" name="school"></ion-icon>
       <ion-label class="font">Orientadores</ion-label>
     </ion-item>
+
+    <ion-item *ngIf="user === 'admin'" lines="full" button (click)="goToStudents()">
+      <ion-icon size="large" color="light" slot="start" name="school"></ion-icon>
+      <ion-label class="font">Alunos</ion-label>
+    </ion-item>
   </div>
 
   <app-logoutbutton class="logoutbt"></app-logoutbutton>
