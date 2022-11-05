@@ -19,7 +19,9 @@ import { ApiAdminService } from 'src/app/services/api-admin.service';
 export class StudentsListComponent implements OnInit {
   public searchTerm: string;
 
-  public supervisors: any = undefined;
+  public students: any = undefined;
+
+  public addButton: boolean = true;
 
   constructor(
     public apiAdmin: ApiAdminService,
@@ -29,31 +31,31 @@ export class StudentsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadSupervisors();
+    this.loadStudents();
   }
 
-  async presentAlert(id: number, supervisorName: string) {
-    const alert = await this.alertController.create({
-      header: 'Cuidado!',
-      subHeader: `Tem certeza que deseja excluir ${supervisorName} permanentemente?`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => { },
-        },
-        {
-          text: 'Sim, desejo',
-          role: 'confirm',
-          handler: () => {
-            this.deleteSupervisor(id);
-          },
-        },
-      ],
-    });
+  // async presentAlert(id: number, supervisorName: string) {
+  //   const alert = await this.alertController.create({
+  //     header: 'Cuidado!',
+  //     subHeader: `Tem certeza que deseja excluir ${supervisorName} permanentemente?`,
+  //     buttons: [
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancel',
+  //         handler: () => { },
+  //       },
+  //       {
+  //         text: 'Sim, desejo',
+  //         role: 'confirm',
+  //         handler: () => {
+  //           this.deleteSupervisor(id);
+  //         },
+  //       },
+  //     ],
+  //   });
 
-    await alert.present();
-  }
+  //   await alert.present();
+  // }
 
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
@@ -65,22 +67,37 @@ export class StudentsListComponent implements OnInit {
     toast.present();
   }
 
-  loadSupervisors() {
-    this.apiAdmin.getSupervisors().subscribe((data) => {
+  loadStudents() {
+    this.apiAdmin.getStudents().subscribe((data) => {
       // console.log(data);
-      this.supervisors = data;
+      this.students = data;
+      this.addButton = false;
     }, (error) => {
       // console.log(error);
       this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
 
-  deleteSupervisor(id: number) {
-    this.apiAdmin.deleteSupervisor(id).subscribe((data) => {
-      this.presentToast(data, 'success', 'checkmark-circle');
-      this.loadSupervisors();
+  // deleteSupervisor(id: number) {
+  //   this.apiAdmin.deleteSupervisor(id).subscribe((data) => {
+  //     this.presentToast(data, 'success', 'checkmark-circle');
+  //     this.loadStudents();
+  //   }, (error) => {
+  //     this.presentToast(error.error, 'danger', 'close-circle');
+  //   });
+  // }
+
+  addStudent() {
+    this.addButton = true;
+    this.apiAdmin.createRandomStudent().subscribe((data) => {
+      this.loadStudents();
     }, (error) => {
+      this.addButton = false;
       this.presentToast(error.error, 'danger', 'close-circle');
     });
+  }
+
+  createTicket(id: number) {
+    console.log(id);
   }
 }

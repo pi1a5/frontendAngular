@@ -55,4 +55,13 @@ export class ApiAdminService {
       id,
     });
   }
+
+  // Alunos
+  createRandomStudent(): Observable<any> {
+    return this.http.get(`${this.url}api/createRandomStudent`);
+  }
+
+  getStudents(): Observable<any> {
+    return this.http.get(`${this.url}api/getFakeStudents`);
+  }
 }

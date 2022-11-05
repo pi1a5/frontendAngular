@@ -33,7 +33,7 @@ export class InternshipsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getAllBySupervisor().subscribe((data) => {
-      console.log(data.processos);
+      // console.log(data.processos);
       this.internships = data.processos;
     }, (error) => {
       // console.log(error);

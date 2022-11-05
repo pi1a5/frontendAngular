@@ -22,6 +22,35 @@
       <ion-grid>
         <ion-row>
 
+          <!-- Estágio Concluído -->
+
+          <ion-col *ngIf="isClosed" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
+            <ion-card class="ion-text-center">
+
+              <ion-card-header color="success">
+                <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
+                  <ion-card-title slot="start" class="ion-padding-start ion-margin-start" style="color: white; font-size: 2em;">
+                    Estágio Concluído!
+                  </ion-card-title>
+                </ion-item>
+              </ion-card-header>
+
+              <ion-card-content class="contentHeight flex-center" style="background-color: var(--ion-color-light)">
+                <div style="height: 60vh; width: 20vw;">
+                  <ion-img class="emptyTicketIcon" src="../../../assets/undrawImages/endInternship.svg"></ion-img>
+                  <ion-title class="font ion-margin-top ion-padding-top" style="font-size: 2em;">
+                    Parabéns!
+                  </ion-title>
+                  <br>
+                  <ion-note class="font" style="font-size: 1em;">Você completou as horas obrigatórias de estágio do seu
+                    curso. </ion-note>
+                  <br><br><br>
+                </div>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+
           <!-- Ticket Atrasado -->
 
           <ion-col *ngIf="isLate" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
@@ -39,8 +68,8 @@
 
           <!-- Sem Ticket Pendente -->
 
-          <ion-col *ngIf="pendingTicket === null && isLate === undefined" offset="0.5" size="11" size-sm="11" size-md="11" size-lg="11"
-            size-xl="7.5">
+          <ion-col *ngIf="pendingTicket === null && isLate === undefined && isClosed === undefined" offset="0.5"
+            size="11" size-sm="11" size-md="11" size-lg="11" size-xl="7.5">
             <ion-card color="light" class="font ion-text-center">
               <ion-card-header class="ion-text-start" color="success">
                 <ion-card-title style="color: white; font-size: 2em;">Ticket Pendente</ion-card-title>

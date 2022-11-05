@@ -59,11 +59,13 @@ export class TicketBarChartComponent implements OnInit {
           label: 'Aceitos',
           data: this.acceptedTickets,
           backgroundColor: '#3eae91',
+          // hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
         },
         {
           label: 'Recusados',
           data: this.refusedTickets,
           backgroundColor: 'rgb(255, 99, 132)',
+          // hoverBackgroundColor: 'rgb(255, 99, 132, 0.6)',
         }],
       },
       options: {

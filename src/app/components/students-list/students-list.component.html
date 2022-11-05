@@ -6,16 +6,21 @@
         Gestão de Estudantes
       </ion-card-title>
     </ion-toolbar>
+    <ion-button [attr.disabled]="addButton" class="font" color="success" (click)="addStudent()">
+      <ion-icon name="duplicate"></ion-icon>
+      Adicionar Aluno
+    </ion-button>
     <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar ion-text-start" color="success"
       show-clear-button="always" clear-icon="trash-bin" placeholder="Procure pelo nome ou prontuário">
     </ion-searchbar>
+
   </ion-card-header>
   <ion-card-content>
     <div class="listHeight">
 
       <!-- Orientadores Carregando -->
 
-      <ion-accordion-group *ngIf="supervisors === undefined" expand="inset">
+      <ion-accordion-group *ngIf="students === undefined" expand="inset">
         <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" style="width: auto; height: 7em;"></ion-skeleton-text>
@@ -25,32 +30,32 @@
 
       <!-- Orientadores Carregados -->
 
-      <ion-list *ngIf="supervisors" expand="inset">
-        <ion-item *ngFor="let supervisor of supervisors | filter:searchTerm" lines="full">
+      <ion-list *ngIf="students" expand="inset">
+        <ion-item *ngFor="let student of students | filter:searchTerm" lines="full">
           <ion-avatar slot="start" size="large">
-            <img [src]="supervisor.foto" onError="this.src = '../../../assets/avatarIcon.png'">
+            <img [src]="student.foto" onError="this.src = '../../../assets/avatarIcon.png'">
           </ion-avatar>
           <ion-label slot="start" class="font">
-            <h3>{{supervisor.nome}}</h3>
-            <p style="font-size: 1.2em;">{{supervisor.prontuario}}</p>
+            <h3>{{student.nome}}</h3>
+            <p style="font-size: 1.2em;">{{student.prontuario}}</p>
           </ion-label>
           <ion-badge slot="start" color="success" class="badge">
-            <ion-label class="font">{{supervisor.curso}}</ion-label>
+            <ion-label class="font">{{student.curso ? student.curso : 'Sem nome'}}</ion-label>
           </ion-badge>
-          <ion-button slot="end" color="danger" size="default" (click)="presentAlert(supervisor.id, supervisor.nome)">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          <ion-button slot="end" color="success" size="default" (click)="createTicket(student.id)">
+            <ion-icon slot="icon-only" name="arrow-redo"></ion-icon>
           </ion-button>
         </ion-item>
       </ion-list>
 
       <!-- Sem Orientadores -->
 
-      <ion-row *ngIf="supervisors === null" size="12" class="ion-padding ion-margin">
+      <ion-row *ngIf="student === null" size="12" class="ion-padding ion-margin">
         <ion-col class="flex-center ion-padding ion-margin">
           <ion-card-title class="ion-padding ion-margin">
             <ion-note class="font ion-text-center ion-padding ion-margin"
               style="color: var(--ion-color-medium-shade); font-size: 2em;">
-              Não há Orientadores
+              Não há Alunos
             </ion-note>
           </ion-card-title>
         </ion-col>

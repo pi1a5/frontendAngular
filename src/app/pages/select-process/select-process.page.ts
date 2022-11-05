@@ -84,7 +84,7 @@ export class SelectProcessPage implements OnInit {
 
   getStatus() {
     this.apiStudent.getStatus().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       if (data.nome === 'Em Dia') {
         this.waitWarning = data;
       } else {

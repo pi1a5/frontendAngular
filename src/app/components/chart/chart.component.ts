@@ -38,15 +38,15 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
     if (this.data) {
-      // for (let index = 0; index < this.data.length; index++) {
-      //   const element = this.data[index];
-      //   this.supervisorsName.push(element.nome);
-      //   this.supervisorsCountOpen.push(element.quantidade);
-      // }
-      for (let index = 0; index < 6; index++) {
-        this.supervisorsName.push(`Orientador ${index}`);
-        this.supervisorsCountOpen.push(Math.ceil(Math.random() * 15));
+      for (let index = 0; index < this.data.length; index++) {
+        const element = this.data[index];
+        this.supervisorsName.push(element.nome);
+        this.supervisorsCountOpen.push(element.quantidade);
       }
+      // for (let index = 0; index < 6; index++) {
+      //   this.supervisorsName.push(`Orientador ${index}`);
+      //   this.supervisorsCountOpen.push(Math.ceil(Math.random() * 15));
+      // }
       this.barChartMethod();
     }
   }
