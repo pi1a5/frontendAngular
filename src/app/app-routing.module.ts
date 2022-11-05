@@ -78,6 +78,10 @@ const routes: Routes = [
     path: 'admin-supervisors',
     loadChildren: () => import('./pages/admin-supervisors/admin-supervisors.module').then((m) => m.AdminSupervisorsPageModule),
   },
+  {
+    path: 'admin-students',
+    loadChildren: () => import('./pages/admin-students/admin-students.module').then( m => m.AdminStudentsPageModule)
+  },
 
 ];
 

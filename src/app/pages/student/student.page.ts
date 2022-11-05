@@ -27,6 +27,8 @@ export class StudentPage implements OnInit {
 
   public isLate: any = undefined;
 
+  public isClosed: any = undefined;
+
   constructor(
     public apiStudent: ApiStudentService,
     public modalController: ModalController,
@@ -47,7 +49,9 @@ export class StudentPage implements OnInit {
     });
     this.apiStudent.getStatus().subscribe((data) => {
       console.log(data);
+      if (!data) this.isLate = undefined;
       if (data.nome === 'Atrasado') this.isLate = data;
+      if (data.nome === 'Fechado') this.isClosed = data;
     }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
     });

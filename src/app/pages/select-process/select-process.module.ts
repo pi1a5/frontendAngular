@@ -17,6 +17,7 @@ import { SelectDetailsProcessComponent } from 'src/app/components/selectProcessP
 import { PendingTicketComponent } from 'src/app/components/pending-ticket/pending-ticket.component';
 import { PendingTicketWarningComponent } from 'src/app/components/pending-ticket-warning/pending-ticket-warning.component';
 import { InternshipCardComponent } from 'src/app/components/profilePage/internship-card/internship-card.component';
+import { WaitWarningComponent } from 'src/app/components/selectProcessPage/wait-warning/wait-warning.component';
 import { SelectProcessPage } from './select-process.page';
 import { SelectProcessPageRoutingModule } from './select-process-routing.module';
 
@@ -39,6 +40,7 @@ import { SelectProcessPageRoutingModule } from './select-process-routing.module'
     PendingTicketComponent,
     PendingTicketWarningComponent,
     InternshipCardComponent,
+    WaitWarningComponent,
   ],
 })
 export class SelectProcessPageModule { }

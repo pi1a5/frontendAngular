@@ -7,7 +7,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import {
-  Component, ElementRef, OnInit, ViewChild,
+  Component, ElementRef, Input, OnInit, ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
@@ -24,27 +24,31 @@ export class ChartComponent implements OnInit {
 
   public barChart: any;
 
+  @Input() data: any = undefined;
+
   public supervisorsName: any = [];
 
-  public supervisorsCount: any = [];
+  public supervisorsCountOpen: any = [];
+
+  // public supervisorsCountClosed: any = [];
 
   constructor(
     public apiSupervisor: ApiSupervisorService,
   ) { }
 
   ngOnInit() {
-    this.apiSupervisor.checkOrientadoresAmount().subscribe((data) => {
-      // console.log(data);
-      for (let index = 0; index < data.length; index++) {
-        this.supervisorsName[index] = data[index].nome;
-        this.supervisorsCount[index] = data[index].quantidade;
+    if (this.data) {
+      for (let index = 0; index < this.data.length; index++) {
+        const element = this.data[index];
+        this.supervisorsName.push(element.nome);
+        this.supervisorsCountOpen.push(element.quantidade);
       }
-
-      this.loaded = true;
+      // for (let index = 0; index < 6; index++) {
+      //   this.supervisorsName.push(`Orientador ${index}`);
+      //   this.supervisorsCountOpen.push(Math.ceil(Math.random() * 15));
+      // }
       this.barChartMethod();
-    }, (error) => {
-      console.log(error);
-    });
+    }
   }
 
   barChartMethod() {
@@ -52,30 +56,42 @@ export class ChartComponent implements OnInit {
       type: 'bar',
       data: {
         labels: this.supervisorsName,
-        datasets: [{
-          barPercentage: 0.8,
-          barThickness: 'flex',
-          label: 'Alunos',
-          stack: 'Base',
-          backgroundColor: '#00795F',
-          hoverBackgroundColor: '#3eae91',
-          data: this.supervisorsCount,
-        }],
+        datasets: [
+          {
+            barPercentage: 0.8,
+            barThickness: 'flex',
+            label: 'Estágios em andamento',
+            stack: 'Base',
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)',
+              'rgba(153, 102, 25)',
+              'rgba(75, 192, 192)',
+              'rgba(255, 159, 64)',
+              'rgba(100, 100, 255)',
+            ],
+            hoverBackgroundColor: [
+              'rgb(255, 99, 132, 0.8)',
+              'rgb(54, 162, 235, 0.8)',
+              'rgb(255, 205, 86, 0.8)',
+              'rgba(153, 102, 25, 0.8)',
+              'rgba(75, 192, 192, 0.8)',
+              'rgba(255, 159, 64, 0.8)',
+              'rgba(255, 255, 255, 0.8)',
+            ],
+            // hoverBackgroundColor: '#3eae91',
+            data: this.supervisorsCountOpen.sort((a, b) => b - a),
+          },
+        ],
       },
       options: {
         plugins: {
           legend: {
-            labels: {
-              // This more specific font property overrides the global property
-              font: {
-                family: "'Nunito', sans-serif",
-              },
-            },
+            display: false,
           },
         },
-        animation: {
-          duration: 2000,
-        },
+        animation: false,
         responsive: true,
         indexAxis: 'y',
         scales: {

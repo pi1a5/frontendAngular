@@ -94,7 +94,7 @@
               <ion-col size="6">
                 <ion-button expand="block" color="light" size="large" (click)="presentTransfer(internship.id)">
                   <ion-label slot="end" class="font">
-                    tranferir estágio
+                    transferir estágio
                   </ion-label>
                   <ion-icon slot="start" name="repeat" size="large"></ion-icon>
                 </ion-button>
@@ -161,7 +161,7 @@
                     Recusado
                   </ion-col>
                   <ion-col size="2">
-                    0 Hora(s)
+                    {{ticket.horasadicionadas ? ticket.horasadicionadas : 0}} Hora(s)
                   </ion-col>
                 </ion-row>
               </ion-grid>

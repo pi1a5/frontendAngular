@@ -52,9 +52,7 @@ export class SubcourseEditComponent implements OnInit {
   }
 
   onChangeName(value: string) {
-    if (value) {
-      this.editSubcourse.nome = value;
-    }
+    this.editSubcourse.nome = value;
   }
 
   async confirm() {
@@ -76,10 +74,10 @@ export class SubcourseEditComponent implements OnInit {
       this.presentToast('Nome do curso deve conter no mínimo 5 caracteres', 'danger', 'close-circle');
       return false;
     }
-
-    // Verificar se a carga horária é superior a zero
-    if (this.editSubcourse.cargaHoraria <= 0) {
-      this.presentToast('Carga Horária deverá ser superior a zero', 'danger', 'close-circle');
+    
+    // Verificar se a carga horária é superior a 300 horas
+    if (this.editSubcourse.carga < 300) {
+      this.presentToast('Carga Horária deverá ser superior a 300 horas', 'danger', 'close-circle');
       return false;
     }
 

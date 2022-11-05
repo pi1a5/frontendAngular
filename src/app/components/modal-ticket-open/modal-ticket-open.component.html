@@ -50,7 +50,7 @@
           <ion-item *ngFor="let document of ticket.documentos" lines="none" color="success" button="true" shape="round"
             (click)="showPdf(document ? document.arquivo : null)" class="ion-margin-bottom">
             <ion-icon slot="start" name="document"></ion-icon>
-            <ion-label class="documentName">{{document ? document.nome : 'Documento'}}</ion-label>
+            <ion-label class="documentName">{{document ? document.nome : 'Documento Falso (test)'}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>

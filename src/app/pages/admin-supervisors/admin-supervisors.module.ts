@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import { NgModule } from '@angular/core';

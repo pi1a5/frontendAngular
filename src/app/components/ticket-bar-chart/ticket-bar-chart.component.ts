@@ -1,6 +1,6 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable linebreak-style */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
@@ -11,7 +11,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable import/prefer-default-export */
 import {
-  Component, ElementRef, OnInit, ViewChild,
+  Component, ElementRef, Input, OnInit, ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ApiSupervisorService } from 'src/app/services/api-supervisor.service';
@@ -26,6 +26,8 @@ export class TicketBarChartComponent implements OnInit {
 
   public pieChart: any;
 
+  @Input() data = undefined;
+
   public months: any[] = [];
 
   public acceptedTickets: any[] = [];
@@ -39,18 +41,13 @@ export class TicketBarChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiSupervisor.getTicketsStatusByDate().subscribe((data) => {
-      this.year = Object.entries(data)[0][0];
-      console.log(Object.entries(Object.entries(data)[0][1]));
-      for (const [key, value] of Object.entries(Object.entries(data)[0][1])) {
-        this.months.push(key);
-        this.acceptedTickets.push(value.aceito);
-        this.refusedTickets.push(value.recusado);
-      }
-      this.pieChartMethod();
-    }, (error) => {
-      console.log(error);
-    });
+    this.year = Object.entries(this.data)[0][0];
+    for (const [key, value] of Object.entries(Object.entries(this.data)[0][1])) {
+      this.months.push(key);
+      this.acceptedTickets.push(value.aceito);
+      this.refusedTickets.push(value.recusado);
+    }
+    this.pieChartMethod();
   }
 
   pieChartMethod() {
@@ -62,11 +59,13 @@ export class TicketBarChartComponent implements OnInit {
           label: 'Aceitos',
           data: this.acceptedTickets,
           backgroundColor: '#3eae91',
+          // hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
         },
         {
           label: 'Recusados',
           data: this.refusedTickets,
           backgroundColor: 'rgb(255, 99, 132)',
+          // hoverBackgroundColor: 'rgb(255, 99, 132, 0.6)',
         }],
       },
       options: {
@@ -82,7 +81,6 @@ export class TicketBarChartComponent implements OnInit {
           legend: {
             position: 'top',
             labels: {
-              // This more specific font property overrides the global property
               font: {
                 family: "'Nunito', sans-serif",
                 size: 20,
@@ -93,10 +91,11 @@ export class TicketBarChartComponent implements OnInit {
         animation: {
           duration: 2000,
         },
-        responsive: true,
+        responsive: false,
         indexAxis: 'x',
         scales: {
           y: {
+            stacked: true,
             ticks: {
               stepSize: 1,
               font: {
@@ -105,6 +104,7 @@ export class TicketBarChartComponent implements OnInit {
             },
           },
           x: {
+            stacked: true,
             ticks: {
               stepSize: 1,
               font: {

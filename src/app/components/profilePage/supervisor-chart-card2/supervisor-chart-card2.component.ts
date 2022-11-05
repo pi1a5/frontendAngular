@@ -26,7 +26,7 @@ export class SupervisorChartCard2Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiSupervisor.getInternshipsAmountByStatus().subscribe((data) => {
+    this.apiSupervisor.getTicketsStatusByDate().subscribe((data) => {
       // console.log(data);
       this.data = data;
     }, (error) => {

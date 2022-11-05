@@ -1,0 +1,28 @@
+<ion-card class="ion-text-center">
+
+  <ion-card-header color="success">
+    <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
+      <ion-card-title slot="start" style="color: white; font-size: 2em;">Em Dia !
+      </ion-card-title>
+      <ion-badge slot="end" color="success" class="font" style="font-size: 1.5em;">Faltam {{days}} dias
+      </ion-badge>
+    </ion-item>
+  </ion-card-header>
+
+  <ion-card-content class="contentHeight flex-center" style="background-color: var(--ion-color-light)">
+    <div style="height: 55vh; width: 55vw;">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-img class="statusOkImage" src="../../../assets/undrawImages/statusOkImage.svg"></ion-img>
+          <ion-title class="font ion-margin-top ion-padding-top" style="font-size: 2em;">Aguarde para enviar o próximo!</ion-title>
+          <br><br>
+          <ion-note class="font" style="font-size: 1em;">Você só poderá enviar o próximo ticket dia {{date}}. </ion-note>
+          <br><br><br>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </div>
+  </ion-card-content>
+
+</ion-card>

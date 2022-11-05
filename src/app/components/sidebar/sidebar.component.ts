@@ -65,4 +65,8 @@ export class SidebarComponent implements OnInit {
   goToSupervisors() {
     this.router.navigate(['admin-supervisors'], { replaceUrl: true });
   }
+
+  goToStudents() {
+    this.router.navigate(['admin-students'], { replaceUrl: true });
+  }
 }

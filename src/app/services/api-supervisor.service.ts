@@ -33,27 +33,6 @@ export class ApiSupervisorService {
     });
   }
 
-  // getClosedTicketsWithSupervisor(): Observable<any> {
-  //   return this.http.post(`${this.url}api/getClosedTicketsWithSupervisor`, {
-  //     sub: sessionStorage.getItem('userId'),
-  //   });
-  // }
-
-  // Card Modal
-  // feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number, step: any, status: string, isUnique: boolean, days: number): Observable<any> {
-  //   return this.http.post(`${this.url}api/feedbackTicket`, {
-  //     sub: sessionStorage.getItem('userId'),
-  //     idTicket,
-  //     feedback,
-  //     aceito: accept,
-  //     idfrequencia: frequency,
-  //     etapa: step,
-  //     status,
-  //     etapaunica: isUnique,
-  //     diastrabalhados: days,
-  //   });
-  // }
-
   feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: sessionStorage.getItem('userId'),
@@ -79,6 +58,30 @@ export class ApiSupervisorService {
 
   getTicketsStatusByDate(): Observable<any> {
     return this.http.post(`${this.url}api/getTicketsStatusByDate`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getInternshipsAmountByCourse(): Observable<any> {
+    return this.http.post(`${this.url}api/getInternshipsAmountByCourse`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getInternshipsAmountByMonth(): Observable<any> {
+    return this.http.post(`${this.url}api/getInternshipsAmountByMonth`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getUserTicketAmountAndTotalHours(): Observable<any> {
+    return this.http.post(`${this.url}api/getUserTicketAmountAndTotalHours`, {
+      sub: sessionStorage.getItem('userId'),
+    });
+  }
+
+  getCourseAverageWorkedHours(): Observable<any> {
+    return this.http.post(`${this.url}api/getCourseAverageWorkedHours`, {
       sub: sessionStorage.getItem('userId'),
     });
   }

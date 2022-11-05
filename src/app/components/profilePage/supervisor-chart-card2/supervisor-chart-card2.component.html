@@ -7,7 +7,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <app-ticket-bar-chart></app-ticket-bar-chart>
+        <app-ticket-bar-chart [data]="data"></app-ticket-bar-chart>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -21,6 +21,9 @@
 
 <ion-card *ngIf="data === null">
   <div class="flex-center ion-text-center">
-    <ion-title class="font" style="color: var(--ion-color-medium-shade);">Você ainda não possui estágios</ion-title>
+    <ion-row class="flex-center">
+      <ion-title class="font" style="color: var(--ion-color-medium-shade);">Você ainda não possui estágios</ion-title>
+      <ion-img class="emptyTicketIcon" src="../../../assets/undrawImages/emptyInternshipImage.svg"></ion-img>
+    </ion-row>
   </div>
 </ion-card>

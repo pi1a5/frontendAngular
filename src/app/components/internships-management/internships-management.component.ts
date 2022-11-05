@@ -41,7 +41,7 @@ export class InternshipsManagementComponent implements OnInit {
     });
   }
 
-  async presentAlert(id: number, supervisorName: string) {
+  async presentAlert(id: number) {
     const alert = await this.alertController.create({
       header: 'Cuidado!',
       subHeader: 'Tem certeza que deseja encerrar esse estágio?',

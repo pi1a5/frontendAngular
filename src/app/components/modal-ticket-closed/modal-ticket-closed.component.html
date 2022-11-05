@@ -2,9 +2,21 @@
   <ion-item class="font ion-no-padding ion-no-margin" lines="none" color="success">
     <ion-card-title slot="start" style="color: white; font-size: 2em;" class="ion-margin-start">Ticket Encerrado
     </ion-card-title>
-    <ion-badge *ngIf="ticket.aceito" slot="end" class="font" style="font-size: 1.2em;">Aceito
+    <ion-badge slot="start" class="font" style="font-size: 1.2em;">
+      {{ticket.horasadicionadas ? ticket.horasadicionadas : 0}} horas adicionadas
     </ion-badge>
-    <ion-badge *ngIf="!ticket.aceito" slot="end" class="font" style="font-size: 1.2em;">Recusado
+    <ion-badge *ngIf="ticket.aceito" slot="end" class="font" style="font-size: 1.2em;">
+      Aceito
+    </ion-badge>
+    <ion-popover trigger="hover-trigger" triggerAction="hover" >
+      <ng-template >
+        <ion-content class="ion-padding font">Veja o feedback do orientador para saber o porque seu ticket foi recusado.</ion-content>
+      </ng-template>
+    </ion-popover>
+    <ion-icon *ngIf="!ticket.aceito" slot="end" id="hover-trigger" name="information-circle" size="large" color="tertiary">
+    </ion-icon>
+    <ion-badge *ngIf="!ticket.aceito" slot="end" class="font" style="font-size: 1.2em;">
+      Recusado
     </ion-badge>
     <ion-button slot="end" size="default" color="danger" (click)="dismiss()">
       <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -13,9 +25,9 @@
 </ion-card-header>
 
 <ion-card-content class="contentHeight" style="background-color: var(--ion-color-light)">
-  <ion-card-title class="ion-padding ion-no-margin ion-text-center" style="height: 9vh;">
+  <ion-card-title class="ion-padding ion-no-margin ion-text-center" style="height: 8vh;">
     <ion-title class="font label flex-center">
-      {{ticket.etapa.nome}}
+      {{ticket.etapa.etapa.nome ? ticket.etapa.etapa.nome : ticket.etapa.nome}}
     </ion-title>
   </ion-card-title>
   <hr>
