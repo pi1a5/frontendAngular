@@ -33,7 +33,7 @@ export class InternshipsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getAllBySupervisor().subscribe((data) => {
-      console.log(data.processos);
+      // console.log(data.processos);
       this.internships = data.processos;
     }, (error) => {
       // console.log(error);
@@ -119,12 +119,18 @@ export class InternshipsManagementComponent implements OnInit {
     });
   }
 
-  calculateProgress(cargaTotal: number, cargaAtual: number) {
+  calculateProgress(cargaAtual: number, cargaTotal: number) {
+    if (cargaAtual === 0) return '.0';
+    const progress = Math.round((cargaAtual * 10) / cargaTotal);
+    let stringProgress = `.${progress}`;
+    // console.log(progress);
+    if (progress === 10) stringProgress = '1.0';
+    return stringProgress;
+  }
+
+  calculatePercent(cargaAtual: number, cargaTotal: number) {
     if (cargaAtual === 0) return 0;
     const progress = Math.round((cargaAtual * 100) / cargaTotal);
-    console.log(cargaAtual);
-    // console.log(cargaTotal);
-
     return progress;
   }
 }

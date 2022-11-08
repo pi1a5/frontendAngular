@@ -43,6 +43,6 @@ ion-searchbar.searchbar {
 
 // progress bar
 ion-progress-bar {
-  --background: #f3e895;
+  --background: var(--ion-color-medium-shade);
   --progress-background: #09c567;
 }

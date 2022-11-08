@@ -6,8 +6,8 @@
         Gestão de Estágios
       </ion-card-title>
     </ion-toolbar>
-    <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar ion-text-start" color="success" show-clear-button="always"
-      clear-icon="trash-bin" placeholder="Tente: SP1234567">
+    <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar ion-text-start" color="success"
+      show-clear-button="always" clear-icon="trash-bin" placeholder="Tente: SP1234567">
     </ion-searchbar>
   </ion-card-header>
   <ion-card-content>
@@ -90,8 +90,8 @@
           </ion-item>
 
           <div class="ion-padding" slot="content">
-            <ion-progress-bar [value]="calculateProgress(internship.aluno.cargatotal, internship.aluno.curso.carga)" buffer=".5"></ion-progress-bar>
-            <ion-row *ngIf="internship.status.nome !== 'Fechado' && internship.status.nome !== 'Encerrado'" class="ion-text-center ion-padding">
+            <ion-row *ngIf="internship.status.nome !== 'Fechado' && internship.status.nome !== 'Encerrado'"
+              class="ion-text-center ion-padding">
               <ion-col size="6">
                 <ion-button expand="block" color="light" size="large" (click)="presentTransfer(internship.id)">
                   <ion-label slot="end" class="font">
@@ -108,6 +108,12 @@
                   <ion-icon slot="start" name="archive" size="large"></ion-icon>
                 </ion-button>
               </ion-col>
+            </ion-row>
+            <ion-row class="ion-margin ion-padding flex-center">
+              <ion-label class="font ion-margin-bottom" style="font-size: 2em;">{{calculatePercent(internship.aluno.cargatotal, internship.aluno.curso.carga)}}%</ion-label>
+              <ion-progress-bar [value]="calculateProgress(internship.aluno.cargatotal, internship.aluno.curso.carga)" [buffer]="calculateProgress(internship.aluno.cargatotal, internship.aluno.curso.carga)">
+              </ion-progress-bar>
+              <ion-label class="font ion-margin-top" style="font-size: 1em; color: var(--ion-color-medium-shade);">{{internship.aluno.cargatotal}} horas / {{internship.aluno.curso.carga}} horas</ion-label>
             </ion-row>
             <ion-item class="ion-text-center font" color="transparent" lines="none" style="font-size: 1.5em;">
               <ion-grid style="color: var(--ion-color-medium-shade);">
@@ -141,7 +147,7 @@
                     {{indexOfElement+1}}
                   </ion-col>
                   <ion-col size="3">
-                    {{ticket.etapa.nome}}
+                    {{ticket.etapa.etapa.nome}}
                   </ion-col>
                   <ion-col size="2">
                     {{ticket.datacriado}}
