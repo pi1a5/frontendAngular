@@ -20,6 +20,7 @@ import { InternshipCardComponent } from 'src/app/components/profilePage/internsh
 import { WaitWarningComponent } from 'src/app/components/selectProcessPage/wait-warning/wait-warning.component';
 import { SelectProcessPage } from './select-process.page';
 import { SelectProcessPageRoutingModule } from './select-process-routing.module';
+import { CircularProgressBarComponent } from 'src/app/components/circular-progress-bar/circular-progress-bar.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { SelectProcessPageRoutingModule } from './select-process-routing.module'
     SelectDetailsProcessComponent,
     PendingTicketComponent,
     PendingTicketWarningComponent,
+    CircularProgressBarComponent,
     InternshipCardComponent,
     WaitWarningComponent,
   ],

@@ -78,14 +78,14 @@ export class StudentsListComponent implements OnInit {
     });
   }
 
-  // deleteSupervisor(id: number) {
-  //   this.apiAdmin.deleteSupervisor(id).subscribe((data) => {
-  //     this.presentToast(data, 'success', 'checkmark-circle');
-  //     this.loadStudents();
-  //   }, (error) => {
-  //     this.presentToast(error.error, 'danger', 'close-circle');
-  //   });
-  // }
+  addSupervisor(id: number) {
+    this.apiAdmin.createRandomSupervisorForStudent(id).subscribe(data => {
+      console.log(data);
+      this.loadStudents();
+    }, error => {
+      this.presentToast(error.error, 'danger', 'close-circle');
+    })
+  }
 
   addStudent() {
     this.addButton = true;
@@ -98,6 +98,13 @@ export class StudentsListComponent implements OnInit {
   }
 
   createTicket(id: number) {
-    console.log(id);
+    this.addButton = true;
+    this.apiAdmin.createTicketForRandomStudent(id).subscribe(data => {
+      console.log(data);
+      this.loadStudents();
+    }, error => {
+      this.addButton = false;
+      this.presentToast(error.error, 'danger', 'close-circle');
+    })
   }
 }

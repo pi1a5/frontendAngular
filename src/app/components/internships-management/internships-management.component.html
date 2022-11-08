@@ -90,7 +90,7 @@
           </ion-item>
 
           <div class="ion-padding" slot="content">
-            <ion-row *ngIf="!internship.fechado" class="ion-text-center ion-padding">
+            <ion-row *ngIf="internship.status.nome !== 'Fechado' && internship.status.nome !== 'Encerrado'" class="ion-text-center ion-padding">
               <ion-col size="6">
                 <ion-button expand="block" color="light" size="large" (click)="presentTransfer(internship.id)">
                   <ion-label slot="end" class="font">

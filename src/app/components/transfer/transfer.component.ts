@@ -70,7 +70,7 @@ export class TransferComponent implements OnInit {
   }
 
   transfer(supervisorId: number) {
-    // console.log(supervisorId);
+    console.log(supervisorId);
     // console.log(this.internshipId);
     this.apiSupervisor.transferInternship(supervisorId, this.internshipId).subscribe((data) => {
       this.presentToast(data, 'success', 'checkmark-circle');
