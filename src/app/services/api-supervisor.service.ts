@@ -33,13 +33,14 @@ export class ApiSupervisorService {
     });
   }
 
-  feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number): Observable<any> {
+  feedbackTicket(idTicket: number, feedback: string, accept: boolean, frequency: number, mandatory: string): Observable<any> {
     return this.http.post(`${this.url}api/feedbackTicket`, {
       sub: sessionStorage.getItem('userId'),
       idTicket,
       feedback,
       aceito: accept,
       idfrequencia: frequency,
+      obrigatorio: mandatory,
     });
   }
 

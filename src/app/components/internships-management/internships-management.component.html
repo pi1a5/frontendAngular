@@ -26,13 +26,13 @@
           <ion-col size="1.6">
             Data Criado
           </ion-col>
-          <ion-col size="2.1">
+          <ion-col size="2">
             Estado
           </ion-col>
-          <ion-col size="2">
-            Horas Atuais
+          <ion-col size="1.5">
+            Perfil
           </ion-col>
-          <ion-col size="0.5">
+          <ion-col size="1.1">
 
           </ion-col>
         </ion-row>
@@ -82,7 +82,7 @@
                   {{internship.status.nome}}
                 </ion-col>
                 <ion-col size="2" class="ion-text-center fontSize">
-                  {{internship.aluno.cargatotal}} Hora(s)
+                  {{internship.perfil}}
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -90,6 +90,7 @@
           </ion-item>
 
           <div class="ion-padding" slot="content">
+            <ion-progress-bar [value]="calculateProgress(internship.aluno.cargatotal, internship.aluno.curso.carga)" buffer=".5"></ion-progress-bar>
             <ion-row *ngIf="internship.status.nome !== 'Fechado' && internship.status.nome !== 'Encerrado'" class="ion-text-center ion-padding">
               <ion-col size="6">
                 <ion-button expand="block" color="light" size="large" (click)="presentTransfer(internship.id)">

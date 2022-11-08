@@ -1,6 +1,5 @@
 .contentHeight {
   height: 95vh;
-  // overflow-y: auto;
 }
 
 .title {
@@ -40,4 +39,10 @@ div[slot="content"] {
 ion-searchbar.searchbar {
   --border-radius: 2em;
   font-size: 4em;
+}
+
+// progress bar
+ion-progress-bar {
+  --background: #f3e895;
+  --progress-background: #09c567;
 }

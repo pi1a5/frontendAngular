@@ -113,7 +113,7 @@ export class BarCoursesComponent implements OnInit {
             ticks: {
               stepSize: 1,
               font: {
-                size: 20,
+                size: 15,
                 family: "'Nunito', sans-serif",
               },
             },

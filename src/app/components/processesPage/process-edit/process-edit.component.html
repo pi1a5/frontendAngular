@@ -74,9 +74,16 @@
 
     </ion-list>
 
-    <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">
-      <ion-icon slot="start" name="save"></ion-icon>
-      <ion-label slot="end">Salvar</ion-label>
-    </ion-button>
+    <ion-footer>
+      <div class="flex-center">
+        <ion-note class="font ion-text-center ion-margin-top">Última vez modificado por {{process.modificador}}</ion-note>
+      </div>
+      <ion-button class="font ion-margin-top" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">
+        <ion-icon slot="start" name="save"></ion-icon>
+        <ion-label slot="end">Salvar</ion-label>
+      </ion-button>
+    </ion-footer>
+
+
   </ion-card-content>
 </ion-card>

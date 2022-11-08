@@ -33,7 +33,7 @@ export class InternshipsManagementComponent implements OnInit {
 
   ngOnInit() {
     this.apiSupervisor.getAllBySupervisor().subscribe((data) => {
-      // console.log(data.processos);
+      console.log(data.processos);
       this.internships = data.processos;
     }, (error) => {
       // console.log(error);
@@ -117,5 +117,14 @@ export class InternshipsManagementComponent implements OnInit {
       // console.log(error);
       this.presentToast(error.error, 'danger', 'close-circle');
     });
+  }
+
+  calculateProgress(cargaTotal: number, cargaAtual: number) {
+    if (cargaAtual === 0) return 0;
+    const progress = Math.round((cargaAtual * 100) / cargaTotal);
+    console.log(cargaAtual);
+    // console.log(cargaTotal);
+
+    return progress;
   }
 }

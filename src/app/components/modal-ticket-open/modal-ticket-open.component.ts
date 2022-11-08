@@ -62,6 +62,42 @@ export class ModalTicketOpenComponent implements OnInit {
     toast.present();
   }
 
+  async presentMandatoryAlert() {
+    const alert = await this.alertController.create({
+      header: 'Esse estágio se enquadra em qual perfil?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+        },
+      ],
+      inputs: [
+        {
+          label: 'Obrigatório',
+          type: 'radio',
+          value: 'Obrigatório',
+        },
+        {
+          label: 'Não Obrigatório',
+          type: 'radio',
+          value: 'Não Obrigatório',
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const input = await alert.onDidDismiss();
+
+    if (input.role === 'confirm') return input.data.values;
+
+    return null;
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Qual será a frequência dos relatórios desse Estágio?',
@@ -106,7 +142,7 @@ export class ModalTicketOpenComponent implements OnInit {
   async confirm(accept: boolean) {
     if (this.validate(accept)) {
       if (accept) return await this.setFrequency(accept);
-      return await this.submitFeedback(accept, 0);
+      return await this.submitFeedback(accept, 0, 'Não Obrigatório');
     }
     return false;
   }
@@ -116,17 +152,18 @@ export class ModalTicketOpenComponent implements OnInit {
     if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
     // Selecionar frequência
     if (this.ticket.status === 'Aberto' && this.ticket.etapaunica === false) {
+      const mandatory = await this.presentMandatoryAlert();
       const frequency = await this.presentAlert();
-      if (frequency) return await this.submitFeedback(accept, frequency);
+      if (frequency && mandatory) return await this.submitFeedback(accept, frequency, mandatory);
       return false;
     }
-    return await this.submitFeedback(accept, 0);
+    return await this.submitFeedback(accept, 0, 'Não Obrigatório');
   }
 
-  async submitFeedback(accept: boolean, frequency: number) {
+  async submitFeedback(accept: boolean, frequency: number, mandatory: string) {
     await this.presentLoading();
 
-    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, frequency).subscribe(async (data) => {
+    this.apiSupervisor.feedbackTicket(this.ticket.id, this.textArea, accept, frequency, mandatory).subscribe(async (data) => {
       await this.loadingController.dismiss();
       this.presentToast(data, 'success', 'checkmark-circle');
       this.modalController.dismiss({ data: true });

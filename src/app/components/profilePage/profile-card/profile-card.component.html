@@ -15,10 +15,16 @@
       <ion-item class=" ion-padding-bottom ion-padding-top ion-margin-start ion-margin-end" lines="full">
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">Nome</ion-title>
         <ion-label slot="end" class="font" style="color: #b0b0b0;">{{user.nome}}</ion-label>
+        <ion-button slot="end" color="secondary" size="default" (click)="editName()">
+          <ion-icon slot="icon-only" name="pencil" ></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-item class="ion-padding-bottom ion-padding-top ion-margin-start ion-margin-end" lines="full">
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">Prontuário</ion-title>
         <ion-label slot="end" class="font" style="color: #b0b0b0;">{{user.prontuario}}</ion-label>
+        <ion-button slot="end" color="secondary" size="default" (click)="editProntuario()">
+          <ion-icon slot="icon-only" name="pencil" ></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-item class="ion-padding-bottom ion-padding-top ion-margin-start ion-margin-end" lines="full">
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">E-mail</ion-title>
