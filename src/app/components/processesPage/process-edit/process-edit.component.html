@@ -31,8 +31,8 @@
           Etapas
         </ion-card-title>
       </ion-col>
-      <ion-col *ngIf="newProcess" size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
-        <ion-button class="font fase" color="success" (click)="newFase()">
+      <ion-col *ngIf="newProcess" class="ion-no-padding" size="12" size-sm="12" size-md="12" size-lg="12" size-xl="2">
+        <ion-button class="font fase ion-no-margin " color="success" (click)="newFase()">
           <ion-icon slot="start" size="large" name="add-circle"></ion-icon>
           <ion-label slot="end">Criar Etapa</ion-label>
         </ion-button>
@@ -74,9 +74,16 @@
 
     </ion-list>
 
-    <ion-button class="font" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">
-      <ion-icon slot="start" name="save"></ion-icon>
-      <ion-label slot="end">Salvar</ion-label>
-    </ion-button>
+    <ion-footer>
+      <div class="flex-center">
+        <ion-note class="font ion-text-center ion-margin-top">Última vez modificado por {{process.modificador ? process.modificador : 'você'}}</ion-note>
+      </div>
+      <ion-button class="font ion-margin-top" size="large" expand="block" fill="solid" color="success" (click)="sendSave()">
+        <ion-icon slot="start" name="save"></ion-icon>
+        <ion-label slot="end">Salvar</ion-label>
+      </ion-button>
+    </ion-footer>
+
+
   </ion-card-content>
 </ion-card>

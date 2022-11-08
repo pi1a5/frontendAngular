@@ -118,4 +118,19 @@ export class InternshipsManagementComponent implements OnInit {
       this.presentToast(error.error, 'danger', 'close-circle');
     });
   }
+
+  calculateProgress(cargaAtual: number, cargaTotal: number) {
+    if (cargaAtual === 0) return '.0';
+    const progress = Math.round((cargaAtual * 10) / cargaTotal);
+    let stringProgress = `.${progress}`;
+    // console.log(progress);
+    if (progress === 10) stringProgress = '1.0';
+    return stringProgress;
+  }
+
+  calculatePercent(cargaAtual: number, cargaTotal: number) {
+    if (cargaAtual === 0) return 0;
+    const progress = Math.round((cargaAtual * 100) / cargaTotal);
+    return progress;
+  }
 }

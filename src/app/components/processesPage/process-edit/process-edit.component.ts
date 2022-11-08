@@ -47,6 +47,8 @@ export class ProcessEditComponent implements OnInit {
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
+    // console.log(this.process);
+
     this.editProcess = {
       id: this.process.id,
       nome: this.process.nome,

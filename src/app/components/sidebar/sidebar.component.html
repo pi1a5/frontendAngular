@@ -2,7 +2,7 @@
 
   <div class="contentList">
     <ion-img src="../../../assets/logoIF2.png"></ion-img>
-
+    
     <ion-item *ngIf="user === 'student' || user === 'supervisor'" lines="full" button (click)="goToDashboard()">
       <ion-icon size="large" color="light" slot="start" name="home"></ion-icon>
       <ion-label class="font">Home</ion-label>

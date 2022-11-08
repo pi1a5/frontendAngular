@@ -12,10 +12,14 @@ ion-input {
   font-size: 1.5em;
 }
 
+ion-card-content {
+  height: 61vh;
+}
+
 // Etapas
 
 ion-list.fases {
-  height: 45vh;
+  height: 40vh;
   overflow-y: auto;
 }
 

@@ -78,7 +78,7 @@ export class ChartComponent implements OnInit {
               'rgba(153, 102, 25, 0.8)',
               'rgba(75, 192, 192, 0.8)',
               'rgba(255, 159, 64, 0.8)',
-              'rgba(255, 255, 255, 0.8)',
+              'rgba(100, 100, 255, 0.8)',
             ],
             // hoverBackgroundColor: '#3eae91',
             data: this.supervisorsCountOpen.sort((a, b) => b - a),

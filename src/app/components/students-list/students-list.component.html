@@ -7,7 +7,7 @@
       </ion-card-title>
     </ion-toolbar>
     <ion-button [attr.disabled]="addButton" class="font" color="success" (click)="addStudent()">
-      <ion-icon name="duplicate"></ion-icon>
+      <ion-icon slot="start" name="duplicate"></ion-icon>
       Adicionar Aluno
     </ion-button>
     <ion-searchbar [(ngModel)]="searchTerm" class="font searchbar ion-text-start" color="success"
@@ -42,7 +42,10 @@
           <ion-badge slot="start" color="success" class="badge">
             <ion-label class="font">{{student.curso ? student.curso : 'Sem nome'}}</ion-label>
           </ion-badge>
-          <ion-button slot="end" color="success" size="default" (click)="createTicket(student.id)">
+          <ion-button *ngIf="!student.idorientador" [attr.disabled]="addButton" slot="end" color="success" size="default" (click)="addSupervisor(student.id)">
+            <ion-icon slot="icon-only" name="duplicate"></ion-icon>
+          </ion-button>
+          <ion-button [attr.disabled]="addButton" slot="end" color="success" size="default" (click)="createTicket(student.id)">
             <ion-icon slot="icon-only" name="arrow-redo"></ion-icon>
           </ion-button>
         </ion-item>

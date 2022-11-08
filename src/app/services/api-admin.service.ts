@@ -56,6 +56,12 @@ export class ApiAdminService {
     });
   }
 
+  createRandomSupervisorForStudent(id: number): Observable<any> {
+    return this.http.post(`${this.url}api/createRandomSupervisorForStudent`, {
+      id,
+    });
+  }
+
   // Alunos
   createRandomStudent(): Observable<any> {
     return this.http.get(`${this.url}api/createRandomStudent`);
@@ -63,5 +69,11 @@ export class ApiAdminService {
 
   getStudents(): Observable<any> {
     return this.http.get(`${this.url}api/getFakeStudents`);
+  }
+
+  createTicketForRandomStudent(id: number): Observable<any> {
+    return this.http.post(`${this.url}api/createTicketForRandomStudent`, {
+      id,
+    });
   }
 }

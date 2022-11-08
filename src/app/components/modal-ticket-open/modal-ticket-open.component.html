@@ -7,7 +7,7 @@
       <ion-badge slot="start" class="font ion-margin-start" style="font-size: 1.2em;">DIAS TRABALHADOS</ion-badge>
       <ion-badge slot="start" class="font ion-margin-start" style="font-size: 1.2em;">{{ticket.diastrabalhados}} DIAS</ion-badge>
     </div>
-    <ion-title *ngIf="!ticket.etapa.etapa.loop" slot="start" class="font ion-margin-start" style="font-size: 1.8em;">{{ticket.etapa.etapa.nome}}
+    <ion-title *ngIf="!ticket.etapa.etapa.loop" slot="start" class="font ion-margin-start" style="font-size: 1.8em;">{{ticket.etapa.etapa.nome ? ticket.etapa.etapa.nome : 'sem nome'}}
     </ion-title >
     <ion-badge slot="end" class="font" style="font-size: 1.2em;">{{ticket.etapa.nome}}
     </ion-badge>

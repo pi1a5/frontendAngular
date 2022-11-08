@@ -38,6 +38,14 @@ ion-item {
   --highlight-height: 2em;
 }
 
+@media screen and (max-width: 1600px) {
+  ion-img {
+    height: 30vh !important;
+    width: auto !important;
+    align-items: center;
+  }
+}
+
 .font {
   font-family: 'Nunito', sans-serif;
   font-size: large;

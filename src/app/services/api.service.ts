@@ -68,4 +68,18 @@ export class ApiService {
       sub: sessionStorage.getItem('userId'),
     });
   }
+
+  updateName(name: string): Observable<any> {
+    return this.http.post<any>(`${this.url}api/updateName`, {
+      sub: sessionStorage.getItem('userId'),
+      nome: name,
+    });
+  }
+
+  updateProntuario(prontuario: string): Observable<any> {
+    return this.http.post<any>(`${this.url}api/updateProntuario`, {
+      sub: sessionStorage.getItem('userId'),
+      prontuario,
+    });
+  }
 }
