@@ -6,7 +6,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable import/prefer-default-export */
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component, Input, OnInit, SimpleChanges,
+} from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -17,11 +19,26 @@ import { ToastController } from '@ionic/angular';
 export class ProcessDetailsComponent implements OnInit {
   @Input() process: any = undefined;
 
+  documents = [];
+
   constructor(
     public toastController: ToastController,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.documents = [];
+    for (let index = 0; index < this.process.etapas.length; index++) {
+      const element = this.process.etapas[index].documentos;
+      // console.log(element);
+      for (let i = 0; i < element.length; i++) {
+        const doc = element[i];
+        // console.log(doc);
+        this.documents.push(doc);
+      }
+    }
+  }
 
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({

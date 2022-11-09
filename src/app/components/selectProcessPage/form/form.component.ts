@@ -196,6 +196,8 @@ export class FormComponent implements OnInit {
   onFileChange(event: any, doc: any) {
     const pdfFiles = event.target.files;
     const pdfFile = pdfFiles.item(0);
+    if (!pdfFile) return;
+    if (pdfFile.type !== 'application/pdf') return this.presentToast('Apenas arquivos .PDF', 'danger', 'close-circle');
     if (!this.handleFileUpdate(doc, pdfFile)) {
       this.documentsControl.push({
         nome: doc.nome,
