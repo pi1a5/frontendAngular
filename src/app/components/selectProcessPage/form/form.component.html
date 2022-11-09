@@ -31,7 +31,7 @@
               <ion-item *ngFor="let document of documentsControl" color="success" lines="none" button="true"
                 (click)="arq.click()" class="ion-text-center ion-margin-bottom">
                 <ion-label class="font">{{document.pdfFile ? document.pdfFile.name : document.nome}}</ion-label>
-                <input class="ion-hide" #arq type="file" (change)="onFileChange($event, document)" accept=".pdf">
+                <input class="ion-hide" #arq type="file" (change)="onFileChange($event, document)" accept="application/pdf">
                 <ion-icon lazy="true" slot="end" name="document" size="large"></ion-icon>
               </ion-item>
             </ion-list>
