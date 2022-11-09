@@ -37,7 +37,7 @@ export class ModalTicketOpenComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.ticket);
+    console.log(this.ticket);
     if (this.ticket.datacriado.length > 10) {
       this.ticket.datacriado = this.formatDate({ date: this.ticket.datacriado });
     }
@@ -118,14 +118,19 @@ export class ModalTicketOpenComponent implements OnInit {
           value: 1,
         },
         {
-          label: 'Trimestral',
+          label: 'Bimestral',
           type: 'radio',
           value: 2,
         },
         {
-          label: 'Semestral',
+          label: 'Trimestral',
           type: 'radio',
           value: 3,
+        },
+        {
+          label: 'Semestral',
+          type: 'radio',
+          value: 4,
         },
       ],
     });
@@ -141,17 +146,17 @@ export class ModalTicketOpenComponent implements OnInit {
 
   async confirm(accept: boolean) {
     if (this.validate(accept)) {
-      if (accept) return await this.setFrequency(accept);
+      // Tratar mensagem automática quando aceita
+      if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
+      if (accept === true && this.ticket.inicio === true) return await this.setFrequency(accept);
       return await this.submitFeedback(accept, 0, 'Não Obrigatório');
     }
     return false;
   }
 
   async setFrequency(accept: boolean) {
-    // Tratar mensagem automática quando aceita
-    if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
     // Selecionar frequência
-    if (this.ticket.status === 'Aberto' && this.ticket.etapaunica === false) {
+    if (this.ticket.etapaunica === false) {
       const mandatory = await this.presentMandatoryAlert();
       const frequency = await this.presentAlert();
       if (frequency && mandatory) return await this.submitFeedback(accept, frequency, mandatory);
