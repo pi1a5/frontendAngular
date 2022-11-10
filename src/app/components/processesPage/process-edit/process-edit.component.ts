@@ -53,6 +53,7 @@ export class ProcessEditComponent implements OnInit {
       id: this.process.id,
       nome: this.process.nome,
       etapas: this.process.etapas,
+      modificador: this.process.modificador,
     };
     this.stepNumber = this.process.etapas.length;
   }

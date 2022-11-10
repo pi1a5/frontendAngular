@@ -59,6 +59,24 @@ export class PieCoursesComponent implements OnInit {
         datasets: [{
           data: this.internshipAmount,
           backgroundColor: [
+            'rgb(255, 99, 132, 0.5)',
+            'rgb(54, 162, 235, 0.5)',
+            'rgb(255, 205, 86, 0.5)',
+            'rgba(153, 102, 25, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(255, 159, 64, 0.5)',
+            'rgba(100, 100, 255, 0.5)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgba(153, 102, 25)',
+            'rgba(75, 192, 192)',
+            'rgba(255, 159, 64)',
+            'rgba(100, 100, 255)',
+          ],
+          hoverBorderColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
             'rgb(255, 205, 86)',
@@ -68,18 +86,22 @@ export class PieCoursesComponent implements OnInit {
             'rgba(100, 100, 255)',
           ],
           hoverBackgroundColor: [
-            'rgb(255, 99, 132, 0.8)',
-            'rgb(54, 162, 235, 0.8)',
-            'rgb(255, 205, 86, 0.8)',
-            'rgba(153, 102, 25, 0.8)',
-            'rgba(75, 192, 192, 0.8)',
-            'rgba(255, 159, 64, 0.8)',
-            'rgba(100, 100, 255, 0.8)',
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgba(153, 102, 25)',
+            'rgba(75, 192, 192)',
+            'rgba(255, 159, 64)',
+            'rgba(100, 100, 255)',
           ],
-          // hoverOffset: 0.5,
         }],
       },
       options: {
+        elements: {
+          bar: {
+            borderWidth: 2,
+          },
+        },
         animation: false,
         plugins: {
           title: {
