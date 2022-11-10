@@ -31,9 +31,8 @@
               style="color: var(--ion-color-medium-shade);">{{internship.cumprido}} Horas</ion-label>
           </ion-item>
           <ion-item class="ion-margin-top ion-margin-start ion-margin-end" lines="full">
-            <ion-title slot="start" class="font ion-no-margin ion-no-padding">Faltante</ion-title>
-            <ion-label slot="end" class="font" style="color: var(--ion-color-medium-shade);">{{internship.faltante}}
-              Horas</ion-label>
+            <ion-title slot="start" class="font ion-no-margin ion-no-padding">Tipo de Estágio</ion-title>
+            <ion-label slot="end" class="font" style="color: var(--ion-color-medium-shade);">{{internship.obrigatorio ? internship.obrigatorio : '-'}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>

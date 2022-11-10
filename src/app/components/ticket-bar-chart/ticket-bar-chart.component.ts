@@ -189,7 +189,7 @@ export class TicketBarChartComponent implements OnInit {
           tooltip: {
             enabled: false,
             position: 'nearest',
-            external: externalTooltipHandler
+            external: externalTooltipHandler,
           },
           legend: {
             position: 'top',

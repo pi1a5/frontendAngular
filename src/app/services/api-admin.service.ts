@@ -76,4 +76,10 @@ export class ApiAdminService {
       id,
     });
   }
+
+  changeStatus(id: number): Observable<any> {
+    return this.http.post(`${this.url}api/delayStudentTicket`, {
+      id,
+    });
+  }
 }
