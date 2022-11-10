@@ -34,29 +34,6 @@ export class StudentsListComponent implements OnInit {
     this.loadStudents();
   }
 
-  // async presentAlert(id: number, supervisorName: string) {
-  //   const alert = await this.alertController.create({
-  //     header: 'Cuidado!',
-  //     subHeader: `Tem certeza que deseja excluir ${supervisorName} permanentemente?`,
-  //     buttons: [
-  //       {
-  //         text: 'Cancelar',
-  //         role: 'cancel',
-  //         handler: () => { },
-  //       },
-  //       {
-  //         text: 'Sim, desejo',
-  //         role: 'confirm',
-  //         handler: () => {
-  //           this.deleteSupervisor(id);
-  //         },
-  //       },
-  //     ],
-  //   });
-
-  //   await alert.present();
-  // }
-
   async presentToast(msg: string, color: string, icon: string) {
     const toast = await this.toastController.create({
       message: msg,
@@ -80,7 +57,7 @@ export class StudentsListComponent implements OnInit {
 
   addSupervisor(id: number) {
     this.apiAdmin.createRandomSupervisorForStudent(id).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.loadStudents();
     }, (error) => {
       this.presentToast(error.error, 'danger', 'close-circle');
@@ -104,6 +81,18 @@ export class StudentsListComponent implements OnInit {
       // console.log(data);
       this.loadStudents();
       this.presentToast('Ticket criado', 'success', 'checkmark-circle');
+    }, (error) => {
+      this.addButton = false;
+      this.presentToast(error.error, 'danger', 'close-circle');
+    });
+  }
+
+  changeStatus(id: number) {
+    this.addButton = true;
+    this.apiAdmin.changeStatus(id).subscribe((data) => {
+      // console.log(data);
+      this.loadStudents();
+      this.presentToast('Status alterado', 'success', 'checkmark-circle');
     }, (error) => {
       this.addButton = false;
       this.presentToast(error.error, 'danger', 'close-circle');

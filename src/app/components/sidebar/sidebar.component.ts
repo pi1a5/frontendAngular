@@ -20,8 +20,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     const email = sessionStorage.getItem('userEmail');
-
-    if (email.includes('aluno') || email === 'teste.aluno.g5.pi2a6@gmail.com') {
+    const splitted = email.split('@');
+    if (splitted[1].includes('aluno') || email === 'alunofake.teste@gmail.com') {
       this.user = 'student';
     } else if (email === 'adm.g5.pi2a6@gmail.com') {
       this.user = 'admin';

@@ -45,6 +45,9 @@
           <ion-button *ngIf="!student.idorientador" [attr.disabled]="addButton" slot="end" color="success" size="default" (click)="addSupervisor(student.id)">
             <ion-icon slot="icon-only" name="duplicate"></ion-icon>
           </ion-button>
+          <ion-button [attr.disabled]="addButton" slot="end" color="success" size="default" (click)="changeStatus(student.id)">
+            <ion-icon slot="icon-only" name="time"></ion-icon>
+          </ion-button>
           <ion-button [attr.disabled]="addButton" slot="end" color="success" size="default" (click)="createTicket(student.id)">
             <ion-icon slot="icon-only" name="arrow-redo"></ion-icon>
           </ion-button>

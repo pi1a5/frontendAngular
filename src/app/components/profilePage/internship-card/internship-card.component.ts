@@ -53,7 +53,6 @@ export class InternshipCardComponent implements OnInit {
   }
 
   calculateProgress(neededHours: number, completedHours: number) {
-    this.internship.faltante = neededHours - completedHours;
     const progress = Math.round((completedHours * 100) / neededHours);
     return progress;
   }
