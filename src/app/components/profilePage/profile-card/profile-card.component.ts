@@ -82,47 +82,10 @@ export class ProfileCardComponent implements OnInit {
     return false;
   }
 
-  async presentProntuarioAlert() {
-    const alert = await this.alertController.create({
-      header: 'Mudar prontuário',
-      message: 'Informe seu prontuário sem "SP"',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: (prontuario) => {
-            if (!this.isProntuarioValid(prontuario[0])) return false;
-            this.setProntuario(`SP${prontuario[0]}`);
-          },
-        },
-      ],
-      inputs: [
-        {
-          placeholder: '123456',
-          attributes: {
-            maxlength: 7,
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-
-    const input = await alert.onDidDismiss();
-
-    if (input.role === 'confirm') return input.data.values;
-
-    return false;
-  }
-
   loadUserProfile() {
     this.user = undefined;
     this.api.getUserProfile().subscribe((data) => {
-      // console.log(user);
+      console.log(data);
       if (!data) {
         this.user = null;
       } else {
@@ -134,31 +97,6 @@ export class ProfileCardComponent implements OnInit {
     });
   }
 
-  isProntuarioValid(prontuario: string) {
-    if (prontuario.length < 6 || !this.modulo11(prontuario)) {
-      this.presentToast('Prontuário inválido', 'danger', 'close-circle');
-      return false;
-    }
-
-    return true;
-  }
-
-  modulo11(prontuario: any) {
-    const corpo = prontuario.slice(0, prontuario.length - 1);
-    const verificador = prontuario.slice(prontuario.length - 1);
-    const multiplicadores = [7, 6, 5, 4, 3, 2];
-
-    let total = 0;
-    for (let index = 0; index < corpo.length; index++) total += corpo[index] * multiplicadores[index];
-
-    const resto = (total * 10) % 11;
-
-    if (resto === 10 && verificador.toUpperCase() === 'X') return true;
-    if (Number(verificador) === resto) return true;
-
-    return false;
-  }
-
   setName(name: string) {
     this.api.updateName(name).subscribe((data) => {
       this.presentToast(data, 'success', 'checkmark-circle');
@@ -168,20 +106,7 @@ export class ProfileCardComponent implements OnInit {
     });
   }
 
-  setProntuario(prontuario: string) {
-    this.api.updateProntuario(prontuario).subscribe((data) => {
-      this.presentToast(data, 'success', 'checkmark-circle');
-      this.loadUserProfile();
-    }, (error) => {
-      this.presentToast(error.error, 'danger', 'close-circle');
-    });
-  }
-
   editName() {
     this.presentNameAlert();
-  }
-
-  editProntuario() {
-    this.presentProntuarioAlert();
   }
 }

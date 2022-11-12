@@ -16,23 +16,35 @@
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">Nome</ion-title>
         <ion-label slot="end" class="font" style="color: #b0b0b0;">{{user.nome}}</ion-label>
         <ion-button slot="end" color="secondary" size="default" (click)="editName()">
-          <ion-icon slot="icon-only" name="pencil" ></ion-icon>
+          <ion-icon slot="icon-only" name="pencil"></ion-icon>
         </ion-button>
       </ion-item>
       <ion-item class="ion-padding-bottom ion-padding-top ion-margin-start ion-margin-end" lines="full">
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">Prontuário</ion-title>
         <ion-label slot="end" class="font" style="color: #b0b0b0;">{{user.prontuario}}</ion-label>
-        <ion-button slot="end" color="secondary" size="default" (click)="editProntuario()">
-          <ion-icon slot="icon-only" name="pencil" ></ion-icon>
-        </ion-button>
       </ion-item>
+     
       <ion-item class="ion-padding-bottom ion-padding-top ion-margin-start ion-margin-end" lines="full">
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">E-mail</ion-title>
         <ion-label slot="end" class="font" style="color: #b0b0b0;">{{user.email}}</ion-label>
       </ion-item>
+      
       <ion-item class="ion-padding-bottom ion-padding-top ion-margin-start ion-margin-end" lines="full">
         <ion-title slot="start" class="font ion-no-margin" style="color: #474747;">Curso</ion-title>
-        <ion-label slot="end"   class="font" style="color: #b0b0b0;">{{user.curso}}</ion-label>
+        <label slot="end" class="font" style="color: #b0b0b0;">{{user.curso}}</label>
+        <ion-button slot="end" id="top-center" color="secondary" size="deafult">
+          <ion-icon slot="icon-only" name="information-circle">
+          </ion-icon>
+        </ion-button>
+        <ion-popover triggerAction="click" trigger="top-center" side="top" alignment="start" size="auto">
+          <ng-template>
+            <ion-content class="ion-padding font">
+              Área: {{user.area}}.
+              <br><br>
+              Cursos:<div *ngFor="let course of user.cursos">- {{course.nome}}</div>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
       </ion-item>
     </ion-list>
   </ion-card-content>

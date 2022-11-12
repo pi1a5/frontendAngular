@@ -213,10 +213,10 @@ export class FormComponent implements OnInit {
     //   return false;
     // }
 
-    if (this.textArea.length < 100) {
-      this.presentToast('A mensagem deve conter no mínimo 100 caracteres', 'danger', 'close-circle');
-      return false;
-    }
+    // if (this.textArea.length < 100) {
+    //   this.presentToast('A mensagem deve conter no mínimo 100 caracteres', 'danger', 'close-circle');
+    //   return false;
+    // }
 
     // Files
     for (let index = 0; index < this.documentsControl.length; index++) {
