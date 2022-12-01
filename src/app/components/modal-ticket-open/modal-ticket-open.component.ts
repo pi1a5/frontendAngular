@@ -147,7 +147,7 @@ export class ModalTicketOpenComponent implements OnInit {
   async confirm(accept: boolean) {
     if (this.validate(accept)) {
       // Tratar mensagem automática quando aceita
-      if (this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
+      if (accept === true && this.textArea.length === 0) this.textArea = 'Olá! Está tudo certo!';
       if (accept === true && this.ticket.inicio === true) return await this.setFrequency(accept);
       return await this.submitFeedback(accept, 0, 'Não Obrigatório');
     }
@@ -180,10 +180,10 @@ export class ModalTicketOpenComponent implements OnInit {
   }
 
   validate(accept: boolean) {
-    if (accept === false && this.textArea.length < 100) {
-      this.presentToast('A mensagem deve conter no mínimo 100 caracteres', 'danger', 'close-circle');
-      return false;
-    }
+    // if (accept === false && this.textArea.length < 100) {
+    //   this.presentToast('A mensagem deve conter no mínimo 100 caracteres', 'danger', 'close-circle');
+    //   return false;
+    // }
 
     return true;
   }

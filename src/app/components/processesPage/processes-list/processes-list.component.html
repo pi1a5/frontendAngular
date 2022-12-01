@@ -1,7 +1,10 @@
 <ion-list class="processes">
   <ion-radio-group *ngIf="processes">
     <ion-item *ngFor="let process of processes" [disabled]="newProcess" lines="none" color="light">
-      <ion-label class="font">{{process.nome}}</ion-label>
+      <ion-label slot="start" class="font">{{process.nome}} </ion-label>
+      <ion-badge slot="start" class="font" color="medium" style="font-size: 0.8em;">
+        v{{process.versao}}
+      </ion-badge>
       <ion-radio color="success" slot="end" (click)="sendProcess(process)"></ion-radio>
     </ion-item>
   </ion-radio-group>
