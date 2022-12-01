@@ -64,6 +64,8 @@ export class ProcessesPage implements OnInit {
 
   async loadProcesses() {
     this.api.getAllProcesses().subscribe(async (data) => {
+      console.log(data);
+      
       if (!data.processos) {
         this.processes = null;
         this.documents = data.documentos;
